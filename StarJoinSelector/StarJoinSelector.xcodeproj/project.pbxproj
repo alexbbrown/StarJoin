@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74201F1DFDE000AE571F /* StarJoinSelector.framework */; };
-		187E742F1F1DFDE000AE571F /* StarJoinSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectorTests.swift */; };
+		187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */; };
 		187E74311F1DFDE000AE571F /* StarJoinSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 187E74231F1DFDE000AE571F /* StarJoinSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		187E74441F1DFE3400AE571F /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E74431F1DFE3400AE571F /* Selection.swift */; };
 		187E74481F1E030400AE571F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74471F1E02B400AE571F /* AppKit.framework */; };
@@ -29,7 +29,7 @@
 		187E74231F1DFDE000AE571F /* StarJoinSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarJoinSelector.h; sourceTree = "<group>"; };
 		187E74241F1DFDE000AE571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187E74291F1DFDE000AE571F /* StarJoinSelectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinSelectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		187E742E1F1DFDE000AE571F /* StarJoinSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinSelectorTests.swift; sourceTree = "<group>"; };
+		187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinSelectionTests.swift; sourceTree = "<group>"; };
 		187E74301F1DFDE000AE571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187E74431F1DFE3400AE571F /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		187E74471F1E02B400AE571F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -87,7 +87,7 @@
 		187E742D1F1DFDE000AE571F /* StarJoinSelectorTests */ = {
 			isa = PBXGroup;
 			children = (
-				187E742E1F1DFDE000AE571F /* StarJoinSelectorTests.swift */,
+				187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */,
 				187E74301F1DFDE000AE571F /* Info.plist */,
 			);
 			path = StarJoinSelectorTests;
@@ -218,7 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187E742F1F1DFDE000AE571F /* StarJoinSelectorTests.swift in Sources */,
+				187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

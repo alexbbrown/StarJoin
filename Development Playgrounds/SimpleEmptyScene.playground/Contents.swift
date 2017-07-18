@@ -19,3 +19,5 @@ sceneView.presentScene(scene)
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 PlaygroundSupport.PlaygroundPage.current.needsIndefiniteExecution = true
 
+scene.setValue(<#T##value: Any?##Any?#>, forKey: <#T##String#>)
+scene.value(forKey: <#T##String#>)

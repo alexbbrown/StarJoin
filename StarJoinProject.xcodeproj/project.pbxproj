@@ -21,6 +21,20 @@
 			remoteGlobalIDString = 187E74291F1DFDE000AE571F;
 			remoteInfo = StarJoinSelectorTests;
 		};
+		18EBE8141F1E8EDE00C57088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18EBE7F51F1E8EDC00C57088;
+			remoteInfo = StarJoinSpriteKitAdaptor;
+		};
+		18EBE8161F1E8EDE00C57088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18EBE7FE1F1E8EDD00C57088;
+			remoteInfo = StarJoinSpriteKitAdaptorTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +43,7 @@
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
+		18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSpriteKitAdaptor.xcodeproj; path = StarJoinSpriteKitAdaptor/StarJoinSpriteKitAdaptor.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -44,6 +59,7 @@
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
+				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
 				187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
 			);
@@ -58,6 +74,23 @@
 				187E73F11F1DEE9E00AE571F /* SelectEditing.playground */,
 			);
 			path = "Development Playgrounds";
+			sourceTree = "<group>";
+		};
+		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {
+			isa = PBXGroup;
+			children = (
+				18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */,
+			);
+			path = Adaptors;
+			sourceTree = "<group>";
+		};
+		18EBE8101F1E8EDD00C57088 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18EBE8151F1E8EDE00C57088 /* StarJoinSpriteKitAdaptor.framework */,
+				18EBE8171F1E8EDE00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +115,10 @@
 					ProductGroup = 187E743B1F1DFDE000AE571F /* Products */;
 					ProjectRef = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
 				},
+				{
+					ProductGroup = 18EBE8101F1E8EDD00C57088 /* Products */;
+					ProjectRef = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -102,6 +139,20 @@
 			fileType = wrapper.cfbundle;
 			path = StarJoinSelectorTests.xctest;
 			remoteRef = 187E74411F1DFDE200AE571F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EBE8151F1E8EDE00C57088 /* StarJoinSpriteKitAdaptor.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = StarJoinSpriteKitAdaptor.framework;
+			remoteRef = 18EBE8141F1E8EDE00C57088 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EBE8171F1E8EDE00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = StarJoinSpriteKitAdaptorTests.xctest;
+			remoteRef = 18EBE8161F1E8EDE00C57088 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

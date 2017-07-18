@@ -24,12 +24,12 @@ sceneView.presentScene(scene)
 
 //: **Data Configuration**
 //:
-//: This form uses tuples as the input data
+//: Let's use tuples as the input data
 
 var nodeArray = [
     (x:100, y:100, color:#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), size:50),
     (x:200, y:200, color:#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), size:50),
-    (x:300, y:300, color:#colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), size:50),
+    (x:300, y:300, color:#colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), size:50),
 ]
 
 //: **Selection** picks a root node and 'joins' it to the data

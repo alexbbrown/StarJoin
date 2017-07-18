@@ -1,5 +1,7 @@
 //: A SpriteKit based Playground
 
+// Expected: open the assistant editor.  It should spin and then you should see a black box with "Hello World" written in it
+
 import PlaygroundSupport
 import SpriteKit
 

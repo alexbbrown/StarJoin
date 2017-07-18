@@ -37,7 +37,7 @@ class StarJoinSelectorTests: XCTestCase {
 }
 
 
-
+#if false
 
 class SelectionTests: XCTestCase {
 
@@ -170,3 +170,4 @@ class SelectionTests: XCTestCase {
     }
 
 }
+#endif

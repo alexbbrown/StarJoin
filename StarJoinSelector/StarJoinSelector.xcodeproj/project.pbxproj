@@ -11,6 +11,7 @@
 		187E742F1F1DFDE000AE571F /* StarJoinSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectorTests.swift */; };
 		187E74311F1DFDE000AE571F /* StarJoinSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 187E74231F1DFDE000AE571F /* StarJoinSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		187E74441F1DFE3400AE571F /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E74431F1DFE3400AE571F /* Selection.swift */; };
+		187E74481F1E030400AE571F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74471F1E02B400AE571F /* AppKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		187E742E1F1DFDE000AE571F /* StarJoinSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinSelectorTests.swift; sourceTree = "<group>"; };
 		187E74301F1DFDE000AE571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187E74431F1DFE3400AE571F /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		187E74471F1E02B400AE571F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187E74481F1E030400AE571F /* AppKit.framework in Frameworks */,
 				187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +61,7 @@
 				187E74221F1DFDE000AE571F /* StarJoinSelector */,
 				187E742D1F1DFDE000AE571F /* StarJoinSelectorTests */,
 				187E74211F1DFDE000AE571F /* Products */,
+				187E74461F1E02B300AE571F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +91,14 @@
 				187E74301F1DFDE000AE571F /* Info.plist */,
 			);
 			path = StarJoinSelectorTests;
+			sourceTree = "<group>";
+		};
+		187E74461F1E02B300AE571F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				187E74471F1E02B400AE571F /* AppKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +355,7 @@
 		187E74351F1DFDE000AE571F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -365,6 +378,7 @@
 		187E74361F1DFDE000AE571F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -389,7 +403,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinSelectorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks/ @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSelectorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -403,7 +417,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinSelectorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks/ @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSelectorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

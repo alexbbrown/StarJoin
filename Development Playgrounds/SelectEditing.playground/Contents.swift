@@ -1,6 +1,6 @@
 //: A SpriteKit based Playground
 
-// Expected: Nothing yet, The original select function being hacked up to run.
+// Expected: Nothing yet, The original select function being hacked up to at least execute.
 
 //
 //  Selection.swift

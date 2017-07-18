@@ -6,17 +6,45 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		187E743F1F1DFDE200AE571F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 187E74201F1DFDE000AE571F;
+			remoteInfo = StarJoinSelector;
+		};
+		187E74411F1DFDE200AE571F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 187E74291F1DFDE000AE571F;
+			remoteInfo = StarJoinSelectorTests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1841F0D61F1DEA810049A474 /* GameTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GameTemplate.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleEmptyScene.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		187E743B1F1DFDE000AE571F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				187E74401F1DFDE200AE571F /* StarJoinSelector.framework */,
+				187E74421F1DFDE200AE571F /* StarJoinSelectorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
+				187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
 			);
 			sourceTree = "<group>";
@@ -49,11 +77,34 @@
 			);
 			mainGroup = 188B5B6A1F1DE677007BB08A;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 187E743B1F1DFDE000AE571F /* Products */;
+					ProjectRef = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		187E74401F1DFDE200AE571F /* StarJoinSelector.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = StarJoinSelector.framework;
+			remoteRef = 187E743F1F1DFDE200AE571F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		187E74421F1DFDE200AE571F /* StarJoinSelectorTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = StarJoinSelectorTests.xctest;
+			remoteRef = 187E74411F1DFDE200AE571F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin XCBuildConfiguration section */
 		188B5B6F1F1DE677007BB08A /* Debug */ = {

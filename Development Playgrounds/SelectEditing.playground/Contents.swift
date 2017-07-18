@@ -604,7 +604,9 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
-        let retainedCount = min(boundData.count,initialSelection.count)
+        let boundCount = boundData.count
+        let retainedCount = min(boundCount, initialSelection.count)
+        let initialCount = max(boundCount, initialSelection.count)
 
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
@@ -638,7 +640,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
         }
 
         // grab the exit selection
-        for i in boundData.count ..< initialSelection.count {
+        for i in boundData.count ..< initialCount {
             exitSelection.append(initialSelection[i])
         }
 
@@ -1287,7 +1289,7 @@ func testSelectionConstructionZero() {
     assert(0 == mySelection.data.count)
 }
 
-testSelectionConstructionZero()
+//testSelectionConstructionZero()
 
 func testSelectionConstructionOne() {
     // This is an example of a functional test case.
@@ -1312,38 +1314,30 @@ func testSelectionConstructionOne() {
 
 }
 
-testSelectionConstructionOne()
+//testSelectionConstructionOne()
+
+
+func testSelectionOneEnter() {
+    // This is an example of a functional test case.
+
+    let children = scene.children
+
+    let mySelection = Selection<SKNode>.selection(parent: scene, nodes: scene.childNodes, data: oneRowData)
+
+    mySelection.enter().append { (s, d, i) -> SKNode in
+        return SKNode()
+    }
+
+    assert(1 == mySelection.nodes.count) // this used to say 0.  why?
+    assert(1 == mySelection.data.count)
+    assert(1 == scene.children.count)
+
+}
+
+testSelectionOneEnter()
 
 #if false
 
-    func testSelectionOneEnter() {
-        // This is an example of a functional test case.
-
-        let children = scene?.children
-
-        let mySelection = Selection<SKNode>.selection(scene!, nodes: scene!.childNodes, data: self.oneRowData)
-
-        mySelection.enter().append { (s, d, i) -> SKNode in
-            return SKNode()
-        }
-
-        XCTAssertEqual(0, mySelection.nodes.count)
-        XCTAssertEqual(1, mySelection.data.count)
-        XCTAssertEqual(1, scene!.children.count)
-
-        // defunct - we don't do it that way any more
-        //        let nonNilCount = mySelection.nodes.reduce(0, combine: { (acc, elem) -> Int in
-        //            if let elemReal = elem {
-        //                return acc + 1
-        //            } else {
-        //                return acc
-        //            }
-        //        })
-        //
-        //        XCTAssertEqual(1, nonNilCount);
-
-        XCTAssert(true, "Pass")
-    }
 
     func testSelectionOneZeroEnterExit() {
         // This is an example of a functional test case.
@@ -1384,3 +1378,4 @@ testSelectionConstructionOne()
     }
 #endif
 
+10+3

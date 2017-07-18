@@ -11,7 +11,6 @@
 		187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */; };
 		187E74311F1DFDE000AE571F /* StarJoinSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 187E74231F1DFDE000AE571F /* StarJoinSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		187E74441F1DFE3400AE571F /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E74431F1DFE3400AE571F /* Selection.swift */; };
-		187E74481F1E030400AE571F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74471F1E02B400AE571F /* AppKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187E74481F1E030400AE571F /* AppKit.framework in Frameworks */,
 				187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

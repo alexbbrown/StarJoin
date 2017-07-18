@@ -6,7 +6,7 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for StarJoinSelector.
 FOUNDATION_EXPORT double StarJoinSelectorVersionNumber;

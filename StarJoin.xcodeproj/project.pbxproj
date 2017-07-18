@@ -6,6 +6,10 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXFileReference section */
+		1841F0D61F1DEA810049A474 /* GameTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GameTemplate.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
@@ -17,6 +21,7 @@
 		188B5B7D1F1DE70E007BB08A /* Development Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1841F0D61F1DEA810049A474 /* GameTemplate.playground */,
 			);
 			path = "Development Playgrounds";
 			sourceTree = "<group>";

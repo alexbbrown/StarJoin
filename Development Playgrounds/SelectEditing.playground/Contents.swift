@@ -18,20 +18,67 @@
 // handy d3 references
 // https://github.com/mbostock/d3/blob/48ad44fdeef32b518c6271bb99a9aed376c1a1d6/src/selection/data.js
 
-// TODO:
+// TODO:[new]
+// Where's my state machine?
+// get the old one working;
+// build a NEW one.
+// handle structures which are not arrays
+
+// TODO:[old]
 // refactor into DataDominant, NodeDominant, and Perfect joins
 // rationalise the the setKeyAttr logic
 // deprecate setKeyAttr in favour of attr
 // allow simple types and tuples to pass setKeyAttr
 // Allow data function to be a dictionary, which is auto-keyed. Perhaps a common ancestor of Array, Dictionary
 
+// Feature switches
+let transitionFeatures = false
+
+
 import Foundation
 
-// MARK: start of body
+// MARK: start of Adaptor Protocols AdaptorProtocols.swift
+
+// MARK: required delegate protocols
+
+// why do we need this?  it looks like a mutable collection of some kind
+public protocol TreeNavigable {
+    typealias T = Self
+    func addChildNode(_: Self)
+
+    func removeNodeFromParent()
+
+    var childNodes: [T]! { get }
+}
+
+// this is a way to store metadata in the node itself, which lets us put the value in there so it can be retrieved without reference to the origianl array, for examine in 'each'.  I need to consider what this means.
+public protocol NodeMetadata {
+    var metadata: AnyObject? { get set }
+}
+
+// KVC protocol encapsulates the idea that values can be accessed using string accessors.  This enables one sort of interaction, bit it's not the only one.
+public protocol KVC {
+    // real functions
+    func setValue(_: AnyObject?, forKey:String) -> Void
+    func valueForKey(_: String) -> AnyObject?
+
+    func setValue(_: AnyObject?, forKeyPath:String) -> Void
+    func valueForKeyPath(_: String) -> AnyObject?
+
+    // proxy functions
+    func setNodeValue(_ toValue:AnyObject?, forKeyPath keyPath:String)
+    func setNodeValueAnimated(_ toValue:AnyObject?, forKeyPath keyPath:String, withDuration: TimeInterval)
+
+    // this feels closer to TreeNavigable
+    func removeNodeFromParent(withDelay: TimeInterval)
+}
+
+// MARK: start of body Selector.swift
 
 // NodeData carries Node, Value pairs,
 // even if Node is missing.  Note that live
 // nodes keep a reference to their data, too
+// TODO(4): can this be a struct
 public class NodeData<NodeType, ValueType> {
     public var node:NodeType?
     public var value:ValueType
@@ -54,7 +101,7 @@ internal class BoxedValue<ValueType> {
 
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
-public class Selection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> {
+public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
 
     public var nodes:[NodeType]
 
@@ -66,13 +113,13 @@ public class Selection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> {
         return self.select(parent).selectAll(nodes).join(data)
     }
 
-    public func selectAll(nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
         fatalError("This method must be overridden")
     }
 
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
-    public class func select(node: NodeType) -> SingleSelection<NodeType> {
+    public class func select(_ node: NodeType) -> SingleSelection<NodeType> {
         return SingleSelection<NodeType>(node: node)
     }
 
@@ -90,7 +137,7 @@ public class Selection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> {
     }
 }
 
-public func select<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>>(node:NodeType) -> SingleSelection<NodeType> {
+public func select<NodeType: KVC & TreeNavigable & NodeMetadata>(node:NodeType) -> SingleSelection<NodeType> {
     return SingleSelection(node: node)
 }
 
@@ -105,7 +152,7 @@ public func select<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>>(node:Node
 //      MultiSelection <- selectAll
 // Selections support simple operations such as append - which generate
 // new selections.
-public class SingleSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> : Selection<NodeType> {
+public class SingleSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Selection<NodeType> {
 
     // initialise the selection of a single node (usually the base node)
     override public init (node:NodeType) {
@@ -113,12 +160,12 @@ public class SingleSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>>
     }
 
     // These nodes should be descendants of the parent node
-    public override func selectAll(nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public override func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
         return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes)
     }
 
     // These nodes should be descendants of the parent node
-    public func selectAll(nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
+    public func selectAll(_ nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
         return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
 
@@ -140,7 +187,7 @@ public class SingleSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>>
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
 
-public class InternalMultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> : Selection<NodeType> {
+public class InternalMultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Selection<NodeType> {
 
     // Convenience Types
 
@@ -166,7 +213,7 @@ public class InternalMultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMet
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
-public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> : InternalMultiSelection<NodeType> {
+public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : InternalMultiSelection<NodeType> {
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,Void,Int) -> ()
@@ -184,14 +231,14 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 
 
 
-    public func join<ValueType,KeyType:Hashable>(data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<NodeType, ValueType> {
+    public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<NodeType, ValueType> {
         return JoinSelection<NodeType, ValueType>(parent: self.parent,
                                                   nodes: self.nodes,
                                                   data: data,
                                                   keyFunction: keyFunction)
     }
 
-    public func join<ValueType>(data: [ValueType]) -> JoinSelection<NodeType, ValueType> {
+    public func join<ValueType>(_ data: [ValueType]) -> JoinSelection<NodeType, ValueType> {
         return JoinSelection<NodeType, ValueType>(parent: self.parent,
                                                   nodes: self.nodes,
                                                   data: data)
@@ -201,9 +248,7 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 
     public func each(eachFn:NodeFunction) -> Self {
         // TODO create more childrens
-        for (var i = 0; i < nodes.count; i++) {
-
-            let selected:NodeType = nodes[i]
+        for (i, selected) in nodes.enumerated() {
 
             // unfortunate boxing required to handle tuples stored in
             // NSMutableDictionary.  Can't push it down to the helper
@@ -216,8 +261,8 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 
     // set a property using key value coding
     public func setKeyedAttr(keyPath: String, toValue: AnyObject?) -> Self {
-        for (var i = 0; i < nodes.count; i++) {
-            nodes[i].setNodeValue(toValue, forKeyPath: keyPath)
+        for selected in nodes {
+            selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
 
         return self;
@@ -225,12 +270,12 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 
     // shorthand alias for setKeyedAttr to work like d3
     public func attr(keyPath: String, toValue: AnyObject?) -> Self {
-        return setKeyedAttr(keyPath, toValue: toValue)
+        return setKeyedAttr(keyPath: keyPath, toValue: toValue)
     }
 
     // shorthand alias for setKeyedAttr to work like d3
     public func attr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
-        return setKeyedAttr(keyPath, toValueFn: toValueFn)
+        return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
     // compound attr for functions
@@ -239,26 +284,24 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath, toValueFn: toValueFn)
+            attr(keyPath: keyPath, toValueFn: toValueFn)
         }
         return self;
     }
 
     // compound attr for values
-    public func attr(keyedFunctions: [String:AnyObject?]) -> Self {
+    public func attr(keyedValues: [String:AnyObject?]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValue) in keyedFunctions  {
-            attr(keyPath, toValue: toValue)
+        for (keyPath, toValue) in keyedValues  {
+            attr(keyPath: keyPath, toValue: toValue)
         }
         return self;
     }
 
     // set a property using key value coding
     public func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
-        for (var i = 0; i < nodes.count; i++) {
-
-            let selected:NodeType = nodes[i]
+        for (i, selected) in nodes.enumerated() {
 
             // unfortunate boxing required to handle tuples stored in
             // NSMutableDictionary.  Can't push it down to the helper
@@ -271,9 +314,11 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
         return self;
     }
 
-    public func transition(duration duration: NSTimeInterval = 3) -> TransitionMultiSelection<NodeType> {
+    #if transitionFeatures
+    public func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
         return TransitionMultiSelection(parent: self.parent, nodes:self.nodes, duration:duration)
     }
+    #endif
 }
 
 // MARK: JoinedSelection
@@ -283,7 +328,7 @@ public class MultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> 
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : InternalMultiSelection<NodeType> {
+public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : InternalMultiSelection<NodeType> {
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,ValueType?,Int) -> ()
@@ -319,20 +364,17 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
     //    }
 
     public func each(eachFn:NodeFunction) -> Self {
+        for (i, selected) in nodes.enumerated() {
 
-        for (var i = 0; i < nodes.count; i++) {
-
-            let selected:NodeType = nodes[i]
-
-            eachFn(selected, self.metadataForNode(i), i)
+            eachFn(selected, self.metadataForNode(i:i), i)
         }
         return self;
     }
 
     // set a property using key value coding
     public func setKeyedAttr(keyPath: String, toValue: AnyObject!) -> Self {
-        for (var i = 0; i < nodes.count; i++) {
-            nodes[i].setNodeValue(toValue, forKeyPath: keyPath)
+        for selected in nodes {
+            selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
 
         return self;
@@ -340,11 +382,9 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
 
     // set a property using key value coding
     public func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
-        for (var i = 0; i < nodes.count; i++) {
+        for (i, node) in nodes.enumerated() {
 
-            let node:NodeType = nodes[i]
-
-            node.setNodeValue(toValueFn(node, self.metadataForNode(i), i), forKeyPath: keyPath)
+            node.setNodeValue(toValueFn(node, self.metadataForNode(i:i), i), forKeyPath: keyPath)
         }
         return self;
     }
@@ -352,12 +392,12 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
     // TODO: move attr and setKeyedAttr default implementations up the tree.
     // shorthand alias for setKeyedAttr to work like d3
     public func attr(keyPath: String, toValue: AnyObject!) -> Self {
-        return setKeyedAttr(keyPath, toValue: toValue)
+        return setKeyedAttr(keyPath: keyPath, toValue: toValue)
     }
 
     // shorthand alias for setKeyedAttr to work like d3
     public func attr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
-        return setKeyedAttr(keyPath, toValueFn: toValueFn)
+        return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
     // compound attr for functions
@@ -366,17 +406,17 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath, toValueFn: toValueFn)
+            attr(keyPath: keyPath, toValueFn: toValueFn)
         }
         return self;
     }
 
     // compound attr for values
-    public func attr(keyedFunctions: [String:AnyObject?]) -> Self {
+    public func attr(keyedValues: [String:AnyObject?]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValue) in keyedFunctions  {
-            attr(keyPath, toValue: toValue)
+        for (keyPath, toValue) in keyedValues  {
+            attr(keyPath: keyPath, toValue: toValue)
         }
         return self;
     }
@@ -415,7 +455,7 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
 }
 
 // as yet unused - need things to inherit from this
-//public class DataDominantSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : JoinedSelection<NodeType, ValueType> {
+//public class DataDominantSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 //
 //    // Convenience types
 //    internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -433,7 +473,7 @@ public class JoinedSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
-public class PerfectSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
     // Convenience types
     internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -450,9 +490,11 @@ public class PerfectSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>
         super.init(parent: parent, nodes: nodes)
     }
 
-    public func transition(duration duration: NSTimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
+    #if transitionFeatures
+    public func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
         return TransitionSelection(parent: self.parent, nodes:self.nodes, duration:duration)
     }
+    #endif
 
     /// Append adds a new child node to every node in the selection
     // Take care when using on data-dominant selections - a join
@@ -465,8 +507,7 @@ public class PerfectSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>
 
         var newNodes = [NodeType]()
 
-        for (var i = 0; i < nodes.count; i++) {
-            let selected:NodeType = nodes[i]
+        for (i, selected) in nodes.enumerated() {
             // MARK: WORKING FACE
             var newNode = constructorFn(nodes[i], selected.metadata as? ValueType, i)
 
@@ -494,7 +535,7 @@ public class PerfectSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
-public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
     // Convenience types
     internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -567,10 +608,9 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
 
         // handle the Simple index case - where unique keys have not been supplied
 
-        var i = 0;
-
         // grab the retained selection - those nodes we are going to keep that already exist
-        for ; i < retainedCount; i++ {
+
+        for i in 0 ..< retainedCount {
             var updatedNode:NodeType = initialSelection[i]
             let updatedValue = boundData[i]
 
@@ -584,7 +624,7 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
         }
 
         // grab the enter selection, which has no nodes yet
-        for ; i < boundData.count; i++ {
+        for i in retainedCount ..< boundData.count {
             let newNodeData = NodeDataType(node: nil,
                                            value: boundData[i])
 
@@ -593,7 +633,7 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
         }
 
         // grab the exit selection
-        for ; i < initialSelection.count; i++ {
+        for i in boundData.count ..< initialSelection.count {
             exitSelection.append(initialSelection[i])
         }
 
@@ -635,20 +675,20 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
         var boundNodeDictionary = [KeyType:NodeType]()
 
         // make a dictionary of bound data
-        for var i = 0; i < boundData.count; i++ {
-            let key = keyFunction(boundData[i], i)
+        for (i, boundDatum) in boundData.enumerated() {
+            let key = keyFunction(boundDatum, i)
 
             if nil != boundDataDictionary[key] {
                 fatalError("Duplicate key \(key) in data")
             }
 
-            boundDataDictionary[key] = boundData[i]
+            boundDataDictionary[key] = boundDatum
         }
 
         // make a dictionary of nodes
-        for var i = 0; i < initialSelection.count; i++ {
+        for (i, initialNode) in initialSelection.enumerated() {
 
-            if let boxedMetadata = initialSelection[i].metadata as? BoxedValueType {
+            if let boxedMetadata = initialNode.metadata as? BoxedValueType {
                 let metaData = boxedMetadata.value
                 let key = keyFunction(metaData, i)
 
@@ -707,9 +747,9 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
         } } // this TYPE only makes sense for multiply selected things
 
     // dodgy function
-    internal func metadata(fromNode:NodeType?) -> ValueType? {
+    internal func metadata(from node:NodeType?) -> ValueType? {
 
-        if let node = fromNode {
+        if let node = node {
             let boxedMetadata = node.metadata as? BoxedValueType
 
             let unboxedMetadata = boxedMetadata?.value
@@ -747,7 +787,7 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
 
         // let's take in on faith that exitnodes have values.  not necessarily true.
         let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) -> NodeDataType in
-            NodeDataType(node: node, value: self.metadata(node)!) // metadata! is untenable here - exit might not have data
+            NodeDataType(node: node, value: self.metadata(from: node)!) // metadata! is untenable here - exit might not have data
         }
 
         return ExitSelection<NodeType, ValueType>(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
@@ -755,7 +795,8 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
 
     public override func each(eachFn:NodeFunction) -> Self {
         // TODO create more childrens (what?)
-        for (var i = 0; i < selection.count; i++) {
+
+        for i in 0 ..< selection.count {
             eachFn(selection[i], selectionData[i], i)
         }
         return self;
@@ -785,8 +826,8 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
 
     // set a property using key value coding
     public override func setKeyedAttr(keyPath: String, toValue: AnyObject!) -> Self {
-        for (var i = 0; i < selection.count; i++) {
-            selection[i].setNodeValue(toValue, forKeyPath: keyPath)
+        for node in selection {
+            node.setNodeValue(toValue, forKeyPath: keyPath)
         }
 
         return self;
@@ -813,7 +854,7 @@ public class JoinSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
 // extracts the concrete set of live nodes (for efficiency)
 // UpdateSelection is a PerfectSelection - with complete data - value pairs
 // assuming no-one has futzed with the node graph or metadata
-public class UpdateSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : PerfectSelection<NodeType, ValueType> {
+public class UpdateSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : PerfectSelection<NodeType, ValueType> {
 
     // Properties
 
@@ -833,7 +874,7 @@ public class UpdateSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>,
 
 // Enter Selection deals with entered nodes only.
 // it returns to type MultiSelection after append is performed.
-public class EnterSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
     // Convenience types
     internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -866,8 +907,8 @@ public class EnterSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, 
 
         var newNodes = [NodeType]()
 
-        for (var i = 0; i < nodeData.count; i++) {
-            let nodeValue:ValueType = nodeData[i].value
+        for (i, datum) in nodeData.enumerated() {
+            let nodeValue:ValueType = datum.value
             var newNode = constructorFn(nil, nodeValue, i)
             newNodes.append(newNode)
             nodeData[i].node = newNode // TODO: check if I need this
@@ -889,7 +930,7 @@ public class EnterSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, 
 // is it joined?... it's prejoined.  we can rejoin it?
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
-public class ExitSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : PerfectSelection<NodeType, ValueType
+public class ExitSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : PerfectSelection<NodeType, ValueType
 > {
 
     override internal init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
@@ -901,8 +942,8 @@ public class ExitSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
     override public func remove() {
 
         //let anyArray = self.selection as [AnyObject]
-        for var i = 0; i < self.nodes.count; i++ {
-            self.nodes[i].removeNodeFromParent()
+        for node in nodes {
+            node.removeNodeFromParent()
         }
 
     }
@@ -916,14 +957,17 @@ public class ExitSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, V
     }
 }
 
+
+#if transitionFeatures
+
 /// PerfectTransitionSelection is a PerfectSelection with delayed property operations
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
-public class TransitionSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class TransitionSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
-    let duration : NSTimeInterval
+    let duration : TimeInterval
 
-    internal init (parent:ParentType, nodes: [NodeType], duration:NSTimeInterval)
+    internal init (parent:ParentType, nodes: [NodeType], duration:TimeInterval)
     {
         self.duration = duration
         super.init(parent: parent, nodes: nodes)
@@ -950,7 +994,7 @@ public class TransitionSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetada
 
             let node:NodeType = nodes[i]
 
-            node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i), i), forKeyPath: keyPath, withDuration:self.duration)
+            node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i:i), i), forKeyPath: keyPath, withDuration:self.duration)
         }
         return self;
     }
@@ -964,11 +1008,11 @@ public class TransitionSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetada
 }
 
 // imperfect Transition
-public class TransitionMultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeMetadata>> : MultiSelection<NodeType> {
+public class TransitionMultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : MultiSelection<NodeType> {
 
-    let duration : NSTimeInterval
+    let duration : TimeInterval
 
-    internal init (parent:ParentType, nodes: [NodeType], duration:NSTimeInterval)
+    internal init (parent:ParentType, nodes: [NodeType], duration:TimeInterval)
     {
         self.duration = duration
         super.init(parent: parent, nodes: nodes)
@@ -991,9 +1035,7 @@ public class TransitionMultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeM
 
         // TODO: make action deferred for at least some cases
 
-        for (var i = 0; i < nodes.count; i++) {
-
-            let node:NodeType = nodes[i]
+        for (i, node) in nodes.enumerated() {
 
             node.setNodeValueAnimated(toValueFn(node, (), i), forKeyPath: keyPath, withDuration:self.duration)
         }
@@ -1002,13 +1044,14 @@ public class TransitionMultiSelection<NodeType: protocol<KVC,TreeNavigable,NodeM
 
     override public func remove() {
 
-        for var i = 0; i < self.nodes.count; i++ {
-            self.nodes[i].removeNodeFromParent(duration)
+        // be careful what we are iterating across here to avoid deleting and iterating
+        for node in nodes {
+            node.removeNodeFromParent(duration)
         }
     }
 }
 
-
+#endif
 
 
 

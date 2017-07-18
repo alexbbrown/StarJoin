@@ -103,8 +103,6 @@ class BasicSpriteKitSelectionTests: XCTestCase {
     func testSelectionOneZeroEnterExit() {
         // This is an example of a functional test case.
 
-        let children = scene?.children
-
         // If the node has children my code fails.
 
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)

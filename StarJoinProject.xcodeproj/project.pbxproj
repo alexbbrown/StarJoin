@@ -40,7 +40,7 @@
 			attributes = {
 				LastUpgradeCheck = 0900;
 			};
-			buildConfigurationList = 188B5B6E1F1DE677007BB08A /* Build configuration list for PBXProject "StarJoin" */;
+			buildConfigurationList = 188B5B6E1F1DE677007BB08A /* Build configuration list for PBXProject "StarJoinProject" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -71,7 +71,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		188B5B6E1F1DE677007BB08A /* Build configuration list for PBXProject "StarJoin" */ = {
+		188B5B6E1F1DE677007BB08A /* Build configuration list for PBXProject "StarJoinProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				188B5B6F1F1DE677007BB08A /* Debug */,

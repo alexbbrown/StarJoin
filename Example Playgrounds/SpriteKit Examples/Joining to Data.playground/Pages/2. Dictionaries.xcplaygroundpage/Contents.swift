@@ -1,3 +1,4 @@
+//: [Previous–Joining Tuples](@previous)
 //:# Dictionaries to Sprites
 
 import StarJoinSelector
@@ -50,3 +51,4 @@ mySelection
     // Color keys must be valid for the colorlist
     .setKeyedAttr("color") { (s, d, i) in d!["color"] }
 
+//: [Next–Joining Structs](@next)

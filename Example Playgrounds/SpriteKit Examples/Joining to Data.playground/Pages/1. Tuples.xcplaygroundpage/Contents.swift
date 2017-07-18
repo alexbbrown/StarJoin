@@ -47,3 +47,4 @@ mySelection
     .attr("size") { (s, d, i) in SKSize(width: d!.size, height: d!.size) }
     .attr("color") { (s, d, i) in d!.color }
 
+//: [Next–Joining Dictionaries](@next)

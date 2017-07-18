@@ -44,7 +44,7 @@
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
 		18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSpriteKitAdaptor.xcodeproj; path = StarJoinSpriteKitAdaptor/StarJoinSpriteKitAdaptor.xcodeproj; sourceTree = "<group>"; };
-		18EBE81E1F1EA6F100C57088 /* eg1 simple tuples.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "eg1 simple tuples.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Joining to Data.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -98,7 +98,7 @@
 		18EBE81D1F1EA5FE00C57088 /* SpriteKit Examples */ = {
 			isa = PBXGroup;
 			children = (
-				18EBE81E1F1EA6F100C57088 /* eg1 simple tuples.playground */,
+				18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */,
 			);
 			path = "SpriteKit Examples";
 			sourceTree = "<group>";

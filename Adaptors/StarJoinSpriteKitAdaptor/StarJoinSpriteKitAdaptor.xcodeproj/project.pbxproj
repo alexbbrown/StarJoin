@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18EBE7FF1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EBE7F51F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.framework */; };
-		18EBE8041F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE8031F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift */; };
+		18EBE8041F1E8EDD00C57088 /* SelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE8031F1E8EDD00C57088 /* SelectionTests.swift */; };
 		18EBE8061F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18EBE81B1F1EA1CB00C57088 /* StarJoinAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE81A1F1EA1CB00C57088 /* StarJoinAdaptor.swift */; };
 /* End PBXBuildFile section */
@@ -28,7 +28,7 @@
 		18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarJoinSpriteKitAdaptor.h; sourceTree = "<group>"; };
 		18EBE7F91F1E8EDC00C57088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EBE7FE1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinSpriteKitAdaptorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		18EBE8031F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinSpriteKitAdaptorTests.swift; sourceTree = "<group>"; };
+		18EBE8031F1E8EDD00C57088 /* SelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTests.swift; sourceTree = "<group>"; };
 		18EBE8051F1E8EDD00C57088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EBE81A1F1EA1CB00C57088 /* StarJoinAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,7 +84,7 @@
 		18EBE8021F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests */ = {
 			isa = PBXGroup;
 			children = (
-				18EBE8031F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift */,
+				18EBE8031F1E8EDD00C57088 /* SelectionTests.swift */,
 				18EBE8051F1E8EDD00C57088 /* Info.plist */,
 			);
 			path = StarJoinSpriteKitAdaptorTests;
@@ -214,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18EBE8041F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift in Sources */,
+				18EBE8041F1E8EDD00C57088 /* SelectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

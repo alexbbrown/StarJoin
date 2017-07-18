@@ -10,6 +10,7 @@
 		18EBE7FF1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EBE7F51F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.framework */; };
 		18EBE8041F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE8031F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift */; };
 		18EBE8061F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		18EBE81B1F1EA1CB00C57088 /* StarJoinAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE81A1F1EA1CB00C57088 /* StarJoinAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		18EBE7FE1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinSpriteKitAdaptorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EBE8031F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinSpriteKitAdaptorTests.swift; sourceTree = "<group>"; };
 		18EBE8051F1E8EDD00C57088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18EBE81A1F1EA1CB00C57088 /* StarJoinAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				18EBE7F71F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor */,
 				18EBE8021F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests */,
 				18EBE7F61F1E8EDC00C57088 /* Products */,
+				18EBE8181F1E936B00C57088 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +76,7 @@
 			children = (
 				18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */,
 				18EBE7F91F1E8EDC00C57088 /* Info.plist */,
+				18EBE81A1F1EA1CB00C57088 /* StarJoinAdaptor.swift */,
 			);
 			path = StarJoinSpriteKitAdaptor;
 			sourceTree = "<group>";
@@ -84,6 +88,13 @@
 				18EBE8051F1E8EDD00C57088 /* Info.plist */,
 			);
 			path = StarJoinSpriteKitAdaptorTests;
+			sourceTree = "<group>";
+		};
+		18EBE8181F1E936B00C57088 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +159,7 @@
 				TargetAttributes = {
 					18EBE7F41F1E8EDC00C57088 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					18EBE7FD1F1E8EDD00C57088 = {
 						CreatedOnToolsVersion = 9.0;
@@ -194,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18EBE81B1F1EA1CB00C57088 /* StarJoinAdaptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +343,7 @@
 		18EBE80A1F1E8EDD00C57088 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -340,12 +354,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSpriteKitAdaptor;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		18EBE80B1F1E8EDD00C57088 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -356,12 +373,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSpriteKitAdaptor;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		18EBE80D1F1E8EDD00C57088 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StarJoinSpriteKitAdaptorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSpriteKitAdaptorTests;
@@ -372,6 +391,7 @@
 		18EBE80E1F1E8EDD00C57088 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StarJoinSpriteKitAdaptorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinSpriteKitAdaptorTests;

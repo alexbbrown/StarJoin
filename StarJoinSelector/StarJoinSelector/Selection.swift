@@ -53,8 +53,8 @@ import Foundation
 
 // why do we need this?  it looks like a mutable collection of some kind
 public protocol TreeNavigable {
-    typealias T = Self
-    func addChildNode(_: Self)
+    associatedtype T = Self
+    func add(child: Self)
 
     func removeNodeFromParent()
 
@@ -69,18 +69,23 @@ public protocol NodeMetadata {
 // KVC protocol encapsulates the idea that values can be accessed using string accessors.  This enables one sort of interaction, bit it's not the only one.
 public protocol KVC {
     // real functions
-    func setValue(_: AnyObject?, forKey:String) -> Void
-    func valueForKey(_: String) -> AnyObject?
 
-    func setValue(_: AnyObject?, forKeyPath:String) -> Void
-    func valueForKeyPath(_: String) -> AnyObject?
+    func setValue(_ value: Any?, forKey:String) -> Void
+
+    func value(forKey: String) -> Any?
+
+    func setValue(_ value: Any?, forKeyPath:String) -> Void
+    func value(forKeyPath: String) -> Any?
 
     // proxy functions
     func setNodeValue(_ toValue:AnyObject?, forKeyPath keyPath:String)
+
+    #if transitionFeatures
     func setNodeValueAnimated(_ toValue:AnyObject?, forKeyPath keyPath:String, withDuration: TimeInterval)
 
     // this feels closer to TreeNavigable
     func removeNodeFromParent(withDelay: TimeInterval)
+    #endif
 }
 
 // MARK: start of body Selector.swift
@@ -528,7 +533,7 @@ public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Valu
             newNode.metadata = boxedMetadata
 
             newNodes.append(newNode)
-            nodes[i].addChildNode(newNode)
+            nodes[i].add(child:newNode)
         }
 
         return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData: [], nodes:newNodes);
@@ -609,7 +614,9 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
-        let retainedCount = min(boundData.count,initialSelection.count)
+        let boundCount = boundData.count
+        let retainedCount = min(boundCount, initialSelection.count)
+        let initialCount = max(boundCount, initialSelection.count)
 
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
@@ -643,7 +650,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
         }
 
         // grab the exit selection
-        for i in boundData.count ..< initialSelection.count {
+        for i in boundData.count ..< initialCount {
             exitSelection.append(initialSelection[i])
         }
 
@@ -925,7 +932,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
 
             newNode.metadata = BoxedValueType(value: nodeValue)
 
-            parent.addChildNode(newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
+            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
 
         }
         // actually self should return the appended selection!
@@ -1062,6 +1069,4 @@ public class ExitSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
     }
 
 #endif
-
-
 

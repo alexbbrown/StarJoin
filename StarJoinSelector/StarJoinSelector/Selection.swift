@@ -920,7 +920,8 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
         } } // this TYPE only makes sense for multiply selected things
 
     /// Append for EnterSelection appends to the parent, not the current node.
-    public func append(constructorFn:(NodeType?,ValueType,Int) -> NodeType ) -> PerfectSelection<NodeType, ValueType> {
+    @discardableResult public
+    func append(constructorFn:(NodeType?,ValueType,Int) -> NodeType ) -> PerfectSelection<NodeType, ValueType> {
 
         var newNodes = [NodeType]()
 

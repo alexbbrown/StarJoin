@@ -43,8 +43,6 @@ class BasicSpriteKitSelectionTests: XCTestCase {
     func testSelectionConstructionZero() {
         // This is an example of a functional test case.
 
-        let children = scene?.children
-
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.emptyData)
 
         XCTAssertEqual(0, mySelection.nodes.count)
@@ -55,8 +53,6 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
     func testSelectionConstructionOne() {
         // This is an example of a functional test case.
-
-        let children = scene?.children
 
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 
@@ -79,8 +75,6 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
     func testSelectionOneEnter() {
         // This is an example of a functional test case.
-
-        let children = scene?.children
 
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 

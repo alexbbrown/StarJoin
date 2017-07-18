@@ -78,10 +78,10 @@ public protocol KVC {
     func value(forKeyPath: String) -> Any?
 
     // proxy functions
-    func setNodeValue(_ toValue:AnyObject?, forKeyPath keyPath:String)
+    func setNodeValue(_ toValue:Any?, forKeyPath keyPath:String)
 
     #if transitionFeatures
-    func setNodeValueAnimated(_ toValue:AnyObject?, forKeyPath keyPath:String, withDuration: TimeInterval)
+    func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
 
     // this feels closer to TreeNavigable
     func removeNodeFromParent(withDelay: TimeInterval)
@@ -232,7 +232,7 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,Void,Int) -> ()
-    public typealias NodeToIdFunction = (NodeType?,Void,Int) -> AnyObject?
+    public typealias NodeToIdFunction = (NodeType?,Void,Int) -> Any?
     public typealias NodeToNodeFunction = (NodeType?,Void,Int) -> NodeType
 
     // Properties
@@ -275,7 +275,7 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValue: AnyObject?) -> Self {
+    public func setKeyedAttr(keyPath: String, toValue: Any?) -> Self {
         for selected in nodes {
             selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -284,32 +284,36 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
     }
 
     // shorthand alias for setKeyedAttr to work like d3
-    public func attr(keyPath: String, toValue: AnyObject?) -> Self {
+    public func attr(_ keyPath: String, toValue: Any?) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValue: toValue)
     }
 
     // shorthand alias for setKeyedAttr to work like d3
-    public func attr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    @discardableResult public
+    func attr(_ keyPath: String, toValueFn: NodeToIdFunction) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
     // compound attr for functions
     // TODO: can I unify the value and function dictionary representations?
-    public func attr(keyedFunctions: [String:NodeToIdFunction]) -> Self {
+    // TODO: is this necessary? can I drop this?
+    @discardableResult public
+    func attr(_ keyedFunctions: [String:NodeToIdFunction]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath: keyPath, toValueFn: toValueFn)
+            attr(keyPath, toValueFn: toValueFn)
         }
         return self;
     }
 
     // compound attr for values
-    public func attr(keyedValues: [String:AnyObject?]) -> Self {
+    @discardableResult public
+    func attr(keyedValues: [String:Any?]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValue) in keyedValues  {
-            attr(keyPath: keyPath, toValue: toValue)
+            attr(keyPath, toValue: toValue)
         }
         return self;
     }
@@ -347,7 +351,8 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,ValueType?,Int) -> ()
-    public typealias NodeToIdFunction = (NodeType?,ValueType?,Int) -> AnyObject?
+    // TODO: should probably call this NodeToValue function and make it return Any
+    public typealias NodeToIdFunction = (NodeType?,ValueType?,Int) -> Any?
     public typealias NodeToNodeFunction = (NodeType?,ValueType?,Int) -> NodeType
     typealias BoxedValueType = BoxedValue<ValueType>
 
@@ -387,7 +392,7 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValue: AnyObject!) -> Self {
+    public func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
         for selected in nodes {
             selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -406,32 +411,37 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
 
     // TODO: move attr and setKeyedAttr default implementations up the tree.
     // shorthand alias for setKeyedAttr to work like d3
-    public func attr(keyPath: String, toValue: AnyObject!) -> Self {
+    @discardableResult public
+    func attr(_ keyPath: String, toValue: Any!) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValue: toValue)
     }
 
     // shorthand alias for setKeyedAttr to work like d3
-    public func attr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    @discardableResult public
+    func attr(_ keyPath: String, toValueFn: NodeToIdFunction) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
     // compound attr for functions
     // TODO: can I unify the value and function dictionary representations?
-    public func attr(keyedFunctions: [String:NodeToIdFunction]) -> Self {
+    // TODO: Do I need this?
+    @discardableResult public
+    func attr(_ keyedFunctions: [String:NodeToIdFunction]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath: keyPath, toValueFn: toValueFn)
+            attr(keyPath, toValueFn: toValueFn)
         }
         return self;
     }
 
     // compound attr for values
-    public func attr(keyedValues: [String:AnyObject?]) -> Self {
+    @discardableResult public
+    func attr(keyedValues: [String:Any?]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValue) in keyedValues  {
-            attr(keyPath: keyPath, toValue: toValue)
+            attr(keyPath, toValue: toValue)
         }
         return self;
     }
@@ -842,7 +852,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValue: AnyObject!) -> Self {
+    public override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
         for node in selection {
             node.setNodeValue(toValue, forKeyPath: keyPath)
         }

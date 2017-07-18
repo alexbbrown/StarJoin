@@ -81,7 +81,7 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
         }
     }
 
-    public func setNodeValue(_ toValue:AnyObject?, forKeyPath keyPath:String)
+    public func setNodeValue(_ toValue:Any?, forKeyPath keyPath:String)
     {
         if let toValue = toValue {
             self.setValue(toValue, forKeyPath: keyPath)
@@ -89,7 +89,7 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
     }
 
     #if transitionFeatures
-    public func setNodeValueAnimated(_ toValue:AnyObject?, forKeyPath keyPath:String, withDuration: TimeInterval)
+    public func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
 {
     if let toValue = toValue {
 

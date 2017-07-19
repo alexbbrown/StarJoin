@@ -1,7 +1,8 @@
 /*: [Previous-Joining Structs](@previous)
-# Adding Complexity
+# Adding Complexity in Data and Nodes
 So far we have examined fixed data - using types that might come from a prototype, the internet, or your app.
- Now let's make the data a tiny bit more dynamic - and generate it on demand
+ Now let's make the data a tiny bit more dynamic - and generate it on demand.
+ This example also executes the selection operation twice - you won't see any animations yet, but this shows that the node state can evolve with the data
 */
 import StarJoinSelector
 import SpriteKit
@@ -55,27 +56,21 @@ let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
 // MARK: Enter first batch
 
 let entered = mySelection.enter()
-#if true
 
+//: For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified
 
 entered.append { (s, d, i) -> SKNode in
     return SKSpriteNode()
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
             sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            //sprite.color = SKColor.redColor() // todo: use color list here
+            sprite.color = colors.color(withKey:d!.color) ?? .red
             sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
 
         }
-    }.setKeyedAttr(keyPath: "color") { (s, d, i) -> AnyObject in
-        // Note that you MUST use properly named keys or it explodes.
-        // there should be a default.  Get the keys from
-        // NSColorList(named:"Apple").allKeys or look at other lists.
-        colors.color(withKey: d!.color)!
-}
-    #endif
+    }
 
-#if false
+
 // MARK: select & join second batch
 
 let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
@@ -87,30 +82,28 @@ mySelection2.exit().remove()
 
 let entered2 = mySelection2.enter()
 
-entered2.append { _ in
+entered2.append { (_, _, _) in
     return SKSpriteNode()
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
-            sprite.position = CGPointMake(CGFloat(d!.x), CGFloat(d!.y))
-            //sprite.color = SKColor.redColor() // todo: use color list here
-            sprite.size = CGSizeMake(CGFloat(d!.size), CGFloat(d!.size))
+            sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
+            sprite.color = colors.color(withKey:d!.color) ?? .red
+            sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
+
 
         }
-    }.setKeyedAttr(keyPath:"color") { (s, d, i) -> AnyObject in
-        // Note that you MUST use properly named keys or it explodes.
-        // there should be a default.  Get the keys from
-        // NSColorList(named:"Apple").allKeys or look at other lists.
-        colors.colorWithKey(d!.color)!
-}
-#endif
+    }
+
+
 /*:
  #Display boilerplate
  let's move the boring stuff down here now.
  */
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
-// Add it to the TimeLine
-PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
+// Add it to the Live View
+PlaygroundPage.current.liveView = sceneView
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 // Create the scene and add it to the view
 scene.size = CGSize(width:640, height:480)

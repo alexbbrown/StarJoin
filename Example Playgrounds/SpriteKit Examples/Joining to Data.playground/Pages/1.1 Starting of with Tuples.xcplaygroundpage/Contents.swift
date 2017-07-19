@@ -1,4 +1,4 @@
-//:# Tuples to Sprites
+//:# turn humble Tuples into Sprites
 import StarJoinSelector
 import SpriteKit
 import StarJoinSpriteKitAdaptor
@@ -11,7 +11,7 @@ import PlaygroundSupport
 */
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
-// Add it to the TimeLine
+// Add a spritekit window to the Live View
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 // Create the scene and add it to the view

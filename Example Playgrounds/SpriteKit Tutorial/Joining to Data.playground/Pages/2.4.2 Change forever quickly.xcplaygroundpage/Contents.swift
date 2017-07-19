@@ -25,7 +25,7 @@ let nodeArray = nodeArrayGenerator(count:(min:5, max:15), xmax:1000, ymax:600, s
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
-let mySelection = rootNode.selectAll(nodes:SKNode.childNodes(:)).join(nodeArray)
+let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
 
 /*:
  ## First selection

@@ -25,7 +25,7 @@ func rangeRandom<T>(ordinals: [T]) -> T {
 }
 
 let colors = NSColorList(named:.init("Apple"))!
-func nodeGenerator1(xmax: Int, ymax:Int, size:Float) -> TableRow {
+func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float(rangeRandom(min: 0, max: xmax)),
             y:Float(rangeRandom(min: 0, max: ymax)),
             color: rangeRandom(ordinals:colors.allKeys),
@@ -81,7 +81,7 @@ extension SJDelegate:SKSceneDelegate {
         var nodeArray2 = [TableRow]()
 
         for _ in 1...rangeRandom(min: 50, max: 150) {
-            nodeArray2.append(nodeGenerator1(xmax: 1000, ymax: 600, size: 20))
+            nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
         }
 
         let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)

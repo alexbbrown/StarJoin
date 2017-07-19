@@ -2,7 +2,7 @@
  # Towards animation - change over time
  This extends the Change over time to generate frames forever.
 
- - Callout(performance): This version moves some of the code into a precompiled etra source page.  Now it runs at about 3 fps
+ - Callout(performance): This version moves some of the code into a the sources folder - where it gets precompiled.  Now it runs at about 3 fps
  */
 //:  ![example](ss2.png)
 

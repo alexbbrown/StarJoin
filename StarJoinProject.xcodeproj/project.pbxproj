@@ -43,6 +43,7 @@
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
+		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSpriteKitAdaptor.xcodeproj; path = StarJoinSpriteKitAdaptor/StarJoinSpriteKitAdaptor.xcodeproj; sourceTree = "<group>"; };
 		18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Joining to Data.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -60,6 +61,7 @@
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
+				18B2D4971F1F496700199DD3 /* Docs */,
 				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
 				187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
@@ -76,6 +78,14 @@
 				187E73F11F1DEE9E00AE571F /* SelectEditing.playground */,
 			);
 			path = "Development Playgrounds";
+			sourceTree = "<group>";
+		};
+		18B2D4971F1F496700199DD3 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				18B2D4921F1F496000199DD3 /* Old Notes.pdf */,
+			);
+			path = Docs;
 			sourceTree = "<group>";
 		};
 		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {

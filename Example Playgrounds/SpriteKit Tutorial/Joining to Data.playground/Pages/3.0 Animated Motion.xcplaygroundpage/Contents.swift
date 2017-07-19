@@ -25,21 +25,26 @@ typealias TableRow = (x:Float, y:Float, color:NSColor.Name, size:Float)
 
 let range = 0..<10
 
-range.endIndex
+range.last
 
-func rangeRandom(min:Int, max:Int) -> Int {
-    return min + Int(arc4random_uniform(UInt32(max - min)))
+extension CountableRange {
+    func sample() -> Bound {
+        return self.lowerBound.advanced(by: Int(arc4random_uniform(UInt32(self.lowerBound.distance(to: self.upperBound)))) as! Bound.Stride)
+    }
 }
 
-func rangeRandom<T>(ordinals: [T]) -> T {
-    return ordinals[rangeRandom(min: 0, max: ordinals.count)]
+extension Array {
+    func sample() -> Element {
+        return self[indices.sample()]
+    }
 }
+
 
 let colors = NSColorList(named:.init("Apple"))!
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
-    return (x:Float(rangeRandom(min: 0, max: xmax)),
-            y:Float(rangeRandom(min: 0, max: ymax)),
-            color: rangeRandom(ordinals:colors.allKeys),
+    return (x:Float((0..<xmax).sample()),
+            y:Float((0..<ymax).sample()),
+            color: colors.allKeys.sample(),
             size:size)
 }
 

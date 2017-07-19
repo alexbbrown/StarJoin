@@ -46,4 +46,4 @@ mySelection
     .attr("position") { (s, d, i) in NSValue(point:d!.position) }
     .attr("size") { (s, d, i) in NSValue(size:d!.size) }
     .attr("color") { (s, d, i) in d!.color }
-//: [Next](@next)
+//: [Next–Section 2–evolving data](@next)

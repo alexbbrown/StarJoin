@@ -4,6 +4,7 @@
         <page name='1.1 Starting of with Tuples'/>
         <page name='1.2 Internet Dictionaries'/>
         <page name='1.3 Serious Structs'/>
-        <page name='2.1 Generated Data'/>
+        <page name='2.1 Addition and Subtraction'/>
+        <page name='2.2 Mutation'/>
     </pages>
 </playground>

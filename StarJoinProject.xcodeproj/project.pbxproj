@@ -95,18 +95,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		18EBE81D1F1EA5FE00C57088 /* SpriteKit Examples */ = {
+		18EBE81D1F1EA5FE00C57088 /* SpriteKit Tutorial */ = {
 			isa = PBXGroup;
 			children = (
 				18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */,
 			);
-			path = "SpriteKit Examples";
+			path = "SpriteKit Tutorial";
 			sourceTree = "<group>";
 		};
 		18EBE8201F1EA76D00C57088 /* Example Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				18EBE81D1F1EA5FE00C57088 /* SpriteKit Examples */,
+				18EBE81D1F1EA5FE00C57088 /* SpriteKit Tutorial */,
 			);
 			path = "Example Playgrounds";
 			sourceTree = "<group>";

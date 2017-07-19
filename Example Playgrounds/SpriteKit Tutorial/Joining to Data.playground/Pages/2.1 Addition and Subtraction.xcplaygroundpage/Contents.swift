@@ -1,8 +1,14 @@
+//: [Previous-Section 1](@previous)
 /*: [Previous-Joining Structs](@previous)
-# Adding Complexity in Data and Nodes
-So far we have examined fixed data - using types that might come from a prototype, the internet, or your app.
- Now let's make the data a tiny bit more dynamic - and generate it on demand.
- This example also executes the selection operation twice - you won't see any animations yet, but this shows that the node state can evolve with the data
+# Evolving data by adding and removing
+ This example demonstrates that programmatically generated data (it's random) works just as well as static data.
+
+ Since can generate new and different data we use that to get two rounds of data - and demonstrate the process of **refreshing the data and nodes** - where *new nodes* get *new values*, but *existing nodes* ignore their new parameters (*that's a deliberate bug that's fixed in the next example*)
+
+ While this is not a perfect
+ use case of d3, it is a precursor to animation - where EXISTING nodes get
+ their new values animated in over time.
+
 */
 import StarJoinSelector
 import SpriteKit
@@ -44,24 +50,28 @@ for _ in 1...rangeRandom(min: 50, max: 150) {
     nodeArray2.append(nodeGenerator1(xmax: 1000, ymax: 600, size: 20))
 }
 /*:
- # Complex Selections
+ ## Complex Selections
  In this example we perform multiple selections.
- The root nodes is a SKSceneNode, but since it's children will be more generic, we need to insist that we are dealing with SKNodes by templating:
+ * Callout(Ninja Tip):
+ The root node's type is `SKSceneNode`, but since it's children might be any sort of `SKNode`, we need to insist-by templating:
 */
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
-let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+let mySelection = rootNode.selectAll(allChildrenSelector).join(nodeArray)
 
-// MARK: Enter first batch
+/*:
+ ## First selection
+ The original data we draw uses the usual approach - `enter` and `append` all the data.
+*/
 
 let entered = mySelection.enter()
 
-//: For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified
-
 entered.append { (s, d, i) -> SKNode in
     return SKSpriteNode()
-    }.each { (s, d, i) -> () in
+    }
+//: * Callout(Ninja Tip): For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified
+entered.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
             sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
             sprite.color = colors.color(withKey:d!.color) ?? .red
@@ -71,13 +81,13 @@ entered.append { (s, d, i) -> SKNode in
     }
 
 
-// MARK: select & join second batch
+//: ## Updating your data
+//: Updating data looks the same as adding your original data to begin with Run select again.  The original selection is forgotten, but the nodes are still there - for the moment.
 
 let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
 
-// MARK: exit old nodes and enter new ones (fail to update)
-
-// full enter/exit update example
+//: Another select operator : `exit` selects only the nodes which no longer have data - and the `remove` modifier destroys them.  Later on we'll see how special effects can be added
+//: * experiment: try making the second data set longer or shorter - what happens?
 mySelection2.exit().remove()
 
 let entered2 = mySelection2.enter()
@@ -94,9 +104,9 @@ entered2.append { (_, _, _) in
         }
     }
 
-
+//: [Next–Mutating existing nodes](@next)
 /*:
- #Display boilerplate
+ ## Display boilerplate
  let's move the boring stuff down here now.
  */
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
@@ -110,5 +120,6 @@ scene.size = CGSize(width:640, height:480)
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
 
-//: [Next](@next)
+//: [Next–Mutating existing nodes](@next)
+
 

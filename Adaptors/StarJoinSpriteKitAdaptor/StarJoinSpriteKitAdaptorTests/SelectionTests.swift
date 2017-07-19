@@ -78,11 +78,18 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 
-        mySelection.enter().append { (s, d, i) -> SKNode in
+        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(1, mySelection.data.count)
+
+        let enterSelection = mySelection.enter()
+
+        XCTAssertEqual(0, mySelection.nodes.count)
+
+        enterSelection.append { (s, d, i) -> SKNode in
             return SKNode()
         }
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(1, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.data.count)
         XCTAssertEqual(1, scene!.children.count)
 

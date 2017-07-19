@@ -1,5 +1,5 @@
 /*: [Previous-Joining Structs](@previous)
-# Evolving data by updating
+# Adding Complexity in Data and Nodes
  In the mutation example, when new data replaces old data, the `update` method is used to update all nodes - not just the ones that are added.
 
 */

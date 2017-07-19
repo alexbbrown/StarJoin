@@ -261,7 +261,7 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
 
 
 
-    public func each(eachFn:NodeFunction) -> Self {
+    public func each(_ eachFn:NodeFunction) -> Self {
         // TODO create more childrens
         for (i, selected) in nodes.enumerated() {
 
@@ -383,7 +383,7 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     //        return self;
     //    }
 
-    public func each(eachFn:NodeFunction) -> Self {
+    public func each(_ eachFn:NodeFunction) -> Self {
         for (i, selected) in nodes.enumerated() {
 
             eachFn(selected, self.metadataForNode(i:i), i)
@@ -820,7 +820,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
         return ExitSelection<NodeType, ValueType>(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
     }
 
-    public override func each(eachFn:NodeFunction) -> Self {
+    public override func each(_ eachFn:NodeFunction) -> Self {
         // TODO create more childrens (what?)
 
         for i in 0 ..< selection.count {

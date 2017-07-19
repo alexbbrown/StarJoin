@@ -2,7 +2,7 @@
 /*:
  This series of tutorial / test cases starts somewhere very simple:
 
- **see how *anyone* can take a pinch of data, add a couple of rules, and see something on the screen straight away.**
+ **We'll show how easy it is to take a pinch of data, add a couple of rules, and draw something on the screen straight away.**
 
  Here are the ingredients we need
  */
@@ -45,9 +45,9 @@ var myDataItems = [
  **`Select`ion** is a key concept in StarJoin.  It means picking a UI element or set of elements that we are going to modify.
 */
 let mySelection = select(node:scene as SKNode)
-//: In this instance we are going to create and modify the children of the scene node.  You'll get to understand the details of this statement later.
+//: To begin with we are going to create and modify some very basic sprites in the scene.  Let's `select` `all` of them.  You'll get to understand the details of this statement later.
     .selectAll(allChildrenSelector)
-//: next we always need to say that we are going to `join` the children to `myDataItems`
+//: In spritejoin you `join` data to your graphics elements:
     .join(myDataItems)
 //: Nothing has been drawn yet - there's a little problem - there **are no children**.
 //: the **`enter`** selection operator focuses on the new (missing) nodes we need:
@@ -60,7 +60,7 @@ mySelection
     .attr("size") { (s, d, i) in SKSize(width: d!.size, height: d!.size) }
     .attr("color") { (s, d, i) in d!.color }
 /*:
- ## *That's it folks!*
+ ## *That's all folks!*
 
  If you haven't done so already, open the *assistant editor* to view the result.  You should see three colored squares.
 

@@ -33,10 +33,10 @@ public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
     static func -(_:Self,_:Self) -> Self
     static func %(_:Self,_:Self) -> Self
 
-    func pow(_:Self,rhs:Self) -> Self
-    func ceil(_ x:Self) -> Self
-    func floor(_ x:Self) -> Self
-    func log(_ x:Self) -> Self
+    func pow(_:Self,_:Self) -> Self
+    func ceil(_:Self) -> Self
+    func floor(_:Self) -> Self
+    func log(_:Self) -> Self
 
     init(integerLiteral value: IntegerLiteralType)
     init(floatLiteral value: FloatLiteralType)

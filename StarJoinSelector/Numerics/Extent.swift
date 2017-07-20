@@ -44,7 +44,7 @@ open class LinearExtent<D:SJFloatingPointType> : Extent<D> where D.Stride == D {
         let d:D = 0.0
 
         let span = domain[1] - domain[0]
-        var step = d.pow(10.0, rhs: d.floor(d.log(span / count) / d.log(10.0)))
+        var step = d.pow(10.0, d.floor(d.log(span / count) / d.log(10.0)))
         let err = count / span * step
 
         // Filter ticks to get closer to the desired count.

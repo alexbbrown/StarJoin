@@ -14,7 +14,7 @@ import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 import SpriteKit
 
-let scene:SKScene = SKScene()
+let scene:SKScene = SKScene(size: .init(width: 640, height: 480))
 
 // MARK: Enable SpriteKit for Playground
 
@@ -50,9 +50,24 @@ func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
 
 var margin:CGFloat = 100
 
-let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,width-margin))
+extension CGFloat: SJFloatingPointType {
+    public func pow(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
+        return CoreGraphics.pow(lhs, rhs)
+    }
+    public func ceil(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.ceil(x)
+    }
+    public func floor(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.floor(x)
+    }
+    public func log(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.log(x)
+    }
+}
 
-let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,height-margin))
+let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.width-margin))
+
+let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.height-margin))
 
 // MARK: Selection
 

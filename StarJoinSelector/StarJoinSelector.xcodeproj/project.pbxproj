@@ -47,6 +47,7 @@
 		18CB9DD41F2085E9008A3E7F /* Extent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extent.swift; sourceTree = "<group>"; };
 		18CB9DD61F208679008A3E7F /* NumericProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericProtocols.swift; sourceTree = "<group>"; };
 		18CB9DD91F20880A008A3E7F /* ScaleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleTests.swift; sourceTree = "<group>"; };
+		18E8A15C1F2099930062934D /* NumericConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConformances.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				18CB9DD81F2087EF008A3E7F /* ScaleTests */,
-				18CB9DCF1F208338008A3E7F /* Scale */,
+				18CB9DCF1F208338008A3E7F /* Numerics */,
 				187E74221F1DFDE000AE571F /* StarJoinSelector */,
 				187E742D1F1DFDE000AE571F /* StarJoinSelectorTests */,
 				187E74211F1DFDE000AE571F /* Products */,
@@ -119,15 +120,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		18CB9DCF1F208338008A3E7F /* Scale */ = {
+		18CB9DCF1F208338008A3E7F /* Numerics */ = {
 			isa = PBXGroup;
 			children = (
 				18CB9DD01F208347008A3E7F /* Scales.swift */,
 				18CB9DD41F2085E9008A3E7F /* Extent.swift */,
 				18CB9DD21F20857C008A3E7F /* MoreScales.swift */,
 				18CB9DD61F208679008A3E7F /* NumericProtocols.swift */,
+				18E8A15C1F2099930062934D /* NumericConformances.swift */,
 			);
-			path = Scale;
+			path = Numerics;
 			sourceTree = "<group>";
 		};
 		18CB9DD81F2087EF008A3E7F /* ScaleTests */ = {

@@ -1,5 +1,5 @@
 
-// This example animates color and position - using the each accessors and SKAction (hack for now) was eg9
+// This example animates color and position - using the each accessors and SKAction (hack for now) was eg10
 
 /*: [Previous-Update forever quickly](@previous)
  # Silky 'tweening using SpriteKit
@@ -38,13 +38,21 @@ func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
 
 func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
     var nodeArray = [TableRow]()
-
+    
     for _ in 1...count {
         nodeArray.append(nodeGenerator(xmax:xmax, ymax:ymax, size:size))
     }
-
+    
     return nodeArray
 }
+
+// Scale Configuration
+
+var margin:CGFloat = 100
+
+let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,width-margin))
+
+let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,height-margin))
 
 // MARK: Selection
 
@@ -56,26 +64,26 @@ var count = 200
 var runCounter = 0
 
 func updatePlot() {
-
+    
     let cellCount = 1 + runCounter % 10
-
+    
     runCounter += 1
-
+    
     // Generate new dataset, slightly larger
-    let nodeArray = tableGenerator(xmax:Int(scene.size.width), ymax:Int(scene.size.height), size:40.0, count:cellCount)
-
+    let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
+    
     let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
-
+    
     // remove nodes which don't have data
     mySelection.exit().remove()
-
+    
     // existing nodes go red
     mySelection.update().attr("color", toValue: SKColor.red)
         .each { (s, d, i)  in
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
                                                height:CGFloat(d!.size))
     }
-
+    
     // new nodes
     mySelection.enter()
         .append { (s, d, i) in SKSpriteNode()}
@@ -83,14 +91,16 @@ func updatePlot() {
         .attr("color",toValue: SKColor.white)
         // jump to start position and grow in
         .each { (s, d, i) in
-            s!.position = CGPoint(x:CGFloat(d!.x), y:CGFloat(d!.y))
+            s!.position = CGPoint(x:xScale.scale(CGFloat(d!.x))!, y:yScale.scale(CGFloat(d!.y))!)
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
     }
-
+    
     mySelection.update().each { (s, d, i) in
-        s!.run(.move(to:CGPoint(x:CGFloat(d!.x), y:CGFloat(d!.y)), duration: period))
-
+        s!.run(.move(to: CGPoint(
+            x: xScale.scale(CGFloat(d!.x))!,
+            y: yScale.scale(CGFloat(d!.y))!)
+            , duration: period))
     }
 }
 
@@ -120,6 +130,7 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 // Create the scene and add it to the view
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
+
 
 
 

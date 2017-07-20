@@ -84,9 +84,10 @@ class LessSimpleOperations: XCTestCase {
             return .init()
         }
 
-        enterSelection.each { (s, d, i) in
-            XCTFail("There is no each for enter - that's only on the append selection")
-        }
+        // remove this - it's fatal now
+//        enterSelection.each { (s, d, i) in
+//            XCTFail("There is no each for enter - that's only on the append selection")
+//        }
 
         selection0.exit().remove()
 

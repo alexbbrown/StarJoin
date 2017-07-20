@@ -1,5 +1,4 @@
-
-// This example uses xScale and yScale to move data coordinates into view coordinates.  Size is still managed by view coordinates (useful since they are points).
+// This example animates color and position - using the each accessors and SKAction (hack for now)
 
 // documentation
 // https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKAction_Ref/Reference/Reference.html#//apple_ref/occ/clm/SKAction/waitForDuration:
@@ -33,7 +32,7 @@ spriteView.presentScene(scene)
 
 typealias TableRow = (x:Float, y:Float, color:String, size:Float)
 
-func rangeRandom(_ min:Int, _ max:Int) -> Int {
+func rangeRandom(min:Int, _ max:Int) -> Int {
     return min + Int(arc4random_uniform(UInt32(max - min)))
 }
 
@@ -52,17 +51,17 @@ func nodeGenerator(xmax:Int, _ ymax:Int, _ size:Float) -> TableRow {
 
 func tableGenerator(xmax:Int, _ ymax:Int, _ size:Float, _ count:Int) -> [TableRow] {
     var nodeArray = [TableRow]()
-
+    
     for i in 1...count {
         nodeArray.append(nodeGenerator(xmax, ymax, size))
     }
-
+    
     return nodeArray
 }
 
 // Cyclic runner
 
-func repeatedlyExecute(block: (()->()), atInterval interval:NSTimeInterval, count count:Int) {
+func repeatedlyExecute(block: (()->()), atInterval interval:NSTimeInterval, count:Int) {
     let action = SKAction.repeatAction(SKAction.group(
         [SKAction.waitForDuration(interval),
          SKAction.runBlock(block)]),count:count)
@@ -78,33 +77,27 @@ var count = 200
 
 var runCounter = 0
 
-var margin:CGFloat = 100
-
-let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,width-margin))
-
-let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,height-margin))
-
 func updatePlot() {
-
+    
     var cellCount = 1 + runCounter % 10
-
+    
     runCounter++
-
+    
     // Generate new dataset, slightly larger
-    let nodeArray = tableGenerator(100,100,40,cellCount)
-
+    let nodeArray = tableGenerator(Int(width),Int(height),40,cellCount)
+    
     let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
-
+    
     // kill dead nodes
     mySelection.exit().remove()
-
+    
     // existing nodes go red
     mySelection.update().setKeyedAttr("color",toValue:SKColor.redColor())
         .each { (s, d, i)  in
             (s as! SKSpriteNode).size = CGSizeMake(CGFloat(d!.size),
                                                    CGFloat(d!.size))
     }
-
+    
     // new nodes
     mySelection.enter()
         .append { _ in SKSpriteNode()}
@@ -112,16 +105,18 @@ func updatePlot() {
         .setKeyedAttr("color",toValue: SKColor.whiteColor())
         // jump to start position and grow in
         .each { (s, d, i) in
-            s!.position = CGPointMake(xScale.scale(CGFloat(d!.x))!, yScale.scale(CGFloat(d!.y))!)
+            s!.position = CGPointMake(CGFloat(d!.x), CGFloat(d!.y))
             (s as! SKSpriteNode).size = CGSizeMake(CGFloat(1), CGFloat(1))
             s!.runAction(SKAction.scaleTo(CGFloat(d!.size), duration: period))
     }
-
+    
     mySelection.update().each { (s, d, i) in
-        s!.runAction(SKAction.moveTo(CGPointMake(xScale.scale(CGFloat(d!.x))!, yScale.scale(CGFloat(d!.y))!), duration: period))
-
+        s!.runAction(SKAction.moveTo(CGPointMake(CGFloat(d!.x), CGFloat(d!.y)), duration: period))
+        
     }
+    //let myNewSelection = entered.selectAll(scene.childNodes).join(nodeArray2)
 }
+
 
 
 repeatedlyExecute({ _ in updatePlot() }, atInterval:period, count:count)

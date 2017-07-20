@@ -19,22 +19,24 @@ let scene = SKScene()
 //: **Generated data**
 //:
 //: The best kind of data is different each time!  Let's make some like that.  A tuple keeps it simple:
-typealias TableRow = (x: Float, y: Float, color: NSColor.Name, size: Float)
+typealias TableRow = (x: Float, y: Float, texture: SKTexture, size: Float)
 let colors = NSColorList(named:.init("Apple"))!
+
+let textures = [#imageLiteral(resourceName: "wood1.jpg"), #imageLiteral(resourceName: "water1.jpg")].map(SKTexture.init(image:))
 
 //: * note:  `range.randomElement()` is found in this playground's Sources
 
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float((0..<xmax).randomElement()),
             y:Float((0..<ymax).randomElement()),
-            color: colors.allKeys.randomElement(),
+            texture: textures.randomElement(),
             size:size)
 }
 
 var nodeArray = [TableRow]()
 
 for _ in 1...(5..<15).randomElement() {
-    nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 50))
+    nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 60))
 }
 
 var nodeArray2 = [TableRow]()
@@ -59,17 +61,15 @@ let mySelection = rootNode.selectAll(allChildrenSelector).join(nodeArray)
 */
 
 let entered = mySelection.enter()
-
-entered.append { (s, d, i) -> SKNode in
-    return SKSpriteNode()
+    .append { (s, d, i) -> SKNode in
+        return SKSpriteNode()
     }
-//: * Callout(Ninja Tip): For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified
-entered.each { (s, d, i) -> () in
+//: * Callout(Ninja Tip): For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified.  We need to cast `s` down to the type we expect.
+    .each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
             sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            sprite.color = colors.color(withKey:d!.color) ?? .red
+            sprite.texture = d!.texture
             sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
-
         }
     }
 
@@ -90,10 +90,8 @@ entered2.append { (_, _, _) in
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
             sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            sprite.color = colors.color(withKey:d!.color) ?? .red
+            sprite.texture = d!.texture
             sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
-
-
         }
     }
 

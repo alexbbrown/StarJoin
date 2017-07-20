@@ -51,9 +51,11 @@ class LessSimpleOperations: XCTestCase {
         XCTAssertEqual(1, appendSelection.nodes.count)
         XCTAssertEqual(0, enterSelection.nodes.count)
 
-        enterSelection.each { (s, d, i) in
-            fatalError()
-        }
+        // Have now changed enterSelection.each to fatal until we can remove it
+        // Enter should be equivalent to unbound join
+//        enterSelection.each { (s, d, i) in
+//            fatalError()
+//        }
 
         XCTAssertEqual(1, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.data.count)

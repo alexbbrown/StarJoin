@@ -34,6 +34,10 @@
 // build a NEW one.
 // handle structures which are not arrays
 
+// update to d3.js new merge selection semantics - merges two selections, should be used after enter!
+// https://github.com/d3/d3-selection/issues/60 - merge issue
+// https://github.com/d3/d3-selection/blob/master/README.md#selection_merge
+
 // TODO:[old]
 // refactor into DataDominant, NodeDominant, and Perfect joins
 // rationalise the the setKeyAttr logic

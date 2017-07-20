@@ -1,11 +1,13 @@
 
-// This example animates color and position -using scales and the transition selection was eg11
+// This example users the SKAxis component and animates growing axes.
+// Note the use of oldscale to get entered scale components animating elegantly
+
+// It chugs a little - that's the playground overhead.  In an app, it's fine.
 
 /*: [Previous-Update forever quickly](@previous)
- # Describe animation using selections
- The transition selection is a way to encapsulate `SpriteKit's` powerful animations behind the facade of the `attr` interface.  This improves reusability and avoids crossing API boundaries while you work.
- * Callout(New operators): look out for the `transition(withDelay:)` operator.  It makes `attr` calls chained after it animate over time.
-*/
+ # Building complex representation - Axes
+  This demo shows an example of a complex feature built using StarJoin - the axis.  All the elements in the axis are created by mapping objects to Sprites.  Here it's packaged up into a new class - take a look at the source.
+ */
 
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
@@ -28,17 +30,43 @@ func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
 
 func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
     var nodeArray = [TableRow]()
-    
+
     for _ in 1...count {
         nodeArray.append(nodeGenerator(xmax:xmax, ymax:ymax, size:size))
     }
-    
+
     return nodeArray
 }
+
+/*: ## Layers organise your scene
+ All the examples until now have put all the sprites directly in the scene, as children of the 
+
+// create a layer for the axes
+let axesNode = SKNode()
+let xAxisNode = SKNode()
+let yAxisNode = SKNode()
+scene.addChildNode(axesNode)
+axesNode.addChildNode(xAxisNode)
+axesNode.addChildNode(yAxisNode)
 
 // Scale Configuration
 
 var margin:CGFloat = 100
+
+extension CGFloat: SJFloatingPointType {
+    public func pow(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
+        return CoreGraphics.pow(lhs, rhs)
+    }
+    public func ceil(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.ceil(x)
+    }
+    public func floor(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.floor(x)
+    }
+    public func log(_ x:CGFloat) -> CGFloat {
+        return CoreGraphics.log(x)
+    }
+}
 
 let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.width-margin))
 
@@ -58,14 +86,14 @@ func updatePlot() {
     let generationCount = 1 + runCounter % 5
 
     let cellCount = 1 + runCounter % 10
-    
+
     runCounter += 1
-    
+
     // Generate new dataset, slightly larger
     let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
-    
+
     let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
-    
+
     // remove nodes which don't have data
     //: * note: It must be your birthday, there's a whole new super cool selection operator - transition - which allows animations!
     mySelection
@@ -84,11 +112,11 @@ func updatePlot() {
             } else {
                 return SKColor.red
             }
-        }
-//        .each { (s, d, i)  in
-//            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
-//                                               height:CGFloat(d!.size))
-//    }
+    }
+    //        .each { (s, d, i)  in
+    //            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
+    //                                               height:CGFloat(d!.size))
+    //    }
 
     // new nodes
     mySelection.enter()
@@ -101,22 +129,22 @@ func updatePlot() {
                                   y: yScale.scale(CGFloat(d!.y))!)
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
-            }
-    
-//    mySelection.update().each { (s, d, i) in
-//        s!.run(.move(to: CGPoint(
-//            x: xScale.scale(CGFloat(d!.x))!,
-//            y: yScale.scale(CGFloat(d!.y))!)
-//            , duration: period))
-//    }
-            
-            mySelection
-                .update()
-                .transition(duration: period)
-                .attr("position") { (s, d, i) in
-                    CGPoint(x: xScale.scale(CGFloat(d!.x))!,
-                            y: yScale.scale(CGFloat(d!.y))!)
-            }
+    }
+
+    //    mySelection.update().each { (s, d, i) in
+    //        s!.run(.move(to: CGPoint(
+    //            x: xScale.scale(CGFloat(d!.x))!,
+    //            y: yScale.scale(CGFloat(d!.y))!)
+    //            , duration: period))
+    //    }
+
+    mySelection
+        .update()
+        .transition(duration: period)
+        .attr("position") { (s, d, i) in
+            CGPoint(x: xScale.scale(CGFloat(d!.x))!,
+                    y: yScale.scale(CGFloat(d!.y))!)
+    }
 
 }
 
@@ -146,6 +174,7 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 // Create the scene and add it to the view
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
+
 
 
 

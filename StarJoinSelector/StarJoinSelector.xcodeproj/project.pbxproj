@@ -14,6 +14,7 @@
 		187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */; };
 		187E74311F1DFDE000AE571F /* StarJoinSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 187E74231F1DFDE000AE571F /* StarJoinSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		187E74441F1DFE3400AE571F /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E74431F1DFE3400AE571F /* Selection.swift */; };
+		18A66DA31F20AE4600FD46B3 /* NumericConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8A15C1F2099930062934D /* NumericConformances.swift */; };
 		18CB9DD11F208347008A3E7F /* Scales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD01F208347008A3E7F /* Scales.swift */; };
 		18CB9DD51F2085E9008A3E7F /* Extent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD41F2085E9008A3E7F /* Extent.swift */; };
 		18CB9DD71F208679008A3E7F /* NumericProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD61F208679008A3E7F /* NumericProtocols.swift */; };
@@ -252,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A66DA31F20AE4600FD46B3 /* NumericConformances.swift in Sources */,
 				187E74441F1DFE3400AE571F /* Selection.swift in Sources */,
 				18CB9DD11F208347008A3E7F /* Scales.swift in Sources */,
 				1824288E1F1FF5C00054248E /* AdaptorProtocols.swift in Sources */,

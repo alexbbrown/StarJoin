@@ -18,50 +18,50 @@ import Foundation
 
 import Foundation
 import CoreGraphics
-import StarJoin
+
 
 extension Double: SJFloatingPointType {
-    public func pow(_ lhs: Double, rhs: Double) -> Double {
+    public func pow(_ lhs: Double, _ rhs: Double) -> Double {
         return Darwin.pow(lhs, rhs)
     }
-    public func ceil(x:Double) -> Double {
+    public func ceil(_ x: Double) -> Double {
         return Darwin.ceil(x)
     }
-    public func floor(x:Double) -> Double {
+    public func floor(_ x: Double) -> Double {
         return Darwin.floor(x)
     }
-    public func log(x:Double) -> Double {
+    public func log(_ x: Double) -> Double {
         return Darwin.log(x)
     }
 }
 
 extension Float: SJFloatingPointType {
-    public func pow(lhs: Float, rhs: Float) -> Float {
+    public func pow(_ lhs: Float, _ rhs: Float) -> Float {
         return Darwin.pow(lhs, rhs)
     }
-    public func ceil(x:Float) -> Float {
+    public func ceil(_ x:Float) -> Float {
         return Darwin.ceil(x)
     }
-    public func floor(x:Float) -> Float {
+    public func floor(_ x:Float) -> Float {
         return Darwin.floor(x)
     }
-    public func log(x:Float) -> Float {
+    public func log(_ x:Float) -> Float {
         return Darwin.log(x)
     }
 }
 
 //extension Float: SJFloatingPointType { }
 extension CGFloat: SJFloatingPointType {
-    public func pow(lhs: CGFloat, rhs: CGFloat) -> CGFloat {
+    public func pow(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
         return CoreGraphics.pow(lhs, rhs)
     }
-    public func ceil(x:CGFloat) -> CGFloat {
+    public func ceil(_ x:CGFloat) -> CGFloat {
         return CoreGraphics.ceil(x)
     }
-    public func floor(x:CGFloat) -> CGFloat {
+    public func floor(_ x:CGFloat) -> CGFloat {
         return CoreGraphics.floor(x)
     }
-    public func log(x:CGFloat) -> CGFloat {
+    public func log(_ x:CGFloat) -> CGFloat {
         return CoreGraphics.log(x)
     }
 }

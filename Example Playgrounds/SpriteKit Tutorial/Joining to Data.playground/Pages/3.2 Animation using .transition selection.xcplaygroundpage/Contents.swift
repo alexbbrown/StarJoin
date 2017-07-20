@@ -2,13 +2,10 @@
 // This example animates color and position -using scales and the transition selection was eg11
 
 /*: [Previous-Update forever quickly](@previous)
- # Silky 'tweening using SpriteKit
- Instead of controlling every frame using StarJoin, we can use SpriteKit's high performance animation routines to fill in between explicit frames.
- - Callout(performance): All the code is back in the playground, but is fast because most of the heavy lifting is in SpriteKit.  It runs smoothly at 60 fps (or some high rate)
- */
-
-//: links
-//: * [Apple's SKAction documentation](https://developer.apple.com/documentation/spritekit/skaction?language=objcn)
+ # Describe animation using selections
+ The transition selection is a way to encapsulate `SpriteKit's` powerful animations behind the facade of the `attr` interface.  This improves reusability and avoids crossing API boundaries while you work.
+ * Callout(New operators): look out for the `transition(withDelay:)` operator.  It makes `attr` calls chained after it animate over time.
+*/
 
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
@@ -21,13 +18,6 @@ let scene:SKScene = SKScene(size: .init(width: 640, height: 480))
 // MARK: Data Configuration
 
 typealias TableRow = (x:Float, y:Float, color:NSColor.Name, size:Float)
-
-let range = 0..<10
-
-range.last
-
-
-//: * note:  `range.randomElement()` is found in this playground's Sources
 let colors = NSColorList(named:.init("Apple"))!
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float((0..<xmax).randomElement()),

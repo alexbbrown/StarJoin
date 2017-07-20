@@ -18,7 +18,7 @@ import Foundation
 
 import Foundation
 
-open class Scale<D,R : SJFloatingPointType> where R.Stride == D {
+open class Scale<D,R : SJFloatingPointType> {
 
     public final var range:(R,R)?
     open var domain:[D]?

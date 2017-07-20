@@ -39,42 +39,47 @@ func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
 }
 
 /*: ## Layers organise your scene
- All the examples until now have put all the sprites directly in the scene, as children of the 
+ All the examples until this one have put all the sprites directly in the scene, as children of the SKScene node `scene`.  As your designs become more complex it's useful to wrap them up inside named nodes.  These can then be moved, scaled and hidden independently.
+ */
 
-// create a layer for the axes
+//: ### Plot layer contains all the elements corresponding directly to your data, as before
+//: create the plot layer as a `SKNode`, then add a single sprite to it, for good measure.
+let plotNode = SKNode()
+scene.addChild(plotNode)
+
+//: just a junky sprite (why?)
+let aSprite = SKSpriteNode()
+
+aSprite.color = .red
+aSprite.size = .init(width:10,height:10)
+
+scene.addChild(aSprite)
+
+//: create a layer for both of the axes, and a sublayer for each axis.
 let axesNode = SKNode()
 let xAxisNode = SKNode()
 let yAxisNode = SKNode()
-scene.addChildNode(axesNode)
-axesNode.addChildNode(xAxisNode)
-axesNode.addChildNode(yAxisNode)
+scene.addChild(axesNode)
+axesNode.addChild(xAxisNode)
+axesNode.addChild(yAxisNode)
 
 // Scale Configuration
 
 var margin:CGFloat = 100
 
-extension CGFloat: SJFloatingPointType {
-    public func pow(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
-        return CoreGraphics.pow(lhs, rhs)
-    }
-    public func ceil(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.ceil(x)
-    }
-    public func floor(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.floor(x)
-    }
-    public func log(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.log(x)
-    }
-}
+var valueMax:Float = 100.0
 
 let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.width-margin))
 
 let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.height-margin))
 
+// some magic perhaps
+var oldXScale:LinearScale<CGFloat>? = nil
+var oldYScale:LinearScale<CGFloat>? = nil
+
 // MARK: Selection
 
-let rootNode = SingleSelection<SKNode>(node: scene)
+let plot = SingleSelection<SKNode>(node: plotNode)
 
 var period:TimeInterval = 1
 var count = 200
@@ -83,22 +88,45 @@ var runCounter = 0
 
 func updatePlot() {
 
+    //: zoom forever
+    valueMax *= 1.1
+
     let generationCount = 1 + runCounter % 5
 
-    let cellCount = 1 + runCounter % 10
+    let cellCount = 10 * generationCount
 
     runCounter += 1
 
-    // Generate new dataset, slightly larger
-    let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
+    let maxRange = valueMax
 
-    let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+    let xScale = LinearScale<CGFloat>(
+        domain:[0,CGFloat(maxRange)],
+        range:(margin,scene.size.width-margin))
+
+
+    let yScale = LinearScale<CGFloat>(
+        domain:[0,CGFloat(maxRange)],
+        range:(margin,scene.size.height-margin))
+
+
+    // Generate new dataset, slightly larger
+    let intMaxRange:Int = Int(maxRange)
+
+    let nodeArray = tableGenerator(
+        xmax: intMaxRange,
+        ymax: intMaxRange,
+        size: 40,
+        count: cellCount)
+
+    let mySelection = plot
+        .selectAll(allChildrenSelector)
+        .join(nodeArray)
 
     // remove nodes which don't have data
     //: * note: It must be your birthday, there's a whole new super cool selection operator - transition - which allows animations!
     mySelection
         .exit()
-        .transition(duration: 0.5)
+        .transition(duration: period)
         .attr("alpha", toValue:0)
         .remove()
 
@@ -145,6 +173,44 @@ func updatePlot() {
             CGPoint(x: xScale.scale(CGFloat(d!.x))!,
                     y: yScale.scale(CGFloat(d!.y))!)
     }
+
+    // Update axes
+
+    xAxisNode.position = CGPoint(x:0, y:yScale.scale(0.0)!)
+
+    yAxisNode.position = CGPoint(x:xScale.scale(0.0)!, y:0)
+
+    //lineNode.position =
+
+
+    let xAxisSelection = SingleSelection<SKNode>(node: xAxisNode)
+
+    let yAxisSelection = SingleSelection<SKNode>(node: yAxisNode)
+
+    let xAxis = SKAxis<CGFloat,CGFloat>(scale: xScale, side: AxisSide.bottom)
+
+
+    xAxis.enterScale = oldXScale
+
+    xAxis.lineColor = .white
+    xAxis.lineWidth = 1
+
+    xAxisSelection.call(function:xAxis.make)
+
+    let yAxis = SKAxis<CGFloat,CGFloat>(scale: yScale, side: AxisSide.left)
+
+    yAxis.enterScale = oldYScale
+
+    yAxis.lineColor = .white
+    yAxis.lineWidth = 1
+
+    yAxisSelection.call(function:yAxis.make)
+
+    oldXScale = xScale
+    oldYScale = yScale
+    #if false
+
+    #endif
 
 }
 

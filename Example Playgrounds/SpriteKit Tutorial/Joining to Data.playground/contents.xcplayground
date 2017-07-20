@@ -12,7 +12,7 @@
         <page name='3.0 Animated Motion using SpriteKit'/>
         <page name='3.1 Scale independent drawing using LinearScale'/>
         <page name='3.2 Animation using .transition selection'/>
-        <page name='eg11'/>
+        <page name='4.0 Complex Structures using Axes'/>
         <page name='eg12'/>
     </pages>
 </playground>

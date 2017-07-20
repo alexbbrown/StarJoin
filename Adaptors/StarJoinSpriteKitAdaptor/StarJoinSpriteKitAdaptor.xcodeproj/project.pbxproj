@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1889AD271F20B3BD00F60DED /* SKAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AD261F20B3BD00F60DED /* SKAxis.swift */; };
 		18EBE7FF1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EBE7F51F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.framework */; };
 		18EBE8041F1E8EDD00C57088 /* SelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBE8031F1E8EDD00C57088 /* SelectionTests.swift */; };
 		18EBE8061F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1889AD261F20B3BD00F60DED /* SKAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKAxis.swift; sourceTree = "<group>"; };
 		18EBE7F51F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StarJoinSpriteKitAdaptor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EBE7F81F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarJoinSpriteKitAdaptor.h; sourceTree = "<group>"; };
 		18EBE7F91F1E8EDC00C57088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,9 +54,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1889AD251F20B3AB00F60DED /* Axis */ = {
+			isa = PBXGroup;
+			children = (
+				1889AD261F20B3BD00F60DED /* SKAxis.swift */,
+			);
+			path = Axis;
+			sourceTree = "<group>";
+		};
 		18EBE7EB1F1E8EDC00C57088 = {
 			isa = PBXGroup;
 			children = (
+				1889AD251F20B3AB00F60DED /* Axis */,
 				18EBE7F71F1E8EDC00C57088 /* StarJoinSpriteKitAdaptor */,
 				18EBE8021F1E8EDD00C57088 /* StarJoinSpriteKitAdaptorTests */,
 				18EBE7F61F1E8EDC00C57088 /* Products */,
@@ -206,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1889AD271F20B3BD00F60DED /* SKAxis.swift in Sources */,
 				18EBE81B1F1EA1CB00C57088 /* StarJoinAdaptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

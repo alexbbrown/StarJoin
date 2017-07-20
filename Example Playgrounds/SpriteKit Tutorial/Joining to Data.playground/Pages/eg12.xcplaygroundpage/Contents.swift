@@ -1,11 +1,5 @@
 // Playground - noun: a place where people can play
 
-// Randomness demonstrates random generation of a random number of records,
-// as well as a simple cycle where NEW nodes get new values, but EXISTING values
-// with new random parameters are not updated.  While this is not a perfect
-// use case of d3, it is a precursor to animation - where EXISTING nodes get
-// their new values animated in over time.
-
 // This example users the SKAxis component and animates growing axes.
 // Note the use of oldscale to get entered scale components animating elegantly
 

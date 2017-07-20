@@ -913,6 +913,11 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
         // actually self should return the appended selection!
         return PerfectSelection<NodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes);
     }
+    
+    // try to remove the even existence of this one:
+    override public func each(_ eachFn:NodeFunction) -> Self {
+        fatalError("Enter has no each Function")
+    }
 }
 
 // MARK: Exit Selection

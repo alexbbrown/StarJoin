@@ -864,6 +864,7 @@ public class UpdateSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
 
 // Enter Selection deals with entered nodes only.
 // it returns to type MultiSelection after append is performed.
+// TODO: EnterSelection has an 'each' but it's action is unexpected - it operates on 0 entries.  Is that intentional?  is enterselection really a joined selection?
 public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
     // Convenience types

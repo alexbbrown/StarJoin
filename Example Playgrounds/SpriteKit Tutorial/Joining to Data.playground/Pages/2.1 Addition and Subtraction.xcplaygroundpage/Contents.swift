@@ -61,6 +61,8 @@ let mySelection = rootNode.selectAll(allChildrenSelector).join(nodeArray)
 */
 
 let entered = mySelection.enter()
+
+entered
     .append { (s, d, i) -> SKNode in
         return SKSpriteNode()
     }

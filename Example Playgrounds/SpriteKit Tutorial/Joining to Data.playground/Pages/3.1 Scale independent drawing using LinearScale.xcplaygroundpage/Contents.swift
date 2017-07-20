@@ -46,35 +46,33 @@ func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
     return nodeArray
 }
 
-// Scale Configuration
+/*:
+ ## Scales
+ It's easy to just use pixel based length to position and scale elements, but it can help to use units which match the data - lengths might be measured in dollars or miles or votes.
 
+ Scales are invisible math elements that translate between user dimensions such as dollars (the *domain*) and screen dimensions (the *range*) in pixels.
+
+ * note: pixel dimensions are usually scaled again before they hit the screen - this playground uses `.resizeFill` which tries to show the whole scene, resulting in shrinking.
+
+*/
+
+//: **domain** is the user scale - positions from 0 to 100 will appear in the plot area
+let xDomain:[CGFloat] = [0, 100]
+let yDomain:[CGFloat] = [0, 100]
+// margin makes room for the axes
 var margin:CGFloat = 100
 
-extension CGFloat: SJFloatingPointType {
-    public func pow(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
-        return CoreGraphics.pow(lhs, rhs)
-    }
-    public func ceil(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.ceil(x)
-    }
-    public func floor(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.floor(x)
-    }
-    public func log(_ x:CGFloat) -> CGFloat {
-        return CoreGraphics.log(x)
-    }
-}
+let xScale = LinearScale<CGFloat>(domain:  xDomain, range: (margin,scene.size.width-margin))
 
-let xScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.width-margin))
+let yScale = LinearScale<CGFloat>(domain:  yDomain, range: (margin,scene.size.height-margin))
 
-let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.height-margin))
-
-// MARK: Selection
+// Selection
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
+// updatePlot is called every second to set the new animation target
+
 var period:TimeInterval = 1
-var count = 200
 
 var runCounter = 0
 
@@ -84,16 +82,18 @@ func updatePlot() {
 
     runCounter += 1
 
-    // Generate new dataset, slightly larger
+    // Generate new dataset, slightly larger each time
     let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
 
+    // Join to the new selection
     let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
 
     // remove nodes which don't have data
     mySelection.exit().remove()
 
     // existing nodes go red
-    mySelection.update().attr("color", toValue: SKColor.red)
+    mySelection.update()
+        .attr("color", toValue: SKColor.red)
         .each { (s, d, i)  in
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
                                                height:CGFloat(d!.size))
@@ -111,8 +111,9 @@ func updatePlot() {
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
     }
 
+    // Here's the SKAction - TODO Document it
     mySelection.update().each { (s, d, i) in
-        s!.run(.move(to: CGPoint(
+        s!.run(SKAction.move(to: CGPoint(
             x: xScale.scale(CGFloat(d!.x))!,
             y: yScale.scale(CGFloat(d!.y))!)
             , duration: period))
@@ -128,7 +129,7 @@ func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction)
     scene.run(action)
 }
 
-periodically(atInterval:period, count:count, action:.run(updatePlot))
+periodically(atInterval:period, count:200, action:.run(updatePlot))
 
 
 /*:

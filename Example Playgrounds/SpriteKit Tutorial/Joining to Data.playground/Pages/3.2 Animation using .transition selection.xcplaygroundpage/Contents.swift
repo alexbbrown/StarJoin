@@ -49,7 +49,6 @@ let yScale = LinearScale<CGFloat>(domain: [0,100], range:(margin,scene.size.heig
 let rootNode = SingleSelection<SKNode>(node: scene)
 
 var period:TimeInterval = 1
-var count = 200
 
 var runCounter = 0
 
@@ -85,10 +84,6 @@ func updatePlot() {
                 return SKColor.red
             }
         }
-//        .each { (s, d, i)  in
-//            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
-//                                               height:CGFloat(d!.size))
-//    }
 
     // new nodes
     mySelection.enter()
@@ -102,13 +97,6 @@ func updatePlot() {
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
             }
-    
-//    mySelection.update().each { (s, d, i) in
-//        s!.run(.move(to: CGPoint(
-//            x: xScale.scale(CGFloat(d!.x))!,
-//            y: yScale.scale(CGFloat(d!.y))!)
-//            , duration: period))
-//    }
             
             mySelection
                 .update()
@@ -129,7 +117,7 @@ func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction)
     scene.run(action)
 }
 
-periodically(atInterval:period, count:count, action:.run(updatePlot))
+periodically(atInterval:period, count: 200, action:.run(updatePlot))
 
 
 /*:

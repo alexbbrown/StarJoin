@@ -8,7 +8,6 @@
  # Building complex representation - Axes
   This demo shows an example of a complex feature built using StarJoin - the axis.  All the elements in the axis are created by mapping objects to Sprites.  Here it's packaged up into a new class - take a look at the source.
  */
-
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 import SpriteKit
@@ -38,30 +37,24 @@ func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
     return nodeArray
 }
 
-/*: ## Layers organise your scene
- All the examples until this one have put all the sprites directly in the scene, as children of the SKScene node `scene`.  As your designs become more complex it's useful to wrap them up inside named nodes.  These can then be moved, scaled and hidden independently.
- */
+/*:
+ ## Levelling up : Layers organise your scene
 
-//: ### Plot layer contains all the elements corresponding directly to your data, as before
-//: create the plot layer as a `SKNode`, then add a single sprite to it, for good measure.
+ Very simple projects can put all the sprites directly inside the root SKScene object.\
+ As your designs become more complex and introduce graph furniture such as labels and axes, it's useful to group them together, by placing them inside invisible `SKNodes`.\
+ These can then be moved, scaled and hidden independently.
+
+
+ The *Plot layer* contains all the elements corresponding directly to your data:
+*/
 let plotNode = SKNode()
 scene.addChild(plotNode)
 
-//: just a junky sprite (why?)
-let aSprite = SKSpriteNode()
-
-aSprite.color = .red
-aSprite.size = .init(width:10,height:10)
-
-scene.addChild(aSprite)
-
-//: create a layer for both of the axes, and a sublayer for each axis.
-let axesNode = SKNode()
+//: Each of the axes gets their own layer, which positions and displays axis furniture and labels.
 let xAxisNode = SKNode()
 let yAxisNode = SKNode()
-scene.addChild(axesNode)
-axesNode.addChild(xAxisNode)
-axesNode.addChild(yAxisNode)
+scene.addChild(xAxisNode)
+scene.addChild(yAxisNode)
 
 // Scale Configuration
 
@@ -140,11 +133,7 @@ func updatePlot() {
             } else {
                 return SKColor.red
             }
-    }
-    //        .each { (s, d, i)  in
-    //            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
-    //                                               height:CGFloat(d!.size))
-    //    }
+        }
 
     // new nodes
     mySelection.enter()
@@ -159,13 +148,6 @@ func updatePlot() {
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
     }
 
-    //    mySelection.update().each { (s, d, i) in
-    //        s!.run(.move(to: CGPoint(
-    //            x: xScale.scale(CGFloat(d!.x))!,
-    //            y: yScale.scale(CGFloat(d!.y))!)
-    //            , duration: period))
-    //    }
-
     mySelection
         .update()
         .transition(duration: period)
@@ -174,7 +156,9 @@ func updatePlot() {
                     y: yScale.scale(CGFloat(d!.y))!)
     }
 
-    // Update axes
+    /*: ##Update axes
+     On each Key-Frame we describe how the TODO
+    */
 
     xAxisNode.position = CGPoint(x:0, y:yScale.scale(0.0)!)
 
@@ -195,6 +179,7 @@ func updatePlot() {
     xAxis.lineColor = .white
     xAxis.lineWidth = 1
 
+    xAxis.niceTickCount = 5 // for a small display
     xAxisSelection.call(function:xAxis.make)
 
     let yAxis = SKAxis<CGFloat,CGFloat>(scale: yScale, side: AxisSide.left)
@@ -203,6 +188,8 @@ func updatePlot() {
 
     yAxis.lineColor = .white
     yAxis.lineWidth = 1
+
+    yAxis.niceTickCount = 5 // for a small display
 
     yAxisSelection.call(function:yAxis.make)
 

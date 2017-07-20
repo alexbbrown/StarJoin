@@ -110,9 +110,6 @@ extension SJDelegate:SKSceneDelegate {
 let d = SJDelegate()
 scene.delegate = d
 
-//scene.run(SKAction.wait(forDuration:3)) {
-//
-//}
 
 /*:
  ## Display boilerplate

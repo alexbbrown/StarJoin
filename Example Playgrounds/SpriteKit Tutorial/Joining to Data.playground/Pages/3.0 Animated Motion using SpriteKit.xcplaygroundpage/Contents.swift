@@ -6,7 +6,7 @@
  Instead of controlling every frame using StarJoin, we can use SpriteKit's high performance animation routines to fill in between explicit frames.
  - Callout(performance): All the code is back in the playground, but is fast because most of the heavy lifting is in SpriteKit.  It runs smoothly at 60 fps (or some high rate)
  */
-
+// WHERE ARE THE SKACTION ANIMATION NODES? TODO
 //: links
 //: * [Apple's SKAction documentation](https://developer.apple.com/documentation/spritekit/skaction?language=objcn)
 
@@ -51,7 +51,6 @@ func tableGenerator(xmax:Int, ymax:Int, size:Float, count:Int) -> [TableRow] {
 let rootNode = SingleSelection<SKNode>(node: scene)
 
 var period:TimeInterval = 1
-var count = 200
 
 var runCounter = 0
 
@@ -103,7 +102,7 @@ func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction)
     scene.run(action)
 }
 
-periodically(atInterval:period, count:count, action:.run(updatePlot))
+periodically(atInterval:period, count: 200, action:.run(updatePlot))
 
 
 /*:

@@ -19,13 +19,16 @@ public protocol TreeNavigable {
     associatedtype T = Self
     func add(child: Self)
 
+    // this is a problematic one.  what's it for?
     func removeNodeFromParent()
 
+    // TODO: check if I can drop !
     var childNodes: [T]! { get }
 }
 
 // this is a way to store metadata in the node itself, which lets us put the value in there so it can be retrieved without reference to the origianl array, for examine in 'each'.  I need to consider what this means.
 public protocol NodeMetadata {
+    // TODO: can this be Any in swift 4? I probably won't find out until I build real code
     var metadata: AnyObject? { get set }
 }
 

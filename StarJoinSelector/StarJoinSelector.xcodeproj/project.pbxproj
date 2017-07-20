@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1824288E1F1FF5C00054248E /* AdaptorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */; };
+		1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C8991F205807007A6C5F /* SimpleOperations.swift */; };
 		187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74201F1DFDE000AE571F /* StarJoinSelector.framework */; };
 		187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */; };
 		187E74311F1DFDE000AE571F /* StarJoinSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 187E74231F1DFDE000AE571F /* StarJoinSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptorProtocols.swift; sourceTree = "<group>"; };
+		1874C8991F205807007A6C5F /* SimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleOperations.swift; sourceTree = "<group>"; };
 		187E74201F1DFDE000AE571F /* StarJoinSelector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StarJoinSelector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		187E74231F1DFDE000AE571F /* StarJoinSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarJoinSelector.h; sourceTree = "<group>"; };
 		187E74241F1DFDE000AE571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */,
 				187E74301F1DFDE000AE571F /* Info.plist */,
+				1874C8991F205807007A6C5F /* SimpleOperations.swift */,
 			);
 			path = StarJoinSelectorTests;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				187E742F1F1DFDE000AE571F /* StarJoinSelectionTests.swift in Sources */,
+				1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

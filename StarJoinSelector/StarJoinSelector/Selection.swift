@@ -777,7 +777,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
 
         // let's take in on faith that exitnodes have values.  not necessarily true.
         let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) -> NodeDataType in
-            NodeDataType(node: node, value: self.metadata(from: node)!) // metadata! is untenable here - exit might not have data
+            NodeDataType(node: node, value: self.metadata(from: node)!) // FIXME: metadata! is untenable here - exit might not have data
         }
 
         return ExitSelection<NodeType, ValueType>(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)

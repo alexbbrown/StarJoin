@@ -18,7 +18,7 @@ import Foundation
 
 import Foundation
 
-open class Scale<D,R : SJFloatingPointType> {
+open class Scale<D,R : SJFloatingPointType> where R.Stride == D {
 
     public final var range:(R,R)?
     open var domain:[D]?
@@ -52,7 +52,7 @@ open class Scale<D,R : SJFloatingPointType> {
     }
 }
 
-open class LinearScale<D:SJFloatingPointType> : Scale<D,D> {
+open class LinearScale<D:SJFloatingPointType> : Scale<D,D> where D.Stride == D {
 
     // Optimisation - let LinearScale always deal with a concrete tuple (optional)
     override open var domain:[D]? {

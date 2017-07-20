@@ -119,7 +119,7 @@ class ScaleLinearTests: XCTestCase {
 
         let ticks = lin.ticks(3)
 
-        XCTAssertEqual([-100, 0, 100], ticks)
+        XCTAssertEqual([0.0, 0.5, 1.0], ticks)
 
     }
 

@@ -19,6 +19,9 @@ import Foundation
 import Foundation
 
 public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
+
+    associatedtype Stride = Self
+
     static func ==(_:Self,_:Self) -> Bool
 
     static func +(_:Self,_:Self) -> Self
@@ -42,3 +45,5 @@ public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
     init(_ value: Float)
     init(_ value: Double)
 }
+
+

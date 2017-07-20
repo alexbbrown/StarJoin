@@ -32,7 +32,7 @@ open class Extent<D:SJFloatingPointType> {
     }
 }
 
-open class LinearExtent<D:SJFloatingPointType> : Extent<D> {
+open class LinearExtent<D:SJFloatingPointType> : Extent<D> where D.Stride == D {
 
     public override init(domain: [D]) {
         super.init(domain: domain)
@@ -61,12 +61,9 @@ open class LinearExtent<D:SJFloatingPointType> : Extent<D> {
             end:d.floor(domain[1] / step) * step + step * 0.5
         )
 
-        //
-        #if false // urk - no compiley
         for tick:D in stride(from:niceDomain.start, through: domain[1], by: step) {
             ticks.append(tick)
         }
-            #endif
 
         return ticks
     }
@@ -74,6 +71,7 @@ open class LinearExtent<D:SJFloatingPointType> : Extent<D> {
 
 }
 
+#if false
 
 
 //#import "NSDate_ABLERound.h"
@@ -140,4 +138,6 @@ open class DateExtent<D:SJFloatingPointType> : LinearExtent<D> {
         return Array(ticks)
     }
 }
+
+#endif
 

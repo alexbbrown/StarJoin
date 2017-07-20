@@ -1,5 +1,5 @@
 
-// This example animates color and position - using the each accessors and SKAction (hack for now) was eg10
+// This example animates color and position -using scales and the transition selection was eg11
 
 /*: [Previous-Update forever quickly](@previous)
  # Silky 'tweening using SpriteKit
@@ -79,7 +79,9 @@ var count = 200
 var runCounter = 0
 
 func updatePlot() {
-    
+
+    let generationCount = 1 + runCounter % 5
+
     let cellCount = 1 + runCounter % 10
     
     runCounter += 1
@@ -90,15 +92,29 @@ func updatePlot() {
     let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
     
     // remove nodes which don't have data
-    mySelection.exit().remove()
-    
-    // existing nodes go red
-    mySelection.update().attr("color", toValue: SKColor.red)
-        .each { (s, d, i)  in
-            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
-                                               height:CGFloat(d!.size))
-    }
-    
+    //: * note: It must be your birthday, there's a whole new super cool selection operator - transition - which allows animations!
+    mySelection
+        .exit()
+//        .transition(duration: 0.5)
+        .attr("alpha", toValue:0)
+        .remove()
+
+    // existing nodes go red - or blue on purge cycles
+    mySelection
+        .update()
+//        .transition(duration: period)
+        .attr("color") { (s, d, i) in
+            if generationCount == 1 {
+                return SKColor.blue
+            } else {
+                return SKColor.red
+            }
+        }
+//        .each { (s, d, i)  in
+//            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
+//                                               height:CGFloat(d!.size))
+//    }
+
     // new nodes
     mySelection.enter()
         .append { (s, d, i) in SKSpriteNode()}
@@ -106,17 +122,27 @@ func updatePlot() {
         .attr("color",toValue: SKColor.white)
         // jump to start position and grow in
         .each { (s, d, i) in
-            s!.position = CGPoint(x:xScale.scale(CGFloat(d!.x))!, y:yScale.scale(CGFloat(d!.y))!)
+            s!.position = CGPoint(x: xScale.scale(CGFloat(d!.x))!,
+                                  y: yScale.scale(CGFloat(d!.y))!)
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
             s!.run(.scale(to:CGFloat(d!.size), duration: period))
-    }
+            }
     
-    mySelection.update().each { (s, d, i) in
-        s!.run(.move(to: CGPoint(
-            x: xScale.scale(CGFloat(d!.x))!,
-            y: yScale.scale(CGFloat(d!.y))!)
-            , duration: period))
-    }
+//    mySelection.update().each { (s, d, i) in
+//        s!.run(.move(to: CGPoint(
+//            x: xScale.scale(CGFloat(d!.x))!,
+//            y: yScale.scale(CGFloat(d!.y))!)
+//            , duration: period))
+//    }
+            
+            mySelection
+                .update()
+//                .transition(duration: period)
+                .attr("position") { (s, d, i) in
+                    CGPoint(x: xScale.scale(CGFloat(d!.x))!,
+                            y: yScale.scale(CGFloat(d!.y))!)
+            }
+
 }
 
 //: Run this update repeatedly using SKActions

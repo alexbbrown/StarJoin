@@ -9,10 +9,9 @@
         <page name='2.3 Change over time'/>
         <page name='2.4 Change forever'/>
         <page name='2.4.2 Change forever quickly'/>
-        <page name='3.0 Animated Motion'/>
-        <page name='3.1 Scaling'/>
-        <page name='eg9'/>
-        <page name='eg10'/>
+        <page name='3.0 Animated Motion using SpriteKit'/>
+        <page name='3.1 Scale independent drawing using LinearScale'/>
+        <page name='3.2 Animation using .transition selection'/>
         <page name='eg11'/>
         <page name='eg12'/>
     </pages>

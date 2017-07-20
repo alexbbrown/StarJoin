@@ -5,9 +5,8 @@
  - Callout(performance): Ideally this should run at 60 fps - but its runs at 0.25 fps - playrounds are designed for feedback, not speed. the Change Forever app example to see how fast it can go
  */
 import StarJoinSelector
-import SpriteKit
 import StarJoinSpriteKitAdaptor
-import PlaygroundSupport
+import SpriteKit
 
 let scene = SKScene()
 
@@ -16,26 +15,18 @@ let scene = SKScene()
 //: The best kind of data is different each time!  Let's make some like that.  A tuple keeps it simple:
 typealias TableRow = (x: Float, y: Float, color: NSColor.Name, size: Float)
 
-func rangeRandom(min:Int, max:Int) -> Int {
-    return min + Int(arc4random_uniform(UInt32(max - min)))
-}
-
-func rangeRandom<T>(ordinals: [T]) -> T {
-    return ordinals[rangeRandom(min: 0, max: ordinals.count - 1)]
-}
-
 let colors = NSColorList(named:.init("Apple"))!
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
-    return (x:Float(rangeRandom(min: 0, max: xmax)),
-            y:Float(rangeRandom(min: 0, max: ymax)),
-            color: rangeRandom(ordinals:colors.allKeys),
+    return (x:Float((0..<xmax).randomElement()),
+            y:Float((0..<ymax).randomElement()),
+            color: colors.allKeys.randomElement(),
             size:size)
 }
 
 var nodeArray = [TableRow]()
 
-for _ in 1...rangeRandom(min: 5, max: 15) {
-    nodeArray.append(nodeGenerator1(xmax: 1000, ymax: 600, size: 50))
+for _ in 1...(5..<15).randomElement() {
+    nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 50))
 }
 
 /*:
@@ -80,7 +71,7 @@ extension SJDelegate:SKSceneDelegate {
 
         var nodeArray2 = [TableRow]()
 
-        for _ in 1...rangeRandom(min: 50, max: 150) {
+        for _ in 1...(50..<150).randomElement() {
             nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
         }
 
@@ -130,6 +121,7 @@ scene.delegate = d
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
 // Add it to the Live View
+import PlaygroundSupport
 PlaygroundPage.current.liveView = sceneView
 
 // Create the scene and add it to the view

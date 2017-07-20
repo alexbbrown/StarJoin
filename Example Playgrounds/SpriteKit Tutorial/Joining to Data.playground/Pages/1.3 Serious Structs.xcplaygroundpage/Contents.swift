@@ -1,15 +1,15 @@
 //: [Previous-Joining Dictionaries](@previous)
 //:# Structs to Sprites
 import StarJoinSelector
-import SpriteKit
 import StarJoinSpriteKitAdaptor
-import PlaygroundSupport
+import SpriteKit
 /*:
  Enable SpriteKit for Playground
  */
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
 // Add a spritekit window to the Live View
+import PlaygroundSupport
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 // Create the scene and add it to the view

@@ -11,9 +11,8 @@
 //: * [Apple's SKAction documentation](https://developer.apple.com/documentation/spritekit/skaction?language=objcn)
 
 import StarJoinSelector
-import SpriteKit
 import StarJoinSpriteKitAdaptor
-import PlaygroundSupport
+import SpriteKit
 
 let scene:SKScene = SKScene()
 
@@ -27,24 +26,13 @@ let range = 0..<10
 
 range.last
 
-extension CountableRange {
-    func sample() -> Bound {
-        return self.lowerBound.advanced(by: Int(arc4random_uniform(UInt32(self.lowerBound.distance(to: self.upperBound)))) as! Bound.Stride)
-    }
-}
 
-extension Array {
-    func sample() -> Element {
-        return self[indices.sample()]
-    }
-}
-
-
+//: * note:  `range.randomElement()` is found in this playground's Sources
 let colors = NSColorList(named:.init("Apple"))!
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
-    return (x:Float((0..<xmax).sample()),
-            y:Float((0..<ymax).sample()),
-            color: colors.allKeys.sample(),
+    return (x:Float((0..<xmax).randomElement()),
+            y:Float((0..<ymax).randomElement()),
+            color: colors.allKeys.randomElement(),
             size:size)
 }
 
@@ -125,6 +113,7 @@ periodically(atInterval:period, count:count, action:.run(updatePlot))
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
 // Add it to the Live View
+import PlaygroundSupport
 PlaygroundPage.current.liveView = sceneView
 PlaygroundPage.current.needsIndefiniteExecution = true
 

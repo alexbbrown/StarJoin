@@ -4,9 +4,8 @@
 
 */
 import StarJoinSelector
-import SpriteKit
 import StarJoinSpriteKitAdaptor
-import PlaygroundSupport
+import SpriteKit
 
 let scene = SKScene()
 
@@ -15,32 +14,24 @@ let scene = SKScene()
 //: The best kind of data is different each time!  Let's make some like that.  A tuple keeps it simple:
 typealias TableRow = (x: Float, y: Float, color: NSColor.Name, size: Float)
 
-func rangeRandom(min:Int, max:Int) -> Int {
-    return min + Int(arc4random_uniform(UInt32(max - min)))
-}
-
-func rangeRandom<T>(ordinals: [T]) -> T {
-    return ordinals[rangeRandom(min: 0, max: ordinals.count - 1)]
-}
-
 let colors = NSColorList(named:.init("Apple"))!
-func nodeGenerator1(xmax: Int, ymax:Int, size:Float) -> TableRow {
-    return (x:Float(rangeRandom(min: 0, max: xmax)),
-            y:Float(rangeRandom(min: 0, max: ymax)),
-            color: rangeRandom(ordinals:colors.allKeys),
+func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
+    return (x:Float((0..<xmax).randomElement()),
+            y:Float((0..<ymax).randomElement()),
+            color: colors.allKeys.randomElement(),
             size:size)
 }
 
 var nodeArray = [TableRow]()
 
-for _ in 1...rangeRandom(min: 5, max: 15) {
-    nodeArray.append(nodeGenerator1(xmax: 1000, ymax: 600, size: 50))
+for _ in 1...(5..<15).randomElement() {
+    nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 50))
 }
 
 var nodeArray2 = [TableRow]()
 
-for _ in 1...rangeRandom(min: 50, max: 150) {
-    nodeArray2.append(nodeGenerator1(xmax: 1000, ymax: 600, size: 20))
+for _ in 1...(50..<150).randomElement() {
+    nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
 }
 /*:
  ## Complex Selections
@@ -109,8 +100,8 @@ updated2.each { (s, d, i) -> () in
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
 // Add it to the Live View
+import PlaygroundSupport
 PlaygroundPage.current.liveView = sceneView
-PlaygroundPage.current.needsIndefiniteExecution = true
 
 // Create the scene and add it to the view
 scene.size = CGSize(width:640, height:480)

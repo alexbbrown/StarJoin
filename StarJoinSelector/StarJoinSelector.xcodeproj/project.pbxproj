@@ -18,6 +18,7 @@
 		18CB9DD51F2085E9008A3E7F /* Extent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD41F2085E9008A3E7F /* Extent.swift */; };
 		18CB9DD71F208679008A3E7F /* NumericProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD61F208679008A3E7F /* NumericProtocols.swift */; };
 		18CB9DDA1F20880A008A3E7F /* ScaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD91F20880A008A3E7F /* ScaleTests.swift */; };
+		18F5125C1F20A35C002DD1E6 /* TransitionSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186994161F20A1860023DF39 /* TransitionSelection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptorProtocols.swift; sourceTree = "<group>"; };
+		186994161F20A1860023DF39 /* TransitionSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSelection.swift; sourceTree = "<group>"; };
 		1874C8991F205807007A6C5F /* SimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleOperations.swift; sourceTree = "<group>"; };
 		1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSimpleOperations.swift; sourceTree = "<group>"; };
 		187E74201F1DFDE000AE571F /* StarJoinSelector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StarJoinSelector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				187E74231F1DFDE000AE571F /* StarJoinSelector.h */,
 				187E74241F1DFDE000AE571F /* Info.plist */,
 				187E74431F1DFE3400AE571F /* Selection.swift */,
+				186994161F20A1860023DF39 /* TransitionSelection.swift */,
 				1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */,
 			);
 			path = StarJoinSelector;
@@ -254,6 +257,7 @@
 				1824288E1F1FF5C00054248E /* AdaptorProtocols.swift in Sources */,
 				18CB9DD71F208679008A3E7F /* NumericProtocols.swift in Sources */,
 				18CB9DD51F2085E9008A3E7F /* Extent.swift in Sources */,
+				18F5125C1F20A35C002DD1E6 /* TransitionSelection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

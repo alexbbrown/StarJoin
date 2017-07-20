@@ -95,14 +95,14 @@ func updatePlot() {
     //: * note: It must be your birthday, there's a whole new super cool selection operator - transition - which allows animations!
     mySelection
         .exit()
-//        .transition(duration: 0.5)
+        .transition(duration: 0.5)
         .attr("alpha", toValue:0)
         .remove()
 
     // existing nodes go red - or blue on purge cycles
     mySelection
         .update()
-//        .transition(duration: period)
+        .transition(duration: period)
         .attr("color") { (s, d, i) in
             if generationCount == 1 {
                 return SKColor.blue
@@ -137,7 +137,7 @@ func updatePlot() {
             
             mySelection
                 .update()
-//                .transition(duration: period)
+                .transition(duration: period)
                 .attr("position") { (s, d, i) in
                     CGPoint(x: xScale.scale(CGFloat(d!.x))!,
                             y: yScale.scale(CGFloat(d!.y))!)

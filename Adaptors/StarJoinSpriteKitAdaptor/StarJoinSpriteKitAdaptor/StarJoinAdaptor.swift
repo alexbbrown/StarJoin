@@ -28,6 +28,7 @@ public func namedNode<T:SKNode>(node:T, _ name:String) -> T {
 
 // The following should really be in a SKNode swift module for adapting this protocol to SKNode
 extension SKNode: TreeNavigable, KVC, NodeMetadata {
+
     final public var childNodes: [SKNode]! {
         get { return self.children }
     }
@@ -49,14 +50,12 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
     #endif
 
 
-    #if transitionFeatures
     public func removeNodeFromParent(withDelay: TimeInterval) {
 
-    runAction(SKAction.sequence(
-    [SKAction.waitForDuration(withDelay),
-    SKAction.removeFromParent()]))
+    run(.sequence(
+        [.wait(forDuration:withDelay),
+         .removeFromParent()]))
     }
-    #endif
 
     //    // the argument type should be [SKNode] but the compiler fails
     //    public func removeChildNodesInArray(children:[SKNode]) {
@@ -88,42 +87,40 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
         }
     }
 
-    #if transitionFeatures
     public func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
-{
-    if let toValue = toValue {
+    {
+        if let toValue = toValue {
 
-    switch keyPath {
-    case "position":
-    runAction(SKAction.moveTo((toValue as! NSValue).CGPointValue(),
-    duration: withDuration))
+            switch keyPath {
+            case "position":
+                run(.move(to: (toValue as! NSValue).CGPointValue(),
+                                    duration: withDuration))
 
-    case "xPosition":
-    runAction(SKAction.moveToX(toValue as! CGFloat, duration: withDuration))
+            case "xPosition":
+                run(.moveTo(x: toValue as! CGFloat, duration: withDuration))
 
-    case "yPosition":
-    runAction(SKAction.moveToY(toValue as! CGFloat, duration: withDuration))
+            case "yPosition":
+                run(.moveTo(y: toValue as! CGFloat, duration: withDuration))
 
-    case "scale":
-    runAction(SKAction.scaleTo(toValue as! CGFloat, duration: withDuration))
+            case "scale":
+                run(.scale(to: toValue as! CGFloat, duration: withDuration))
 
-    case "size":
-    if let sizeO = toValue as? NSValue {
-    let size = sizeO.CGPointValue()
-    runAction(SKAction.resizeToWidth(size.x, height: size.y, duration: withDuration))
+            case "size":
+                if let sizeO = toValue as? NSValue {
+                    let size = sizeO.CGPointValue()
+                    run(.resize(toWidth: size.x, height: size.y, duration: withDuration))
+                }
+            case "color":
+                run(.colorize(with: toValue as! SKColor, colorBlendFactor:1.0, duration: withDuration))
+
+            case "alpha":
+                run(.fadeAlpha(to: toValue as! CGFloat, duration: withDuration))
+
+            default:
+                setValue(toValue, forKeyPath: keyPath)
+            }
+        }
     }
-    case "color":
-    runAction(SKAction.colorizeWithColor(toValue as! SKColor, colorBlendFactor:1.0, duration: withDuration))
-
-    case "alpha":
-    runAction(SKAction.fadeAlphaTo(toValue as! CGFloat, duration: withDuration))
-
-    default:
-    setValue(toValue, forKeyPath: keyPath)
-    }
-    }
-    }
-    #endif
 }
 
 // Convenience function for selection

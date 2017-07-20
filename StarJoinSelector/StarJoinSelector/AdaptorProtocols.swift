@@ -46,10 +46,8 @@ public protocol KVC {
     // proxy functions
     func setNodeValue(_ toValue:Any?, forKeyPath keyPath:String)
 
-    #if transitionFeatures
     func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
 
     // this feels closer to TreeNavigable
     func removeNodeFromParent(withDelay: TimeInterval)
-    #endif
 }

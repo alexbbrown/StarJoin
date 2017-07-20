@@ -12,7 +12,8 @@ import Foundation
 // (assuming someone hasn't futzed with the node graph or metadata)
 extension PerfectSelection {
 
-    public func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
+    @discardableResult public
+    func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
         return TransitionSelection(parent: self.parent, nodes:self.nodes, duration:duration)
     }
 

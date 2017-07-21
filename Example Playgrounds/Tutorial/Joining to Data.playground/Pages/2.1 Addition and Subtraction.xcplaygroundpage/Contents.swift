@@ -53,7 +53,7 @@ for _ in 1...(50..<150).randomElement() {
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
-let mySelection = rootNode.selectAll(allChildrenSelector).join(nodeArray)
+let mySelection = rootNode.select(all: allChildrenSelector).join(nodeArray)
 
 /*:
  ## First selection
@@ -79,7 +79,7 @@ entered
 //: ## Updating your data
 //: Updating data looks the same as adding your original data to begin with Run select again.  The original selection is forgotten, but the nodes are still there - for the moment.
 
-let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
+let mySelection2 = rootNode.select(all: scene.childNodes).join(nodeArray2)
 
 //: Another select operator : `exit` selects only the nodes which no longer have data - and the `remove` modifier destroys them.  Later on we'll see how special effects can be added
 //: * experiment: try making the second data set longer or shorter - what happens?

@@ -63,7 +63,7 @@ func updatePlot() {
     // Generate new dataset, slightly larger
     let nodeArray = tableGenerator(xmax:Int(scene.size.width), ymax:Int(scene.size.height), size:40.0, count:cellCount)
 
-    let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+    let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
 
     // remove nodes which don't have data
     mySelection.exit().remove()

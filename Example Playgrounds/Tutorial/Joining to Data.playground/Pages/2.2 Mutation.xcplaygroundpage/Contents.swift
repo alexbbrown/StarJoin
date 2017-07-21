@@ -40,7 +40,7 @@ for _ in 1...(50..<150).randomElement() {
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
-let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
 
 /*:
  ## First selection
@@ -62,7 +62,7 @@ entered.append { (s, d, i) -> SKNode in
 
 // MARK: select & join second batch
 
-let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
+let mySelection2 = rootNode.select(all: scene.childNodes).join(nodeArray2)
 
 // MARK: exit old nodes and enter new ones (fail to update)
 

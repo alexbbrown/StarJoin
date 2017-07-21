@@ -36,7 +36,7 @@ for _ in 1...(5..<15).randomElement() {
 
 let rootNode = SingleSelection<SKNode>(node: scene)
 
-let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
 
 /*:
  ## First selection
@@ -75,7 +75,7 @@ extension SJDelegate:SKSceneDelegate {
             nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
         }
 
-        let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
+        let mySelection2 = rootNode.select(all: scene.childNodes).join(nodeArray2)
 
         // MARK: exit old nodes and enter new ones (fail to update)
 

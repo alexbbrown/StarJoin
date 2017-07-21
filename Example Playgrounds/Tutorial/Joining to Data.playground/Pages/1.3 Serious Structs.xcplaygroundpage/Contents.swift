@@ -34,7 +34,7 @@ var nodeArray = [
 //: **Selection** picks a root node and 'joins' it to the data
 
 let mySelection = select(node:scene as SKNode)
-    .selectAll(allChildrenSelector)
+    .select(all: allChildrenSelector)
     .join(nodeArray)
 
 //: **enter** focuses on the new nodes we need,

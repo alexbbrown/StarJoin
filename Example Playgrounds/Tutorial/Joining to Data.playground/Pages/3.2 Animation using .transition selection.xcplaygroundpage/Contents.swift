@@ -63,7 +63,7 @@ func updatePlot() {
     // Generate new dataset, slightly larger
     let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
     
-    let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+    let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
     
     // remove nodes which don't have data
     //: * note: It must be your birthday, there's a whole new super cool selection operator - transition - which allows animations!

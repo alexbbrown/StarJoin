@@ -44,7 +44,7 @@ var myDataItems = [
 */
 let mySelection = select(node:scene)
 //: To begin with we are going to create and modify some basic sprites.  Let's `select` `all` of them.  You'll get to understand the details of this statement later.
-    .selectAll(allChildrenSelector)
+    .select(all: allChildrenSelector)
 //: In spritejoin you `join` data to your graphics elements, matching each data item to a sprite.  Even if they don't exist yet.
     .join(myDataItems)
 //: the `enter` selection operator focuses on the new (missing) nodes we need to match the data we just joined:
@@ -53,8 +53,8 @@ mySelection
 //: then **`append`** (selection mutation operator) summons a new sprite to stand in for each data item, and
     .append { (s, d, i) in SKSpriteNode() }
 //: The `attr` method uses [KVC](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/) to create a promise to write sprite properties - we can use the `d` parameter to access the fields from our data's tuple.
-    .attr("position") { (s, d, i) in SKPoint(x: d!.x, y: d!.y) }
-    .attr("size") { (s, d, i) in SKSize(width: d!.size, height: d!.size) }
+    .attr("position") { (s, d, i) in CGPoint(x: d!.x, y: d!.y) }
+    .attr("size") { (s, d, i) in CGSize(width: d!.size, height: d!.size) }
     .attr("color") { (s, d, i) in d!.color }
 /*:
  ## *That's all folks!*

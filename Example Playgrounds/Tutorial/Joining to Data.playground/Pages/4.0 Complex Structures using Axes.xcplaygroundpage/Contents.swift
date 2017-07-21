@@ -112,7 +112,7 @@ func updatePlot() {
         count: cellCount)
 
     let mySelection = plot
-        .selectAll(allChildrenSelector)
+        .select(all:allChildrenSelector)
         .join(nodeArray)
 
     // remove nodes which don't have data

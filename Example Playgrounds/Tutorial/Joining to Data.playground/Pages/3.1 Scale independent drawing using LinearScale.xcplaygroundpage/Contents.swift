@@ -86,7 +86,7 @@ func updatePlot() {
     let nodeArray = tableGenerator(xmax:100, ymax:100, size:40.0, count:cellCount)
 
     // Join to the new selection
-    let mySelection = rootNode.selectAll(scene.childNodes).join(nodeArray)
+    let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
 
     // remove nodes which don't have data
     mySelection.exit().remove()

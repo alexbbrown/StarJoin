@@ -45,10 +45,6 @@
 // allow simple types and tuples to pass setKeyAttr
 // Allow data function to be a dictionary, which is auto-keyed. Perhaps a common ancestor of Array, Dictionary
 
-// Feature switches
-let transitionFeatures = true
-
-
 import Foundation
 
 
@@ -243,7 +239,7 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValue: Any?) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValue: Any?) -> Self {
         for selected in nodes {
             selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -288,25 +284,13 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
         for (i, selected) in nodes.enumerated() {
-
-            // unfortunate boxing required to handle tuples stored in
-            // NSMutableDictionary.  Can't push it down to the helper
-            // right now
-
-            let optionalSelected = selected as NodeType?
-
-            selected.setNodeValue(toValueFn(optionalSelected, (), i), forKeyPath: keyPath)
+            selected.setNodeValue(toValueFn(selected, (), i), forKeyPath: keyPath)
         }
         return self;
     }
 
-    #if transitionFeatures
-    public func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
-    return TransitionMultiSelection(parent: self.parent, nodes:self.nodes, duration:duration)
-    }
-    #endif
 }
 
 // MARK: JoinedSelection
@@ -362,7 +346,7 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
         for selected in nodes {
             selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -371,10 +355,10 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     }
 
     // set a property using key value coding
-    public func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
         for (i, node) in nodes.enumerated() {
-
-            node.setNodeValue(toValueFn(node, self.metadataForNode(i:i), i), forKeyPath: keyPath)
+            let dataValue = self.metadataForNode(i:i)
+            node.setNodeValue(toValueFn(node, dataValue, i), forKeyPath: keyPath)
         }
         return self;
     }
@@ -484,12 +468,6 @@ public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Valu
 
         super.init(parent: parent, nodes: nodes)
     }
-
-    #if transitionFeatures
-    public func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
-    return TransitionSelection(parent: self.parent, nodes:self.nodes, duration:duration)
-    }
-    #endif
 
     /// Append adds a new child node to every node in the selection
     // Take care when using on data-dominant selections - a join
@@ -823,7 +801,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
         for node in selection {
             node.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -832,13 +810,13 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
     }
 
     // TODO: put back
-    //    // set a property using key value coding
-    //    public func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
-    //        for (var i = 0; i < selection.count; i++) {
-    //            selection[i]?.setNodeValue(toValueFn(selection[i]!, selectionData[i], i), forKeyPath: keyPath)
-    //        }
-    //        return self;
-    //    }
+    // set a property using key value coding
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+        for (i, node) in selection.enumerated() {
+            node.setNodeValue(toValueFn(selection[i], selectionData[i], i), forKeyPath: keyPath)
+        }
+        return self;
+    }
 
 
 }

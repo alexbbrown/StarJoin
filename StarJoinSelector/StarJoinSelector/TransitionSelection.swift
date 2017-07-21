@@ -16,7 +16,14 @@ extension PerfectSelection {
     func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
         return TransitionSelection(parent: self.parent, nodes:self.nodes, duration:duration)
     }
+}
 
+extension MultiSelection {
+
+    @discardableResult public
+    public func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
+        return TransitionMultiSelection(parent: self.parent, nodes:self.nodes, duration:duration)
+    }
 }
 
 /// PerfectTransitionSelection is a PerfectSelection with delayed property operations
@@ -33,7 +40,7 @@ public class TransitionSelection<NodeType: KVC & TreeNavigable & NodeMetadata, V
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
 
         for node in nodes {
             node.setNodeValueAnimated(toValue, forKeyPath: keyPath, withDuration:self.duration)
@@ -43,7 +50,7 @@ public class TransitionSelection<NodeType: KVC & TreeNavigable & NodeMetadata, V
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
 
         for (i, node) in nodes.enumerated() {
             node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i:i), i), forKeyPath: keyPath, withDuration:self.duration)
@@ -72,7 +79,7 @@ public class TransitionMultiSelection<NodeType: KVC & TreeNavigable & NodeMetada
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
 
         // TODO: make action deferred for at least some cases
 
@@ -84,7 +91,7 @@ public class TransitionMultiSelection<NodeType: KVC & TreeNavigable & NodeMetada
     }
 
     // set a property using key value coding
-    public override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
 
         // TODO: make action deferred for at least some cases
 

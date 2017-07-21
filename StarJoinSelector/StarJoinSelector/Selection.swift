@@ -118,7 +118,7 @@ public class SingleSelection<NodeType> : Selection<NodeType>
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
 
-public class InternalMultiSelection<NodeType> : Selection<NodeType>
+internal class InternalMultiSelection<NodeType> : Selection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience Types

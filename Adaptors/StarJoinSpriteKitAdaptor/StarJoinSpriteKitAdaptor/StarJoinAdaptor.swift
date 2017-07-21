@@ -139,7 +139,7 @@ public func allChildrenNamedSelector(name:String) -> (_:SKNode) -> [SKNode] {
 #if os(OSX)
 
     extension NSValue {
-        func CGPointValue() -> CGPoint {
+        var cgPointValue:CGPoint {
             return self.pointValue
         }
         convenience init(CGPoint point:CGPoint) {

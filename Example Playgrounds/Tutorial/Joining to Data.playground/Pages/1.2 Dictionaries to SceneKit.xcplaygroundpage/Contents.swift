@@ -53,15 +53,15 @@ mySelection
         return SCNNode(geometry: torus)
     }
     .attr("position") { (s, d, i) in
-        SCNVector3(x:0.01 * CGFloat(d!["x"] as! Int),
-                   y:0.01 * CGFloat(d!["y"] as! Int),
+        SCNVector3(x:0.01 * CGFloat(d["x"] as! Int),
+                   y:0.01 * CGFloat(d["y"] as! Int),
                    z: CGFloat(-2.0))
     }
     .attr("scale") { (s, d, i) in
-        let size = 0.01 * CGFloat(d!["size"] as! Int)
+        let size = 0.01 * CGFloat(d["size"] as! Int)
         return SCNVector3(x: size, y: size, z: size)
     }
-    .attr("geometry.firstMaterial.diffuse.contents") { (s, d, i) in color(d!["color"] as! String)
+    .attr("geometry.firstMaterial.diffuse.contents") { (s, d, i) in color(d["color"] as! String)
     }
 //:   What's `(s, d, i)`?
 //:   - `d` is whatever the current record is - a row from the data array

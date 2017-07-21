@@ -1,0 +1,774 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18A01A5619ACFD1D00E013A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01A5519ACFD1D00E013A0 /* AppDelegate.swift */; };
+		18A01A5819ACFD1D00E013A0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18A01A5719ACFD1D00E013A0 /* GameScene.sks */; };
+		18A01A5C19ACFD1D00E013A0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01A5B19ACFD1D00E013A0 /* GameViewController.swift */; };
+		18A01A5F19ACFD1D00E013A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A01A5D19ACFD1D00E013A0 /* Main.storyboard */; };
+		18A01A6119ACFD1D00E013A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A01A6019ACFD1D00E013A0 /* Images.xcassets */; };
+		18A01A6D19ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01A6C19ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.swift */; };
+		18A01A7419ACFD7B00E013A0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2536219AB752100AAB8B2 /* GameScene.swift */; };
+		18A01A7519ACFD8000E013A0 /* PlotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA071C19AB8DFA00034392 /* PlotNode.swift */; };
+		18B8107519B0CFE3003A4F0F /* SpriteJoinSampleData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18BA071D19AB8DFA00034392 /* PlotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA071C19AB8DFA00034392 /* PlotNode.swift */; };
+		18C99B221F217EDA002819FA /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180370791F21699C00131E7E /* StarJoinSelector.framework */; };
+		18C99B271F217F1D002819FA /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180370791F21699C00131E7E /* StarJoinSelector.framework */; };
+		18D2535F19AB752100AAB8B2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2535E19AB752100AAB8B2 /* main.swift */; };
+		18D2536119AB752100AAB8B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2536019AB752100AAB8B2 /* AppDelegate.swift */; };
+		18D2536319AB752100AAB8B2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2536219AB752100AAB8B2 /* GameScene.swift */; };
+		18D2536519AB752100AAB8B2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18D2536419AB752100AAB8B2 /* GameScene.sks */; };
+		18D2536719AB752100AAB8B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D2536619AB752100AAB8B2 /* Images.xcassets */; };
+		18D2536A19AB752100AAB8B2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D2536819AB752100AAB8B2 /* MainMenu.xib */; };
+		18D2537619AB752100AAB8B2 /* SpriteJoinDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2537519AB752100AAB8B2 /* SpriteJoinDemoTests.swift */; };
+		FA74883719AD68A60064CB97 /* SpriteJoinSampleData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA7E9C6719AD5C9400D1E207 /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18A01A6719ACFD1D00E013A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18D2535119AB752100AAB8B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18A01A5019ACFD1D00E013A0;
+			remoteInfo = iOSSpriteJoinDemo;
+		};
+		18D2537019AB752100AAB8B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18D2535119AB752100AAB8B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18D2535819AB752100AAB8B2;
+			remoteInfo = SpriteJoinDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18B8107319B0CFD5003A4F0F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18B8107519B0CFE3003A4F0F /* SpriteJoinSampleData.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA74883519AD68970064CB97 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA74883719AD68A60064CB97 /* SpriteJoinSampleData.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		180370791F21699C00131E7E /* StarJoinSelector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSelector.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug/StarJoinSelector.framework"; sourceTree = "<group>"; };
+		1803707A1F21699C00131E7E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug/StarJoinSpriteKitAdaptor.framework"; sourceTree = "<group>"; };
+		18610B091F217F33006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18610B0A1F217F3C006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18A01A5119ACFD1D00E013A0 /* iOSSpriteJoinDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSSpriteJoinDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A01A5419ACFD1D00E013A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18A01A5519ACFD1D00E013A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18A01A5719ACFD1D00E013A0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		18A01A5919ACFD1D00E013A0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		18A01A5B19ACFD1D00E013A0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		18A01A5E19ACFD1D00E013A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18A01A6019ACFD1D00E013A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		18A01A6619ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSSpriteJoinDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A01A6B19ACFD1D00E013A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18A01A6C19ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSpriteJoinDemoTests.swift; sourceTree = "<group>"; };
+		18BA071C19AB8DFA00034392 /* PlotNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotNode.swift; sourceTree = "<group>"; };
+		18C99B211F217ED2002819FA /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18C99B231F217EDA002819FA /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18C99B261F217F0A002819FA /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18C99B281F217F1D002819FA /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = ../../Adaptors/StarJoinSpriteKitAdaptor/build/Debug/StarJoinSpriteKitAdaptor.framework; sourceTree = "<group>"; };
+		18D2535919AB752100AAB8B2 /* SpriteJoinDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteJoinDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D2535D19AB752100AAB8B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D2535E19AB752100AAB8B2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		18D2536019AB752100AAB8B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18D2536219AB752100AAB8B2 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		18D2536419AB752100AAB8B2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		18D2536619AB752100AAB8B2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		18D2536919AB752100AAB8B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		18D2536F19AB752100AAB8B2 /* SpriteJoinDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpriteJoinDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D2537419AB752100AAB8B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D2537519AB752100AAB8B2 /* SpriteJoinDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteJoinDemoTests.swift; sourceTree = "<group>"; };
+		FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpriteJoinSampleData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18A01A4E19ACFD1D00E013A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C99B271F217F1D002819FA /* StarJoinSelector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A01A6319ACFD1D00E013A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2535619AB752100AAB8B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C99B221F217EDA002819FA /* StarJoinSelector.framework in Frameworks */,
+				FA7E9C6719AD5C9400D1E207 /* SpriteJoinSampleData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2536C19AB752100AAB8B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		180370781F21699C00131E7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18C99B211F217ED2002819FA /* StarJoinSpriteKitAdaptor.framework */,
+				18C99B231F217EDA002819FA /* StarJoinSpriteKitAdaptor.framework */,
+				18C99B261F217F0A002819FA /* StarJoinSpriteKitAdaptor.framework */,
+				18C99B281F217F1D002819FA /* StarJoinSpriteKitAdaptor.framework */,
+				18610B091F217F33006BF37E /* StarJoinSpriteKitAdaptor.framework */,
+				18610B0A1F217F3C006BF37E /* StarJoinSpriteKitAdaptor.framework */,
+				180370791F21699C00131E7E /* StarJoinSelector.framework */,
+				1803707A1F21699C00131E7E /* StarJoinSpriteKitAdaptor.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18A01A5219ACFD1D00E013A0 /* iOSSpriteJoinDemo */ = {
+			isa = PBXGroup;
+			children = (
+				18A01A5519ACFD1D00E013A0 /* AppDelegate.swift */,
+				18A01A5719ACFD1D00E013A0 /* GameScene.sks */,
+				18A01A5919ACFD1D00E013A0 /* GameScene.swift */,
+				18A01A5B19ACFD1D00E013A0 /* GameViewController.swift */,
+				18A01A5D19ACFD1D00E013A0 /* Main.storyboard */,
+				18A01A6019ACFD1D00E013A0 /* Images.xcassets */,
+				18A01A5319ACFD1D00E013A0 /* Supporting Files */,
+			);
+			path = iOSSpriteJoinDemo;
+			sourceTree = "<group>";
+		};
+		18A01A5319ACFD1D00E013A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A01A5419ACFD1D00E013A0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18A01A6919ACFD1D00E013A0 /* iOSSpriteJoinDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				18A01A6C19ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.swift */,
+				18A01A6A19ACFD1D00E013A0 /* Supporting Files */,
+			);
+			path = iOSSpriteJoinDemoTests;
+			sourceTree = "<group>";
+		};
+		18A01A6A19ACFD1D00E013A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A01A6B19ACFD1D00E013A0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18D2535019AB752100AAB8B2 = {
+			isa = PBXGroup;
+			children = (
+				FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */,
+				18D2535B19AB752100AAB8B2 /* SpriteJoinDemo */,
+				18D2537219AB752100AAB8B2 /* SpriteJoinDemoTests */,
+				18A01A5219ACFD1D00E013A0 /* iOSSpriteJoinDemo */,
+				18A01A6919ACFD1D00E013A0 /* iOSSpriteJoinDemoTests */,
+				18D2535A19AB752100AAB8B2 /* Products */,
+				180370781F21699C00131E7E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		18D2535A19AB752100AAB8B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18D2535919AB752100AAB8B2 /* SpriteJoinDemo.app */,
+				18D2536F19AB752100AAB8B2 /* SpriteJoinDemoTests.xctest */,
+				18A01A5119ACFD1D00E013A0 /* iOSSpriteJoinDemo.app */,
+				18A01A6619ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18D2535B19AB752100AAB8B2 /* SpriteJoinDemo */ = {
+			isa = PBXGroup;
+			children = (
+				18D2536019AB752100AAB8B2 /* AppDelegate.swift */,
+				18D2536219AB752100AAB8B2 /* GameScene.swift */,
+				18D2536419AB752100AAB8B2 /* GameScene.sks */,
+				18D2536619AB752100AAB8B2 /* Images.xcassets */,
+				18D2536819AB752100AAB8B2 /* MainMenu.xib */,
+				18D2535C19AB752100AAB8B2 /* Supporting Files */,
+				18BA071C19AB8DFA00034392 /* PlotNode.swift */,
+			);
+			path = SpriteJoinDemo;
+			sourceTree = "<group>";
+		};
+		18D2535C19AB752100AAB8B2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18D2535D19AB752100AAB8B2 /* Info.plist */,
+				18D2535E19AB752100AAB8B2 /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18D2537219AB752100AAB8B2 /* SpriteJoinDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				18D2537519AB752100AAB8B2 /* SpriteJoinDemoTests.swift */,
+				18D2537319AB752100AAB8B2 /* Supporting Files */,
+			);
+			path = SpriteJoinDemoTests;
+			sourceTree = "<group>";
+		};
+		18D2537319AB752100AAB8B2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18D2537419AB752100AAB8B2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18A01A5019ACFD1D00E013A0 /* iOSSpriteJoinDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A01A7219ACFD1D00E013A0 /* Build configuration list for PBXNativeTarget "iOSSpriteJoinDemo" */;
+			buildPhases = (
+				18A01A4D19ACFD1D00E013A0 /* Sources */,
+				18A01A4E19ACFD1D00E013A0 /* Frameworks */,
+				18A01A4F19ACFD1D00E013A0 /* Resources */,
+				FA74883519AD68970064CB97 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSSpriteJoinDemo;
+			productName = iOSSpriteJoinDemo;
+			productReference = 18A01A5119ACFD1D00E013A0 /* iOSSpriteJoinDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18A01A6519ACFD1D00E013A0 /* iOSSpriteJoinDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A01A7319ACFD1D00E013A0 /* Build configuration list for PBXNativeTarget "iOSSpriteJoinDemoTests" */;
+			buildPhases = (
+				18A01A6219ACFD1D00E013A0 /* Sources */,
+				18A01A6319ACFD1D00E013A0 /* Frameworks */,
+				18A01A6419ACFD1D00E013A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18A01A6819ACFD1D00E013A0 /* PBXTargetDependency */,
+			);
+			name = iOSSpriteJoinDemoTests;
+			productName = iOSSpriteJoinDemoTests;
+			productReference = 18A01A6619ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		18D2535819AB752100AAB8B2 /* SpriteJoinDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D2537919AB752100AAB8B2 /* Build configuration list for PBXNativeTarget "SpriteJoinDemo" */;
+			buildPhases = (
+				18D2535519AB752100AAB8B2 /* Sources */,
+				18D2535619AB752100AAB8B2 /* Frameworks */,
+				18D2535719AB752100AAB8B2 /* Resources */,
+				18B8107319B0CFD5003A4F0F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpriteJoinDemo;
+			productName = SpriteJoinDemo;
+			productReference = 18D2535919AB752100AAB8B2 /* SpriteJoinDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18D2536E19AB752100AAB8B2 /* SpriteJoinDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D2537C19AB752100AAB8B2 /* Build configuration list for PBXNativeTarget "SpriteJoinDemoTests" */;
+			buildPhases = (
+				18D2536B19AB752100AAB8B2 /* Sources */,
+				18D2536C19AB752100AAB8B2 /* Frameworks */,
+				18D2536D19AB752100AAB8B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18D2537119AB752100AAB8B2 /* PBXTargetDependency */,
+			);
+			name = SpriteJoinDemoTests;
+			productName = SpriteJoinDemoTests;
+			productReference = 18D2536F19AB752100AAB8B2 /* SpriteJoinDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18D2535119AB752100AAB8B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = apple;
+				TargetAttributes = {
+					18A01A5019ACFD1D00E013A0 = {
+						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0830;
+						LastSwiftUpdateCheck = 0800;
+						ProvisioningStyle = Manual;
+					};
+					18A01A6519ACFD1D00E013A0 = {
+						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0830;
+						LastSwiftUpdateCheck = 0800;
+						ProvisioningStyle = Manual;
+						TestTargetID = 18A01A5019ACFD1D00E013A0;
+					};
+					18D2535819AB752100AAB8B2 = {
+						CreatedOnToolsVersion = 6.0;
+						LastSwiftUpdateCheck = 0800;
+						ProvisioningStyle = Manual;
+					};
+					18D2536E19AB752100AAB8B2 = {
+						CreatedOnToolsVersion = 6.0;
+						LastSwiftUpdateCheck = 0800;
+						ProvisioningStyle = Manual;
+						TestTargetID = 18D2535819AB752100AAB8B2;
+					};
+				};
+			};
+			buildConfigurationList = 18D2535419AB752100AAB8B2 /* Build configuration list for PBXProject "SpriteJoinDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18D2535019AB752100AAB8B2;
+			productRefGroup = 18D2535A19AB752100AAB8B2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18D2535819AB752100AAB8B2 /* SpriteJoinDemo */,
+				18D2536E19AB752100AAB8B2 /* SpriteJoinDemoTests */,
+				18A01A5019ACFD1D00E013A0 /* iOSSpriteJoinDemo */,
+				18A01A6519ACFD1D00E013A0 /* iOSSpriteJoinDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18A01A4F19ACFD1D00E013A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A01A6119ACFD1D00E013A0 /* Images.xcassets in Resources */,
+				18A01A5819ACFD1D00E013A0 /* GameScene.sks in Resources */,
+				18A01A5F19ACFD1D00E013A0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A01A6419ACFD1D00E013A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2535719AB752100AAB8B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D2536519AB752100AAB8B2 /* GameScene.sks in Resources */,
+				18D2536719AB752100AAB8B2 /* Images.xcassets in Resources */,
+				18D2536A19AB752100AAB8B2 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2536D19AB752100AAB8B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18A01A4D19ACFD1D00E013A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A01A7419ACFD7B00E013A0 /* GameScene.swift in Sources */,
+				18A01A5C19ACFD1D00E013A0 /* GameViewController.swift in Sources */,
+				18A01A7519ACFD8000E013A0 /* PlotNode.swift in Sources */,
+				18A01A5619ACFD1D00E013A0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A01A6219ACFD1D00E013A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A01A6D19ACFD1D00E013A0 /* iOSSpriteJoinDemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2535519AB752100AAB8B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D2536319AB752100AAB8B2 /* GameScene.swift in Sources */,
+				18D2536119AB752100AAB8B2 /* AppDelegate.swift in Sources */,
+				18BA071D19AB8DFA00034392 /* PlotNode.swift in Sources */,
+				18D2535F19AB752100AAB8B2 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D2536B19AB752100AAB8B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D2537619AB752100AAB8B2 /* SpriteJoinDemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18A01A6819ACFD1D00E013A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18A01A5019ACFD1D00E013A0 /* iOSSpriteJoinDemo */;
+			targetProxy = 18A01A6719ACFD1D00E013A0 /* PBXContainerItemProxy */;
+		};
+		18D2537119AB752100AAB8B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18D2535819AB752100AAB8B2 /* SpriteJoinDemo */;
+			targetProxy = 18D2537019AB752100AAB8B2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18A01A5D19ACFD1D00E013A0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A01A5E19ACFD1D00E013A0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18D2536819AB752100AAB8B2 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18D2536919AB752100AAB8B2 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18A01A6E19ACFD1D00E013A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iOSSpriteJoinDemo/Info.plist;
+				INSTALL_PATH = /AppleInternal/Applications;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos.internal;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TOOLCHAINS = default;
+				VALID_ARCHS = "arm64 armv4t armv5 armv6 armv6m armv7 armv7em armv7f armv7m armv7s xscale";
+			};
+			name = Debug;
+		};
+		18A01A6F19ACFD1D00E013A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = iOSSpriteJoinDemo/Info.plist;
+				INSTALL_PATH = /AppleInternal/Applications;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos.internal;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TOOLCHAINS = default;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv4t armv5 armv6 armv6m armv7 armv7em armv7f armv7m armv7s xscale";
+			};
+			name = Release;
+		};
+		18A01A7019ACFD1D00E013A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iOSSpriteJoinDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSSpriteJoinDemo.app/iOSSpriteJoinDemo";
+			};
+			name = Debug;
+		};
+		18A01A7119ACFD1D00E013A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = iOSSpriteJoinDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSSpriteJoinDemo.app/iOSSpriteJoinDemo";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18D2537719AB752100AAB8B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		18D2537819AB752100AAB8B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		18D2537A19AB752100AAB8B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SpriteJoinDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18D2537B19AB752100AAB8B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SpriteJoinDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		18D2537D19AB752100AAB8B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpriteJoinDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteJoinDemo.app/Contents/MacOS/SpriteJoinDemo";
+			};
+			name = Debug;
+		};
+		18D2537E19AB752100AAB8B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpriteJoinDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteJoinDemo.app/Contents/MacOS/SpriteJoinDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18A01A7219ACFD1D00E013A0 /* Build configuration list for PBXNativeTarget "iOSSpriteJoinDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A01A6E19ACFD1D00E013A0 /* Debug */,
+				18A01A6F19ACFD1D00E013A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18A01A7319ACFD1D00E013A0 /* Build configuration list for PBXNativeTarget "iOSSpriteJoinDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A01A7019ACFD1D00E013A0 /* Debug */,
+				18A01A7119ACFD1D00E013A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D2535419AB752100AAB8B2 /* Build configuration list for PBXProject "SpriteJoinDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D2537719AB752100AAB8B2 /* Debug */,
+				18D2537819AB752100AAB8B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D2537919AB752100AAB8B2 /* Build configuration list for PBXNativeTarget "SpriteJoinDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D2537A19AB752100AAB8B2 /* Debug */,
+				18D2537B19AB752100AAB8B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D2537C19AB752100AAB8B2 /* Build configuration list for PBXNativeTarget "SpriteJoinDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D2537D19AB752100AAB8B2 /* Debug */,
+				18D2537E19AB752100AAB8B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18D2535119AB752100AAB8B2 /* Project object */;
+}

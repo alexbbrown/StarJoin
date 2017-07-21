@@ -71,7 +71,7 @@ open class LinearExtent<D:SJFloatingPointType> : Extent<D> where D.Stride == D {
 
 }
 
-#if false
+#if true
 
 
 //#import "NSDate_ABLERound.h"
@@ -120,7 +120,7 @@ public func ceilToInterval(_ date:Date, unit:TimeInterval, offset:TimeInterval =
     return Date(timeIntervalSinceReferenceDate: ceilToInterval(date.timeIntervalSinceReferenceDate, unit: unit, offset:offset))
 }
 
-open class DateExtent<D:SJFloatingPointType> : LinearExtent<D> {
+open class DateExtent<D:SJFloatingPointType> : LinearExtent<D> where D.Stride == D {
 
     public override init(domain: [D]) {
         super.init(domain: domain)

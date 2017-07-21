@@ -31,7 +31,7 @@ public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
     static func *(_:Self,_:Self) -> Self
     static func /(_:Self,_:Self) -> Self
     static func -(_:Self,_:Self) -> Self
-//    static func %(_:Self,_:Self) -> Self
+    static func %(_:Self,_:Self) -> Self
 
     func pow(_:Self,_:Self) -> Self
     func ceil(_:Self) -> Self

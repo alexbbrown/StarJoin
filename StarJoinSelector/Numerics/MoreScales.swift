@@ -17,7 +17,7 @@ import Foundation
 //
 
 // DateScale is just a linear scale with better ticks.
-open class DateScale<D:SJFloatingPointType> : LinearScale<D> {
+open class DateScale<D:SJFloatingPointType> : LinearScale<D> where D.Stride == D {
 
     public override init(domain: [D]?, range: (D,D)?) {
         super.init(domain: domain, range: range)
@@ -75,8 +75,11 @@ open class OrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> : Scale<
         case (.some(let r), .some(let d)):
             let dExtent = R(d.count)
             if let dvIndex = d.index(of: dv) {
-                let bandWidth = ((r.1 - r.0) - padding * (dExtent - 1) - outerPadding * 2) / dExtent
-                let a = (bandWidth + padding) * R(dvIndex)
+                let X1:R = r.1 - r.0
+                let X2:R = padding * (dExtent - 1)
+                let X3:R = outerPadding * 2
+                let bandWidth:R = (X1 - X2 - X3) / dExtent
+                let a:R = (bandWidth + padding) * R(dvIndex)
                 return outerPadding + r.0 + a + bandWidth / R(2)
             } else {
                 return nil
@@ -91,7 +94,11 @@ open class OrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> : Scale<
         switch (range, domain) {
         case (.some(let r), .some(let d)):
             let dExtent = R(d.count)
-            return (r.1 - r.0 - padding * (dExtent - 1) - outerPadding * 2) / dExtent
+            let X1:R = r.1 - r.0
+            let X2:R = padding * (dExtent - 1)
+            let X3:R = outerPadding * 2
+            let bandWidth:R = (X1 - X2 - X3) / dExtent
+            return bandWidth
         default:
             return nil
         }
@@ -103,7 +110,10 @@ open class OrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> : Scale<
         case (.some(let r), .some(let d)):
             let dExtent = R(d.count)
             if let dvIndex = d.index(of: dv) {
-                let bandWidth = (r.1 - r.0 - padding * (dExtent - 1) - outerPadding * 2) / dExtent
+                let X1:R = r.1 - r.0
+                let X2:R = padding * (dExtent - 1)
+                let X3:R = outerPadding * 2
+                let bandWidth:R = (X1 - X2 - X3) / dExtent
                 return (left:outerPadding + r.0 + (bandWidth + padding) * R(dvIndex),
                         right:outerPadding + r.0 + (bandWidth + padding) * R(dvIndex) + bandWidth)
             } else {
@@ -161,7 +171,11 @@ open class WeightedOrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> 
                 let dExtent = cumWeight(d.count)
                 let dCount = R(d.count)
                 let dCumWeight = cumWeight(dvIndex)
-                let unitBandwidth = ((r.1 - r.0) - padding * (dCount - 1) - outerPadding * 2) / dExtent
+
+                let X1:R = r.1 - r.0
+                let X2:R = padding * (dCount - 1)
+                let X3:R = outerPadding * 2
+                let unitBandwidth:R = (X1 - X2 - X3) / dExtent
                 let a = (unitBandwidth) * dCumWeight + padding * R(dvIndex)
                 let weight = weights[dvIndex]
                 let dBandwidth = weight * unitBandwidth
@@ -181,7 +195,12 @@ open class WeightedOrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> 
             if let dvIndex = d.index(of: dv) {
                 let dExtent = cumWeight(d.count)
                 let dCount = R(d.count)
-                let unitBandwidth = ((r.1 - r.0) - padding * (dCount - 1) - outerPadding * 2) / dExtent
+
+                let X1:R = r.1 - r.0
+                let X2:R = padding * (dCount - 1)
+                let X3:R = outerPadding * 2
+                let unitBandwidth:R = (X1 - X2 - X3) / dExtent
+
                 let weight = weights[dvIndex]
                 return weight * unitBandwidth
             } else {
@@ -200,7 +219,12 @@ open class WeightedOrdinalRangeBandsScale<D : Equatable, R:SJFloatingPointType> 
                 let dExtent = cumWeight(d.count)
                 let dCount = R(d.count)
                 let dCumWeight = cumWeight(dvIndex)
-                let unitBandwidth = ((r.1 - r.0) - padding * (dCount - 1) - outerPadding * 2) / dExtent
+
+                let X1:R = r.1 - r.0
+                let X2:R = padding * (dCount - 1)
+                let X3:R = outerPadding * 2
+                let unitBandwidth:R = (X1 - X2 - X3) / dExtent
+
                 let a = (unitBandwidth) * dCumWeight + padding * R(dvIndex)
                 let weight = weights[dvIndex]
                 let bandWidth = weight * unitBandwidth

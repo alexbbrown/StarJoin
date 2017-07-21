@@ -204,7 +204,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         }
 
         enterTicks
-            .append { (s, d, i) in namedNode(node:SKLabelNode(),"label") }
+            .append2 { (s, d, i) in namedNode(node:SKLabelNode(),"label") }
             .each({ (s, d, i) in
                 if let d = d {
                     if let label = s as? SKLabelNode {

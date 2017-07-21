@@ -89,11 +89,6 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
 public class SingleSelection<NodeType> : Selection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
-    // initialise the selection of a single node (usually the base node)
-//    override public init (node:NodeType) {
-//        super.init(node:node)
-//    }
-
     // These nodes should be descendants of the parent node
     public override func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
         return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes)
@@ -107,7 +102,7 @@ public class SingleSelection<NodeType> : Selection<NodeType>
     // todo: add initialisers for other kinds of searching, and add a
     // select method (which is also a subscript operator) for sub-selection
 
-    // todo: append
+    // todo: append2
     //internal typealias CallFunction = (Selection) -> ()
 
     @discardableResult public
@@ -375,35 +370,6 @@ public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, V
 
         super.init(parent: parent, nodes: nodes)
     }
-
-#if false
-    /// Append adds a new child node to every node in the selection
-    // Take care when using on data-dominant selections - a join
-    // after an append can go badly wrong.  Updateselection is a perfect selection
-    // so that's OK.
-    //
-    // returns a new UpdateSelection containing the created nodes.
-    // binds the child nodes to the same metadata.
-    public func append(constructorFn:NodeToNodeFunction) -> PerfectSelection {
-
-        var newNodes = [NodeType]()
-
-        for (i, selected) in nodes.enumerated() {
-            // MARK: WORKING FACE
-            var newNode = constructorFn(nodes[i], selected.metadata as? ValueType, i)
-
-            nodeData.append(NodeDataType(node: newNode,
-                                         value: nodeData[i].value))
-
-            newNode.metadata = nodeData[i].value
-
-            newNodes.append(newNode)
-            nodes[i].add(child:newNode)
-        }
-
-        return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData: [], nodes:newNodes);
-    }
-#endif
 
     public func call(function: (PerfectSelection) -> ()) -> Self {
         function(self)

@@ -95,7 +95,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         let line = SingleSelection(node: axisNode)
 
-        let lineChildren = line.selectAll(allChildrenNamedSelector(name: "line"))
+        let lineChildren = line.select(all: allChildrenNamedSelector(name: "line"))
 
         let lineJoin = lineChildren
             .join(["line"])
@@ -149,7 +149,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         let niceTicks = self.tickFunction(self.scale)
 
-        let tickSelectAll = ticks.selectAll(allChildrenSelector)
+        let tickSelectAll = ticks.select(all: allChildrenSelector)
 
         let tickJoin = tickSelectAll.join(niceTicks, keyFunction: { (d, i) in d })
 

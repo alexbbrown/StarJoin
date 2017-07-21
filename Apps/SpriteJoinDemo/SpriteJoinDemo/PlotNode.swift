@@ -141,7 +141,7 @@ open class QuoteNode: SKNode {
         
         // TODO: this should be a selection, not a selectAll
         let mySelection = node
-            .selectAll(allChildrenNamedSelector(name: "label"))
+            .select(all: allChildrenNamedSelector(name: "label"))
             .join([quote.company])
         
 //        labelNode.name = "label"
@@ -183,7 +183,7 @@ open class QuoteNode: SKNode {
     open func updatePlot() {
     
         // join the current dataset to the plot
-        let mySelection = plot!.selectAll(allChildrenSelector).join(quote.history)
+        let mySelection = plot!.select(all: allChildrenSelector).join(quote.history)
         
 
         // kill dead nodes

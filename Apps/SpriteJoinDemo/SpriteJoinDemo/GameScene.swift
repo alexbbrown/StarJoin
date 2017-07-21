@@ -128,7 +128,7 @@ class GameScene: SKScene {
         }
         // join
         let selectAll = plot!
-            .selectAll(allChildrenSelector)
+            .select(all: allChildrenSelector)
             
         let join = selectAll
             .join(stockHistory, keyFunction:{ (d, i) -> String in

@@ -55,13 +55,13 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     // Convenience data types
     public typealias ParentType = NodeType // does this go here?
 
-    public func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
         fatalError("This method must be overridden")
     }
 
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
-    public class func select(_ node: NodeType) -> SingleSelection<NodeType> {
+    public class func select(only node: NodeType) -> SingleSelection<NodeType> {
         return SingleSelection<NodeType>(node: node)
     }
 
@@ -73,10 +73,6 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     public init (nodes:[NodeType]) {
         self.nodes = nodes
     }
-}
-
-public func select<NodeType: KVC & TreeNavigable & NodeMetadata>(node:NodeType) -> SingleSelection<NodeType> {
-    return SingleSelection(node: node)
 }
 
 // MARK: SingleSelection
@@ -99,12 +95,12 @@ public class SingleSelection<NodeType> : Selection<NodeType>
 //    }
 
     // These nodes should be descendants of the parent node
-    public override func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public override func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
         return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes)
     }
 
     // These nodes should be descendants of the parent node
-    public func selectAll(_ nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
+    public func select(all nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
         return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
 
@@ -142,7 +138,7 @@ public class InternalMultiSelection<NodeType> : Selection<NodeType>
     // computed accessor to get managed nodes & data
     /// selection is the set of nodes initially supplied
 
-    internal init (parent:ParentType, nodes:[NodeType]) {
+    internal init(parent:ParentType, nodes:[NodeType]) {
         self.parent = parent
 
         super.init(nodes: nodes)

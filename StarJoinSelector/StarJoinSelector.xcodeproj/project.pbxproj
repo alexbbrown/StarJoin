@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		180370921F21706900131E7E /* MoreScales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB9DD21F20857C008A3E7F /* MoreScales.swift */; };
 		1824288E1F1FF5C00054248E /* AdaptorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */; };
+		185180EC1F21E23C009FF305 /* SelectionConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185180EB1F21E23C009FF305 /* SelectionConvenience.swift */; };
 		1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C8991F205807007A6C5F /* SimpleOperations.swift */; };
 		1874C89C1F20651C007A6C5F /* LessSimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */; };
 		187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74201F1DFDE000AE571F /* StarJoinSelector.framework */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptorProtocols.swift; sourceTree = "<group>"; };
+		185180EB1F21E23C009FF305 /* SelectionConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionConvenience.swift; sourceTree = "<group>"; };
 		186994161F20A1860023DF39 /* TransitionSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSelection.swift; sourceTree = "<group>"; };
 		1874C8991F205807007A6C5F /* SimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleOperations.swift; sourceTree = "<group>"; };
 		1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSimpleOperations.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				187E74231F1DFDE000AE571F /* StarJoinSelector.h */,
 				187E74241F1DFDE000AE571F /* Info.plist */,
 				187E74431F1DFE3400AE571F /* Selection.swift */,
+				185180EB1F21E23C009FF305 /* SelectionConvenience.swift */,
 				186994161F20A1860023DF39 /* TransitionSelection.swift */,
 				1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */,
 			);
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A66DA31F20AE4600FD46B3 /* NumericConformances.swift in Sources */,
+				185180EC1F21E23C009FF305 /* SelectionConvenience.swift in Sources */,
 				180370921F21706900131E7E /* MoreScales.swift in Sources */,
 				187E74441F1DFE3400AE571F /* Selection.swift in Sources */,
 				18CB9DD11F208347008A3E7F /* Scales.swift in Sources */,

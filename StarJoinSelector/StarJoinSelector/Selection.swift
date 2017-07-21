@@ -55,11 +55,6 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     // Convenience data types
     public typealias ParentType = NodeType // does this go here?
 
-    // convenience function to do select, selectAll and join in one throw
-    public class func selection<ValueType>(parent: NodeType, nodes: [NodeType], data: [ValueType]) -> JoinSelection<NodeType, ValueType> {
-        return self.select(parent).selectAll(nodes).join(data)
-    }
-
     public func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
         fatalError("This method must be overridden")
     }
@@ -73,10 +68,6 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     // Remove nodes from the document
     public func remove() {
         // TODO: should do something here - it's possible to remove things other than the exit selection
-    }
-
-    public init (node:NodeType) {
-        nodes = [node]
     }
 
     public init (nodes:[NodeType]) {
@@ -99,12 +90,13 @@ public func select<NodeType: KVC & TreeNavigable & NodeMetadata>(node:NodeType) 
 //      MultiSelection <- selectAll
 // Selections support simple operations such as append - which generate
 // new selections.
-public class SingleSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Selection<NodeType> {
+public class SingleSelection<NodeType> : Selection<NodeType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // initialise the selection of a single node (usually the base node)
-    override public init (node:NodeType) {
-        super.init(node:node)
-    }
+//    override public init (node:NodeType) {
+//        super.init(node:node)
+//    }
 
     // These nodes should be descendants of the parent node
     public override func selectAll(_ nodes: [NodeType]) -> MultiSelection<NodeType> {
@@ -122,7 +114,8 @@ public class SingleSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Sel
     // todo: append
     //internal typealias CallFunction = (Selection) -> ()
 
-    public func call(function: (SingleSelection) -> ()) -> Self {
+    @discardableResult public
+    func call(function: (SingleSelection) -> ()) -> Self {
         function(self)
 
         return self
@@ -134,7 +127,8 @@ public class SingleSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Sel
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
 
-public class InternalMultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Selection<NodeType> {
+public class InternalMultiSelection<NodeType> : Selection<NodeType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience Types
 
@@ -160,7 +154,8 @@ public class InternalMultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
-public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : InternalMultiSelection<NodeType> {
+public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,Void,Int) -> ()
@@ -176,8 +171,6 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
         super.init(parent: parent, nodes: nodes)
     }
 
-
-
     public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<NodeType, ValueType> {
         return JoinSelection<NodeType, ValueType>(parent: self.parent,
                                                   nodes: self.nodes,
@@ -190,8 +183,6 @@ public class MultiSelection<NodeType: KVC & TreeNavigable & NodeMetadata> : Inte
                                                   nodes: self.nodes,
                                                   data: data)
     }
-
-
 
     @discardableResult public
     func each(_ eachFn:NodeFunction) -> Self {

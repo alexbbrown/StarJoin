@@ -35,7 +35,7 @@ extension SCNNode: TreeNavigable, NodeMetadata, KVC {
     }
 
     public var metadata: AnyObject? {
-        get { return self.value(forKey: "metadata") as AnyObject }
+        get { return self.value(forKey: "metadata") }
         set(value) {
             self.setValue(value, forKey: "metadata")
         }

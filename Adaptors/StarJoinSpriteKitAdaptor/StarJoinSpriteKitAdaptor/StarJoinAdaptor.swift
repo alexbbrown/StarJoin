@@ -67,15 +67,15 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
     }
 
     // can we make this Any?
-    public var metadata: AnyObject? {
-        get { return self.userData?["data"] as AnyObject }
-        set(value) {
+    public var metadata: Any? {
+        get { return self.userData?["data"] }
+        set(newValue) {
             if let userDataDictionary = self.userData {
-                userDataDictionary["data"] = value
+                userDataDictionary["data"] = newValue
             } else {
                 let newUserDataDictionary = NSMutableDictionary()
                 self.userData = newUserDataDictionary
-                newUserDataDictionary["data"] = value
+                newUserDataDictionary["data"] = newValue
             }
         }
     }

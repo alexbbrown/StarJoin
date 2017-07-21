@@ -2,28 +2,14 @@
 //  Selection.swift
 //  StarJoinSelector
 //
-//  Created by apple on 7/18/17.
-//  Copyright © 2017 apple. All rights reserved.
-//
-
-
-
-//: A SpriteKit based Playground
-
-// Expected: Nothing yet, The original select function being hacked up to at least execute.
-
-//
-//  Selection.swift
-//  SpriteJoin
-//
 //  Created by apple on 19/08/2014.
 //  Copyright (c) 2014 apple. All rights reserved.
 //
 
 // Issues
-// Selection class should not be bound up with a specific class,
-// but should support any class obeying protocols allowing
-// tree walking and manipulation.
+// * Selection class should not be bound up with a specific class, but should support any class obeying protocols allowing tree walking and manipulation.
+// * d might be not optional?
+// * do I still need boxing?
 
 // handy d3 references
 // https://github.com/mbostock/d3/blob/48ad44fdeef32b518c6271bb99a9aed376c1a1d6/src/selection/data.js
@@ -62,15 +48,6 @@ public class NodeData<NodeType, ValueType> {
     public var value:ValueType
     init(node:NodeType?, value:ValueType) {
         self.node = node
-        self.value = value
-    }
-}
-
-// Non AnyObject types such as tuples need boxing
-// since metadata (SKNode) may be stored in NSMutableDictionaries
-internal class BoxedValue<ValueType> {
-    internal var value:ValueType
-    init(value:ValueType) {
         self.value = value
     }
 }
@@ -307,7 +284,6 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     // TODO: should probably call this NodeToValue function and make it return Any
     public typealias NodeToIdFunction = (NodeType?,ValueType?,Int) -> Any?
     public typealias NodeToNodeFunction = (NodeType?,ValueType?,Int) -> NodeType
-    typealias BoxedValueType = BoxedValue<ValueType>
 
     // Properties
 
@@ -419,17 +395,7 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
     //    }
 
     internal func metadataForNode(i:Int) -> ValueType? {
-        let node:NodeType = nodes[i]
-
-        // unfortunate boxing required to handle tuples stored in
-        // NSMutableDictionary.  Can't push it down to the helper
-        // right now
-
-        let boxedMetadata = node.metadata as? BoxedValueType
-
-        let unboxedMetadata = boxedMetadata?.value
-
-        return unboxedMetadata
+        return nodes[i].metadata as? ValueType
     }
 }
 
@@ -487,8 +453,7 @@ public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Valu
             nodeData.append(NodeDataType(node: newNode,
                                          value: nodeData[i].value))
 
-            let boxedMetadata:BoxedValueType = BoxedValueType(value: nodeData[i].value)
-            newNode.metadata = boxedMetadata
+            newNode.metadata = nodeData[i].value
 
             newNodes.append(newNode)
             nodes[i].add(child:newNode)
@@ -594,8 +559,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
             nodeData.append(NodeDataType(node: updatedNode,
                                          value: updatedValue))
 
-            let boxedMetadata:BoxedValueType = BoxedValueType(value: updatedValue)
-            updatedNode.metadata = boxedMetadata
+            updatedNode.metadata = updatedValue
         }
 
         // grab the enter selection, which has no nodes yet
@@ -663,8 +627,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
         // make a dictionary of nodes
         for (i, initialNode) in initialSelection.enumerated() {
 
-            if let boxedMetadata = initialNode.metadata as? BoxedValueType {
-                let metaData = boxedMetadata.value
+            if let metaData = initialNode.metadata as? ValueType {
                 let key = keyFunction(metaData, i)
 
                 if nil != boundNodeDictionary[key] {
@@ -684,8 +647,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
                 nodeData.append(NodeDataType(node: node,
                                              value: updatedValue))
 
-                let boxedMetadata:BoxedValueType = BoxedValueType(value: updatedValue)
-                node.metadata = boxedMetadata
+                node.metadata = updatedValue
             } else {
                 exitSelection.append(node)
 
@@ -724,15 +686,7 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
     // dodgy function
     internal func metadata(from node:NodeType?) -> ValueType? {
 
-        if let node = node {
-            let boxedMetadata = node.metadata as? BoxedValueType
-
-            let unboxedMetadata = boxedMetadata?.value
-
-            return unboxedMetadata
-        } else {
-            return nil
-        }
+        return node?.metadata as? ValueType
     }
 
     // Enter returns the limited selection matching only missing nodes.
@@ -891,7 +845,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
             newNodes.append(newNode)
             nodeData[i].node = newNode // TODO: check if I need this
 
-            newNode.metadata = BoxedValueType(value: nodeValue)
+            newNode.metadata = nodeValue
 
             parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
 

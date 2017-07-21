@@ -27,8 +27,7 @@ public protocol TreeNavigable {
 
 // this is a way to store metadata in the node itself, which lets us put the value in there so it can be retrieved without reference to the origianl array, for examine in 'each'.  I need to consider what this means.
 public protocol NodeMetadata {
-    // TODO: can this be Any in swift 4? I probably won't find out until I build real code
-    var metadata: AnyObject? { get set }
+    var metadata: Any? { get set }
 }
 
 // KVC protocol encapsulates the idea that values can be accessed using string accessors.  This enables one sort of interaction, bit it's not the only one.

@@ -21,7 +21,7 @@ extension PerfectSelection {
 extension MultiSelection {
 
     @discardableResult public
-    public func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
+    func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
         return TransitionMultiSelection(parent: self.parent, nodes:self.nodes, duration:duration)
     }
 }

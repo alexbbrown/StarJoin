@@ -39,9 +39,13 @@ import Foundation
 // nodes keep a reference to their data, too
 // is this just a convenience or is it critical?
 // is this really a map?  or even a weak map?
-public struct NodeData<NodeType, ValueType> {
-    var node:NodeType?
-    var value:ValueType
+public class NodeData<NodeType, ValueType> {
+    public var node:NodeType?
+    public var value:ValueType
+    init(node:NodeType?, value:ValueType) {
+        self.node = node
+        self.value = value
+    }
 }
 
 // MARK: Selection - base class

@@ -256,7 +256,9 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : InternalMultiSelection<NodeType> {
+public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
+     where NodeType : KVC & TreeNavigable & NodeMetadata {
+
 
     // Convenience Types
     public typealias NodeFunction = (NodeType?,ValueType?,Int) -> ()
@@ -397,7 +399,8 @@ public class JoinedSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Value
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
-public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, ValueType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
     internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -452,7 +455,8 @@ public class PerfectSelection<NodeType: KVC & TreeNavigable & NodeMetadata, Valu
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
-public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, ValueType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
     internal typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -763,7 +767,8 @@ public class JoinSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueTy
 // extracts the concrete set of live nodes (for efficiency)
 // UpdateSelection is a PerfectSelection - with complete data - value pairs
 // assuming no-one has futzed with the node graph or metadata
-public class UpdateSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : PerfectSelection<NodeType, ValueType> {
+public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType>
+    where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Properties
 
@@ -847,8 +852,9 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
 // is it joined?... it's prejoined.  we can rejoin it?
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
-public class ExitSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : PerfectSelection<NodeType, ValueType
-> {
+public class ExitSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType
+>
+where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     override internal init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
         super.init(parent: parent, nodeData: nodeData, nodes: nodes)

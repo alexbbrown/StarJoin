@@ -142,6 +142,16 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
 
         super.init(nodes: nodes)
     }
+
+    // set a property using key value coding
+    @discardableResult public
+    func attr(_ keyPath: String, toValue: Any!) -> Self {
+        for selected in nodes {
+            selected.setNodeValue(toValue, forKeyPath: keyPath)
+        }
+
+        return self;
+    }
 }
 
 // MARK: MultiSelection
@@ -194,57 +204,15 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     }
 
     // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValue: Any?) -> Self {
-        for selected in nodes {
-            selected.setNodeValue(toValue, forKeyPath: keyPath)
-        }
-
-        return self;
-    }
-
-    // shorthand alias for setKeyedAttr to work like d3
-    @discardableResult public
-    func attr(_ keyPath: String, toValue: Any?) -> Self {
-        return setKeyedAttr(keyPath: keyPath, toValue: toValue)
-    }
-
-    // shorthand alias for setKeyedAttr to work like d3
     @discardableResult public
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
-    }
-
-    // compound attr for functions
-    // TODO: can I unify the value and function dictionary representations?
-    // TODO: is this necessary? can I drop this?
-    @discardableResult public
-    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
-
-        // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath, toValueFn: toValueFn)
-        }
-        return self;
-    }
-
-    // compound attr for values
-    @discardableResult public
-    func attr(keyedValues: [String:Any?]) -> Self {
-
-        // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValue) in keyedValues  {
-            attr(keyPath, toValue: toValue)
-        }
-        return self;
-    }
-
-    // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, selected) in nodes.enumerated() {
             selected.setNodeValue(toValueFn(selected, (), i), forKeyPath: keyPath)
         }
         return self;
     }
+
+
 }
 
 // MARK: JoinedSelection
@@ -280,57 +248,12 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     }
 
     // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
-        for selected in nodes {
-            selected.setNodeValue(toValue, forKeyPath: keyPath)
-        }
-
-        return self;
-    }
-
-    // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public
+    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
             let dataValue = self.metadataForNode(i:i)
             // todo: explain the ! here
             node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath)
-        }
-        return self;
-    }
-
-    // TODO: move attr and setKeyedAttr default implementations up the tree.
-    // shorthand alias for setKeyedAttr to work like d3
-    @discardableResult public
-    func attr(_ keyPath: String, toValue: Any!) -> Self {
-        return setKeyedAttr(keyPath: keyPath, toValue: toValue)
-    }
-
-    // shorthand alias for setKeyedAttr to work like d3
-    @discardableResult public
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
-    }
-
-    // compound attr for functions
-    // TODO: can I unify the value and function dictionary representations?
-    // TODO: Do I need this?
-    @discardableResult public
-    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
-
-        // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValueFn) in keyedFunctions  {
-            attr(keyPath, toValueFn: toValueFn)
-        }
-        return self;
-    }
-
-    // compound attr for values
-    @discardableResult public
-    func attr(keyedValues: [String:Any?]) -> Self {
-
-        // TODO: performance - could iterate the nodes outside?
-        for (keyPath, toValue) in keyedValues  {
-            attr(keyPath, toValue: toValue)
         }
         return self;
     }
@@ -662,7 +585,8 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     }
 
     // set a property using key value coding
-    internal override func setKeyedAttr(keyPath: String, toValue: Any!) -> Self {
+    @discardableResult public override
+    func attr(_ keyPath: String, toValue: Any!) -> Self {
         for node in selection {
             node.setNodeValue(toValue, forKeyPath: keyPath)
         }
@@ -672,7 +596,8 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 
     // TODO: put back
     // set a property using key value coding
-    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public override
+    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in selection.enumerated() {
             node.setNodeValue(toValueFn(selection[i], selectionData[i], i), forKeyPath: keyPath)
         }

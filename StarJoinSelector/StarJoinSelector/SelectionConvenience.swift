@@ -58,3 +58,55 @@ extension PerfectSelection {
     }
 }
 
+extension MultiSelection {
+    // compound attr for functions
+    // TODO: can I unify the value and function dictionary representations?
+    // TODO: is this necessary? can I drop this?
+    @discardableResult public
+    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
+        
+        // TODO: performance - could iterate the nodes outside?
+        for (keyPath, toValueFn) in keyedFunctions  {
+            attr(keyPath, toValueFn: toValueFn)
+        }
+        return self;
+    }
+    
+    // compound attr for values
+    @discardableResult public
+    func attr(_ keyedValues: [String:Any?]) -> Self {
+        
+        // TODO: performance - could iterate the nodes outside?
+        for (keyPath, toValue) in keyedValues  {
+            attr(keyPath, toValue: toValue)
+        }
+        return self;
+    }
+}
+
+extension  JoinedSelection {
+    // compound attr for functions
+    // TODO: can I unify the value and function dictionary representations?
+    // TODO: Do I need this?
+    @discardableResult public
+    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
+
+        // TODO: performance - could iterate the nodes outside?
+        for (keyPath, toValueFn) in keyedFunctions  {
+            attr(keyPath, toValueFn: toValueFn)
+        }
+        return self;
+    }
+
+    // compound attr for values
+    @discardableResult public
+    func attr(keyedValues: [String:Any?]) -> Self {
+
+        // TODO: performance - could iterate the nodes outside?
+        for (keyPath, toValue) in keyedValues  {
+            attr(keyPath, toValue: toValue)
+        }
+        return self;
+    }
+}
+

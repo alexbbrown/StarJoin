@@ -93,7 +93,7 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
 
             switch keyPath {
             case "position":
-                run(.move(to: (toValue as! NSValue).CGPointValue(),
+                run(.move(to: (toValue as! NSValue).cgPointValue,
                                     duration: withDuration))
 
             case "xPosition":
@@ -107,7 +107,7 @@ extension SKNode: TreeNavigable, KVC, NodeMetadata {
 
             case "size":
                 if let sizeO = toValue as? NSValue {
-                    let size = sizeO.CGPointValue()
+                    let size = sizeO.cgPointValue
                     run(.resize(toWidth: size.x, height: size.y, duration: withDuration))
                 }
             case "color":
@@ -182,27 +182,27 @@ public func allChildrenNamedSelector(name:String) -> (_:SKNode) -> [SKNode] {
 
     // Convenience functions for CG types
     public func SKPoint(x:CGFloat,y:CGFloat) -> NSValue {
-        return NSValue(CGPoint: CGPointMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
     }
     public func SKPoint(x:Double,y:Double) -> NSValue {
-        return NSValue(CGPoint: CGPointMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
     }
     public func SKPoint(x:Int,y:Int) -> NSValue {
-        return NSValue(CGPoint: CGPointMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
     }
     public func SKPoint(x:NSNumber,y:NSNumber) -> NSValue {
-        return NSValue(CGPoint: CGPointMake(CGFloat(x.doubleValue),CGFloat(y.doubleValue)))
+        return NSValue(cgPoint: CGPoint(x: CGFloat(x.doubleValue), y: CGFloat(y.doubleValue)))
     }
 
     // Convenience functions for CG types
     public func SKSize(width x:CGFloat, height y:CGFloat) -> NSValue {
-        return NSValue(CGSize: CGSizeMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
     }
     public func SKSize(width x:Double, height y:Double) -> NSValue {
-        return NSValue(CGSize: CGSizeMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
     }
     public func SKSize(width x:Int,height y:Int) -> NSValue {
-        return NSValue(CGSize: CGSizeMake(CGFloat(x),CGFloat(y)))
+        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
     }
 
 #endif

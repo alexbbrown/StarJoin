@@ -16,6 +16,7 @@
 		18610B251F217FA3006BF37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18610B241F217FA3006BF37E /* Assets.xcassets */; };
 		18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B261F217FA3006BF37E /* LaunchScreen.storyboard */; };
 		18610B331F217FA3006BF37E /* StarJoinStocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */; };
+		18610B551F2181BE006BF37E /* PlotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* PlotNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,10 @@
 		18610B2E1F217FA3006BF37E /* StarJoinStocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinStocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinStocksTests.swift; sourceTree = "<group>"; };
 		18610B341F217FA3006BF37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18610B511F217FED006BF37E /* StarJoinSelector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSelector.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug/StarJoinSelector.framework"; sourceTree = "<group>"; };
+		18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/StarJoinSpriteKitAdaptor.framework"; sourceTree = "<group>"; };
+		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
+		18610B541F2181BE006BF37E /* PlotNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +73,7 @@
 				18610B161F217FA3006BF37E /* StarJoinStocks */,
 				18610B311F217FA3006BF37E /* StarJoinStocksTests */,
 				18610B151F217FA3006BF37E /* Products */,
+				18610B501F217FED006BF37E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +89,7 @@
 		18610B161F217FA3006BF37E /* StarJoinStocks */ = {
 			isa = PBXGroup;
 			children = (
+				18610B541F2181BE006BF37E /* PlotNode.swift */,
 				18610B171F217FA3006BF37E /* AppDelegate.swift */,
 				18610B191F217FA3006BF37E /* GameScene.sks */,
 				18610B1B1F217FA3006BF37E /* Actions.sks */,
@@ -103,6 +110,16 @@
 				18610B341F217FA3006BF37E /* Info.plist */,
 			);
 			path = StarJoinStocksTests;
+			sourceTree = "<group>";
+		};
+		18610B501F217FED006BF37E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */,
+				18610B511F217FED006BF37E /* StarJoinSelector.framework */,
+				18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +227,7 @@
 			files = (
 				18610B1E1F217FA3006BF37E /* GameScene.swift in Sources */,
 				18610B201F217FA3006BF37E /* GameViewController.swift in Sources */,
+				18610B551F2181BE006BF37E /* PlotNode.swift in Sources */,
 				18610B181F217FA3006BF37E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

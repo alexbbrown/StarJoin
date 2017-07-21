@@ -114,7 +114,6 @@
 		180370671F21697100131E7E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		180370681F21697100131E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180370691F21697100131E7E /* SpriteJoinDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SpriteJoinDemo.xcodeproj; sourceTree = "<group>"; };
-		1803707B1F216A2C00131E7E /* a.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a.swift; sourceTree = "<group>"; };
 		1803707E1F216C9A00131E7E /* apple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apple.json; sourceTree = "<group>"; };
 		1803707F1F216C9A00131E7E /* ibm.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ibm.json; sourceTree = "<group>"; };
 		180370801F216C9A00131E7E /* intel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = intel.json; sourceTree = "<group>"; };
@@ -188,7 +187,6 @@
 				1803705D1F21697100131E7E /* GameScene.swift */,
 				1803705E1F21697100131E7E /* main.swift */,
 				1803705F1F21697100131E7E /* Info.plist */,
-				1803707B1F216A2C00131E7E /* a.swift */,
 			);
 			path = SpriteJoinDemo;
 			sourceTree = "<group>";

@@ -18,7 +18,8 @@
 // Where's my state machine?
 // get the old one working;
 // build a NEW one.
-// handle structures which are not arrays
+// handle node structures which are not shallow heirarchies
+// handle data structures which are not arrays
 
 // update to d3.js new merge selection semantics - merges two selections, should be used after enter!
 // https://github.com/d3/d3-selection/issues/60 - merge issue
@@ -33,23 +34,14 @@
 
 import Foundation
 
-
-
-// MARK: start of body Selector.swift
-
 // NodeData carries Node, Value pairs,
 // even if Node is missing.  Note that live
 // nodes keep a reference to their data, too
-// TODO(4): can this be a struct
 // is this just a convenience or is it critical?
 // is this really a map?  or even a weak map?
-public class NodeData<NodeType, ValueType> {
-    public var node:NodeType?
-    public var value:ValueType
-    init(node:NodeType?, value:ValueType) {
-        self.node = node
-        self.value = value
-    }
+public struct NodeData<NodeType, ValueType> {
+    var node:NodeType?
+    var value:ValueType
 }
 
 // MARK: Selection - base class

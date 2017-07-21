@@ -270,28 +270,6 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     // TODO: return data - strip out missing results, perhaps? or return ValueType?
     public var data:[ValueType] { get { return [] } } // this TYPE only makes sense for multiply selected things
 
-    // Initialisers
-    // TODO: does JoinedSelection use nodeData array or metadata?
-    // passing nodeData here is a convenience, the exact same data should be available
-    // in the metadata!
-//    override internal init (parent:ParentType, nodes: [NodeType]) {
-//
-//        super.init(parent: parent, nodes: nodes)
-//    }
-
-    //    // Append should accept a node type or class type, but I don't know how.
-    //    public func append(constructorFn:NodeToNodeFunction) -> Self {
-    //        for (var i = 0; i < nodes.count; i++) {
-    //            let selected:NodeType = nodes[i]
-    //
-    //            var newNode = constructorFn(nodes[i], selected.metadata as? ValueType, i)
-    //            nodes[i] = newNode
-    //            parent.addChildNode(newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-    //        }
-    //        // actually self should return the appended selection!
-    //        return self;
-    //    }
-
     @discardableResult public
     func each(_ eachFn:NodeFunction) -> Self {
         for (i, selected) in nodes.enumerated() {
@@ -355,24 +333,6 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
         }
         return self;
     }
-
-    //    /// Append should accept a node type or class type, but I don't know how.
-    //    // actually a form of this should be available before JOIN.
-    //    // TODO: FIXME: this append should append a child, not replace the node!
-    //    public func append(constructorFn:NodeToNodeFunction) -> JoinedSelection<NodeType, ValueType> {
-    //
-    //        println("Joined override")
-    //
-    //        for (var i = 0; i < nodes.count; i++) {
-    //            let selected:NodeType = nodes[i]
-    //
-    //            var newNode = constructorFn(nodes[i],selected.metadata as? ValueType, i)
-    //            nodes[i] = newNode
-    //            parent.addChildNode(newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-    //        }
-    //        // actually self should return the appended selection!
-    //        return self;
-    //    }
 
     internal func metadataForNode(i:Int) -> ValueType? {
         return nodes[i].metadata as? ValueType
@@ -715,17 +675,6 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
         }
         return self;
     }
-
-    //    // Append should accept a node type or class type, but I don't know how.
-    //    public override func append(constructorFn:(NodeType?,ValueType,Int) -> NodeType ) -> Self {
-    //        for (var i = 0; i < selection.count; i++) {
-    //            var newNode = constructorFn(selection[i], selectionData[i], i)
-    //            selection[i] = newNode
-    //            parent.addChildNode(newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-    //        }
-    //        // actually self should return the appended selection!
-    //        return self;
-    //    }
 
     // Remove nodes from the document
     public override func remove() {

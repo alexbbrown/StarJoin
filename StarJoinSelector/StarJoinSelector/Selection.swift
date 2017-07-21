@@ -149,9 +149,9 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience Types
-    public typealias NodeFunction = (NodeType?,Void,Int) -> ()
-    public typealias NodeToIdFunction = (NodeType?,Void,Int) -> Any?
-    public typealias NodeToNodeFunction = (NodeType?,Void,Int) -> NodeType
+    public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
+    public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
+    public typealias NodeValueIndexToNode = (NodeType?,Void,Int) -> NodeType
 
     // Properties
 
@@ -176,7 +176,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     }
 
     @discardableResult public
-    func each(_ eachFn:NodeFunction) -> Self {
+    func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         // TODO create more childrens
         for (i, selected) in nodes.enumerated() {
 
@@ -206,7 +206,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 
     // shorthand alias for setKeyedAttr to work like d3
     @discardableResult public
-    func attr(_ keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
@@ -214,7 +214,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     // TODO: can I unify the value and function dictionary representations?
     // TODO: is this necessary? can I drop this?
     @discardableResult public
-    func attr(_ keyedFunctions: [String:NodeToIdFunction]) -> Self {
+    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
@@ -235,7 +235,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     }
 
     // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, selected) in nodes.enumerated() {
             selected.setNodeValue(toValueFn(selected, (), i), forKeyPath: keyPath)
         }
@@ -255,10 +255,10 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
 
 
     // Convenience Types
-    public typealias NodeFunction = (NodeType?,ValueType?,Int) -> ()
+    public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
     // TODO: should probably call this NodeToValue function and make it return Any
-    public typealias NodeToIdFunction = (NodeType?,ValueType?,Int) -> Any?
-    public typealias NodeToNodeFunction = (NodeType?,ValueType?,Int) -> NodeType
+    public typealias NodeValueIndexToAny = (NodeType?,ValueType,Int) -> Any?
+    public typealias NodeValueIndexToNode = (NodeType?,ValueType,Int) -> NodeType
 
     // Properties
 
@@ -266,10 +266,11 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     public var data:[ValueType] { get { return [] } } // this TYPE only makes sense for multiply selected things
 
     @discardableResult public
-    func each(_ eachFn:NodeFunction) -> Self {
+    func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         for (i, selected) in nodes.enumerated() {
 
-            eachFn(selected, self.metadataForNode(i:i), i)
+            // TODO: explain the ! here - any if it's true.  what about re-binds?
+            eachFn(selected, self.metadataForNode(i:i)!, i)
         }
         return self;
     }
@@ -284,10 +285,11 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     }
 
     // set a property using key value coding
-    internal func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
             let dataValue = self.metadataForNode(i:i)
-            node.setNodeValue(toValueFn(node, dataValue, i), forKeyPath: keyPath)
+            // todo: explain the ! here
+            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath)
         }
         return self;
     }
@@ -301,7 +303,7 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
 
     // shorthand alias for setKeyedAttr to work like d3
     @discardableResult public
-    func attr(_ keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         return setKeyedAttr(keyPath: keyPath, toValueFn: toValueFn)
     }
 
@@ -309,7 +311,7 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     // TODO: can I unify the value and function dictionary representations?
     // TODO: Do I need this?
     @discardableResult public
-    func attr(_ keyedFunctions: [String:NodeToIdFunction]) -> Self {
+    func attr(_ keyedFunctions: [String:NodeValueIndexToAny]) -> Self {
 
         // TODO: performance - could iterate the nodes outside?
         for (keyPath, toValueFn) in keyedFunctions  {
@@ -633,7 +635,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     }
 
     @discardableResult public
-    override func each(_ eachFn:NodeFunction) -> Self {
+    override func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         // TODO create more childrens (what?)
 
         for i in 0 ..< selection.count {
@@ -664,7 +666,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 
     // TODO: put back
     // set a property using key value coding
-    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in selection.enumerated() {
             node.setNodeValue(toValueFn(selection[i], selectionData[i], i), forKeyPath: keyPath)
         }
@@ -756,7 +758,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
     
     // try to remove the even existence of this one:
     @discardableResult public
-    override func each(_ eachFn:NodeFunction) -> Self {
+    override func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         fatalError("Enter has no each Function")
     }
 }

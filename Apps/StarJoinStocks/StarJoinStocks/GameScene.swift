@@ -136,7 +136,7 @@ class GameScene: SKScene {
         }
         // join
         let selectAll = plot!
-            .selectAll(allChildrenSelector)
+            .select(all: allChildrenSelector)
 
         let join = selectAll
             .join(stockHistory, keyFunction:{ (d, i) -> String in
@@ -209,7 +209,7 @@ class GameScene: SKScene {
             .each({ (s, d, i) in ()
                 if let s = s as? QuoteNode {
 
-                    if let companyIndex = self.orderedCompanies!.index(of: d!.0) {
+                    if let companyIndex = self.orderedCompanies!.index(of: d.0) {
                         #if os(OSX)
                         let colorName = self.colors.allKeys[1+companyIndex]
                             if let color = self.colors.color(withKey: colorName) { // can overflow!
@@ -220,11 +220,11 @@ class GameScene: SKScene {
                         #endif
                     }
 
-                    s.quote = d!
+                    s.quote = d
 
-                    print("looking for \(d!.0) in \(ordinalScale!.domain)")
+                    print("looking for \(d.0) in \(ordinalScale!.domain)")
 
-                    let aKey = (ordinalScale!.domain!.count == 1) ? ordinalScale!.domain![0] : d!.0
+                    let aKey = (ordinalScale!.domain!.count == 1) ? ordinalScale!.domain![0] : d.0
 
                     if let band = ordinalScale!.band(aKey) {
 

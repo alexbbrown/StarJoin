@@ -142,18 +142,18 @@ func updatePlot() {
         .attr("color",toValue: SKColor.white)
         // jump to start position and grow in
         .each { (s, d, i) in
-            s!.position = CGPoint(x: xScale.scale(CGFloat(d!.x))!,
-                                  y: yScale.scale(CGFloat(d!.y))!)
+            s!.position = CGPoint(x: xScale.scale(CGFloat(d.x))!,
+                                  y: yScale.scale(CGFloat(d.y))!)
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
-            s!.run(.scale(to:CGFloat(d!.size), duration: period))
+            s!.run(.scale(to:CGFloat(d.size), duration: period))
     }
 
     mySelection
         .update()
         .transition(duration: period)
         .attr("position") { (s, d, i) in
-            CGPoint(x: xScale.scale(CGFloat(d!.x))!,
-                    y: yScale.scale(CGFloat(d!.y))!)
+            CGPoint(x: xScale.scale(CGFloat(d.x))!,
+                    y: yScale.scale(CGFloat(d.y))!)
     }
 
     /*: ##Update axes

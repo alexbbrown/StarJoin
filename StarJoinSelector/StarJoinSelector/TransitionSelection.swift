@@ -51,10 +51,10 @@ where NodeType : KVC & TreeNavigable & NodeMetadata  {
     }
 
     // set a property using key value coding
-    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
         for (i, node) in nodes.enumerated() {
-            node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i:i), i), forKeyPath: keyPath, withDuration:self.duration)
+            node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i:i)!, i), forKeyPath: keyPath, withDuration:self.duration)
         }
         return self;
     }
@@ -93,7 +93,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata  {
     }
 
     // set a property using key value coding
-    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeToIdFunction) -> Self {
+    internal override func setKeyedAttr(keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
         // TODO: make action deferred for at least some cases
 

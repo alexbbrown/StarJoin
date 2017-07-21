@@ -141,7 +141,7 @@ open class QuoteNode: SKNode {
         
         // TODO: this should be a selection, not a selectAll
         let mySelection = node
-            .selectAll(allChildrenNamedSelector(name: "label"))
+            .select(all: allChildrenNamedSelector(name: "label"))
             .join([quote.company])
         
 //        labelNode.name = "label"
@@ -183,7 +183,7 @@ open class QuoteNode: SKNode {
     open func updatePlot() {
     
         // join the current dataset to the plot
-        let mySelection = plot!.selectAll(allChildrenSelector).join(quote.history)
+        let mySelection = plot!.select(all: allChildrenSelector).join(quote.history)
         
 
         // kill dead nodes
@@ -207,7 +207,7 @@ open class QuoteNode: SKNode {
             .attr("color",toValue: SKColor.white)
             .attr("position") { (s, d, i) in
                 
-                let close = CGFloat((d!["Close"] as NSString?)!.doubleValue)
+                let close = CGFloat((d["Close"] as NSString?)!.doubleValue)
                 
                 return CGPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
                 
@@ -227,7 +227,7 @@ open class QuoteNode: SKNode {
             }
             .attr("position") { (s, d, i) in
                 
-                let close = CGFloat((d!["Close"] as NSString?)!.doubleValue)
+                let close = CGFloat((d["Close"] as NSString?)!.doubleValue)
                 
                 return CGPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
                 

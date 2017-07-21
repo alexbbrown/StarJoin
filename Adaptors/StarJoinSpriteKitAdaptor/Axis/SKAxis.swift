@@ -188,16 +188,14 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         enterTicks
             .attr("position") { (s, d, i) in
-                if let d = d {
-                    switch self.side {
-                    case .bottom, .top:
-                        if let x = enterScale.scale(d) as CGFloat? {
-                            return CGPoint(x:x, y:0)
-                        }
-                    case .left, .right:
-                        if let y = enterScale.scale(d) as CGFloat? {
-                            return CGPoint(x:0, y:y)
-                        }
+                switch self.side {
+                case .bottom, .top:
+                    if let x = enterScale.scale(d) as CGFloat? {
+                        return CGPoint(x:x, y:0)
+                    }
+                case .left, .right:
+                    if let y = enterScale.scale(d) as CGFloat? {
+                        return CGPoint(x:0, y:y)
                     }
                 }
                 return nil
@@ -206,32 +204,30 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         enterTicks
             .append2 { (s, d, i) in namedNode(node:SKLabelNode(),"label") }
             .each({ (s, d, i) in
-                if let d = d {
-                    if let label = s as? SKLabelNode {
+                if let label = s as? SKLabelNode {
 
-                        label.fontSize = self.fontSize
-                        label.fontColor = self.fontColor
-                        label.fontName = "HelveticaNeue"
+                    label.fontSize = self.fontSize
+                    label.fontColor = self.fontColor
+                    label.fontName = "HelveticaNeue"
 
-                        if let accessoryGenerator = self.accessoryGenerator {
-                            let accessoryNode = accessoryGenerator(d)
-                            label.addChild(accessoryNode)
-                        }
-
-                        switch self.side {
-                        case .bottom, .top:
-                            label.verticalAlignmentMode = .top
-                            label.horizontalAlignmentMode = .left
-                        case .left:
-                            label.horizontalAlignmentMode = .right
-                            label.verticalAlignmentMode = .center
-
-                        case .right:
-                            label.horizontalAlignmentMode = .left
-                            label.verticalAlignmentMode = .center
-                        }
-                        //
+                    if let accessoryGenerator = self.accessoryGenerator {
+                        let accessoryNode = accessoryGenerator(d)
+                        label.addChild(accessoryNode)
                     }
+
+                    switch self.side {
+                    case .bottom, .top:
+                        label.verticalAlignmentMode = .top
+                        label.horizontalAlignmentMode = .left
+                    case .left:
+                        label.horizontalAlignmentMode = .right
+                        label.verticalAlignmentMode = .center
+
+                    case .right:
+                        label.horizontalAlignmentMode = .left
+                        label.verticalAlignmentMode = .center
+                    }
+                    //
                 }
             })
             .each({ (s, d, i) in // Positioning
@@ -272,14 +268,12 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         updatedTicks
             .each({ (s, d, i) in
-                if let d = d {
-                    if let s = s {
-                        if let label = s.childNode(withName: "label") as? SKLabelNode {
-                            if let tickLabelFormatter = self.tickLabelFormatter {
-                                label.text = tickLabelFormatter(d)
-                            } else {
-                                label.text = "\(d)"
-                            }
+                if let s = s {
+                    if let label = s.childNode(withName: "label") as? SKLabelNode {
+                        if let tickLabelFormatter = self.tickLabelFormatter {
+                            label.text = tickLabelFormatter(d)
+                        } else {
+                            label.text = "\(d)"
                         }
                     }
                 }
@@ -293,11 +287,9 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         case .bottom, .top:
             animatedTicks
                 .attr("position") { (s, d, i) in
-                    if let d = d {
 
-                        if let x = self.scale.scale(d) {
-                            return CGPoint(x:x, y:0)
-                        }
+                    if let x = self.scale.scale(d) {
+                        return CGPoint(x:x, y:0)
                     }
                     return nil
             }
@@ -305,11 +297,9 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         case .left, .right:
             animatedTicks
                 .attr("position") { (s, d, i) in
-                    if let d = d {
 
-                        if let y = self.scale.scale(d) {
-                            return CGPoint(x:0, y:y)
-                        }
+                    if let y = self.scale.scale(d) {
+                        return CGPoint(x:0, y:y)
                     }
                     return nil
             }
@@ -328,10 +318,8 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         case .bottom, .top:
             animatedExit
                 .attr("position") { (s, d, i) in
-                    if let d = d {
-                        if let x = self.scale.scale(d) {
-                            return CGPoint(x:x, y:0)
-                        }
+                    if let x = self.scale.scale(d) {
+                        return CGPoint(x:x, y:0)
                     }
                     return nil
             }
@@ -339,10 +327,8 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         case .left, .right:
             animatedExit
                 .attr("position") { (s, d, i) in
-                    if let d = d {
-                        if let y = self.scale.scale(d) {
-                            return CGPoint(x:0, y:y)
-                        }
+                    if let y = self.scale.scale(d) {
+                        return CGPoint(x:0, y:y)
                     }
                     return nil
             }

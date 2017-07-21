@@ -37,13 +37,13 @@ extension PerfectSelection {
     //
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
-    public func append2(constructorFn:NodeToNodeFunction) -> PerfectSelection {
+    public func append2(constructorFn:NodeValueIndexToNode) -> PerfectSelection {
 
         var newNodes = [NodeType]()
 
         for (i, selected) in nodes.enumerated() {
             // MARK: WORKING FACE
-            var newNode = constructorFn(nodes[i], selected.metadata as? ValueType, i)
+            var newNode = constructorFn(nodes[i], selected.metadata as! ValueType, i)
 
             nodeData.append(NodeDataType(node: newNode,
                                          value: nodeData[i].value))

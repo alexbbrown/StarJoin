@@ -95,8 +95,8 @@ func updatePlot() {
     mySelection.update()
         .attr("color", toValue: SKColor.red)
         .each { (s, d, i)  in
-            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d!.size),
-                                               height:CGFloat(d!.size))
+            (s as! SKSpriteNode).size = CGSize(width:CGFloat(d.size),
+                                               height:CGFloat(d.size))
     }
 
     // new nodes
@@ -106,16 +106,16 @@ func updatePlot() {
         .attr("color",toValue: SKColor.white)
         // jump to start position and grow in
         .each { (s, d, i) in
-            s!.position = CGPoint(x:xScale.scale(CGFloat(d!.x))!, y:yScale.scale(CGFloat(d!.y))!)
+            s!.position = CGPoint(x:xScale.scale(CGFloat(d.x))!, y:yScale.scale(CGFloat(d.y))!)
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(1), height:CGFloat(1))
-            s!.run(.scale(to:CGFloat(d!.size), duration: period))
+            s!.run(.scale(to:CGFloat(d.size), duration: period))
     }
 
     // Here's the SKAction - TODO Document it
     mySelection.update().each { (s, d, i) in
         s!.run(SKAction.move(to: CGPoint(
-            x: xScale.scale(CGFloat(d!.x))!,
-            y: yScale.scale(CGFloat(d!.y))!)
+            x: xScale.scale(CGFloat(d.x))!,
+            y: yScale.scale(CGFloat(d.y))!)
             , duration: period))
     }
 }

@@ -48,9 +48,9 @@ entered.append { (s, d, i) -> SKNode in
     return SKSpriteNode()
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
-            sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            sprite.color = colors.color(withKey:d!.color) ?? .red
-            sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
+            sprite.position = CGPoint(x: CGFloat(d.x), y: CGFloat(d.y))
+            sprite.color = colors.color(withKey:d.color) ?? .red
+            sprite.size = CGSize(width: CGFloat(d.size), height: CGFloat(d.size))
 
         }
 }
@@ -97,9 +97,9 @@ extension SJDelegate:SKSceneDelegate {
         // how does enter affect the selection it owns?
         updated2.each { (s, d, i) -> () in
             if let sprite = s as? SKSpriteNode {
-                sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-                sprite.color = colors.color(withKey:d!.color) ?? .red
-                sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
+                sprite.position = CGPoint(x: CGFloat(d.x), y: CGFloat(d.y))
+                sprite.color = colors.color(withKey:d.color) ?? .red
+                sprite.size = CGSize(width: CGFloat(d.size), height: CGFloat(d.size))
 
 
             }

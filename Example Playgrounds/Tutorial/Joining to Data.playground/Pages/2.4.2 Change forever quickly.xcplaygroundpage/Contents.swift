@@ -52,7 +52,7 @@ extension SJDelegate:SKSceneDelegate {
         let nodeArray2 = nodeArrayGenerator(count:(min:50, max:150), xmax:1000, ymax:600, size:20)
 
         // MARK: select & join second batch
-        let mySelection2 = rootNode.selectAll(scene.childNodes).join(nodeArray2)
+        let mySelection2 = rootNode.select(all: scene.childNodes).join(nodeArray2)
 
         // MARK: exit old nodes and enter new ones (fail to update)
 

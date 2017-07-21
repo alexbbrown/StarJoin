@@ -69,9 +69,9 @@ entered
 //: * Callout(Ninja Tip): For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified.  We need to cast `s` down to the type we expect.
     .each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
-            sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            sprite.texture = d!.texture
-            sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
+            sprite.position = CGPoint(x: CGFloat(d.x), y: CGFloat(d.y))
+            sprite.texture = d.texture
+            sprite.size = CGSize(width: CGFloat(d.size), height: CGFloat(d.size))
         }
     }
 
@@ -91,9 +91,9 @@ entered2.append { (_, _, _) in
     return SKSpriteNode()
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
-            sprite.position = CGPoint(x: CGFloat(d!.x), y: CGFloat(d!.y))
-            sprite.texture = d!.texture
-            sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
+            sprite.position = CGPoint(x: CGFloat(d.x), y: CGFloat(d.y))
+            sprite.texture = d.texture
+            sprite.size = CGSize(width: CGFloat(d.size), height: CGFloat(d.size))
         }
     }
 

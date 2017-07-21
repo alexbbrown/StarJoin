@@ -579,6 +579,8 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
                 let newNodeData = NodeDataType(node: nil,
                                                value: updatedValue)
 
+                // TODO: the nodeData (update set) should not include the new ones
+                // TODO: expect a new merge selection operation!
                 nodeData.append(newNodeData)
                 enterNodeData.append(newNodeData)
             }

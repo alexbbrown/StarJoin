@@ -246,7 +246,6 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
         }
         return self;
     }
-
 }
 
 // MARK: JoinedSelection
@@ -275,10 +274,10 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     // TODO: does JoinedSelection use nodeData array or metadata?
     // passing nodeData here is a convenience, the exact same data should be available
     // in the metadata!
-    override internal init (parent:ParentType, nodes: [NodeType]) {
-
-        super.init(parent: parent, nodes: nodes)
-    }
+//    override internal init (parent:ParentType, nodes: [NodeType]) {
+//
+//        super.init(parent: parent, nodes: nodes)
+//    }
 
     //    // Append should accept a node type or class type, but I don't know how.
     //    public func append(constructorFn:NodeToNodeFunction) -> Self {
@@ -417,6 +416,7 @@ public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, V
         super.init(parent: parent, nodes: nodes)
     }
 
+#if false
     /// Append adds a new child node to every node in the selection
     // Take care when using on data-dominant selections - a join
     // after an append can go badly wrong.  Updateselection is a perfect selection
@@ -443,6 +443,7 @@ public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, V
 
         return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData: [], nodes:newNodes);
     }
+#endif
 
     public func call(function: (PerfectSelection) -> ()) -> Self {
         function(self)

@@ -1,29 +1,33 @@
 //: [Previous–Joining Tuples](@previous)
-//:# Dictionaries to Sprites
+//:# Dictionaries to SceneKit Shapes
+// This one mixes it up - a dictionary instead of a tuple, and some funky donuts from `SceneKit`
 import StarJoinSelector
-import StarJoinSpriteKitAdaptor
-import SpriteKit
+import StarJoinSceneKitAdaptor
+import SceneKit
+import SpriteKit // for SKColor?
 /*:
- Enable SpriteKit for Playground
+ Enable Scenekit for Playground
  */
-let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
+var sceneView = SCNView(frame: CGRect(x: 0, y: 0, width: 640, height: 480))
+sceneView.autoenablesDefaultLighting = true
+sceneView.allowsCameraControl = true
 
 // Add a spritekit window to the Live View
 import PlaygroundSupport
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 // Create the scene and add it to the view
-let scene:SKScene = SKScene(size: CGSize(width:640, height:480))
-scene.scaleMode = .resizeFill
-sceneView.presentScene(scene)
+var scene = SCNScene()
+//scene.scaleMode = .resizeFill
+sceneView.scene = scene
 //: **Data from the internet**
 //:
 //: Let's use a table-an array of dictionaries–as our data model this time, and bind that.  This sort of data might be loaded off disk or as Json from the internet, and is pretty common.
 //: * note: you might have noticed that Starjoin likes data stored in arrays
 var nodeArray = [
-    ["x":100, "y":100, "color":"Red", "size":50],
-    ["x":200, "y":200, "color":"Orange", "size":50],
-    ["x":300, "y":300, "color":"Blue", "size":50],
+    ["x":-100, "y":100, "color":"Red", "size":50],
+    ["x":0, "y":0, "color":"Orange", "size":50],
+    ["x":100, "y":-50, "color":"Blue", "size":50],
 ]
 //: We need a way to translate text colors to colors.
 let colors = NSColorList(named:.init("Apple"))
@@ -32,8 +36,8 @@ func color(_ named:String) -> SKColor? {
 }
 //: **Selection** picks a root node and 'joins' it to the data
 
-let mySelection = select(node:scene as SKNode)
-    .selectAll(allChildrenSelector)
+let mySelection = select(node:scene.rootNode)
+    .selectAll(scene.rootNode.childNodes)
     .join(nodeArray)
 
 //: **enter** focuses on the new nodes we need,
@@ -42,10 +46,22 @@ let mySelection = select(node:scene as SKNode)
 //: + Casting is often necessary for dictionaries; '`!`' is used here for brevity - `if let` patterns are also a good option
 mySelection
     .enter()
-    .append { (_, _, _) in SKSpriteNode() }
-    .attr("position") { (s, d, i) in SKPoint(x:d!["x"] as! Int,y:d!["y"] as! Int) }
-    .attr("size") { (s, d, i) in SKSize(width:d!["size"] as! Int,height:d!["size"] as! Int) }
-    .attr("color") { (s, d, i) in color(d!["color"] as! String) }
+    .append { (_, _, _) in
+        var sphere = SCNSphere()
+        var torus = SCNTorus(ringRadius: 1, pipeRadius: 0.35)
+        return SCNNode(geometry: torus)
+    }
+    .attr("position") { (s, d, i) in
+        SCNVector3(x:0.01 * CGFloat(d!["x"] as! Int),
+                   y:0.01 * CGFloat(d!["y"] as! Int),
+                   z: CGFloat(-2.0))
+    }
+    .attr("scale") { (s, d, i) in
+        let size = 0.01 * CGFloat(d!["size"] as! Int)
+        return SCNVector3(x: size, y: size, z: size)
+    }
+    .attr("geometry.firstMaterial.diffuse.contents") { (s, d, i) in color(d!["color"] as! String)
+    }
 //:   What's `(s, d, i)`?
 //:   - `d` is whatever the current record is - a row from the data array
 //:   - `s` is the sprite, which can be useful.

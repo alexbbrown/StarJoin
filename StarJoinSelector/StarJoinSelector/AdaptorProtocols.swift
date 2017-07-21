@@ -22,8 +22,7 @@ public protocol TreeNavigable {
     // this is a problematic one.  what's it for?
     func removeNodeFromParent()
 
-    // TODO: check if I can drop !
-    var childNodes: [T]! { get }
+    var childNodes: [T] { get }
 }
 
 // this is a way to store metadata in the node itself, which lets us put the value in there so it can be retrieved without reference to the origianl array, for examine in 'each'.  I need to consider what this means.

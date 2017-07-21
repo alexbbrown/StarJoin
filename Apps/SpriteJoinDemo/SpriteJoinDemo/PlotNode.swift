@@ -154,7 +154,7 @@ open class QuoteNode: SKNode {
                 return newNode
             }
             .attr("position") { (s, d, i) in
-                return SKPoint(x:self.newScales.x!.range!.1 + 10,
+                return CGPoint(x:self.newScales.x!.range!.1 + 10,
                     y:self.newScales.y?.scale(closeLastD) ?? 0)
             }
             .attr("alpha", toValue: 0)
@@ -174,7 +174,7 @@ open class QuoteNode: SKNode {
             .transition(duration: duration)
             .attr("text", toValue: quote.company)
             .attr("position") { (s, d, i) in
-                return SKPoint(x:self.newScales.x!.range!.1 + 10,
+                return CGPoint(x:self.newScales.x!.range!.1 + 10,
                     y:self.newScales.y?.scale(closeLastD) ?? 0)
             }
 
@@ -201,7 +201,7 @@ open class QuoteNode: SKNode {
         // create new nodes
         mySelection.enter()
             .append { (s, d, i) in SKSpriteNode()}
-            .attr("size", toValue: SKSize(width:4.0,height:0.5))
+            .attr("size", toValue: CGSize(width:4.0,height:0.5))
             
             // start white
             .attr("color",toValue: SKColor.white)
@@ -209,7 +209,7 @@ open class QuoteNode: SKNode {
                 
                 let close = CGFloat((d!["Close"] as NSString?)!.doubleValue)
                 
-                return SKPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
+                return CGPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
                 
                 //                    (s as SKSpriteNode).size = CGSizeMake(CGFloat(1), CGFloat(1))
             }
@@ -221,7 +221,7 @@ open class QuoteNode: SKNode {
         mySelection
             .update()
             .transition(duration: duration)
-            .attr("size", toValue: SKSize(width:4.0,height:5.0))
+            .attr("size", toValue: CGSize(width:4.0,height:5.0))
             .attr("color") { (s, d, i) in
                 return self.pointColor
             }
@@ -229,7 +229,7 @@ open class QuoteNode: SKNode {
                 
                 let close = CGFloat((d!["Close"] as NSString?)!.doubleValue)
                 
-                return SKPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
+                return CGPoint(x:self.newScales.x?.scale(CGFloat(i)) ?? 0, y:self.newScales.y?.scale(close) ?? 0)
                 
                 //                    (s as SKSpriteNode).size = CGSizeMake(CGFloat(1), CGFloat(1))
         }

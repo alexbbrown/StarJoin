@@ -146,63 +146,9 @@ public func allChildrenNamedSelector(name:String) -> (_:SKNode) -> [SKNode] {
             self.init(point:point)
         }
     }
-
-    // Convenience functions for CG types
-    public func SKPoint(x:CGFloat,y:CGFloat) -> NSValue {
-        return NSValue(point: CGPoint(x: x, y: y))
-    }
-    public func SKPoint(x:Double,y:Double) -> NSValue {
-        return NSValue(point: CGPoint(x: x, y: y))
-    }
-    public func SKPoint(x:Int,y:Int) -> NSValue {
-        return NSValue(point: CGPoint(x: x, y: y))
-    }
-
-    // Convenience functions for CG types
-    public func SKSize(width x:CGFloat, height y:CGFloat) -> NSValue {
-        return NSValue(size: CGSize(width: x, height: y))
-    }
-    public func SKSize(width x:Double, height y:Double) -> NSValue {
-        return NSValue(size: CGSize(width: x, height: y))
-    }
-    public func SKSize(width x:Int,height y:Int) -> NSValue {
-        return NSValue(size: CGSize(width: x, height: y))
-    }
-
+    
 #elseif os(iOS)
 
-    //    extension NSValue {
-    //    func point() -> CGPoint {
-    //    return self.pointValue
-    //    }
-    //    convenience init(CGPoint:CGPoint) {
-    //    self.init(point:CGPoint)
-    //    }
-    //    }
 
-    // Convenience functions for CG types
-    public func SKPoint(x:CGFloat,y:CGFloat) -> NSValue {
-        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
-    }
-    public func SKPoint(x:Double,y:Double) -> NSValue {
-        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
-    }
-    public func SKPoint(x:Int,y:Int) -> NSValue {
-        return NSValue(cgPoint: CGPoint(x: CGFloat(x), y: CGFloat(y)))
-    }
-    public func SKPoint(x:NSNumber,y:NSNumber) -> NSValue {
-        return NSValue(cgPoint: CGPoint(x: CGFloat(x.doubleValue), y: CGFloat(y.doubleValue)))
-    }
-
-    // Convenience functions for CG types
-    public func SKSize(width x:CGFloat, height y:CGFloat) -> NSValue {
-        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
-    }
-    public func SKSize(width x:Double, height y:Double) -> NSValue {
-        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
-    }
-    public func SKSize(width x:Int,height y:Int) -> NSValue {
-        return NSValue(cgSize: CGSize(width:CGFloat(x), height:CGFloat(y)))
-    }
 
 #endif

@@ -192,11 +192,11 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                     switch self.side {
                     case .bottom, .top:
                         if let x = enterScale.scale(d) as CGFloat? {
-                            return SKPoint(x:x, y:0)
+                            return CGPoint(x:x, y:0)
                         }
                     case .left, .right:
                         if let y = enterScale.scale(d) as CGFloat? {
-                            return SKPoint(x:0, y:y)
+                            return CGPoint(x:0, y:y)
                         }
                     }
                 }
@@ -296,7 +296,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                     if let d = d {
 
                         if let x = self.scale.scale(d) {
-                            return SKPoint(x:x, y:0)
+                            return CGPoint(x:x, y:0)
                         }
                     }
                     return nil
@@ -308,7 +308,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                     if let d = d {
 
                         if let y = self.scale.scale(d) {
-                            return SKPoint(x:0, y:y)
+                            return CGPoint(x:0, y:y)
                         }
                     }
                     return nil
@@ -330,7 +330,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                 .attr("position") { (s, d, i) in
                     if let d = d {
                         if let x = self.scale.scale(d) {
-                            return SKPoint(x:x, y:0)
+                            return CGPoint(x:x, y:0)
                         }
                     }
                     return nil
@@ -341,7 +341,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                 .attr("position") { (s, d, i) in
                     if let d = d {
                         if let y = self.scale.scale(d) {
-                            return SKPoint(x:0, y:y)
+                            return CGPoint(x:0, y:y)
                         }
                     }
                     return nil

@@ -66,7 +66,7 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
     public class func select(only node: NodeType) -> SingleSelection<NodeType> {
-        return SingleSelection<NodeType>(node: node)
+        return .init(node: node)
     }
 
     // Remove nodes from the document
@@ -95,12 +95,12 @@ public class SingleSelection<NodeType> : Selection<NodeType>
 
     // These nodes should be descendants of the parent node
     public override func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
-        return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes)
+        return .init(parent: self.nodes[0], nodes: nodes)
     }
 
     // These nodes should be descendants of the parent node
     public func select(all nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
-        return MultiSelection<NodeType>(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
+        return .init(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
 
     // todo: add initialisers for other kinds of searching, and add a
@@ -177,16 +177,16 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     }
 
     public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<NodeType, ValueType> {
-        return JoinSelection<NodeType, ValueType>(parent: self.parent,
-                                                  nodes: self.nodes,
-                                                  data: data,
-                                                  keyFunction: keyFunction)
+        return .init(parent: self.parent,
+                     nodes: self.nodes,
+                     data: data,
+                     keyFunction: keyFunction)
     }
 
     public func join<ValueType>(_ data: [ValueType]) -> JoinSelection<NodeType, ValueType> {
-        return JoinSelection<NodeType, ValueType>(parent: self.parent,
-                                                  nodes: self.nodes,
-                                                  data: data)
+        return .init(parent: self.parent,
+                     nodes: self.nodes,
+                     data: data)
     }
 
     @discardableResult public
@@ -558,10 +558,10 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 
         // let's take in on faith that exitnodes have values.  not necessarily true.
         let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) -> NodeDataType in
-            NodeDataType(node: node, value: self.metadata(from: node)!) // FIXME: metadata! is untenable here - exit might not have data
+            .init(node: node, value: self.metadata(from: node)!) // FIXME: metadata! is untenable here - exit might not have data
         }
 
-        return ExitSelection<NodeType, ValueType>(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
+        return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
     }
 
     @discardableResult public
@@ -669,18 +669,18 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
         var newNodes = [NodeType]()
 
         for (i, datum) in nodeData.enumerated() {
-            let nodeValue:ValueType = datum.value
-            var newNode = constructorFn(nil, nodeValue, i)
+            let value:ValueType = datum.value
+            var newNode = constructorFn(nil, value, i)
             newNodes.append(newNode)
             nodeData[i].node = newNode // TODO: check if I need this
 
-            newNode.metadata = nodeValue
+            newNode.metadata = value
 
             parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
 
         }
         // actually self should return the appended selection!
-        return PerfectSelection<NodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes);
+        return .init(parent: parent, nodeData: nodeData, nodes: newNodes);
     }
     
     // try to remove the even existence of this one:

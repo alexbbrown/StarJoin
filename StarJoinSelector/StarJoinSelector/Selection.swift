@@ -327,6 +327,8 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
 
     /// Vector of Node / Data pairs for existing nodes
     private let nodeData: [NodeDataType]
+    // this is just to make unit tests work - i'm not sure having data like this is meaningful
+    internal var debugNewData:[ValueType] { return boundData } // this TYPE only makes sense for multiply selected things
 
     private let selectionData: [ValueType]
 
@@ -524,11 +526,6 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
 
         super.init(parent: parent, nodes: retainedSelection)
     }
-
-    // internal for testing
-    override internal var data:[ValueType] { get {
-        return boundData
-        } } // this TYPE only makes sense for multiply selected things
 
     // dodgy function
     private func metadata(from node:NodeType?) -> ValueType? {

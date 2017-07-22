@@ -37,7 +37,7 @@ class LessSimpleOperations: XCTestCase {
         let mySelection = Selection<TestNode>.selection(parent: root, nodes: root.children, data: data1)
 
         XCTAssertEqual(0, mySelection.nodes.count)
-        XCTAssertEqual(1, mySelection.data.count)
+        XCTAssertEqual(1, mySelection.debugNewData.count)
 
         let enterSelection = mySelection.enter()
         let updateSelection = mySelection.update()
@@ -66,7 +66,7 @@ class LessSimpleOperations: XCTestCase {
 
 
         XCTAssertEqual(1, mySelection.nodes.count)
-        XCTAssertEqual(1, mySelection.data.count)
+        XCTAssertEqual(1, mySelection.debugNewData.count)
 //        XCTAssertEqual(updateSelection.nodes.count, updateSelection2.nodes.count) // same
 
         XCTAssertEqual(0, updateSelection.nodes.count)
@@ -106,7 +106,7 @@ class LessSimpleOperations: XCTestCase {
         selection0.exit().remove()
 
         XCTAssertEqual(0, selection0.nodes.count) // the selection array gets initialised with nil optionals.
-        XCTAssertEqual(0, selection0.data.count)
+        XCTAssertEqual(0, selection0.debugNewData.count)
         XCTAssertEqual(0, root.children.count) // will fail until exit is implemented
 
     }

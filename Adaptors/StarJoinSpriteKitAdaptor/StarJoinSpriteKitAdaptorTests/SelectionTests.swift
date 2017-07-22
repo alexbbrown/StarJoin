@@ -46,7 +46,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.emptyData)
 
         XCTAssertEqual(0, mySelection.nodes.count)
-        XCTAssertEqual(0, mySelection.data.count)
+        XCTAssertEqual(0, mySelection.debugNewData.count)
 
         XCTAssert(true, "Pass")
     }
@@ -57,7 +57,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 
         XCTAssertEqual(0, mySelection.nodes.count) // the join has NO nodes to begin with (before enter)
-        XCTAssertEqual(1, mySelection.data.count)
+        XCTAssertEqual(1, mySelection.debugNewData.count)
 
         // defunct - we don't do it that way any more
         //        let nonNilCount = mySelection.nodes.reduce(0, combine: { (acc, elem) -> Int in
@@ -79,7 +79,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 
         XCTAssertEqual(0, mySelection.nodes.count)
-        XCTAssertEqual(1, mySelection.data.count)
+        XCTAssertEqual(1, mySelection.debugNewData.count)
 
         let enterSelection = mySelection.enter()
 
@@ -90,7 +90,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
         }
 
         XCTAssertEqual(1, mySelection.nodes.count)
-        XCTAssertEqual(1, mySelection.data.count)
+        XCTAssertEqual(1, mySelection.debugNewData.count)
         XCTAssertEqual(1, scene!.children.count)
 
         // defunct - we don't do it that way any more
@@ -127,7 +127,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
         mySelection2.exit().remove()
 
         XCTAssertEqual(0, mySelection2.nodes.count) // the selection array gets initialised with nil optionals.
-        XCTAssertEqual(0, mySelection2.data.count)
+        XCTAssertEqual(0, mySelection2.debugNewData.count)
         XCTAssertEqual(0, scene!.children.count) // will fail until exit is implemented
 
         //        let nonNilCount = mySelection2.selection.reduce(0, combine: { (acc, elem) -> Int in

@@ -546,6 +546,8 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
     // this needs clarifying (and unit testing - can update include enter or not?)
     public func update() -> UpdateSelection<NodeType, ValueType> {
 
+        // There's a new plan: this behaviour is naughty now
+        // it should only return the goodNodeData.
         let goodNodeData = nodeData.filter { (nodeDataEl:NodeDataType) -> Bool in
             return nil != nodeDataEl.node
         }

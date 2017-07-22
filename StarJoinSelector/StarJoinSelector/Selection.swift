@@ -223,7 +223,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 
 }
 
-// MARK: JoinedSelection
+// MARK: InternalJoinedSelection
 
 /// (internal) JoinedSelection includes the operations that are possible on a bound or pre-joined selection
 // note that JoinedSelection inherited from a pre-entered Join may contain partially bound data

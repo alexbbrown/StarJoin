@@ -595,7 +595,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     @discardableResult public override
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in selection.enumerated() {
-            node.setNodeValue(toValueFn(selection[i], selectionData[i], i), forKeyPath: keyPath)
+            node.setNodeValue(toValueFn(node, selectionData[i], i), forKeyPath: keyPath)
         }
         return self;
     }

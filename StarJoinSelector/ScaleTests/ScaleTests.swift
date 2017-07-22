@@ -19,36 +19,6 @@ import XCTest
 
 public let ordinalScalesEnabled = false
 
-extension Double: SJFloatingPointType {
-    public func pow(_ lhs: Double, rhs: Double) -> Double {
-        return Darwin.pow(lhs, rhs)
-    }
-    public func ceil(_ x:Double) -> Double {
-        return Darwin.ceil(x)
-    }
-    public func floor(_ x:Double) -> Double {
-        return Darwin.floor(x)
-    }
-    public func log(_ x:Double) -> Double {
-        return Darwin.log(x)
-    }
-}
-
-extension Float: SJFloatingPointType {
-    public func pow(_ lhs: Float, rhs: Float) -> Float {
-        return Darwin.pow(lhs, rhs)
-    }
-    public func ceil(_ x:Float) -> Float {
-        return Darwin.ceil(x)
-    }
-    public func floor(_ x:Float) -> Float {
-        return Darwin.floor(x)
-    }
-    public func log(_ x:Float) -> Float {
-        return Darwin.log(x)
-    }
-}
-
 class ScaleLinearTests: XCTestCase {
 
     override func setUp() {

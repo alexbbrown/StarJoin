@@ -12,7 +12,7 @@ import XCTest
 class TestNode {
     var children = [TestNode]()
     weak var parent:TestNode?
-    var metadataStore:AnyObject? = nil
+    var metadataStore:Any? = nil
 }
 
 extension TestNode: TreeNavigable {
@@ -26,7 +26,7 @@ extension TestNode: TreeNavigable {
         parent?.children.remove(at: 0) // OK big cheat here.
     }
 
-    var childNodes: [TestNode]! {
+    var childNodes: [TestNode] {
         return children
     }
 }
@@ -54,7 +54,7 @@ extension TestNode:KVC {
 }
 
 extension TestNode:NodeMetadata {
-    var metadata: AnyObject? {
+    var metadata: Any? {
         get {
             return metadataStore
         }

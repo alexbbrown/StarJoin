@@ -10,7 +10,7 @@ import Foundation
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
-extension PerfectSelection {
+extension PerfectSelection where NodeType:KVCAnimated {
 
     @discardableResult public
     func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
@@ -18,7 +18,7 @@ extension PerfectSelection {
     }
 }
 
-extension MultiSelection {
+extension MultiSelection where NodeType:KVCAnimated {
 
     @discardableResult public
     func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
@@ -30,7 +30,7 @@ extension MultiSelection {
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
 public class TransitionSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
-where NodeType : KVC & TreeNavigable & NodeMetadata  {
+where NodeType : KVC & KVCAnimated & TreeNavigable & NodeMetadata  {
 
     let duration : TimeInterval
 
@@ -78,7 +78,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata  {
 
 // imperfect Transition
 public class TransitionMultiSelection<NodeType> : MultiSelection<NodeType>
-where NodeType : KVC & TreeNavigable & NodeMetadata  {
+where NodeType : KVC & KVCAnimated & TreeNavigable & NodeMetadata  {
 
     let duration : TimeInterval
 

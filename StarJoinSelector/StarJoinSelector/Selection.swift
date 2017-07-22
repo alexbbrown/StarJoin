@@ -48,8 +48,7 @@ public class NodeData<NodeType, ValueType> {
     }
 }
 
-// MARK: Selection - base class
-
+// MARK: -
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
 public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
@@ -85,7 +84,7 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     }
 }
 
-// MARK: SingleSelection
+// MARK: -
 // select a single node.  data operator applies once.
 // Selections are a selection of a single node, although subclasses handle
 // multiple nodes.  For now, the data TYPE is bound here also, although that
@@ -127,7 +126,7 @@ public class SingleSelection<NodeType> : Selection<NodeType>
     }
 }
 
-// MARK: InternalMultiSelection
+// MARK: -
 
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
@@ -162,7 +161,7 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
     }
 }
 
-// MARK: MultiSelection
+// MARK: -
 
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
@@ -223,7 +222,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 
 }
 
-// MARK: InternalJoinedSelection
+// MARK: -
 
 /// (internal) JoinedSelection includes the operations that are possible on a bound or pre-joined selection
 // note that JoinedSelection inherited from a pre-entered Join may contain partially bound data
@@ -285,6 +284,7 @@ public class InternalJoinedSelection<NodeType, ValueType> : InternalMultiSelecti
 //    }
 //
 //}
+// MARK: -
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
@@ -313,7 +313,7 @@ public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<Nod
     }
 }
 
-// MARK: JoinSelection (DataSelection)
+// MARK: -
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
@@ -567,7 +567,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
 }
 
-// MARK: Update Selection
+// MARK: -
 
 // Update Selection deals with joined nodes only.  Before enter it only
 // applies to retained nodes.  After enter it applies to both retained and
@@ -595,7 +595,7 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
     // TODO: I consider this one to be probably the one that should get the active attr methods
 }
 
-// MARK: Enter Selection
+// MARK: -
 
 // Enter Selection deals with entered nodes only.
 // it returns to type MultiSelection after append is performed.
@@ -658,7 +658,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
     }
 }
 
-// MARK: Exit Selection
+// MARK: -
 
 // Exit Selection deals with exiting nodes only
 // TODO: deprecate Exit Selection - all it's functionality exists elsewhere (probably)
@@ -693,6 +693,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata {
     }
 }
 
+// MARK: -
 
 // extensions
 

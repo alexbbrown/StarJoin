@@ -612,6 +612,7 @@
 				18A7539D1F23E54300F9BA54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

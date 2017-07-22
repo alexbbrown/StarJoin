@@ -326,12 +326,13 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
     // Properties
 
-    /// Vector of Node / Data pairs for existing nodes
-    private let nodeData: [NodeDataType]
     // this is just to make unit tests work - i'm not sure having data like this is meaningful
     internal var debugNewData:[ValueType] { return boundData } // this TYPE only makes sense for multiply selected things
 
-    private let selectionData: [ValueType]
+    /// Vector of Node / Data pairs including the unrealised enter nodes
+    private let updateAndEnterNodeData: [NodeDataType]
+
+    private let updateSelection:(nodes: [NodeType], values: [ValueType])
 
     /// Vector of (missing) Node / Data pairs for existing nodes
     private let enterNodeData: [NodeDataType]
@@ -342,20 +343,14 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     private let boundData: [ValueType]
 
     /// selection is a vector of NodeTypes discovered by the selection criteria.
-    /// selection is a vector of optional NodeTypes.  These are the representable
-    // manipulable nodes in the scene graph.  Right now selection is just the nodes
-    // which are present and have a new data node that could be bound to them
-    private let selection: [NodeType];
+    /// selection is a vector of optional NodeTypes.  These are the representable manipulable nodes in the scene graph.
+    /// Right now selection is just the nodes which are present and have a new data node that could be bound to them
 
-    // Note that the selections need to act upon the original data and node
-    // objects, in place, even in the face of mutation of a different
-    // selection - ie the enterSelection needs to act upon the same nodes that
-    // selection acts upon (later)
+    //     Note that the selections need to act upon the original data and node objects, in place, even in the face of mutation of a different selection - ie the enterSelection needs to act upon the same nodes that selection acts upon (later)
     // enter and exit should probably be separate selection objects, too.
-    // how can I maintain a stable index?  perhaps store it in the userData?
+    // How can I maintain a stable index?  perhaps store it in the userData?
     // is the enter index based upon the master selection order or the enter
-    // selection order?  Is the exit index stable?  I can't see how unless
-    // it's only local
+    // selection order?  Is the exit index stable?  I can't see how unless it's only local
 
     // exitSelection is the set of nodes (that have only latent data from prior calls)
     // that should be removed using exit().remove(), or animated
@@ -367,7 +362,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     // computed accessor to get managed nodes & data
     public override var nodes:[NodeType] { get {
         // the enter (before append) is empty by definition
-        return nodeData.flatMap { $0.node }
+        return updateAndEnterNodeData.flatMap { $0.node }
         }
         set { }
     }
@@ -379,56 +374,57 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
         var retainedSelection = [NodeType]()
         var exitSelection = [NodeType]()
-        var nodeData = [NodeDataType]()
+        var updateAndEnterNodeData = [NodeDataType]()
         var enterNodeData = [NodeDataType]()
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
         let boundCount = boundData.count
         let retainedCount = min(boundCount, initialSelection.count)
-        let initialCount = max(boundCount, initialSelection.count)
 
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
-        nodeData.reserveCapacity(boundData.count)
+        updateAndEnterNodeData.reserveCapacity(boundData.count)
         enterNodeData.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the Simple index case - where unique keys have not been supplied
 
         // grab the retained selection - those nodes we are going to keep that already exist
 
-        for i in 0 ..< retainedCount {
-            var updatedNode:NodeType = initialSelection[i]
-            let updatedValue = boundData[i]
+        for (var nodeToUpdate, valueToUpdateWith) in zip(initialSelection, boundData) {
 
-            retainedSelection.append(updatedNode)
+            // may want to re-order these 3 statements, depending, when nodeToUpdate is immutable
+            retainedSelection.append(nodeToUpdate)
 
-            nodeData.append(NodeDataType(node: updatedNode,
-                                         value: updatedValue))
+            updateAndEnterNodeData.append(NodeDataType(node: nodeToUpdate,
+                                         value: valueToUpdateWith))
 
-            updatedNode.metadata = updatedValue
+            // write the new metadata for the updated node only.
+            // TODO: consider handling the old value somehow, too.
+            nodeToUpdate.metadata = valueToUpdateWith
         }
 
         // grab the enter selection, which has no nodes yet
-        for i in retainedCount ..< boundData.count {
+        for valueMoreThanNodes in boundData.dropFirst(initialSelection.count) {
             let newNodeData = NodeDataType(node: nil,
-                                           value: boundData[i])
+                                           value: valueMoreThanNodes)
 
-            nodeData.append(newNodeData)
+            updateAndEnterNodeData.append(newNodeData)
             enterNodeData.append(newNodeData)
         }
 
         // grab the exit selection
-        for i in boundData.count ..< initialCount {
-            exitSelection.append(initialSelection[i])
+        for excessNode in initialSelection.dropFirst(boundData.count) {
+            exitSelection.append(excessNode)
         }
 
-        self.selection = retainedSelection as [NodeType]
-        self.selectionData = boundData // dubious - could be retainedData?
+        updateSelection = (nodes:retainedSelection,
+                           values:boundData // dubious - could be retainedData?
+            )
 
         self.exitSelection = exitSelection
 
-        self.nodeData = nodeData
+        self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterNodeData = enterNodeData
 
         super.init(parent: parent, nodes: retainedSelection)
@@ -441,7 +437,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
         var retainedSelection = [NodeType]()
         var exitSelection = [NodeType]()
-        var nodeData = [NodeDataType]()
+        var updateAndEnterNodeData = [NodeDataType]()
         var enterNodeData = [NodeDataType]()
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
@@ -450,7 +446,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
-        nodeData.reserveCapacity(boundData.count)
+        updateAndEnterNodeData.reserveCapacity(boundData.count)
         enterNodeData.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the keyed case
@@ -491,7 +487,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
             if let updatedValue = boundDataDictionary[key] {
                 retainedSelection.append(node)
 
-                nodeData.append(NodeDataType(node: node,
+                updateAndEnterNodeData.append(NodeDataType(node: node,
                                              value: updatedValue))
 
                 node.metadata = updatedValue
@@ -512,26 +508,21 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
                 // TODO: the nodeData (update set) should not include the new ones
                 // TODO: expect a new merge selection operation!
-                nodeData.append(newNodeData)
+                updateAndEnterNodeData.append(newNodeData)
                 enterNodeData.append(newNodeData)
             }
         }
 
-        self.selection = retainedSelection as [NodeType]
-        self.selectionData = boundData // dubious - could be retainedData?
+        updateSelection = (nodes:retainedSelection,
+                           values:boundData // dubious - could be retainedData?
+        )
 
         self.exitSelection = exitSelection
 
-        self.nodeData = nodeData
+        self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterNodeData = enterNodeData
 
         super.init(parent: parent, nodes: retainedSelection)
-    }
-
-    // dodgy function
-    private func metadata(from node:NodeType?) -> ValueType? {
-
-        return node?.metadata as? ValueType
     }
 
     // Enter returns the limited selection matching only missing nodes.
@@ -547,7 +538,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 
         // There's a new plan: this behaviour is naughty now
         // it should only return the goodNodeData.
-        let goodNodeData = nodeData.filter { (nodeDataEl:NodeDataType) -> Bool in
+        let goodNodeData = updateAndEnterNodeData.filter { (nodeDataEl:NodeDataType) -> Bool in
             return nil != nodeDataEl.node
         }
 
@@ -563,8 +554,12 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     public func exit() -> ExitSelection<NodeType, ValueType> {
 
         // let's take in on faith that exitnodes have values.  not necessarily true.
-        let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) -> NodeDataType in
-            .init(node: node, value: self.metadata(from: node)!) // FIXME: metadata! is untenable here - exit might not have data
+        // FIXME: metadata! is untenable here - exit might not have data value?
+        // d is now !, not ?; so we don't check.  Perhaps we ONLY exit managed nodes (with metadata?)
+        // that doesn't work if we expect to execute on arrays.  But it would work if we always work on
+        // selections - even for reselection.
+        let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) in
+            NodeDataType(node: node, value: node.metadata as! ValueType)
         }
 
         return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)

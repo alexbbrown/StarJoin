@@ -627,7 +627,7 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
     func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<NewNodeType, ValueType>
-    where NewNodeType : KVC & TreeNavigable & NodeMetadata {
+    where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
         // Convenience types
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
@@ -635,16 +635,17 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
         var newNodes:[NewNodeType] = []
         var nodeData:[NewNodeDataType] = []
 
-//        for (i, value) in data.enumerated() {
-//            var newNode = constructorFn(value, i)
-//            newNodes.append(newNode)
-//            nodeData.append(NodeDataType(some: newNode, value: value))
-//
-//            newNode.metadata = value
-//
-//            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-//
-//        }
+        for (i, value) in data.enumerated() {
+
+            var newNode = constructorFn(value, i)
+            newNodes.append(newNode)
+            nodeData.append(NewNodeDataType(some: newNode, value: value))
+
+            newNode.metadata = value
+
+            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
+
+        }
         // actually self should return the appended selection!
         // FIXME: let's get rid of as NewNodeType
         return PerfectSelection<NewNodeType, ValueType>(parent: parent as! NewNodeType, nodeData: nodeData, nodes: newNodes)
@@ -714,21 +715,21 @@ extension PerfectSelection {
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
     public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NewNodeType, ValueType>
-        where NewNodeType==NodeType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
+        where NewNodeType==NodeType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
-
+        // Convenience types
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
 
-        var nodeData:[NewNodeDataType] = []
-        var newNodes = [NewNodeType]()
+        var newNodes:[NewNodeType] = []
+        var newNodeData:[NewNodeDataType] = []
 
-        for (i, selected) in nodes.enumerated() {
+        for (i, node) in nodes.enumerated() {
             // MARK: WORKING FACE
             
-            var newNode = constructorFn(nodes[i], selected.metadata as! ValueType, i)
+            var newNode = constructorFn(nodes[i], node.metadata as! ValueType, i)
 
-            nodeData.append(NewNodeDataType(some: newNode,
-                                            value: nodeData[i].value))
+            newNodeData.append(NewNodeDataType(some: newNode,
+                                               value: nodeData[i].value))
 
             newNode.metadata = nodeData[i].value
 
@@ -736,7 +737,8 @@ extension PerfectSelection {
             nodes[i].add(child: newNode)
         }
 
-        return PerfectSelection<NewNodeType, ValueType>(parent: self.parent, nodeData:nodeData, nodes:newNodes);
+        // remove this hack
+        return PerfectSelection<NewNodeType, ValueType>(parent: self.parent as! NewNodeType, nodeData:newNodeData, nodes:newNodes);
     }
 }
 #endif

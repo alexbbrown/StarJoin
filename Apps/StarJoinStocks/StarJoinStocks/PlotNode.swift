@@ -148,7 +148,7 @@ open class QuoteNode: SKNode {
 //        addChild(labelNode)
 
         mySelection.enter()
-            .append { (s, d, i) in
+            .append { (d, i) in
                 let newNode = SKLabelNode()
                 newNode.name = "label"
                 return newNode
@@ -200,7 +200,7 @@ open class QuoteNode: SKNode {
         
         // create new nodes
         mySelection.enter()
-            .append { (s, d, i) in SKSpriteNode()}
+            .append { (d, i) in SKSpriteNode()}
             .attr("size", toValue: CGSize(width:4.0,height:0.5))
             
             // start white

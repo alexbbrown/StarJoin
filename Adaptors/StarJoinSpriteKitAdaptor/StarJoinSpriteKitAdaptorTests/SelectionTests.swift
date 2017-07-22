@@ -85,11 +85,11 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         XCTAssertEqual(0, mySelection.nodes.count)
 
-        enterSelection.append { (s, d, i) -> SKNode in
+        enterSelection.append { (d, i) -> SKNode in
             return SKNode()
         }
 
-        XCTAssertEqual(1, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.nodes.count) // used to be 1
         XCTAssertEqual(1, mySelection.debugNewData.count)
         XCTAssertEqual(1, scene!.children.count)
 
@@ -114,13 +114,13 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         let mySelection = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.oneRowData)
 
-        mySelection.enter().append { (s, d, i) -> SKNode in
+        mySelection.enter().append { (d, i) -> SKNode in
             return SKNode()
         }
 
         let mySelection2 = Selection<SKNode>.selection(parent: scene!, nodes: scene!.childNodes, data: self.emptyData)
 
-        mySelection2.enter().append { (s, d, i) -> SKNode in
+        mySelection2.enter().append { (d, i) -> SKNode in
             return SKNode()
         }
 

@@ -43,33 +43,25 @@ class LessSimpleOperations: XCTestCase {
         let updateSelection = mySelection.update()
 
         XCTAssertEqual(0, mySelection.nodes.count)
-        XCTAssertEqual(0, enterSelection.nodes.count)
+        XCTAssertEqual(1, enterSelection.debugNewData.count)
         XCTAssertEqual(0, updateSelection.nodes.count)
 
 
-        let appendSelection = enterSelection.append { (s, d, i) -> TestNode in
+        let appendSelection = enterSelection.append { (d, i) -> TestNode in
             return .init()
         }
 
         XCTAssertEqual(1, appendSelection.nodes.count)
-        XCTAssertEqual(0, enterSelection.nodes.count)
+        XCTAssertEqual(1, enterSelection.debugNewData.count)
         XCTAssertEqual(0, updateSelection.nodes.count)
-
-
-        // Have now changed enterSelection.each to fatal until we can remove it
-        // Enter should be equivalent to unbound join
-//        enterSelection.each { (s, d, i) in
-//            fatalError()
-//        }
 
         let updateSelection2 = mySelection.update()
 
-
-        XCTAssertEqual(1, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
 //        XCTAssertEqual(updateSelection.nodes.count, updateSelection2.nodes.count) // same
 
-        XCTAssertEqual(0, updateSelection.nodes.count)
+        XCTAssertEqual(0, updateSelection2.nodes.count)
 //        XCTAssertEqual(0, updateSelection2.nodes.count) // this should be ZERO in mergeWorld
 
 
@@ -83,7 +75,7 @@ class LessSimpleOperations: XCTestCase {
 
         let selection1 = Selection.select(only: root).select(all: root.children).join(data1)
 
-        selection1.enter().append { (s, d, i) in
+        selection1.enter().append { (d, i) in
             return .init()
         }
 
@@ -91,17 +83,12 @@ class LessSimpleOperations: XCTestCase {
 
         let enterSelection = selection0.enter()
 
-        XCTAssertEqual(0, enterSelection.nodes.count)
+        XCTAssertEqual(0, enterSelection.debugNewData.count)
 
 
-        let appendSelection = enterSelection.append { (s, d, i)  in
+        let appendSelection = enterSelection.append { (d, i)  in
             return .init()
         }
-
-        // remove this - it's fatal now
-//        enterSelection.each { (s, d, i) in
-//            XCTFail("There is no each for enter - that's only on the append selection")
-//        }
 
         selection0.exit().remove()
 

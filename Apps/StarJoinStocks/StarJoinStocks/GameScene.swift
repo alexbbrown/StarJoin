@@ -181,7 +181,7 @@ class GameScene: SKScene {
 
         let enterSelection = join
             .enter()
-            .append { (s, d:(String,[[String:String]]), i) -> SKNode in
+            .append { (d:(String,[[String:String]]), i) -> SKNode in
 
                 let newNode = QuoteNode(quote: d, color:SKColor.red, duration:self.duration)
 

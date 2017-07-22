@@ -121,11 +121,11 @@ class SimpleOperations: XCTestCase {
 
         XCTAssertEqual(0, mySelection.nodes.count)
 
-        enterSelection.append { (s, d, i) -> TestNode in
+        enterSelection.append { (d, i) -> TestNode in
             return .init()
         }
 
-        XCTAssertEqual(1, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.nodes.count) // it used to be 1 - now it's not adjusted after enter/append
         XCTAssertEqual(1, mySelection.debugNewData.count)
         XCTAssertEqual(1, root.children.count)
 
@@ -137,13 +137,13 @@ class SimpleOperations: XCTestCase {
 
         let selection1 = Selection.selection(parent: root, nodes: root.children, data: data1)
 
-        selection1.enter().append { (s, d, i) in
+        selection1.enter().append { (d, i) in
             return .init()
         }
 
         let selection0 = Selection.selection(parent: root, nodes: root.children, data: data0)
 
-        selection0.enter().append { (s, d, i)  in
+        selection0.enter().append { (d, i)  in
             return .init()
         }
 

@@ -50,7 +50,7 @@ extension MultiSelection {
     }
 }
 
-extension  JoinedSelection {
+extension InternalJoinedSelection {
     // compound attr for functions
     // TODO: can I unify the value and function dictionary representations?
     // TODO: Do I need this?

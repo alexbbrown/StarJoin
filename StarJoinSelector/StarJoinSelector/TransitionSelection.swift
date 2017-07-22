@@ -29,7 +29,7 @@ extension MultiSelection {
 /// PerfectTransitionSelection is a PerfectSelection with delayed property operations
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
-public class TransitionSelection<NodeType, ValueType> : JoinedSelection<NodeType, ValueType>
+public class TransitionSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
 where NodeType : KVC & TreeNavigable & NodeMetadata  {
 
     let duration : TimeInterval

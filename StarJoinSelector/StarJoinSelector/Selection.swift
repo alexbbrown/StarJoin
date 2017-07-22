@@ -60,6 +60,7 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
     // Convenience data types
     internal typealias ParentType = NodeType // does this go here?
 
+    /// Abstract
     public func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
         fatalError("This method must be overridden")
     }
@@ -229,7 +230,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
+public class InternalJoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
      where NodeType : KVC & TreeNavigable & NodeMetadata {
 
 
@@ -287,7 +288,7 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
-public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, ValueType>
+public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
@@ -316,7 +317,7 @@ public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, V
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
-public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, ValueType>
+public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
@@ -578,13 +579,15 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
         return self;
     }
 
-    // Remove nodes from the document
+    /// DISABLED
+    //Remove nodes from the document
     public override func remove() {
         fatalError("null remove executed from JoinSelection")
         // TODO: add remove - should prune nodes
     }
 
     // set a property using key value coding
+    /// DISABLED
     @discardableResult public override
     func attr(_ keyPath: String, toValue: Any!) -> Self {
         fatalError("JoinSelection doesn't want to do attr")
@@ -596,6 +599,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 //        return self;
     }
 
+    /// DISABLED
     // TODO: put back
     // set a property using key value coding
     @discardableResult public override
@@ -644,7 +648,7 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
 // Enter Selection deals with entered nodes only.
 // it returns to type MultiSelection after append is performed.
 // TODO: EnterSelection has an 'each' but it's action is unexpected - it operates on 0 entries.  Is that intentional?  is enterselection really a joined selection?
-public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
+public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : InternalJoinedSelection<NodeType, ValueType> {
 
     // Convenience types
     fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -694,6 +698,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
     }
     
     // try to remove the even existence of this one:
+    /// OVERRIDE DISABLED
     @discardableResult public
     override func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         fatalError("Enter has no each Function")

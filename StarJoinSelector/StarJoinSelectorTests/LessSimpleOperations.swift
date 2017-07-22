@@ -40,9 +40,12 @@ class LessSimpleOperations: XCTestCase {
         XCTAssertEqual(1, mySelection.data.count)
 
         let enterSelection = mySelection.enter()
+        let updateSelection = mySelection.update()
 
         XCTAssertEqual(0, mySelection.nodes.count)
         XCTAssertEqual(0, enterSelection.nodes.count)
+        XCTAssertEqual(0, updateSelection.nodes.count)
+
 
         let appendSelection = enterSelection.append { (s, d, i) -> TestNode in
             return .init()
@@ -50,6 +53,8 @@ class LessSimpleOperations: XCTestCase {
 
         XCTAssertEqual(1, appendSelection.nodes.count)
         XCTAssertEqual(0, enterSelection.nodes.count)
+        XCTAssertEqual(0, updateSelection.nodes.count)
+
 
         // Have now changed enterSelection.each to fatal until we can remove it
         // Enter should be equivalent to unbound join
@@ -57,8 +62,17 @@ class LessSimpleOperations: XCTestCase {
 //            fatalError()
 //        }
 
+        let updateSelection2 = mySelection.update()
+
+
         XCTAssertEqual(1, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.data.count)
+//        XCTAssertEqual(updateSelection.nodes.count, updateSelection2.nodes.count) // same
+
+        XCTAssertEqual(0, updateSelection.nodes.count)
+//        XCTAssertEqual(0, updateSelection2.nodes.count) // this should be ZERO in mergeWorld
+
+
         XCTAssertEqual(1, root.children.count)
     }
 
@@ -67,13 +81,13 @@ class LessSimpleOperations: XCTestCase {
 
         // If the node has children my code fails.
 
-        let selection1 = Selection.selection(parent: root, nodes: root.children, data: data1)
+        let selection1 = Selection.select(only: root).select(all: root.children).join(data1)
 
         selection1.enter().append { (s, d, i) in
             return .init()
         }
 
-        let selection0 = Selection.selection(parent: root, nodes: root.children, data: data0)
+        let selection0 = Selection.select(only: root).select(all: root.children).join(data0)
 
         let enterSelection = selection0.enter()
 

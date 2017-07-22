@@ -122,7 +122,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         //        let lineNodePositionFn =
 
-        lineEnter.append { (s,d,i) in
+        lineEnter.append{ (d,i) -> SKSpriteNode in
             let lineNode = SKSpriteNode()
             lineNode.name = "line"
             return lineNode
@@ -155,7 +155,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         let enterTicks = tickJoin
             .enter()
-            .append { (s, d, i) in SKSpriteNode() }
+            .append { (d, i) in SKSpriteNode() }
 
         enterTicks
             .each({ (s, d, i) -> () in

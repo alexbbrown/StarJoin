@@ -627,26 +627,37 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
     func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<NewNodeType, ValueType>
-    where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
+    where NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
         // Convenience types
-        typealias NodeDataType = NodeData<NewNodeType, ValueType>
+        typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
 
         var newNodes:[NewNodeType] = []
-        var nodeData:[NodeDataType] = []
+        var nodeData:[NewNodeDataType] = []
 
-        for (i, value) in data.enumerated() {
-            var newNode = constructorFn(value, i)
-            newNodes.append(newNode)
-            nodeData.append(NodeDataType(some: newNode, value: value))
-
-            newNode.metadata = value
-
-            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-
-        }
+//        for (i, value) in data.enumerated() {
+//            var newNode = constructorFn(value, i)
+//            newNodes.append(newNode)
+//            nodeData.append(NodeDataType(some: newNode, value: value))
+//
+//            newNode.metadata = value
+//
+//            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
+//
+//        }
         // actually self should return the appended selection!
-        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
+        // FIXME: let's get rid of as NewNodeType
+        return PerfectSelection<NewNodeType, ValueType>(parent: parent as! NewNodeType, nodeData: nodeData, nodes: newNodes)
+
+        // why isn't this compiling
+//        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
+        // why isn't this compiling
+
+        //'(parent: ParentType, nodeData: [Any], nodes: [Any])' is not convertible to '(parent: NewNodeType, nodeData: [NodeData<NewNodeType, ValueType>], nodes: [NewNodeType])'
+//        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: [], nodes: [])
+
+//        return PerfectSelection<NewNodeType, ValueType>(parent: parent as! NewNodeType, nodeData: [NodeData<NewNodeType, ValueType>](), nodes: [NewNodeType]())
+
     }
 }
 
@@ -689,6 +700,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata {
 
 // extensions
 
+#if true
 extension PerfectSelection {
 
     // this isn't exactly the same as the main append - so let's call it append2
@@ -702,7 +714,7 @@ extension PerfectSelection {
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
     public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NewNodeType, ValueType>
-        where NewNodeType==NodeType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
+        where NewNodeType==NodeType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
 
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
@@ -724,6 +736,7 @@ extension PerfectSelection {
             nodes[i].add(child: newNode)
         }
 
-        return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData:nodeData, nodes:newNodes);
+        return PerfectSelection<NewNodeType, ValueType>(parent: self.parent, nodeData:nodeData, nodes:newNodes);
     }
 }
+#endif

@@ -53,6 +53,7 @@ mySelection
 //: then **`append`** (selection mutation operator) summons a new sprite to stand in for each data item, and
     .append { (s, d, i) in SKSpriteNode() }
 //: The `attr` method uses [KVC](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/) to create a promise to write sprite properties - we can use the `d` parameter to access the fields from our data's tuple.
+//: * experiment: what happens if you change the constant 1 below?
     .attr("position") { (s, d, i) in CGPoint(x: d.x, y: d.y) }
     .attr("size") { (s, d, i) in CGSize(width: d.size, height: d.size) }
     .attr("color") { (s, d, i) in d.color }

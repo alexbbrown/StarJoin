@@ -538,6 +538,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     }
 
     // Update creates a new selection containing only valid node:value pairs
+    // this needs clarifying (and unit testing - can update include enter or not?)
     public func update() -> UpdateSelection<NodeType, ValueType> {
 
         let goodNodeData = nodeData.filter { (nodeDataEl:NodeDataType) -> Bool in
@@ -575,13 +576,8 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 
     // Remove nodes from the document
     public override func remove() {
-        print("null remove executed from JoinSelection")
+        fatalError("null remove executed from JoinSelection")
         // TODO: add remove - should prune nodes
-    }
-
-    //! this is just for checking the types that the generic thinks it is.
-    public func typeTest(typeFn:(ParentType,NodeType,ValueType) -> Bool) -> () {
-
     }
 
     // set a property using key value coding
@@ -623,10 +619,10 @@ public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, V
 
     // Initializers
 
-    internal override init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType])
-    {
-        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
-    }
+//    internal override init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType])
+//    {
+//        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
+//    }
 
     override public var data:[ValueType] { get {
         return nodeData.map { $0.value }

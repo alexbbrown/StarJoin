@@ -326,23 +326,23 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    private var nodeData:[NodeDataType]
+    private let nodeData: [NodeDataType]
 
-    private var selectionData:[ValueType];
+    private let selectionData: [ValueType]
 
     /// Vector of (missing) Node / Data pairs for existing nodes
-    private var enterNodeData:[NodeDataType]
+    private let enterNodeData: [NodeDataType]
 
     /// boundData is a vector of arbitrary data type (preferable homogeneous).
     // this value is just kept around for debugging
     // try using tuples or dictionaries.
-    private var boundData:[ValueType];
+    private let boundData: [ValueType]
 
     /// selection is a vector of NodeTypes discovered by the selection criteria.
     /// selection is a vector of optional NodeTypes.  These are the representable
     // manipulable nodes in the scene graph.  Right now selection is just the nodes
     // which are present and have a new data node that could be bound to them
-    private var selection:[NodeType];
+    private let selection: [NodeType];
 
     // Note that the selections need to act upon the original data and node
     // objects, in place, even in the face of mutation of a different
@@ -359,7 +359,7 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
     // ISSUE: there may be a race condition if a later selection picks them up
     // while they are in a timed animation and exit.  Should take care to check that
     // such nodes have their timed exit terminated (or that they are not eligible)
-    private var exitSelection:[NodeType]
+    private let exitSelection:[NodeType]
 
     // computed accessor to get managed nodes & data
     public override var nodes:[NodeType] { get {
@@ -576,6 +576,7 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
         // TODO create more childrens (what?)
 
         for i in 0 ..< selection.count {
+            // I don't buy this: what's it running EACH on?
             eachFn(selection[i], selectionData[i], i)
         }
         return self;

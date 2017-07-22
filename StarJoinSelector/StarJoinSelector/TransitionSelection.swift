@@ -56,7 +56,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata  {
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
         for (i, node) in nodes.enumerated() {
-            node.setNodeValueAnimated(toValueFn(node, self.metadataForNode(i:i)!, i), forKeyPath: keyPath, withDuration:self.duration)
+            node.setNodeValueAnimated(toValueFn(node, self.metadata(from: node)!, i), forKeyPath: keyPath, withDuration:self.duration)
         }
         return self;
     }
@@ -67,6 +67,12 @@ where NodeType : KVC & TreeNavigable & NodeMetadata  {
         for node in nodes {
             node.removeNodeFromParent(withDelay:duration)
         }
+    }
+
+    // dodgy function
+    private func metadata(from node:NodeType?) -> ValueType? {
+
+        return node?.metadata as? ValueType
     }
 }
 

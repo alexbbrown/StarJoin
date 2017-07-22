@@ -239,10 +239,11 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
 
     @discardableResult public
     func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        for (i, selected) in nodes.enumerated() {
+        for (i, node) in nodes.enumerated() {
+            let dataValue = self.metadata(from: node)
 
             // TODO: explain the ! here - any if it's true.  what about re-binds?
-            eachFn(selected, self.metadataForNode(i:i)!, i)
+            eachFn(node, dataValue!, i)
         }
         return self;
     }
@@ -251,15 +252,15 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     @discardableResult public
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadataForNode(i:i)
+            let dataValue = self.metadata(from: node)
             // todo: explain the ! here
             node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath)
         }
         return self;
     }
 
-    internal func metadataForNode(i:Int) -> ValueType? {
-        return nodes[i].metadata as? ValueType
+    private func metadata(from node:NodeType?) -> ValueType? {
+        return node?.metadata as? ValueType
     }
 }
 
@@ -525,7 +526,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
         } } // this TYPE only makes sense for multiply selected things
 
     // dodgy function
-    internal func metadata(from node:NodeType?) -> ValueType? {
+    private func metadata(from node:NodeType?) -> ValueType? {
 
         return node?.metadata as? ValueType
     }

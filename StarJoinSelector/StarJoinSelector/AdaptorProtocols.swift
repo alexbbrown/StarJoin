@@ -16,13 +16,13 @@ import Foundation
 // TODO: it looks like a mutable collection of some kind
 // TODO: can it be actually an array?  can we generalise to non linear structures such as matrixes or trees?
 public protocol TreeNavigable {
-    associatedtype T = Self
-    func add(child: Self)
+    associatedtype ChildType = Self
+    func add(child: ChildType)
 
     // this is a problematic one.  what's it for?
     func removeNodeFromParent()
 
-    var childNodes: [T] { get }
+    var childNodes: [ChildType] { get }
 }
 
 // this is a way to store metadata in the node itself, which lets us put the value in there so it can be retrieved without reference to the origianl array, for examine in 'each'.  I need to consider what this means.

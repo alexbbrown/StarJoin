@@ -46,6 +46,10 @@ public class NodeData<NodeType, ValueType> {
         self.node = node
         self.value = value
     }
+    init(some node:NodeType, value:ValueType) {
+        self.node = node
+        self.value = value
+    }
 }
 
 // MARK: -
@@ -141,7 +145,7 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
     /// The parent object is where new objects are created.  This is
     // probably incorrect in the long run; new objects may be created
     // on cascading created objects.
-    internal var parent:ParentType // TODO: should be readonly
+    internal var parent:ParentType // TODO: should be readonly (really?)
     // computed accessor to get managed nodes & data
     /// selection is the set of nodes initially supplied
 
@@ -288,6 +292,7 @@ public class InternalJoinedSelection<NodeType, ValueType> : InternalMultiSelecti
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
+// Child types: ExitSelection (WHAT?) and UpdateSelection
 public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
@@ -317,7 +322,7 @@ public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<Nod
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
-// ultimately it's not really a selection at all.
+// ultimately it's not really a selection at all, and should not be!
 final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
@@ -335,7 +340,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     private let updateSelection:(nodes: [NodeType], values: [ValueType])
 
     /// Vector of (missing) Node / Data pairs for existing nodes
-    private let enterNodeData: [NodeDataType]
+    private let enterValues: [ValueType]
 
     /// boundData is a vector of arbitrary data type (preferable homogeneous).
     // this value is just kept around for debugging
@@ -375,7 +380,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         var retainedSelection = [NodeType]()
         var exitSelection = [NodeType]()
         var updateAndEnterNodeData = [NodeDataType]()
-        var enterNodeData = [NodeDataType]()
+        var enterValues = [ValueType]()
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
@@ -385,7 +390,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
         updateAndEnterNodeData.reserveCapacity(boundData.count)
-        enterNodeData.reserveCapacity(max(0,boundData.count - initialSelection.count))
+        enterValues.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the Simple index case - where unique keys have not been supplied
 
@@ -405,13 +410,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         }
 
         // grab the enter selection, which has no nodes yet
-        for valueMoreThanNodes in boundData.dropFirst(initialSelection.count) {
-            let newNodeData = NodeDataType(node: nil,
-                                           value: valueMoreThanNodes)
-
-            updateAndEnterNodeData.append(newNodeData)
-            enterNodeData.append(newNodeData)
-        }
+        enterValues = Array(boundData.dropFirst(initialSelection.count))
 
         // grab the exit selection
         for excessNode in initialSelection.dropFirst(boundData.count) {
@@ -425,7 +424,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         self.exitSelection = exitSelection
 
         self.updateAndEnterNodeData = updateAndEnterNodeData
-        self.enterNodeData = enterNodeData
+        self.enterValues = enterValues
 
         super.init(parent: parent, nodes: retainedSelection)
     }
@@ -438,7 +437,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         var retainedSelection = [NodeType]()
         var exitSelection = [NodeType]()
         var updateAndEnterNodeData = [NodeDataType]()
-        var enterNodeData = [NodeDataType]()
+        var enterValues = [ValueType]()
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
@@ -447,7 +446,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         retainedSelection.reserveCapacity(retainedCount)
         exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
         updateAndEnterNodeData.reserveCapacity(boundData.count)
-        enterNodeData.reserveCapacity(max(0,boundData.count - initialSelection.count))
+        enterValues.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the keyed case
         // incoming data must be bound to the correct nodes
@@ -509,7 +508,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
                 // TODO: the nodeData (update set) should not include the new ones
                 // TODO: expect a new merge selection operation!
                 updateAndEnterNodeData.append(newNodeData)
-                enterNodeData.append(newNodeData)
+                enterValues.append(updatedValue)
             }
         }
 
@@ -520,7 +519,7 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
         self.exitSelection = exitSelection
 
         self.updateAndEnterNodeData = updateAndEnterNodeData
-        self.enterNodeData = enterNodeData
+        self.enterValues = enterValues
 
         super.init(parent: parent, nodes: retainedSelection)
     }
@@ -528,8 +527,8 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     // Enter returns the limited selection matching only missing nodes.
     // it is passed our nodeData object so new nodes are visible.
     // see also update - which extracts a concrete set of nodes at any time
-    public func enter() -> EnterSelection<NodeType, ValueType> {
-        return EnterSelection<NodeType, ValueType>(parent: self.parent, nodeData: self.enterNodeData)
+    public func enter() -> EnterPreSelection<NodeType, ValueType> {
+        return .init(parent: self.parent, data: self.enterValues)
     }
 
     // Update creates a new selection containing only valid node:value pairs
@@ -593,6 +592,8 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
         } } // this TYPE only makes sense for multiply selected things
 
     // TODO: I consider this one to be probably the one that should get the active attr methods
+
+
 }
 
 // MARK: -
@@ -600,46 +601,44 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
 // Enter Selection deals with entered nodes only.
 // it returns to type MultiSelection after append is performed.
 // TODO: EnterSelection has an 'each' but it's action is unexpected - it operates on 0 entries.  Is that intentional?  is enterselection really a joined selection?
-public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : InternalJoinedSelection<NodeType, ValueType> {
+final public class EnterPreSelection<ParentType, ValueType>
+where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treenavigable here
 
-    // Convenience types
-    fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
+    public typealias NodeType = ParentType.ChildType
+    public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    private var nodeData:[NodeDataType]
+    private var data:[ValueType]
+    internal var parent:ParentType // TODO: should be readonly (really?)
 
     // initializers
-    fileprivate init (parent:ParentType, nodeData: [NodeDataType]) {
-        self.nodeData = nodeData
-
-        super.init(parent: parent, nodes: [])
+    fileprivate init (parent:ParentType, data: [ValueType]) {
+        self.parent = parent
+        self.data = data
     }
 
-    // computed accessor to get managed nodes & data
-    override public var nodes:[NodeType] { get {
-        // the enter (before append) is empty by definition
-        return []
-        }
-        set {} }
-
     // internal for testability
-    override internal var data:[ValueType] { get {
-        return nodeData.map { $0.value }
-        } } // this TYPE only makes sense for multiply selected things
+    internal var debugNewData:[ValueType] {
+        return data
+    }
 
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
-    func append(constructorFn:(NodeType?,ValueType,Int) -> NodeType ) -> PerfectSelection<NodeType, ValueType> {
+    func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<NewNodeType, ValueType>
+    where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
-        var newNodes = [NodeType]()
+        // Convenience types
+        typealias NodeDataType = NodeData<NewNodeType, ValueType>
 
-        for (i, datum) in nodeData.enumerated() {
-            let value:ValueType = datum.value
-            var newNode = constructorFn(nil, value, i)
+        var newNodes:[NewNodeType] = []
+        var nodeData:[NodeDataType] = []
+
+        for (i, value) in data.enumerated() {
+            var newNode = constructorFn(value, i)
             newNodes.append(newNode)
-            nodeData[i].node = newNode // TODO: check if I need this
+            nodeData.append(NodeDataType(some: newNode, value: value))
 
             newNode.metadata = value
 
@@ -647,14 +646,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
 
         }
         // actually self should return the appended selection!
-        return .init(parent: parent, nodeData: nodeData, nodes: newNodes);
-    }
-    
-    // try to remove the even existence of this one:
-    /// OVERRIDE DISABLED
-    @discardableResult public
-    override func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        fatalError("Enter has no each Function")
+        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
     }
 }
 
@@ -709,23 +701,29 @@ extension PerfectSelection {
     //
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
-    public func append2(constructorFn:NodeValueIndexToNode) -> PerfectSelection {
+    public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NewNodeType, ValueType>
+        where NewNodeType==NodeType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
-        var newNodes = [NodeType]()
+
+        typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
+
+        var nodeData:[NewNodeDataType] = []
+        var newNodes = [NewNodeType]()
 
         for (i, selected) in nodes.enumerated() {
             // MARK: WORKING FACE
+            
             var newNode = constructorFn(nodes[i], selected.metadata as! ValueType, i)
 
-            nodeData.append(NodeDataType(node: newNode,
-                                         value: nodeData[i].value))
+            nodeData.append(NewNodeDataType(some: newNode,
+                                            value: nodeData[i].value))
 
             newNode.metadata = nodeData[i].value
 
             newNodes.append(newNode)
-            nodes[i].add(child:newNode)
+            nodes[i].add(child: newNode)
         }
 
-        return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData: [], nodes:newNodes);
+        return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData:nodeData, nodes:newNodes);
     }
 }

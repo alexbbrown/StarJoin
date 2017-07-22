@@ -26,14 +26,6 @@ extension SCNNode: TreeNavigable, NodeMetadata, KVC {
         }
     }
 
-    public func setNodeValueAnimated(_ toValue: Any?, forKeyPath keyPath: String, withDuration: TimeInterval) {
-        fatalError()
-    }
-
-    public func removeNodeFromParent(withDelay: TimeInterval) {
-        fatalError()
-    }
-
     public var metadata: Any? {
         get { return self.value(forKey: "metadata") }
         set(value) {

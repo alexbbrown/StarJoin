@@ -147,12 +147,14 @@ open class QuoteNode: SKNode {
 //        labelNode.name = "label"
 //        addChild(labelNode)
 
-        mySelection.enter()
+        let appendedSelection = mySelection.enter()
             .append { (d, i) in
                 let newNode = SKLabelNode()
                 newNode.name = "label"
                 return newNode
             }
+
+        appendedSelection
             .attr("position") { (s, d, i) in
                 return CGPoint(x:self.newScales.x!.range!.1 + 10,
                     y:self.newScales.y?.scale(closeLastD) ?? 0)
@@ -161,7 +163,7 @@ open class QuoteNode: SKNode {
             .transition(duration: duration)
             .attr("alpha", toValue: 1)
             
-        mySelection.update()
+        mySelection.update().merge(with: appendedSelection)
             .each { (s, d, i) in
                 if let label = s as? SKLabelNode {
                     label.fontSize = 40
@@ -199,8 +201,11 @@ open class QuoteNode: SKNode {
 //            .transition(duration: duration)
         
         // create new nodes
+        let appendedSelection =
         mySelection.enter()
-            .append { (d, i) in SKSpriteNode()}
+            .append { (d, i) in SKSpriteNode() }
+
+        appendedSelection
             .attr("size", toValue: CGSize(width:4.0,height:0.5))
             
             // start white
@@ -220,6 +225,7 @@ open class QuoteNode: SKNode {
         
         mySelection
             .update()
+            .merge(with: appendedSelection)
             .transition(duration: duration)
             .attr("size", toValue: CGSize(width:4.0,height:5.0))
             .attr("color") { (s, d, i) in

@@ -593,6 +593,16 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
 
     // TODO: I consider this one to be probably the one that should get the active attr methods
 
+    public func merge(with enterSelection:PerfectSelection<NodeType, ValueType>) -> UpdateSelection<NodeType, ValueType> {
+
+        let combinedNodeData = self.nodeData + enterSelection.nodeData
+
+        let combinedNodes = combinedNodeData.map { (nodeDataEl) -> NodeType in
+            nodeDataEl.node!
+        }
+
+        return UpdateSelection<NodeType, ValueType>(parent: self.parent, nodeData: combinedNodeData, nodes:combinedNodes)
+    }
 
 }
 

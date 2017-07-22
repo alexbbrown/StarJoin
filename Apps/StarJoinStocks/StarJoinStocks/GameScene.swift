@@ -179,7 +179,7 @@ class GameScene: SKScene {
         ordinalScale!.padding = 50
         ordinalScale!.outerPadding = 50
 
-        let enterSelection = join
+        let enterAppendedSelection = join
             .enter()
             .append { (d:(String,[[String:String]]), i) -> SKNode in
 
@@ -203,8 +203,9 @@ class GameScene: SKScene {
         // this crashes even if I have no child nodes.  Perhaps plotNode
         // is not safe to destroy
 
-        join
-            .update()
+        let merged = join.update().merge(with: enterAppendedSelection)
+
+        merged
             .attr("hidden", toValue:false)
             .each({ (s, d, i) in ()
                 if let s = s as? QuoteNode {
@@ -258,7 +259,7 @@ class GameScene: SKScene {
                 }
             })
 
-        enterSelection
+        enterAppendedSelection
             .attr("alpha", toValue:0)
             .transition(duration:0.5)
             .attr("alpha", toValue:1)

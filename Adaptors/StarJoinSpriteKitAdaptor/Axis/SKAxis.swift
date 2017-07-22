@@ -122,7 +122,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         //        let lineNodePositionFn =
 
-        lineEnter.append{ (d,i) -> SKSpriteNode in
+        let appended = lineEnter.append{ (d,i) -> SKSpriteNode in
             let lineNode = SKSpriteNode()
             lineNode.name = "line"
             return lineNode
@@ -132,6 +132,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         lineJoin
             .update()
+            .merge(with: appended)
             .each { (s,d,i) in if let lineNode = s as? SKSpriteNode { linePositionFn(lineNode) } }
 
         // Draw the axis ticks
@@ -201,7 +202,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                 return nil
         }
 
-        enterTicks
+        let appendedTicks = enterTicks
             .append2 { (s, d, i) in namedNode(node:SKLabelNode(),"label") }
             .each({ (s, d, i) in
                 if let label = s as? SKLabelNode {
@@ -263,10 +264,11 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
                 .attr("alpha",toValue: 1)
         }
 
-        let updatedTicks = tickJoin
+        let mergedTicks = tickJoin
             .update()
+            .merge(with: appendedTicks)
 
-        updatedTicks
+        mergedTicks
             .each({ (s, d, i) in
                 if let s = s {
                     if let label = s.childNode(withName: "label") as? SKLabelNode {
@@ -280,7 +282,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
             })
 
 
-        let animatedTicks = updatedTicks
+        let animatedTicks = mergedTicks
             .transition(duration: animationDuration)
 
         switch self.side {

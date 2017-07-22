@@ -525,7 +525,8 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
         super.init(parent: parent, nodes: retainedSelection)
     }
 
-    override public var data:[ValueType] { get {
+    // internal for testing
+    override internal var data:[ValueType] { get {
         return boundData
         } } // this TYPE only makes sense for multiply selected things
 
@@ -675,7 +676,8 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
         }
         set {} }
 
-    override fileprivate var data:[ValueType] { get {
+    // internal for testability
+    override internal var data:[ValueType] { get {
         return nodeData.map { $0.value }
         } } // this TYPE only makes sense for multiply selected things
 

@@ -39,14 +39,10 @@ import Foundation
 // nodes keep a reference to their data, too
 // is this just a convenience or is it critical?
 // is this really a map?  or even a weak map?
-public class NodeData<NodeType, ValueType> {
+public struct NodeData<NodeType, ValueType> {
     public var node:NodeType?
     public var value:ValueType
     init(node:NodeType?, value:ValueType) {
-        self.node = node
-        self.value = value
-    }
-    init(some node:NodeType, value:ValueType) {
         self.node = node
         self.value = value
     }
@@ -649,7 +645,7 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
 
             var newNode = constructorFn(value, i)
             newNodes.append(newNode)
-            nodeData.append(NewNodeDataType(some: newNode, value: value))
+            nodeData.append(NewNodeDataType(node: newNode, value: value))
 
             newNode.metadata = value
 
@@ -738,7 +734,7 @@ extension PerfectSelection {
             
             var newNode = constructorFn(nodes[i], node.metadata as! ValueType, i)
 
-            newNodeData.append(NewNodeDataType(some: newNode,
+            newNodeData.append(NewNodeDataType(node: newNode,
                                                value: nodeData[i].value))
 
             newNode.metadata = nodeData[i].value

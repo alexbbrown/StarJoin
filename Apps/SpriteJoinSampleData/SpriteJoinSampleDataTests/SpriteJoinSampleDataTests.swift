@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 apple. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import XCTest
 
 class SpriteJoinSampleDataTests: XCTestCase {

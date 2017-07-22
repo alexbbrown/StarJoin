@@ -13,12 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				18A753A31F23E5AF00F9BA54 /* PBXTargetDependency */,
-				18A753A51F23E5AF00F9BA54 /* PBXTargetDependency */,
-				18A753A71F23E5AF00F9BA54 /* PBXTargetDependency */,
-				18A753A91F23E5AF00F9BA54 /* PBXTargetDependency */,
-				18A753AB1F23E5AF00F9BA54 /* PBXTargetDependency */,
-				18A753AD1F23E5AF00F9BA54 /* PBXTargetDependency */,
 			);
 			name = "Test all";
 			productName = "All macos";
@@ -94,48 +88,6 @@
 			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 187E74291F1DFDE000AE571F;
-			remoteInfo = StarJoinSelectorTests;
-		};
-		18A753A21F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 182CE3AD1F21B21600D4BBB6;
-			remoteInfo = StarJoinSceneKitAdaptor;
-		};
-		18A753A41F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 182CE3B61F21B21700D4BBB6;
-			remoteInfo = StarJoinSceneKitAdaptorTests;
-		};
-		18A753A61F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 18EBE7F41F1E8EDC00C57088;
-			remoteInfo = StarJoinSpriteKitAdaptor;
-		};
-		18A753A81F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 18EBE7FD1F1E8EDD00C57088;
-			remoteInfo = StarJoinSpriteKitAdaptorTests;
-		};
-		18A753AA1F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 187E741F1F1DFDE000AE571F;
-			remoteInfo = StarJoinSelector;
-		};
-		18A753AC1F23E5AF00F9BA54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 187E74281F1DFDE000AE571F;
 			remoteInfo = StarJoinSelectorTests;
 		};
 		18B61A221F218B940006BD26 /* PBXContainerItemProxy */ = {
@@ -592,39 +544,6 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
-
-/* Begin PBXTargetDependency section */
-		18A753A31F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSceneKitAdaptor;
-			targetProxy = 18A753A21F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-		18A753A51F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSceneKitAdaptorTests;
-			targetProxy = 18A753A41F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-		18A753A71F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSpriteKitAdaptor;
-			targetProxy = 18A753A61F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-		18A753A91F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSpriteKitAdaptorTests;
-			targetProxy = 18A753A81F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-		18A753AB1F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSelector;
-			targetProxy = 18A753AA1F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-		18A753AD1F23E5AF00F9BA54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = StarJoinSelectorTests;
-			targetProxy = 18A753AC1F23E5AF00F9BA54 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		180370581F21697100131E7E /* MainMenu.xib */ = {

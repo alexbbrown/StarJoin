@@ -317,7 +317,8 @@ public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<Nod
 
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
-public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
+// ultimately it's not really a selection at all.
+final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
@@ -568,51 +569,6 @@ public class JoinSelection<NodeType, ValueType> : InternalJoinedSelection<NodeTy
 
         return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
     }
-
-    @discardableResult public
-    override func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        // TODO create more childrens (what?)
-
-        for i in 0 ..< selection.count {
-            // I don't buy this: what's it running EACH on?
-            eachFn(selection[i], selectionData[i], i)
-        }
-        return self;
-    }
-
-    /// DISABLED
-    //Remove nodes from the document
-    public override func remove() {
-        fatalError("null remove executed from JoinSelection")
-        // TODO: add remove - should prune nodes
-    }
-
-    // set a property using key value coding
-    /// DISABLED
-    @discardableResult public override
-    func attr(_ keyPath: String, toValue: Any!) -> Self {
-        fatalError("JoinSelection doesn't want to do attr")
-        // this walks over selection
-//        for node in selection {
-//            node.setNodeValue(toValue, forKeyPath: keyPath)
-//        }
-//
-//        return self;
-    }
-
-    /// DISABLED
-    // TODO: put back
-    // set a property using key value coding
-    @discardableResult public override
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        fatalError("JoinSelection doesn't want to do attr")
-//
-//        for (i, node) in selection.enumerated() {
-//            node.setNodeValue(toValueFn(node, selectionData[i], i), forKeyPath: keyPath)
-//        }
-//        return self;
-    }
-
 
 }
 

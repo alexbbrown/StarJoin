@@ -135,6 +135,7 @@
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
+		18A753821F234E0500F9BA54 /* Scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratch.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18B61A121F218B940006BD26 /* apple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apple.json; sourceTree = "<group>"; };
 		18B61A131F218B940006BD26 /* ibm.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ibm.json; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				1841F0D61F1DEA810049A474 /* GameTemplate.playground */,
+				18A753821F234E0500F9BA54 /* Scratch.playground */,
 				187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */,
 				187E73F01F1DEDE100AE571F /* SelectOld.playground */,
 				187E73F11F1DEE9E00AE571F /* SelectEditing.playground */,

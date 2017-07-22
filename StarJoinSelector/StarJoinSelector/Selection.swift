@@ -54,10 +54,11 @@ public class NodeData<NodeType, ValueType> {
 // although ValueType might become subclass specific later.
 public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
 
+    // public accessible so axis can use it
     public var nodes:[NodeType]
 
     // Convenience data types
-    public typealias ParentType = NodeType // does this go here?
+    internal typealias ParentType = NodeType // does this go here?
 
     public func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
         fatalError("This method must be overridden")
@@ -74,8 +75,12 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
         // TODO: should do something here - it's possible to remove things other than the exit selection
     }
 
-    public init (nodes:[NodeType]) {
+    fileprivate init(nodes:[NodeType]) {
         self.nodes = nodes
+    }
+
+    convenience public init(node:NodeType) {
+        self.init(nodes:[node])
     }
 }
 
@@ -115,6 +120,10 @@ public class SingleSelection<NodeType> : Selection<NodeType>
 
         return self
     }
+
+    convenience fileprivate init(node:NodeType) {
+        self.init(nodes:[node])
+    }
 }
 
 // MARK: InternalMultiSelection
@@ -126,7 +135,6 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience Types
-
 
     // Properties
 
@@ -149,7 +157,6 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
         for selected in nodes {
             selected.setNodeValue(toValue, forKeyPath: keyPath)
         }
-
         return self;
     }
 }
@@ -171,7 +178,7 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 
     // Constructor for specific nodes, equivalent to selectAll
     // TODO: add constructors for patterns, too.
-    public override init (parent:ParentType, nodes:[NodeType]) {
+    internal override init(parent:ParentType, nodes:[NodeType]) {
 
         super.init(parent: parent, nodes: nodes)
     }
@@ -206,8 +213,8 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
     // set a property using key value coding
     @discardableResult public
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, selected) in nodes.enumerated() {
-            selected.setNodeValue(toValueFn(selected, (), i), forKeyPath: keyPath)
+        for (i, node) in nodes.enumerated() {
+            node.setNodeValue(toValueFn(node, (), i), forKeyPath: keyPath)
         }
         return self;
     }
@@ -235,15 +242,13 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     // Properties
 
     // TODO: return data - strip out missing results, perhaps? or return ValueType?
-    public var data:[ValueType] { get { return [] } } // this TYPE only makes sense for multiply selected things
+    fileprivate var data:[ValueType] { return [] } // this TYPE only makes sense for multiply selected things
 
     @discardableResult public
     func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         for (i, node) in nodes.enumerated() {
             let dataValue = self.metadata(from: node)
-
-            // TODO: explain the ! here - any if it's true.  what about re-binds?
-            eachFn(node, dataValue!, i)
+            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
         }
         return self;
     }
@@ -253,8 +258,7 @@ public class JoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeT
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
             let dataValue = self.metadata(from: node)
-            // todo: explain the ! here
-            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath)
+            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath) // todo: explain the ! here
         }
         return self;
     }
@@ -287,14 +291,14 @@ public class PerfectSelection<NodeType, ValueType> : JoinedSelection<NodeType, V
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
-    internal typealias NodeDataType = NodeData<NodeType, ValueType>
+    fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    internal var nodeData:[NodeDataType]
+    fileprivate var nodeData:[NodeDataType]
 
-    internal init (parent:ParentType, nodeData:[NodeDataType], nodes:[NodeType]) {
+    fileprivate init(parent:ParentType, nodeData:[NodeDataType], nodes:[NodeType]) {
 
         self.nodeData = nodeData
 
@@ -316,28 +320,28 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Convenience types
-    internal typealias NodeDataType = NodeData<NodeType, ValueType>
+    private typealias NodeDataType = NodeData<NodeType, ValueType>
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    internal var nodeData:[NodeDataType]
+    private var nodeData:[NodeDataType]
 
-    internal var selectionData:[ValueType];
+    private var selectionData:[ValueType];
 
     /// Vector of (missing) Node / Data pairs for existing nodes
-    internal var enterNodeData:[NodeDataType]
+    private var enterNodeData:[NodeDataType]
 
     /// boundData is a vector of arbitrary data type (preferable homogeneous).
     // this value is just kept around for debugging
     // try using tuples or dictionaries.
-    internal var boundData:[ValueType];
+    private var boundData:[ValueType];
 
     /// selection is a vector of NodeTypes discovered by the selection criteria.
     /// selection is a vector of optional NodeTypes.  These are the representable
     // manipulable nodes in the scene graph.  Right now selection is just the nodes
     // which are present and have a new data node that could be bound to them
-    internal var selection:[NodeType];
+    private var selection:[NodeType];
 
     // Note that the selections need to act upon the original data and node
     // objects, in place, even in the face of mutation of a different
@@ -354,19 +358,18 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     // ISSUE: there may be a race condition if a later selection picks them up
     // while they are in a timed animation and exit.  Should take care to check that
     // such nodes have their timed exit terminated (or that they are not eligible)
-    public var exitSelection:[NodeType]
+    private var exitSelection:[NodeType]
 
     // computed accessor to get managed nodes & data
     public override var nodes:[NodeType] { get {
         // the enter (before append) is empty by definition
-
         return nodeData.flatMap { $0.node }
         }
-        set {}
+        set { }
     }
 
     // unkeyed version of join init
-    public init(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType]) {
+    fileprivate init(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType]) {
 
         self.boundData = boundData;
 
@@ -428,7 +431,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     }
 
     // keyed version of join init
-    public init<KeyType:Hashable>(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType], keyFunction:((ValueType,Int) -> KeyType)) {
+    fileprivate init<KeyType:Hashable>(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType], keyFunction:((ValueType,Int) -> KeyType)) {
 
         self.boundData = boundData;
 
@@ -584,21 +587,25 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
     // set a property using key value coding
     @discardableResult public override
     func attr(_ keyPath: String, toValue: Any!) -> Self {
-        for node in selection {
-            node.setNodeValue(toValue, forKeyPath: keyPath)
-        }
-
-        return self;
+        fatalError("JoinSelection doesn't want to do attr")
+        // this walks over selection
+//        for node in selection {
+//            node.setNodeValue(toValue, forKeyPath: keyPath)
+//        }
+//
+//        return self;
     }
 
     // TODO: put back
     // set a property using key value coding
     @discardableResult public override
     func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, node) in selection.enumerated() {
-            node.setNodeValue(toValueFn(node, selectionData[i], i), forKeyPath: keyPath)
-        }
-        return self;
+        fatalError("JoinSelection doesn't want to do attr")
+//
+//        for (i, node) in selection.enumerated() {
+//            node.setNodeValue(toValueFn(node, selectionData[i], i), forKeyPath: keyPath)
+//        }
+//        return self;
     }
 
 
@@ -613,7 +620,7 @@ public class JoinSelection<NodeType, ValueType> : JoinedSelection<NodeType, Valu
 // extracts the concrete set of live nodes (for efficiency)
 // UpdateSelection is a PerfectSelection - with complete data - value pairs
 // assuming no-one has futzed with the node graph or metadata
-public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType>
+final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType>
     where NodeType : KVC & TreeNavigable & NodeMetadata {
 
     // Properties
@@ -625,9 +632,11 @@ public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, V
 //        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
 //    }
 
-    override public var data:[ValueType] { get {
+    override fileprivate var data:[ValueType] { get {
         return nodeData.map { $0.value }
         } } // this TYPE only makes sense for multiply selected things
+
+    // TODO: I consider this one to be probably the one that should get the active attr methods
 }
 
 // MARK: Enter Selection
@@ -638,15 +647,15 @@ public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, V
 public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
 
     // Convenience types
-    internal typealias NodeDataType = NodeData<NodeType, ValueType>
+    fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    internal var nodeData:[NodeDataType]
+    private var nodeData:[NodeDataType]
 
     // initializers
-    internal init (parent:ParentType, nodeData: [NodeDataType]) {
+    fileprivate init (parent:ParentType, nodeData: [NodeDataType]) {
         self.nodeData = nodeData
 
         super.init(parent: parent, nodes: [])
@@ -659,7 +668,7 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
         }
         set {} }
 
-    override public var data:[ValueType] { get {
+    override fileprivate var data:[ValueType] { get {
         return nodeData.map { $0.value }
         } } // this TYPE only makes sense for multiply selected things
 
@@ -698,13 +707,13 @@ public class EnterSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueT
 // is it joined?... it's prejoined.  we can rejoin it?
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
-public class ExitSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType
+final public class ExitSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType
 >
 where NodeType : KVC & TreeNavigable & NodeMetadata {
 
-    override internal init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
-        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
-    }
+//    override fileprivate init(parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
+//        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
+//    }
 
     // Remove nodes from the document
     // unusually, this function doesn't chain - since the represented nodes are now dead
@@ -726,3 +735,38 @@ where NodeType : KVC & TreeNavigable & NodeMetadata {
     }
 }
 
+
+// extensions
+
+extension PerfectSelection {
+
+    // this isn't exactly the same as the main append - so let's call it append2
+    // it's tested in the axis logic
+
+    /// Append adds a new child node to every node in the selection
+    // Take care when using on data-dominant selections - a join
+    // after an append can go badly wrong.  Updateselection is a perfect selection
+    // so that's OK.
+    //
+    // returns a new UpdateSelection containing the created nodes.
+    // binds the child nodes to the same metadata.
+    public func append2(constructorFn:NodeValueIndexToNode) -> PerfectSelection {
+
+        var newNodes = [NodeType]()
+
+        for (i, selected) in nodes.enumerated() {
+            // MARK: WORKING FACE
+            var newNode = constructorFn(nodes[i], selected.metadata as! ValueType, i)
+
+            nodeData.append(NodeDataType(node: newNode,
+                                         value: nodeData[i].value))
+
+            newNode.metadata = nodeData[i].value
+
+            newNodes.append(newNode)
+            nodes[i].add(child:newNode)
+        }
+
+        return PerfectSelection<NodeType, ValueType>(parent: self.parent, nodeData: [], nodes:newNodes);
+    }
+}

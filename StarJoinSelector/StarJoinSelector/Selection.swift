@@ -25,22 +25,16 @@
 
 import Foundation
 
-// NodeData carries Node, Value pairs,
+// NodeValuePair carries Node, Value pairs,
 // even if Node is missing.  Note that live
 // nodes keep a reference to their data, too
 // is this just a convenience or is it critical?
 // is this really a map?  or even a weak map?
 public struct NodeValuePair<NodeType, ValueType> {
-    public var node:NodeType?
-    public var value:ValueType
-    init(node:NodeType?, value:ValueType) {
-        self.node = node
-        self.value = value
-    }
+    var node:NodeType?
+    var value:ValueType
 }
 
-// This needs generalising - a select on a multiselection returns a multiselection
-// this one just returns a selection for one node.
 /// Starting point : make the initial selection of the root node
 public class StarJoin {
     public class func select<NodeType>(only node: NodeType) -> SingleSelection<NodeType> {
@@ -334,7 +328,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     }
 
     // Enter returns the limited selection matching only missing nodes.
-    // it is passed our nodeData object so new nodes are visible.
+    // it is passed our nodeValue object so new nodes are visible.
     // see also update - which extracts a concrete set of nodes at any time
     public func enter() -> EnterPreSelection<ParentType, ValueType> {
         return .init(parent: parent, data: enterValues)
@@ -355,11 +349,11 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         // d is now !, not ?; so we don't check.  Perhaps we ONLY exit managed nodes (with metadata?)
         // that doesn't work if we expect to execute on arrays.  But it would work if we always work on
         // selections - even for reselection.
-        let exitNodeData:[NodeValuePairType] = self.exitNodes.map { (node:NodeType) in
+        let exitNodesValues:[NodeValuePairType] = self.exitNodes.map { (node:NodeType) in
             NodeValuePairType(node: node, value: node.metadata as! ValueType)
         }
 
-        return .init(parent: parent, nodesValues: exitNodeData)
+        return .init(parent: parent, nodesValues: exitNodesValues)
     }
 
 }
@@ -380,9 +374,9 @@ where ParentType : TreeNavigable {
 
     public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
-        let combinedNodeData = self.nodesValues + enterSelection.nodesValues
+        let combinedNodesValues = self.nodesValues + enterSelection.nodesValues
 
-        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodesValues: combinedNodeData)
+        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodesValues: combinedNodesValues)
     }
 
 }

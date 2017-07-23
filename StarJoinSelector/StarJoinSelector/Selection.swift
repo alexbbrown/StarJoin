@@ -7,28 +7,20 @@
 //
 
 // Issues
-// * Selection class should not be bound up with a specific class, but should support any class obeying protocols allowing tree walking and manipulation.
-// * d might be not optional?
-// * do I still need boxing?
-
-// handy d3 references
-// https://github.com/mbostock/d3/blob/48ad44fdeef32b518c6271bb99a9aed376c1a1d6/src/selection/data.js
 
 // TODO:[new]
 // Where's my state machine?
-// get the old one working -> build a NEW one.
 // handle node structures which are not shallow heirarchies
 // handle data structures which are not arrays
 // handle data structures which are non linear
 // handle data structures which are generic collections
-// examine rebind
-
-// update to d3.js new merge selection semantics - merges two selections, should be used after enter!
-// https://github.com/d3/d3-selection/issues/60 - merge issue
-// https://github.com/d3/d3-selection/blob/master/README.md#selection_merge
+// look at adding rebind
+// todo: add initialisers for other kinds of searching, and
+// handle filters and partial selections and partial removals
+// add a select method (which is also a subscript operator) for sub-selection of multi-selections
+// todo: append2 for cases other than perfect selection
 
 // TODO:[old]
-// refactor into DataDominant, NodeDominant, and Perfect joins
 // Allow data function to be a dictionary, which is auto-keyed. Perhaps a common ancestor of Array, Dictionary
 
 import Foundation
@@ -88,11 +80,6 @@ where NodeType : TreeNavigable {
     public func select<NewNodeType>(all nodes: (NodeType) -> [NewNodeType]) -> MultiSelection<NodeType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
-
-    // todo: add initialisers for other kinds of searching, and add a
-    // select method (which is also a subscript operator) for sub-selection
-
-    // todo: append2 for cases other than perfect selection
 
     public init(node:NodeType) {
         self.nodes = [node]

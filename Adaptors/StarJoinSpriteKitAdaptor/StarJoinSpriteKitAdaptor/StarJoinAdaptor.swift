@@ -29,15 +29,15 @@ public func namedNode<T:SKNode>(node:T, _ name:String) -> T {
 // The following should really be in a SKNode swift module for adapting this protocol to SKNode
 extension SKNode: TreeNavigable, KVC, KVCAnimated, NodeMetadata {
 
+
     final public var childNodes: [SKNode] {
         get { return self.children }
     }
 
-    public func removeNodeFromParent() {
-        self.removeFromParent()
-
-
+    public func remove(child: SKNode) {
+        child.removeFromParent()
     }
+
 
     #if false // not sure
     public override func isEqual(object: AnyObject?) -> Bool {

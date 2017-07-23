@@ -34,7 +34,7 @@ class LessSimpleOperations: XCTestCase {
     // Examine the relationship between the enter and append selections
     func testEnterCounts() {
 
-        let mySelection = Selection<TestNode, TestNode>(node: root).select(all: root.children).join(data1)
+        let mySelection = Selection<TestNode, TestNode>.select(only: root).select(all: root.children).join(data1)
 
         XCTAssertEqual(0, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
@@ -94,7 +94,7 @@ class LessSimpleOperations: XCTestCase {
 
         XCTAssertEqual(0, selection0.nodes.count) // the selection array gets initialised with nil optionals.
         XCTAssertEqual(0, selection0.debugNewData.count)
-        XCTAssertEqual(0, root.children.count) // will fail until exit is implemented
+        XCTAssertEqual(0, root.children.count)
 
     }
 

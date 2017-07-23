@@ -18,7 +18,7 @@ class TestNode {
 extension TestNode: TreeNavigable {
     func remove(child: TestNode) {
         // what? not possible.
-        parent?.children.remove(at: 0) // OK big cheat here.
+        children.remove(at: 0) // OK big cheat here.
     }
 
     func add(child: TestNode) {

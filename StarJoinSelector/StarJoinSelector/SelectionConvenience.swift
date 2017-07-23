@@ -13,16 +13,14 @@ public func select<NodeType>(node:NodeType) -> SingleSelection<NodeType>
     return SingleSelection(node: node)
 }
 
-//#if false
-//extension Selection {
-//
+extension Selection {
+
 //    // convenience function to do select, selectAll and join in one throw
-//    public class func selection<ValueType>(parent: ParentType, nodes: [NodeType], data: [ValueType]) -> JoinSelection<ParentType, NodeType, ValueType> {
+//    public class func selection<ParentType, ValueType>(parent: ParentType, nodes: [NodeType], data: [ValueType]) -> JoinSelection<ParentType, NodeType, ValueType> {
 //        return self.select(only: parent).select(all: nodes).join(data)
 //    }
-//
-//}
-//#endif
+
+}
 
 
 

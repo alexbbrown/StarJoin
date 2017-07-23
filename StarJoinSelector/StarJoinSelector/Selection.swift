@@ -262,7 +262,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // Debug Properties
 
     // this is just to make unit tests work - i'm not sure having data like this is meaningful
-    internal var debugNewData:[ValueType] { return boundData } // this TYPE only makes sense for multiply selected things
+    internal let debugNewData:[ValueType] // this TYPE only makes sense for multiply selected things
 
     // computed accessor to get managed nodes & data
     internal var debugNodes:[NodeType] {
@@ -275,15 +275,15 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     internal let parent:ParentType
 
     /// Vector of Node / Data pairs including for update
-    private let updateSelection:(pairs: [NodeValuePairType], nodes: [NodeType], values: [ValueType])
+    private let updateSelection:(pairs: [NodeValuePairType], nodes: [NodeType])
 
     /// Vector of (missing) Node / Data pairs for existing nodes
     private let enterValues: [ValueType]
 
-    /// boundData is a vector of arbitrary data type (preferable homogeneous).
-    // this value is just kept around for debugging
-    // try using tuples or dictionaries.
-    private let boundData: [ValueType]
+//    /// boundData is a vector of arbitrary data type (preferable homogeneous).
+//    // this value is just kept around for debugging
+//    // try using tuples or dictionaries.
+//    private let boundData: [ValueType]
 
     /// selection is a vector of NodeTypes discovered by the selection criteria.
     /// selection is a vector of optional NodeTypes.  These are the representable manipulable nodes in the scene graph.
@@ -306,11 +306,10 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // unkeyed version of join init
     fileprivate init(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType]) {
 
-        self.boundData = boundData;
+        debugNewData = boundData
 
         var updateNodes: [NodeType] = []
         var updatePairs: [NodeValuePairType] = []
-        var enterValues: [ValueType] = []
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
@@ -319,7 +318,6 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
         updateNodes.reserveCapacity(retainedCount)
         updatePairs.reserveCapacity(boundData.count)
-        enterValues.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the Simple index case - where unique keys have not been supplied
 
@@ -339,27 +337,25 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         }
 
         // grab the enter selection, which has no nodes yet
-        enterValues = Array(boundData.dropFirst(initialSelection.count))
+        let enterValues = boundData.dropFirst(initialSelection.count)
 
         // grab the exit selection
         let exitNodes = initialSelection.dropFirst(boundData.count)
 
         updateSelection = (pairs: updatePairs,
-                           nodes: updateNodes,
-                           values: boundData)
+                           nodes: updateNodes)
 
         self.exitNodes = Array(exitNodes)
 
-        self.enterValues = enterValues
+        self.enterValues = Array(enterValues)
 
         self.parent = parent
-//        super.init(parent: parent, nodes: retainedSelection)
     }
 
     // keyed version of join init
     fileprivate init<KeyType:Hashable>(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType], keyFunction:((ValueType,Int) -> KeyType)) {
 
-        self.boundData = boundData;
+        debugNewData = boundData
 
         var updateNodes: [NodeType] = []
         var updatePairs: [NodeValuePairType] = []
@@ -434,15 +430,12 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         }
 
         updateSelection = (pairs:updatePairs,
-                           nodes:updateNodes,
-                           values:boundData // dubious - could be retainedData?
-        )
+                           nodes:updateNodes)
 
         self.exitNodes = exitNodes
 
         self.enterValues = enterValues
 
-//        super.init(parent: parent, nodes: retainedSelection)
         self.parent = parent
     }
 

@@ -720,6 +720,8 @@ extension PerfectSelection {
     //
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
+    // TODO: There should be a datafn version of this which calculates the bound data item
+    // e.g. if it's a subfield of the parent.
     public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NodeType, NewNodeType, ValueType>
     where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : KVC & NodeMetadata {
 
@@ -743,7 +745,10 @@ extension PerfectSelection {
             oldNode.add(child: newNode)
         }
 
-        // remove this hack (as! NewNodeType)
+        // TODO: add unit test for append2 applied to empty first round
+
+        //
+        // nodes[0] would crash if there are... wait for it... 0 nodes.
         return PerfectSelection<NodeType, NewNodeType, ValueType>(parent: nodes[0], nodeData: newNodeData, nodes: newNodes)
 
         //

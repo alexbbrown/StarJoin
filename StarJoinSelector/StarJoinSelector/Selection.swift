@@ -156,7 +156,6 @@ internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentTy
 // into a JoinSelection
 public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType> {
 
-
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
     public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
@@ -165,7 +164,7 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
     // Properties
 
     // Constructor for specific nodes, equivalent to selectAll
-    // TODO: add constructors for patterns, too.
+    // TODO: add constructors for search patterns, too.
     internal override init(parent:ParentType, nodes:[NodeType]) {
 
         super.init(parent: parent, nodes: nodes)
@@ -196,10 +195,7 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
         }
         return self;
     }
-
 }
-
-
 
 // MARK: -
 
@@ -209,7 +205,6 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
 public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType> {
-
 
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
@@ -272,36 +267,23 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
     // Properties
 
+    // required for addition operation
     internal let parent:ParentType
 
-    /// Vector of Node / Data pairs including for update
+    // update is the set of nodes that existed before AND after
     private let updateSelection:(pairs: [NodeValuePairType], nodes: [NodeType])
 
     /// Vector of (missing) Node / Data pairs for existing nodes
     private let enterValues: [ValueType]
 
-//    /// boundData is a vector of arbitrary data type (preferable homogeneous).
-//    // this value is just kept around for debugging
-//    // try using tuples or dictionaries.
-//    private let boundData: [ValueType]
-
-    /// selection is a vector of NodeTypes discovered by the selection criteria.
-    /// selection is a vector of optional NodeTypes.  These are the representable manipulable nodes in the scene graph.
-    /// Right now selection is just the nodes which are present and have a new data node that could be bound to them
-
-    //     Note that the selections need to act upon the original data and node objects, in place, even in the face of mutation of a different selection - ie the enterSelection needs to act upon the same nodes that selection acts upon (later)
-    // enter and exit should probably be separate selection objects, too.
-    // How can I maintain a stable index?  perhaps store it in the userData?
-    // is the enter index based upon the master selection order or the enter
-    // selection order?  Is the exit index stable?  I can't see how unless it's only local
-
-    // exitSelection is the set of nodes (that have only latent data from prior calls)
-    // that should be removed using exit().remove(), or animated
-    // ISSUE: there may be a race condition if a later selection picks them up
-    // while they are in a timed animation and exit.  Should take care to check that
-    // such nodes have their timed exit terminated (or that they are not eligible)
+    // for the exit selection
     private let exitNodes:[NodeType]
 
+    // List of vague thoughts:
+    // * Note that the selections need to act upon the original data and node objects, in place, even in the face of mutation of a different selection - ie the enterSelection needs to act upon the same nodes that selection acts upon (later)
+    // * How can I maintain a stable index?  perhaps store it in the userData?
+    // * is the enter index based upon the master selection order or the enter
+    // * selection order?  Is the exit index stable?  I can't see how unless it's only local
 
     // unkeyed version of join init
     fileprivate init(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType]) {
@@ -375,8 +357,8 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         // incoming data must be bound to the correct nodes
 
         // the set of node keys that will be exited
-        var boundDataDictionary = [KeyType:ValueType]()
-        var boundNodeDictionary = [KeyType:NodeType]()
+        var boundDataDictionary: [KeyType:ValueType] = [:]
+        var boundNodeDictionary: [KeyType:NodeType] = [:]
 
         // make a dictionary of bound data
         for (i, boundDatum) in boundData.enumerated() {
@@ -443,14 +425,13 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // it is passed our nodeData object so new nodes are visible.
     // see also update - which extracts a concrete set of nodes at any time
     public func enter() -> EnterPreSelection<ParentType, ValueType> {
-        return .init(parent: self.parent, data: self.enterValues)
+        return .init(parent: parent, data: enterValues)
     }
 
     // Update creates a new selection containing only valid node:value pairs
     // this needs clarifying (and unit testing - can update include enter or not?)
     public func update() -> UpdateSelection<ParentType, NodeType, ValueType> {
-
-        return .init(parent: self.parent, nodeData: updateSelection.pairs, nodes: updateSelection.nodes)
+        return .init(parent: parent, nodeData: updateSelection.pairs, nodes: updateSelection.nodes)
     }
 
     // Return the Exit selection
@@ -466,7 +447,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
             NodeValuePairType(node: node, value: node.metadata as! ValueType)
         }
 
-        return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitNodes)
+        return .init(parent: parent, nodeData: exitNodeData, nodes: exitNodes)
     }
 
 }

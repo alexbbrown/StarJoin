@@ -115,6 +115,9 @@ extension TransitionMultiSelection where NodeType : KVC & KVCAnimated & NodeMeta
         return self;
     }
 
+    // ISSUE: there may be a race condition if a later selection picks them up
+    // while they are in a timed animation and exit.  Should take care to check that
+    // such nodes have their timed exit terminated (or that they are not eligible)
     public func remove() {
 
         // be careful what we are iterating across here to avoid deleting and iterating

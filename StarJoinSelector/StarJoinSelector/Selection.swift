@@ -16,10 +16,12 @@
 
 // TODO:[new]
 // Where's my state machine?
-// get the old one working;
-// build a NEW one.
+// get the old one working -> build a NEW one.
 // handle node structures which are not shallow heirarchies
 // handle data structures which are not arrays
+// handle data structures which are non linear
+// handle data structures which are generic collections
+// examine rebind
 
 // update to d3.js new merge selection semantics - merges two selections, should be used after enter!
 // https://github.com/d3/d3-selection/issues/60 - merge issue

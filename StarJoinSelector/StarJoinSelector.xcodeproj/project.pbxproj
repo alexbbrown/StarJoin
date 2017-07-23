@@ -13,7 +13,7 @@
 		18626ED61F246D240040636B /* TransitionSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186994161F20A1860023DF39 /* TransitionSelection.swift */; };
 		18626EDC1F246FC10040636B /* Append2Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EDB1F246FC10040636B /* Append2Operation.swift */; };
 		18626EDE1F246FF70040636B /* TestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EDD1F246FF70040636B /* TestNode.swift */; };
-		18626EE21F2496A60040636B /* SelectionAttr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EE11F2496A60040636B /* SelectionAttr.swift */; };
+		18626EE21F2496A60040636B /* SelectionVisitors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EE11F2496A60040636B /* SelectionVisitors.swift */; };
 		1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C8991F205807007A6C5F /* SimpleOperations.swift */; };
 		1874C89C1F20651C007A6C5F /* LessSimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */; };
 		187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74201F1DFDE000AE571F /* StarJoinSelector.framework */; };
@@ -44,7 +44,7 @@
 		18626EDB1F246FC10040636B /* Append2Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Append2Operation.swift; sourceTree = "<group>"; };
 		18626EDD1F246FF70040636B /* TestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNode.swift; sourceTree = "<group>"; };
 		18626EDF1F247C820040636B /* ArrayNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayNode.swift; sourceTree = "<group>"; };
-		18626EE11F2496A60040636B /* SelectionAttr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionAttr.swift; sourceTree = "<group>"; };
+		18626EE11F2496A60040636B /* SelectionVisitors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionVisitors.swift; sourceTree = "<group>"; };
 		186994161F20A1860023DF39 /* TransitionSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSelection.swift; sourceTree = "<group>"; };
 		1874C8991F205807007A6C5F /* SimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleOperations.swift; sourceTree = "<group>"; };
 		1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSimpleOperations.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				187E74231F1DFDE000AE571F /* StarJoinSelector.h */,
 				187E74241F1DFDE000AE571F /* Info.plist */,
 				187E74431F1DFE3400AE571F /* Selection.swift */,
-				18626EE11F2496A60040636B /* SelectionAttr.swift */,
+				18626EE11F2496A60040636B /* SelectionVisitors.swift */,
 				185180EB1F21E23C009FF305 /* SelectionConvenience.swift */,
 				186994161F20A1860023DF39 /* TransitionSelection.swift */,
 				1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */,
@@ -274,7 +274,7 @@
 				18A66DA31F20AE4600FD46B3 /* NumericConformances.swift in Sources */,
 				185180EC1F21E23C009FF305 /* SelectionConvenience.swift in Sources */,
 				18626ED61F246D240040636B /* TransitionSelection.swift in Sources */,
-				18626EE21F2496A60040636B /* SelectionAttr.swift in Sources */,
+				18626EE21F2496A60040636B /* SelectionVisitors.swift in Sources */,
 				180370921F21706900131E7E /* MoreScales.swift in Sources */,
 				187E74441F1DFE3400AE571F /* Selection.swift in Sources */,
 				18CB9DD11F208347008A3E7F /* Scales.swift in Sources */,

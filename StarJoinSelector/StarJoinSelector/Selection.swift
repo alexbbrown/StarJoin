@@ -411,7 +411,7 @@ where ParentType : TreeNavigable {
 
     /// Vector of Node / Data pairs for existing nodes
     private var data:[ValueType]
-    internal var parent:ParentType // TODO: should be readonly (really?)
+    internal var parent:ParentType
 
     // initializers
     fileprivate init (parent:ParentType, data: [ValueType]) {

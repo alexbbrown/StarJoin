@@ -266,7 +266,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
         let mergedTicks = tickJoin
             .update()
-            .merge(with: appendedTicks)
+            .merge(with: enterTicks)
 
         mergedTicks
             .each({ (s, d, i) in

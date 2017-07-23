@@ -80,11 +80,15 @@ class LessSimpleOperations: XCTestCase {
 
         // If the node has children my code fails.
 
-        let selection1 = Selection<TestNode, TestNode>.select(only: root).select(all: root.children).join(data1)
+        let selection1 = SingleSelection(node: root).select(all: root.children).join(data1)
+
+        XCTAssertEqual(0, root.children.count)
 
         selection1.enter().append { (d, i) in
             return .init()
         }
+
+        XCTAssertEqual(1, root.children.count)
 
         let selection0 = Selection<TestNode, TestNode>.select(only: root).select(all: root.children).join(data0)
 
@@ -92,12 +96,20 @@ class LessSimpleOperations: XCTestCase {
 
         XCTAssertEqual(0, enterSelection.debugNewData.count)
 
+        XCTAssertEqual(1, root.children.count)
 
         let appendSelection = enterSelection.append { (d, i)  in
             return .init()
         }
 
+        XCTAssertEqual(0, appendSelection.nodes.count)
+
+
+        XCTAssertEqual(1, root.children.count)
+
         selection0.exit().remove()
+
+        XCTAssertEqual(0, selection0.debugNodes.count) // the selection array gets initialised with nil optionals.
 
         XCTAssertEqual(0, selection0.debugNodes.count) // the selection array gets initialised with nil optionals.
         XCTAssertEqual(0, selection0.debugNewData.count)

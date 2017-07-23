@@ -8,6 +8,8 @@
 
 import XCTest
 
+// TODO: test joins, including keyed joins
+
 class JoinOperations: XCTestCase {
     
     override func setUp() {

@@ -11,6 +11,8 @@
 		1824288E1F1FF5C00054248E /* AdaptorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */; };
 		185180EC1F21E23C009FF305 /* SelectionConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185180EB1F21E23C009FF305 /* SelectionConvenience.swift */; };
 		18626ED61F246D240040636B /* TransitionSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186994161F20A1860023DF39 /* TransitionSelection.swift */; };
+		18626EDC1F246FC10040636B /* Append2Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EDB1F246FC10040636B /* Append2Operation.swift */; };
+		18626EDE1F246FF70040636B /* TestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18626EDD1F246FF70040636B /* TestNode.swift */; };
 		1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C8991F205807007A6C5F /* SimpleOperations.swift */; };
 		1874C89C1F20651C007A6C5F /* LessSimpleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */; };
 		187E742A1F1DFDE000AE571F /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187E74201F1DFDE000AE571F /* StarJoinSelector.framework */; };
@@ -38,6 +40,8 @@
 /* Begin PBXFileReference section */
 		1824288D1F1FF5C00054248E /* AdaptorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptorProtocols.swift; sourceTree = "<group>"; };
 		185180EB1F21E23C009FF305 /* SelectionConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionConvenience.swift; sourceTree = "<group>"; };
+		18626EDB1F246FC10040636B /* Append2Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Append2Operation.swift; sourceTree = "<group>"; };
+		18626EDD1F246FF70040636B /* TestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNode.swift; sourceTree = "<group>"; };
 		186994161F20A1860023DF39 /* TransitionSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSelection.swift; sourceTree = "<group>"; };
 		1874C8991F205807007A6C5F /* SimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleOperations.swift; sourceTree = "<group>"; };
 		1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSimpleOperations.swift; sourceTree = "<group>"; };
@@ -116,8 +120,10 @@
 			children = (
 				187E742E1F1DFDE000AE571F /* StarJoinSelectionTests.swift */,
 				187E74301F1DFDE000AE571F /* Info.plist */,
+				18626EDD1F246FF70040636B /* TestNode.swift */,
 				1874C8991F205807007A6C5F /* SimpleOperations.swift */,
 				1874C89B1F20651C007A6C5F /* LessSimpleOperations.swift */,
+				18626EDB1F246FC10040636B /* Append2Operation.swift */,
 				18A753801F23432900F9BA54 /* JoinOperations.swift */,
 			);
 			path = StarJoinSelectorTests;
@@ -280,6 +286,8 @@
 				1874C89C1F20651C007A6C5F /* LessSimpleOperations.swift in Sources */,
 				18CB9DDA1F20880A008A3E7F /* ScaleTests.swift in Sources */,
 				1874C89A1F205807007A6C5F /* SimpleOperations.swift in Sources */,
+				18626EDE1F246FF70040636B /* TestNode.swift in Sources */,
+				18626EDC1F246FC10040636B /* Append2Operation.swift in Sources */,
 				18A753811F23432900F9BA54 /* JoinOperations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

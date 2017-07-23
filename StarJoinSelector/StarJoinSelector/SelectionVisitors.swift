@@ -24,8 +24,10 @@ extension SingleSelection {
 
 extension MultiSelection where NodeType : KVC {
 
+    public typealias NodeVoidIndexToAny = (NodeType?,Void,Int) -> Any?
+
     // set a property using key value coding
-    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeVoidIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
             node.setNodeValue(toValueFn(node, (), i), forKeyPath: keyPath)
         }
@@ -34,7 +36,9 @@ extension MultiSelection where NodeType : KVC {
 }
 
 extension MultiSelection {
-    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+    public typealias NodeVoidIndexToVoid = (NodeType?,Void,Int) -> ()
+
+    @discardableResult public func each(_ eachFn:NodeVoidIndexToVoid) -> Self {
         // TODO create more childrens
         for (i, selected) in nodes.enumerated() {
             eachFn(selected, (), i)
@@ -66,6 +70,9 @@ extension PerfectSelection where NodeType : KVC
 }
 
 extension PerfectSelection {
+
+    public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
+
     @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         for (i, nodeValue) in nodesValues.enumerated() {
             eachFn(nodeValue.node!, nodeValue.value, i)

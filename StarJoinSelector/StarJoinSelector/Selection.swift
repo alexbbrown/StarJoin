@@ -101,11 +101,6 @@ internal class InternalImperfectSelection<ParentType, NodeType> : InternalParent
 /// MultiSelection can be operated upon as basic selections, or combined with data using the function cluster `join` `enter` and `update`
 public class MultiSelection<ParentType, NodeType> : InternalImperfectSelection<ParentType, NodeType> {
 
-    // Convenience Types
-    public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
-    public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
-    public typealias NodeValueIndexToNode = (NodeType?,Void,Int) -> NodeType
-
     /// Combine each element of this selection with a data item
     /// Note: the selection can have more or fewer nodes than the supplied data
     /// @param keyFunction extracts a unique identity from a data value, allowing precise matching of new and existing data, allowing nodes to be smoothly animated in the presence of enter/append and exit/remove operations.
@@ -132,9 +127,7 @@ public class MultiSelection<ParentType, NodeType> : InternalImperfectSelection<P
 public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalParentedSelection<ParentType> {
 
     // Convenience Types
-    public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
     public typealias NodeValueIndexToAny = (NodeType?,ValueType,Int) -> Any?
-    public typealias NodeValueIndexToNode = (NodeType?,ValueType,Int) -> NodeType
 
     internal typealias NodeValuePairType = NodeValuePair<NodeType, ValueType>
 
@@ -371,12 +364,7 @@ where ParentType : TreeNavigable {
 final public class EnterPreSelection<ParentType, ValueType>
 where ParentType : TreeNavigable {
 
-    public typealias NodeType = ParentType.ChildType
-    public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
-
     // Properties
-
-    /// Vector of Node / Data pairs for existing nodes
     private var data:[ValueType]
     internal var parent:ParentType
 

@@ -41,8 +41,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     }
 
     // set a property using key value coding
-    @discardableResult public override
-    func attr(_ keyPath: String, toValue: Any!) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
 
         for node in nodes {
             node.setNodeValueAnimated(toValue, forKeyPath: keyPath, withDuration:self.duration)
@@ -52,8 +51,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     }
 
     // set a property using key value coding
-    @discardableResult public override
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
         for (i, node) in nodes.enumerated() {
             node.setNodeValueAnimated(toValueFn(node, self.metadata(from: node)!, i), forKeyPath: keyPath, withDuration:self.duration)
@@ -77,8 +75,10 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
 }
 
 // imperfect Transition
-public class TransitionMultiSelection<ParentType, NodeType> : MultiSelection<ParentType, NodeType>
+public class TransitionMultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType>
 where NodeType : KVC & KVCAnimated & NodeMetadata  {
+
+    public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
 
     let duration : TimeInterval
 
@@ -89,8 +89,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     }
 
     // set a property using key value coding
-    @discardableResult public override
-    func attr(_ keyPath: String, toValue: Any!) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
 
         // TODO: make action deferred for at least some cases
 
@@ -102,8 +101,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     }
 
     // set a property using key value coding
-    @discardableResult public override
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
         // TODO: make action deferred for at least some cases
 

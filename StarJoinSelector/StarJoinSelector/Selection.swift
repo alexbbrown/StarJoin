@@ -157,15 +157,6 @@ where NodeType : KVC & NodeMetadata {
 
         super.init(nodes: nodes)
     }
-
-    // set a property using key value coding
-    @discardableResult public
-    func attr(_ keyPath: String, toValue: Any!) -> Self {
-        for selected in nodes {
-            selected.setNodeValue(toValue, forKeyPath: keyPath)
-        }
-        return self;
-    }
 }
 
 // MARK: -
@@ -204,8 +195,7 @@ where NodeType : KVC & NodeMetadata {
                      data: data)
     }
 
-    @discardableResult public
-    func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         // TODO create more childrens
         for (i, selected) in nodes.enumerated() {
 
@@ -219,8 +209,7 @@ where NodeType : KVC & NodeMetadata {
     }
 
     // set a property using key value coding
-    @discardableResult public
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, node) in nodes.enumerated() {
             node.setNodeValue(toValueFn(node, (), i), forKeyPath: keyPath)
         }
@@ -252,28 +241,6 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
     // TODO: return data - strip out missing results, perhaps? or return ValueType?
     fileprivate var data:[ValueType] { return [] } // this TYPE only makes sense for multiply selected things
 
-    @discardableResult public
-    func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
-        }
-        return self;
-    }
-
-    // set a property using key value coding
-    @discardableResult public
-    func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath) // todo: explain the ! here
-        }
-        return self;
-    }
-
-    private func metadata(from node:NodeType?) -> ValueType? {
-        return node?.metadata as? ValueType
-    }
 }
 
 // as yet unused - need things to inherit from this
@@ -313,6 +280,36 @@ where NodeType : KVC & NodeMetadata {
         self.nodeData = nodeData
 
         super.init(parent: parent, nodes: nodes)
+    }
+
+
+    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+        for (i, node) in nodes.enumerated() {
+            let dataValue = self.metadata(from: node)
+            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
+        }
+        return self;
+    }
+
+    // set a property using key value coding
+    @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
+        for selected in nodes {
+            selected.setNodeValue(toValue, forKeyPath: keyPath)
+        }
+        return self;
+    }
+
+    // set a property using key value coding
+    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+        for (i, node) in nodes.enumerated() {
+            let dataValue = self.metadata(from: node)
+            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath) // todo: explain the ! here
+        }
+        return self;
+    }
+
+    private func metadata(from node:NodeType?) -> ValueType? {
+        return node?.metadata as? ValueType
     }
 
     public func call(function: (PerfectSelection) -> ()) -> Self {

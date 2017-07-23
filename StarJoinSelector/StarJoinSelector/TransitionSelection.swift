@@ -30,7 +30,7 @@ extension MultiSelection where NodeType:KVCAnimated {
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
 public class TransitionSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & KVCAnimated & NodeMetadata  {
+where NodeType : KVC & KVCAnimated & NodeMetadata  {
 
     let duration : TimeInterval
 
@@ -78,7 +78,7 @@ where ParentType : TreeNavigable, NodeType : KVC & KVCAnimated & NodeMetadata  {
 
 // imperfect Transition
 public class TransitionMultiSelection<ParentType, NodeType> : MultiSelection<ParentType, NodeType>
-where ParentType : TreeNavigable, NodeType : KVC & KVCAnimated & NodeMetadata  {
+where NodeType : KVC & KVCAnimated & NodeMetadata  {
 
     let duration : TimeInterval
 

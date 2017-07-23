@@ -52,7 +52,7 @@ public struct NodeData<NodeType, ValueType> {
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
 public class Selection<ParentType, NodeType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
+where NodeType : KVC & NodeMetadata {
 
     // public accessible so axis can use it
     public var nodes:[NodeType]
@@ -136,7 +136,7 @@ where ParentType : TreeNavigable & KVC & NodeMetadata {
 // of a multiple selection
 
 internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentType, NodeType>
-where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
+where NodeType : KVC & NodeMetadata {
 
     // Convenience Types
 
@@ -171,7 +171,7 @@ where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
 public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType>
-where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
+where NodeType : KVC & NodeMetadata {
 
 
     // Convenience Types
@@ -235,7 +235,7 @@ where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
 public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType>
-     where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
+     where NodeType : KVC & NodeMetadata {
 
 
     // Convenience Types
@@ -295,7 +295,7 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
 public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
+where NodeType : KVC & NodeMetadata {
 
     // Convenience types
     fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -722,7 +722,7 @@ extension PerfectSelection {
     // binds the child nodes to the same metadata.
     // TODO: There should be a datafn version of this which calculates the bound data item
     // e.g. if it's a subfield of the parent.
-    public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NodeType, NewNodeType, ValueType>
+    public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<Void, NewNodeType, ValueType>
     where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : KVC & NodeMetadata {
 
         // Convenience types
@@ -749,7 +749,8 @@ extension PerfectSelection {
 
         //
         // nodes[0] would crash if there are... wait for it... 0 nodes.
-        return PerfectSelection<NodeType, NewNodeType, ValueType>(parent: nodes[0], nodeData: newNodeData, nodes: newNodes)
+
+        return .init(parent: (), nodeData: newNodeData, nodes: newNodes)
 
         //
     }

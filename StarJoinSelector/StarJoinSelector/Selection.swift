@@ -36,7 +36,7 @@ import Foundation
 // nodes keep a reference to their data, too
 // is this just a convenience or is it critical?
 // is this really a map?  or even a weak map?
-public struct NodeData<NodeType, ValueType> {
+public struct NodeValuePair<NodeType, ValueType> {
     public var node:NodeType?
     public var value:ValueType
     init(node:NodeType?, value:ValueType) {
@@ -230,16 +230,16 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType> {
 
     // Convenience types
-    fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
+    fileprivate typealias NodeValuePairType = NodeValuePair<NodeType, ValueType>
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    fileprivate var nodeData:[NodeDataType]
+    fileprivate var nodesValues:[NodeValuePairType]
 
-    fileprivate init(parent:ParentType, nodeData:[NodeDataType], nodes:[NodeType]) {
+    fileprivate init(parent:ParentType, nodeData:[NodeValuePairType], nodes:[NodeType]) {
 
-        self.nodeData = nodeData
+        self.nodesValues = nodeData
 
         super.init(parent: parent, nodes: nodes)
     }
@@ -257,7 +257,7 @@ final public class JoinPreSelection<ParentType, NodeType, ValueType>
 where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType  {
 
     // Convenience types
-    private typealias NodeDataType = NodeData<NodeType, ValueType>
+    private typealias NodeDataType = NodeValuePair<NodeType, ValueType>
 
     // Debug Properties
 
@@ -527,12 +527,12 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata {
 //    }
 
     override fileprivate var data:[ValueType] { get {
-        return nodeData.map { $0.value }
+        return nodesValues.map { $0.value }
         } } // this TYPE only makes sense for multiply selected things
 
     public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
-        let combinedNodeData = self.nodeData + enterSelection.nodeData
+        let combinedNodeData = self.nodesValues + enterSelection.nodesValues
 
         let combinedNodes = combinedNodeData.map { (nodeDataEl) -> NodeType in
             nodeDataEl.node!
@@ -577,7 +577,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
     where NewNodeType==ParentType.ChildType, NewNodeType : TreeNavigable & NodeMetadata {
 
         // Convenience types
-        typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
+        typealias NewNodeDataType = NodeValuePair<NewNodeType, ValueType>
 
         var newNodes:[NewNodeType] = []
         var nodeData:[NewNodeDataType] = []
@@ -590,11 +590,10 @@ where ParentType : TreeNavigable { // should just be treenavigable here
 
             newNode.metadata = value
 
-            parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
-
+            parent.add(child:newNode)
         }
 
-        return .self(parent: parent, nodeData: nodeData, nodes: newNodes)
+        return .init(parent: parent, nodeData: nodeData, nodes: newNodes)
     }
 }
 
@@ -645,27 +644,27 @@ where ParentType : TreeNavigable {
     where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : NodeMetadata {
 
         // Convenience types
-        typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
+        typealias NewNodeValuePairType = NodeValuePair<NewNodeType, ValueType>
 
         var newNodes:[NewNodeType] = []
-        var newNodeData:[NewNodeDataType] = []
+        var newNodesValues:[NewNodeValuePairType] = []
 
         for (i, oldNode) in nodes.enumerated() {
             // MARK: WORKING FACE
             
             var newNode = constructorFn(oldNode, oldNode.metadata as! ValueType, i)
 
-            newNodeData.append(NewNodeDataType(node: newNode,
-                                               value: nodeData[i].value))
+            newNodesValues.append(NewNodeValuePairType(node: newNode,
+                                               value: nodesValues[i].value))
 
-            newNode.metadata = nodeData[i].value
+            newNode.metadata = nodesValues[i].value
 
             newNodes.append(newNode)
             oldNode.add(child: newNode)
         }
 
         // It's too hard to fit parents into this model, so I'm just throwing up my hands.  There's no parent.
-        return .init(parent: (), nodeData: newNodeData, nodes: newNodes)
+        return .init(parent: (), nodeData: newNodesValues, nodes: newNodes)
 
         //
     }

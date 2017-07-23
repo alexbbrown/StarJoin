@@ -471,4 +471,3 @@ extension PerfectSelection where NodeType : NodeMetadata {
         //
     }
 }
-

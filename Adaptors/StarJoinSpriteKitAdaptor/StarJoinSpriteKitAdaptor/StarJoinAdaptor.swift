@@ -27,7 +27,7 @@ public func namedNode<T:SKNode>(node:T, _ name:String) -> T {
 }
 
 // The following should really be in a SKNode swift module for adapting this protocol to SKNode
-extension SKNode: TreeNavigable, KVC, KVCAnimated, NodeMetadata {
+extension SKNode: TreeNavigable {
 
     final public var childNodes: [SKNode] {
         get { return self.children }
@@ -37,33 +37,21 @@ extension SKNode: TreeNavigable, KVC, KVCAnimated, NodeMetadata {
         child.removeFromParent()
     }
 
-
-    #if false // not sure
-    public override func isEqual(object: AnyObject?) -> Bool {
-    if let object = object {
-    return self === object
-    } else {
-    return false
-    }
-    }
-    #endif
-
-
-    public func removeNodeFromParent(withDelay: TimeInterval) {
-
-    run(.sequence(
-        [.wait(forDuration:withDelay),
-         .removeFromParent()]))
-    }
-
-    //    // the argument type should be [SKNode] but the compiler fails
-    //    public func removeChildNodesInArray(children:[SKNode]) {
-    //        self.removeChildrenInArray(children as [SKNode])
-    //    }
-
     public func add(child: SKNode) {
         self.addChild(child)
     }
+}
+
+extension SKNode: KVCAnimated {
+    public func removeNodeFromParent(withDelay: TimeInterval) {
+
+        run(.sequence(
+            [.wait(forDuration:withDelay),
+             .removeFromParent()]))
+    }
+}
+
+extension SKNode: NodeMetadata {
 
     // can we make this Any?
     public var metadata: Any? {
@@ -78,6 +66,11 @@ extension SKNode: TreeNavigable, KVC, KVCAnimated, NodeMetadata {
             }
         }
     }
+}
+
+extension SKNode: KVC {
+
+
 
     public func setNodeValue(_ toValue:Any?, forKeyPath keyPath:String)
     {
@@ -120,6 +113,21 @@ extension SKNode: TreeNavigable, KVC, KVCAnimated, NodeMetadata {
             }
         }
     }
+
+    #if false // not sure
+    public override func isEqual(object: AnyObject?) -> Bool {
+    if let object = object {
+    return self === object
+    } else {
+    return false
+    }
+    }
+    #endif
+
+    //    // the argument type should be [SKNode] but the compiler fails
+    //    public func removeChildNodesInArray(children:[SKNode]) {
+    //        self.removeChildrenInArray(children as [SKNode])
+    //    }
 }
 
 // Convenience function for selection

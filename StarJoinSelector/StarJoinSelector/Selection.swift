@@ -191,14 +191,14 @@ where NodeType : KVC & NodeMetadata {
         super.init(parent: parent, nodes: nodes)
     }
 
-    public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<ParentType, NodeType, ValueType> {
+    public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinPreSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
                      nodes: self.nodes,
                      data: data,
                      keyFunction: keyFunction)
     }
 
-    public func join<ValueType>(_ data: [ValueType]) -> JoinSelection<ParentType, NodeType, ValueType> {
+    public func join<ValueType>(_ data: [ValueType]) -> JoinPreSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
                      nodes: self.nodes,
                      data: data)
@@ -327,16 +327,28 @@ where NodeType : KVC & NodeMetadata {
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
 // ultimately it's not really a selection at all, and should not be!
-final public class JoinSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType>
+final public class JoinPreSelection<ParentType, NodeType, ValueType>
 where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.ChildType == NodeType  {
 
     // Convenience types
     private typealias NodeDataType = NodeData<NodeType, ValueType>
 
-    // Properties
+    // Debug Properties
 
     // this is just to make unit tests work - i'm not sure having data like this is meaningful
     internal var debugNewData:[ValueType] { return boundData } // this TYPE only makes sense for multiply selected things
+
+    // computed accessor to get managed nodes & data
+    internal var debugNodes:[NodeType] { get {
+        // the enter (before append) is empty by definition
+        return updateAndEnterNodeData.flatMap { $0.node }
+        }
+        set { }
+    }
+
+    // Properties
+
+    internal let parent:ParentType
 
     /// Vector of Node / Data pairs including the unrealised enter nodes
     private let updateAndEnterNodeData: [NodeDataType]
@@ -368,13 +380,6 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
     // such nodes have their timed exit terminated (or that they are not eligible)
     private let exitSelection:[NodeType]
 
-    // computed accessor to get managed nodes & data
-    public override var nodes:[NodeType] { get {
-        // the enter (before append) is empty by definition
-        return updateAndEnterNodeData.flatMap { $0.node }
-        }
-        set { }
-    }
 
     // unkeyed version of join init
     fileprivate init(parent:ParentType, nodes initialSelection:[NodeType], data boundData: [ValueType]) {
@@ -430,7 +435,8 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
         self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterValues = enterValues
 
-        super.init(parent: parent, nodes: retainedSelection)
+        self.parent = parent
+//        super.init(parent: parent, nodes: retainedSelection)
     }
 
     // keyed version of join init
@@ -525,7 +531,8 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
         self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterValues = enterValues
 
-        super.init(parent: parent, nodes: retainedSelection)
+//        super.init(parent: parent, nodes: retainedSelection)
+        self.parent = parent
     }
 
     // Enter returns the limited selection matching only missing nodes.
@@ -748,11 +755,6 @@ extension PerfectSelection {
             newNodes.append(newNode)
             oldNode.add(child: newNode)
         }
-
-        // TODO: add unit test for append2 applied to empty first round
-
-        //
-        // nodes[0] would crash if there are... wait for it... 0 nodes.
 
         // It's too hard to fit parents into this model, so I'm just throwing up my hands.  There's no parent.
         return .init(parent: (), nodeData: newNodeData, nodes: newNodes)

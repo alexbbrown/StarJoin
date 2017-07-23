@@ -45,7 +45,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(emptyData)
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(0, mySelection.debugNewData.count)
 
         XCTAssert(true, "Pass")
@@ -56,7 +56,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(oneRowData)
 
-        XCTAssertEqual(0, mySelection.nodes.count) // the join has NO nodes to begin with (before enter)
+        XCTAssertEqual(0, mySelection.debugNodes.count) // the join has NO nodes to begin with (before enter)
         XCTAssertEqual(1, mySelection.debugNewData.count)
 
         // defunct - we don't do it that way any more
@@ -78,18 +78,18 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(self.oneRowData)
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
 
         let enterSelection = mySelection.enter()
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
 
         enterSelection.append { (d, i) -> SKNode in
             return SKNode()
         }
 
-        XCTAssertEqual(0, mySelection.nodes.count) // used to be 1
+        XCTAssertEqual(0, mySelection.debugNodes.count) // used to be 1
         XCTAssertEqual(1, mySelection.debugNewData.count)
         XCTAssertEqual(1, scene!.children.count)
 
@@ -126,7 +126,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         mySelection2.exit().remove()
 
-        XCTAssertEqual(0, mySelection2.nodes.count) // the selection array gets initialised with nil optionals.
+        XCTAssertEqual(0, mySelection2.debugNodes.count) // the selection array gets initialised with nil optionals.
         XCTAssertEqual(0, mySelection2.debugNewData.count)
         XCTAssertEqual(0, scene!.children.count) // will fail until exit is implemented
 

@@ -44,7 +44,7 @@ class SimpleOperations: XCTestCase {
 
         let mySelection = se1.join(data0)
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(0, mySelection.debugNewData.count)
 
         XCTAssert(true, "Pass")
@@ -58,7 +58,7 @@ class SimpleOperations: XCTestCase {
 
         let mySelection = se1.join(data1)
 
-        XCTAssertEqual(0, mySelection.nodes.count) // the join has NO nodes to begin with (before enter)
+        XCTAssertEqual(0, mySelection.debugNodes.count) // the join has NO nodes to begin with (before enter)
         XCTAssertEqual(1, mySelection.debugNewData.count)
     }
 
@@ -70,18 +70,18 @@ class SimpleOperations: XCTestCase {
 
         let mySelection = se1.join(data1)
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
 
         let enterSelection = mySelection.enter()
 
-        XCTAssertEqual(0, mySelection.nodes.count)
+        XCTAssertEqual(0, mySelection.debugNodes.count)
 
         enterSelection.append { (d, i) -> TestNode in
             return .init()
         }
 
-        XCTAssertEqual(0, mySelection.nodes.count) // it used to be 1 - now it's not adjusted after enter/append
+        XCTAssertEqual(0, mySelection.debugNodes.count) // it used to be 1 - now it's not adjusted after enter/append
         XCTAssertEqual(1, mySelection.debugNewData.count)
         XCTAssertEqual(1, root.children.count)
 
@@ -113,7 +113,7 @@ class SimpleOperations: XCTestCase {
 
         selection0.exit().remove()
 
-        XCTAssertEqual(0, selection0.nodes.count) // the selection array gets initialised with nil optionals.
+        XCTAssertEqual(0, selection0.debugNodes.count) // the selection array gets initialised with nil optionals.
         XCTAssertEqual(0, selection0.debugNewData.count)
         XCTAssertEqual(0, root.children.count) // will fail until exit is implemented
 

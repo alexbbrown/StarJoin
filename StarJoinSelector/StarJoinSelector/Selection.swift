@@ -744,7 +744,7 @@ extension PerfectSelection {
         }
 
         // remove this hack (as! NewNodeType)
-        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: nodes[0], nodeData: newNodeData, nodes: newNodes)
+        return PerfectSelection<NodeType, NewNodeType, ValueType>(parent: nodes[0], nodeData: newNodeData, nodes: newNodes)
 
         //
     }

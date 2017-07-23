@@ -16,16 +16,16 @@ class TestNode {
 }
 
 extension TestNode: TreeNavigable {
-    func add(child: TestNode) {
-        child.parent = self
-        children.append(child)
-    }
-
-    func removeNodeFromParent() {
+    func remove(child: TestNode) {
         // what? not possible.
         parent?.children.remove(at: 0) // OK big cheat here.
     }
 
+    func add(child: TestNode) {
+        child.parent = self
+        children.append(child)
+    }
+    
     var childNodes: [TestNode] {
         return children
     }
@@ -94,7 +94,11 @@ class SimpleOperations: XCTestCase {
     func testSelectionConstructionZero() {
         // This is an example of a functional test case.
 
-        let mySelection = Selection<TestNode>.selection(parent: root, nodes: root.children, data: data0)
+        let se0 = Selection<TestNode, TestNode>.select(only: root)
+
+        let se1 = se0.select(all: root.children)
+
+        let mySelection = se1.join(data0)
 
         XCTAssertEqual(0, mySelection.nodes.count)
         XCTAssertEqual(0, mySelection.debugNewData.count)
@@ -104,7 +108,11 @@ class SimpleOperations: XCTestCase {
 
     func testSelectionConstructionOne() {
 
-        let mySelection = Selection<TestNode>.selection(parent: root, nodes: root.children, data: data1)
+        let se0 = Selection<TestNode, TestNode>.select(only: root)
+
+        let se1 = se0.select(all: root.children)
+
+        let mySelection = se1.join(data1)
 
         XCTAssertEqual(0, mySelection.nodes.count) // the join has NO nodes to begin with (before enter)
         XCTAssertEqual(1, mySelection.debugNewData.count)
@@ -112,7 +120,11 @@ class SimpleOperations: XCTestCase {
 
     func testSelectionOneEnter() {
 
-        let mySelection = Selection<TestNode>.selection(parent: root, nodes: root.children, data: data1)
+        let se0 = Selection<TestNode, TestNode>.select(only: root)
+
+        let se1 = se0.select(all: root.children)
+
+        let mySelection = se1.join(data1)
 
         XCTAssertEqual(0, mySelection.nodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
@@ -135,13 +147,21 @@ class SimpleOperations: XCTestCase {
 
         // If the node has children my code fails.
 
-        let selection1 = Selection.selection(parent: root, nodes: root.children, data: data1)
+        let se10 = Selection<TestNode, TestNode>.select(only: root)
+
+        let se11 = se10.select(all: root.children)
+
+        let selection1 = se11.join(data1)
 
         selection1.enter().append { (d, i) in
             return .init()
         }
 
-        let selection0 = Selection.selection(parent: root, nodes: root.children, data: data0)
+        let se00 = Selection<TestNode, TestNode>.select(only: root)
+
+        let se01 = se00.select(all: root.children)
+
+        let selection0 = se01.join(data0)
 
         selection0.enter().append { (d, i)  in
             return .init()

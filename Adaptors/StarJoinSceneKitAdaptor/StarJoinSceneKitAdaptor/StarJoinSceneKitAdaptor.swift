@@ -12,13 +12,15 @@ import StarJoinSelector
 
 extension SCNNode: TreeNavigable, NodeMetadata, KVC {
 
+
+
     public func add(child: SCNNode) {
         self.addChildNode(child)
     }
 
-    public func removeNodeFromParent() {
-        self.removeFromParentNode()
-    }
+//    public func removeNodeFromParent() {
+//        self.removeFromParentNode()
+//    }
 
     public func setNodeValue(_ toValue: Any?, forKeyPath keyPath: String) {
         if let toValue = toValue {

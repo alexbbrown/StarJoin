@@ -13,7 +13,7 @@ import Foundation
 extension PerfectSelection where NodeType:KVCAnimated {
 
     @discardableResult public
-    func transition(duration: TimeInterval = 3) -> TransitionSelection<NodeType, ValueType> {
+    func transition(duration: TimeInterval = 3) -> TransitionSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent, nodes:self.nodes, duration:duration)
     }
 }
@@ -21,7 +21,7 @@ extension PerfectSelection where NodeType:KVCAnimated {
 extension MultiSelection where NodeType:KVCAnimated {
 
     @discardableResult public
-    func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<NodeType> {
+    func transition(duration: TimeInterval = 3) -> TransitionMultiSelection<ParentType, NodeType> {
         return .init(parent: self.parent, nodes:self.nodes, duration:duration)
     }
 }
@@ -29,8 +29,8 @@ extension MultiSelection where NodeType:KVCAnimated {
 /// PerfectTransitionSelection is a PerfectSelection with delayed property operations
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
-public class TransitionSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
-where NodeType : KVC & KVCAnimated & TreeNavigable & NodeMetadata  {
+public class TransitionSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
+where ParentType : TreeNavigable, NodeType : KVC & KVCAnimated & NodeMetadata  {
 
     let duration : TimeInterval
 
@@ -77,8 +77,8 @@ where NodeType : KVC & KVCAnimated & TreeNavigable & NodeMetadata  {
 }
 
 // imperfect Transition
-public class TransitionMultiSelection<NodeType> : MultiSelection<NodeType>
-where NodeType : KVC & KVCAnimated & TreeNavigable & NodeMetadata  {
+public class TransitionMultiSelection<ParentType, NodeType> : MultiSelection<ParentType, NodeType>
+where ParentType : TreeNavigable, NodeType : KVC & KVCAnimated & NodeMetadata  {
 
     let duration : TimeInterval
 

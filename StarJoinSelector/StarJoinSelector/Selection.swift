@@ -51,23 +51,23 @@ public struct NodeData<NodeType, ValueType> {
 // MARK: -
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
-public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
+public class Selection<ParentType, NodeType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 
     // public accessible so axis can use it
     public var nodes:[NodeType]
 
     // Convenience data types
-    internal typealias ParentType = NodeType // does this go here?
 
     /// Abstract
-    public func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
         fatalError("This method must be overridden")
     }
 
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
-    public class func select(only node: NodeType) -> SingleSelection<NodeType> {
-        return .init(node: node)
+    public class func select<NewNodeType>(only node: NewNodeType) -> SingleSelection<NewNodeType> {
+        return SingleSelection(node: node)
     }
 
     // Remove nodes from the document
@@ -95,16 +95,20 @@ public class Selection<NodeType: KVC & TreeNavigable & NodeMetadata> {
 //      MultiSelection <- selectAll
 // Selections support simple operations such as append - which generate
 // new selections.
-public class SingleSelection<NodeType> : Selection<NodeType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+// this might be a selection of a parent only - we should distinguish between this and grabbing a single node to manipulate it
+public class SingleSelection<ParentType> : Selection<ParentType, ParentType>
+where ParentType : TreeNavigable & KVC & NodeMetadata {
+
+    typealias NodeType = ParentType
 
     // These nodes should be descendants of the parent node
-    public override func select(all nodes: [NodeType]) -> MultiSelection<NodeType> {
+    public override func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
+    where NewNodeType : KVC & NodeMetadata {
         return .init(parent: self.nodes[0], nodes: nodes)
     }
 
     // These nodes should be descendants of the parent node
-    public func select(all nodes: (NodeType) -> [NodeType]) -> MultiSelection<NodeType> {
+    public func select<NewNodeType>(all nodes: (ParentType) -> [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
 
@@ -131,8 +135,8 @@ public class SingleSelection<NodeType> : Selection<NodeType>
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
 
-internal class InternalMultiSelection<NodeType> : Selection<NodeType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentType, NodeType>
+where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
 
     // Convenience Types
 
@@ -166,8 +170,9 @@ internal class InternalMultiSelection<NodeType> : Selection<NodeType>
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
-public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType>
+where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
+
 
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
@@ -183,14 +188,14 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
         super.init(parent: parent, nodes: nodes)
     }
 
-    public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<NodeType, ValueType> {
+    public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
                      nodes: self.nodes,
                      data: data,
                      keyFunction: keyFunction)
     }
 
-    public func join<ValueType>(_ data: [ValueType]) -> JoinSelection<NodeType, ValueType> {
+    public func join<ValueType>(_ data: [ValueType]) -> JoinSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
                      nodes: self.nodes,
                      data: data)
@@ -229,8 +234,8 @@ public class MultiSelection<NodeType> : InternalMultiSelection<NodeType>
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class InternalJoinedSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
-     where NodeType : KVC & TreeNavigable & NodeMetadata {
+public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType>
+     where ParentType: TreeNavigable, NodeType : KVC & NodeMetadata {
 
 
     // Convenience Types
@@ -289,8 +294,8 @@ public class InternalJoinedSelection<NodeType, ValueType> : InternalMultiSelecti
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
-public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<NodeType, ValueType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 
     // Convenience types
     fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -319,8 +324,8 @@ public class PerfectSelection<NodeType, ValueType> : InternalJoinedSelection<Nod
 // Join Selection deals with data-bound node?s only
 // This is a precursor to Enter, Exit and Update selections
 // ultimately it's not really a selection at all, and should not be!
-final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<NodeType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+final public class JoinSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.ChildType == NodeType  {
 
     // Convenience types
     private typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -523,13 +528,13 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
     // Enter returns the limited selection matching only missing nodes.
     // it is passed our nodeData object so new nodes are visible.
     // see also update - which extracts a concrete set of nodes at any time
-    public func enter() -> EnterPreSelection<NodeType, ValueType> {
+    public func enter() -> EnterPreSelection<ParentType, ValueType> {
         return .init(parent: self.parent, data: self.enterValues)
     }
 
     // Update creates a new selection containing only valid node:value pairs
     // this needs clarifying (and unit testing - can update include enter or not?)
-    public func update() -> UpdateSelection<NodeType, ValueType> {
+    public func update() -> UpdateSelection<ParentType, NodeType, ValueType> {
 
         // There's a new plan: this behaviour is naughty now
         // it should only return the goodNodeData.
@@ -541,12 +546,12 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
             nodeDataEl.node!
         }
 
-        return UpdateSelection<NodeType, ValueType>(parent: self.parent, nodeData: goodNodeData, nodes:goodNodes)
+        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodeData: goodNodeData, nodes:goodNodes)
     }
 
     // Return the Exit selection
     // this should only be a method on initialSelection
-    public func exit() -> ExitSelection<NodeType, ValueType> {
+    public func exit() -> ExitSelection<ParentType, NodeType, ValueType> {
 
         // let's take in on faith that exitnodes have values.  not necessarily true.
         // FIXME: metadata! is untenable here - exit might not have data value?
@@ -571,8 +576,10 @@ final public class JoinSelection<NodeType, ValueType> : InternalMultiSelection<N
 // extracts the concrete set of live nodes (for efficiency)
 // UpdateSelection is a PerfectSelection - with complete data - value pairs
 // assuming no-one has futzed with the node graph or metadata
-final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType>
-    where NodeType : KVC & TreeNavigable & NodeMetadata {
+
+// for perfect selection (update selection) can we do away with the parent?  If we aren't allowed to BIND again, we could.
+final public class UpdateSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 
     // Properties
 
@@ -589,7 +596,7 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
 
     // TODO: I consider this one to be probably the one that should get the active attr methods
 
-    public func merge(with enterSelection:PerfectSelection<NodeType, ValueType>) -> UpdateSelection<NodeType, ValueType> {
+    public func merge(with enterSelection:PerfectSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
         let combinedNodeData = self.nodeData + enterSelection.nodeData
 
@@ -597,7 +604,7 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
             nodeDataEl.node!
         }
 
-        return UpdateSelection<NodeType, ValueType>(parent: self.parent, nodeData: combinedNodeData, nodes:combinedNodes)
+        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodeData: combinedNodeData, nodes:combinedNodes)
     }
 
 }
@@ -608,7 +615,7 @@ final public class UpdateSelection<NodeType, ValueType> : PerfectSelection<NodeT
 // it returns to type MultiSelection after append is performed.
 // TODO: EnterSelection has an 'each' but it's action is unexpected - it operates on 0 entries.  Is that intentional?  is enterselection really a joined selection?
 final public class EnterPreSelection<ParentType, ValueType>
-where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treenavigable here
+where ParentType : TreeNavigable { // should just be treenavigable here
 
     public typealias NodeType = ParentType.ChildType
     public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
@@ -632,7 +639,7 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
 
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
-    func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<NewNodeType, ValueType>
+    func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<ParentType, NewNodeType, ValueType>
     where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
         // Convenience types
@@ -654,17 +661,7 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
         }
         // actually self should return the appended selection!
         // FIXME: let's get rid of as NewNodeType
-        return PerfectSelection<NewNodeType, ValueType>(parent: parent as! NewNodeType, nodeData: nodeData, nodes: newNodes)
-
-        // why isn't this compiling
-//        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
-        // why isn't this compiling
-
-        //'(parent: ParentType, nodeData: [Any], nodes: [Any])' is not convertible to '(parent: NewNodeType, nodeData: [NodeData<NewNodeType, ValueType>], nodes: [NewNodeType])'
-//        return PerfectSelection<NewNodeType, ValueType>(parent: parent, nodeData: [], nodes: [])
-
-//        return PerfectSelection<NewNodeType, ValueType>(parent: parent as! NewNodeType, nodeData: [NodeData<NewNodeType, ValueType>](), nodes: [NewNodeType]())
-
+        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
     }
 }
 
@@ -675,9 +672,8 @@ where ParentType : KVC & TreeNavigable & NodeMetadata { // should just be treena
 // is it joined?... it's prejoined.  we can rejoin it?
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
-final public class ExitSelection<NodeType, ValueType> : PerfectSelection<NodeType, ValueType
->
-where NodeType : KVC & TreeNavigable & NodeMetadata {
+final public class ExitSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.ChildType == NodeType {
 
 //    override fileprivate init(parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
 //        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
@@ -689,7 +685,7 @@ where NodeType : KVC & TreeNavigable & NodeMetadata {
 
         //let anyArray = self.selection as [AnyObject]
         for node in nodes {
-            node.removeNodeFromParent()
+            parent.remove(child: node)
         }
 
     }
@@ -703,11 +699,15 @@ where NodeType : KVC & TreeNavigable & NodeMetadata {
     }
 }
 
+extension ExitSelection {
+
+}
+
 // MARK: -
 
 // extensions
 
-#if true
+#if false
 extension PerfectSelection {
 
     // this isn't exactly the same as the main append - so let's call it append2
@@ -720,8 +720,8 @@ extension PerfectSelection {
     //
     // returns a new UpdateSelection containing the created nodes.
     // binds the child nodes to the same metadata.
-    public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NewNodeType, ValueType>
-        where NewNodeType==NodeType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
+    public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<NodeType, NewNodeType, ValueType>
+    where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : KVC & NodeMetadata {
 
         // Convenience types
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
@@ -743,8 +743,8 @@ extension PerfectSelection {
             nodes[i].add(child: newNode)
         }
 
-        // remove this hack
-        return PerfectSelection<NewNodeType, ValueType>(parent: self.parent as! NewNodeType, nodeData:newNodeData, nodes:newNodes);
+        // remove this hack (as! NewNodeType)
+        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: nodes[0], nodeData:newNodeData, nodes:newNodes);
     }
 }
 #endif

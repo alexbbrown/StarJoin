@@ -19,8 +19,10 @@ public protocol TreeNavigable {
     associatedtype ChildType = Self
     func add(child: ChildType)
 
+    func remove(child: ChildType)
+
     // this is a problematic one.  what's it for?
-    func removeNodeFromParent()
+//    func removeNodeFromParent()
 
     var childNodes: [ChildType] { get }
 }

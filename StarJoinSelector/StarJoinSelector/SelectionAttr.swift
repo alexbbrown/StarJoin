@@ -11,6 +11,7 @@ import Foundation
 // TODO
 // allow simple types and tuples to satisfy setKeyAttr 
 
+/// Mark Attr
 
 extension MultiSelection where NodeType : KVC & NodeMetadata {
 
@@ -24,15 +25,11 @@ extension MultiSelection where NodeType : KVC & NodeMetadata {
 
 }
 
+
+
 extension PerfectSelection where NodeType : KVC & NodeMetadata {
 
-    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
-        }
-        return self;
-    }
+
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
@@ -51,13 +48,26 @@ extension PerfectSelection where NodeType : KVC & NodeMetadata {
         return self;
     }
 
+
+
+
+}
+
+/// Each
+
+extension PerfectSelection where NodeType : NodeMetadata {
+
     private func metadata(from node:NodeType?) -> ValueType? {
         return node?.metadata as? ValueType
     }
 
-    public func call(function: (PerfectSelection) -> ()) -> Self {
-        function(self)
-
-        return self
+    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+        for (i, node) in nodes.enumerated() {
+            let dataValue = self.metadata(from: node)
+            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
+        }
+        return self;
     }
 }
+
+/// Call

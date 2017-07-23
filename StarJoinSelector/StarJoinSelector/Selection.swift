@@ -91,15 +91,14 @@ public class Selection<ParentType, NodeType> {
 // new selections.
 // this might be a selection of a parent only - we should distinguish between this and grabbing a single node to manipulate it
 public class SingleSelection<ParentType> : Selection<Void, ParentType>
-where ParentType : TreeNavigable & NodeMetadata {
+where ParentType : TreeNavigable {
 
     typealias NodeType = ParentType
 
     // These nodes should be descendants of the parent node
     /// Step 2. select the children -
     /// * example: select(all: root.children)
-    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
-    where NewNodeType : NodeMetadata {
+    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes)
     }
 
@@ -238,6 +237,12 @@ public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedS
         super.init(parent: parent, nodes: nodes)
     }
 
+    public func call(function: (PerfectSelection) -> ()) -> Self {
+        function(self)
+
+        return self
+    }
+
 }
 
 // MARK: -
@@ -312,6 +317,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
             // write the new metadata for the updated node only.
             // TODO: consider handling the old value somehow, too.
+            // TODO: work out if we can extract this from here?
             nodeToUpdate.metadata = valueToUpdateWith
         }
 
@@ -461,7 +467,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
 // for perfect selection (update selection) can we do away with the parent?  If we aren't allowed to BIND again, we could.
 final public class UpdateSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : NodeMetadata {
+where ParentType : TreeNavigable {
 
     public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
@@ -537,7 +543,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
 final public class ExitSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType {
+where ParentType : TreeNavigable, ParentType.ChildType == NodeType {
 
     /// Remove nodes from the document
     // unusually, this function doesn't chain - since the represented nodes are now dead

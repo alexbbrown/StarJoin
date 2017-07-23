@@ -59,7 +59,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
         return self;
     }
 
-    override public func remove() {
+    public func remove() {
 
         // fixme: is this safe:
         for node in nodes {
@@ -75,8 +75,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
 }
 
 // imperfect Transition
-public class TransitionMultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType>
-where NodeType : KVC & KVCAnimated & NodeMetadata  {
+public class TransitionMultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType> {
 
     public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
 
@@ -87,6 +86,10 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
         self.duration = duration
         super.init(parent: parent, nodes: nodes)
     }
+
+}
+
+extension TransitionMultiSelection where NodeType : KVC & KVCAnimated & NodeMetadata {
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
@@ -112,7 +115,7 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
         return self;
     }
 
-    override public func remove() {
+    public func remove() {
 
         // be careful what we are iterating across here to avoid deleting and iterating
         for node in nodes {

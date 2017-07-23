@@ -51,8 +51,7 @@ public struct NodeData<NodeType, ValueType> {
 // MARK: -
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
-public class Selection<ParentType, NodeType>
-where NodeType : KVC & NodeMetadata {
+public class Selection<ParentType, NodeType> {
 
     // public accessible so axis can use it
     public var nodes:[NodeType]
@@ -69,11 +68,6 @@ where NodeType : KVC & NodeMetadata {
     /// Starting point : make the initial selection
     public class func select<NewNodeType>(only node: NewNodeType) -> SingleSelection<NewNodeType> {
         return SingleSelection(node: node)
-    }
-
-    // Remove nodes from the document
-    public func remove() {
-        // TODO: should do something here - it's possible to remove things other than the exit selection
     }
 
     fileprivate init(nodes:[NodeType]) {
@@ -138,8 +132,7 @@ where ParentType : TreeNavigable & KVC & NodeMetadata {
 // (internal) InternalMultiSelection represents the common properties and actions
 // of a multiple selection
 
-internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentType, NodeType>
-where NodeType : KVC & NodeMetadata {
+internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentType, NodeType> {
 
     // Convenience Types
 
@@ -164,8 +157,7 @@ where NodeType : KVC & NodeMetadata {
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
-public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType>
-where NodeType : KVC & NodeMetadata {
+public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType> {
 
 
     // Convenience Types
@@ -207,6 +199,10 @@ where NodeType : KVC & NodeMetadata {
         }
         return self;
     }
+
+}
+
+extension MultiSelection where NodeType : KVC & NodeMetadata {
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
@@ -688,7 +684,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
 
     // Remove nodes from the document
     // unusually, this function doesn't chain - since the represented nodes are now dead
-    override public func remove() {
+    public func remove() {
 
         //let anyArray = self.selection as [AnyObject]
         for node in nodes {

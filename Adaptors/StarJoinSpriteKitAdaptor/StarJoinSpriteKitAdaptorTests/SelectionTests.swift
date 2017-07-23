@@ -43,7 +43,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
     func testSelectionConstructionZero() {
         // This is an example of a functional test case.
 
-        let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(emptyData)
+        let mySelection = StarJoin.select(only: scene!).select(all: scene!.childNodes).join(emptyData)
 
         XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(0, mySelection.debugNewData.count)
@@ -54,7 +54,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
     func testSelectionConstructionOne() {
         // This is an example of a functional test case.
 
-        let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(oneRowData)
+        let mySelection = StarJoin.select(only: scene!).select(all: scene!.childNodes).join(oneRowData)
 
         XCTAssertEqual(0, mySelection.debugNodes.count) // the join has NO nodes to begin with (before enter)
         XCTAssertEqual(1, mySelection.debugNewData.count)
@@ -76,7 +76,7 @@ class BasicSpriteKitSelectionTests: XCTestCase {
     func testSelectionOneEnter() {
         // This is an example of a functional test case.
 
-        let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(self.oneRowData)
+        let mySelection = StarJoin.select(only: scene!).select(all: scene!.childNodes).join(self.oneRowData)
 
         XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(1, mySelection.debugNewData.count)
@@ -112,13 +112,13 @@ class BasicSpriteKitSelectionTests: XCTestCase {
 
         // If the node has children my code fails.
 
-        let mySelection = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(self.oneRowData)
+        let mySelection = StarJoin.select(only: scene!).select(all: scene!.childNodes).join(self.oneRowData)
 
         mySelection.enter().append { (d, i) -> SKNode in
             return SKNode()
         }
 
-        let mySelection2 = Selection<SKNode, SKNode>.select(only: scene!).select(all: scene!.childNodes).join(self.emptyData)
+        let mySelection2 = StarJoin.select(only: scene!).select(all: scene!.childNodes).join(self.emptyData)
 
         mySelection2.enter().append { (d, i) -> SKNode in
             return SKNode()

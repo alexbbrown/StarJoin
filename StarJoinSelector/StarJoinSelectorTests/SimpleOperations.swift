@@ -38,7 +38,7 @@ class SimpleOperations: XCTestCase {
     func testSelectionConstructionZero() {
         // This is an example of a functional test case.
 
-        let se0 = Selection<TestNode, TestNode>.select(only: root)
+        let se0 = StarJoin.select(only: root)
 
         let se1 = se0.select(all: root.children)
 
@@ -52,7 +52,7 @@ class SimpleOperations: XCTestCase {
 
     func testSelectionConstructionOne() {
 
-        let se0 = Selection<TestNode, TestNode>.select(only: root)
+        let se0 = StarJoin.select(only: root)
 
         let se1 = se0.select(all: root.children)
 
@@ -64,7 +64,7 @@ class SimpleOperations: XCTestCase {
 
     func testSelectionOneEnter() {
 
-        let se0 = Selection<TestNode, TestNode>.select(only: root)
+        let se0 = StarJoin.select(only: root)
 
         let se1 = se0.select(all: root.children)
 
@@ -91,7 +91,7 @@ class SimpleOperations: XCTestCase {
 
         // If the node has children my code fails.
 
-        let se10 = Selection<TestNode, TestNode>.select(only: root)
+        let se10 = StarJoin.select(only: root)
 
         let se11 = se10.select(all: root.children)
 
@@ -101,7 +101,7 @@ class SimpleOperations: XCTestCase {
             return .init()
         }
 
-        let se00 = Selection<TestNode, TestNode>.select(only: root)
+        let se00 = StarJoin.select(only: root)
 
         let se01 = se00.select(all: root.children)
 

@@ -13,7 +13,16 @@ import Foundation
 
 /// Mark Attr
 
-extension MultiSelection where NodeType : KVC & NodeMetadata {
+extension SingleSelection {
+    @discardableResult public
+    func call(function: (SingleSelection) -> ()) -> Self {
+        function(self)
+
+        return self
+    }
+}
+
+extension MultiSelection where NodeType : KVC {
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
@@ -22,13 +31,19 @@ extension MultiSelection where NodeType : KVC & NodeMetadata {
         }
         return self;
     }
-
 }
 
-
+extension MultiSelection {
+    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+        // TODO create more childrens
+        for (i, selected) in nodes.enumerated() {
+            eachFn(selected, (), i)
+        }
+        return self;
+    }
+}
 
 extension PerfectSelection where NodeType : KVC
-//& NodeMetadata
 {
 
     // set a property using key value coding
@@ -42,30 +57,25 @@ extension PerfectSelection where NodeType : KVC
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
         for (i, nodeValue) in nodesValues.enumerated() {
-//            let dataValue = self.metadata(from: nodeValue.node!)
-            nodeValue.node?.setNodeValue(toValueFn(nodeValue.node, nodeValue.value, i), forKeyPath: keyPath) // todo: explain the ! here
+            nodeValue.node?.setNodeValue(toValueFn(nodeValue.node, nodeValue.value, i), forKeyPath: keyPath)
         }
         return self;
     }
 
+
+}
+
+extension PerfectSelection {
     @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         for (i, nodeValue) in nodesValues.enumerated() {
-            //            let dataValue = self.metadata(from: node)
-            eachFn(nodeValue.node!, nodeValue.value, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
+            eachFn(nodeValue.node!, nodeValue.value, i)
         }
         return self;
     }
-}
 
-/// Each
+    public func call(function: (PerfectSelection) -> ()) -> Self {
+        function(self)
 
-extension PerfectSelection where NodeType : NodeMetadata {
-
-    private func metadata(from node:NodeType?) -> ValueType? {
-        return node?.metadata as? ValueType
+        return self
     }
-
-
 }
-
-/// Call

@@ -47,35 +47,13 @@ public struct NodeValuePair<NodeType, ValueType> {
     }
 }
 
-// MARK: -
-// Selection is just a boring abstract base class.  Sets the Node and Value types
-// although ValueType might become subclass specific later.
-final public class Selection<ParentType, NodeType> {
-
-    // public accessible so axis can use it
-//    public var nodes:[NodeType]
-
-    // Convenience data types
-
-//    /// Abstract
-//    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
-//        fatalError("This method must be overridden")
-//    }
-
-    // This needs generalising - a select on a multiselection returns a multiselection
-    // this one just returns a selection for one node.
-    /// Starting point : make the initial selection
-    public class func select<NewNodeType>(only node: NewNodeType) -> SingleSelection<NewNodeType> {
+// This needs generalising - a select on a multiselection returns a multiselection
+// this one just returns a selection for one node.
+/// Starting point : make the initial selection of the root node
+public class StarJoin {
+    public class func select<NodeType>(only node: NodeType) -> SingleSelection<NodeType> {
         return SingleSelection(node: node)
     }
-
-//    fileprivate init(nodes:[NodeType]) {
-//        self.nodes = nodes
-//    }
-//
-//    convenience public init(node:NodeType) {
-//        self.init(nodes:[node])
-//    }
 }
 
 // MARK: -
@@ -105,6 +83,7 @@ where NodeType : TreeNavigable {
         return .init(parent: self.nodes[0], nodes: nodes)
     }
 
+    
     // These nodes should be descendants of the parent node
     public func select<NewNodeType>(all nodes: (NodeType) -> [NewNodeType]) -> MultiSelection<NodeType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
@@ -113,51 +92,29 @@ where NodeType : TreeNavigable {
     // todo: add initialisers for other kinds of searching, and add a
     // select method (which is also a subscript operator) for sub-selection
 
-    // todo: append2
-    //internal typealias CallFunction = (Selection) -> ()
-
-    @discardableResult public
-    func call(function: (SingleSelection) -> ()) -> Self {
-        function(self)
-
-        return self
-    }
+    // todo: append2 for cases other than perfect selection
 
     public init(node:NodeType) {
         self.nodes = [node]
     }
 }
 
-// MARK: -
-
 // (internal) InternalParentedSelection represents the common properties and actions
 // of a multiple selection
-
 internal class InternalParentedSelection<ParentType, NodeType> {
-
-    // Convenience Types
-
-    // Properties
 
     /// The parent object is where new objects are created.  This is
     // probably incorrect in the long run; new objects may be created
     // on cascading created objects.
     internal var parent:ParentType // TODO: should be readonly (really?)
-    // computed accessor to get managed nodes & data
-    /// selection is the set of nodes initially supplied
 
     internal init(parent:ParentType) {
         self.parent = parent
-
-//        super.init(nodes: nodes)
     }
 }
 
 internal class InternalImperfectSelection<ParentType, NodeType> : InternalParentedSelection<ParentType, NodeType> {
 
-    // Convenience Types
-
-    // Properties
     public var nodes: [NodeType]
 
     internal init(parent: ParentType, nodes: [NodeType]) {
@@ -179,11 +136,6 @@ public class MultiSelection<ParentType, NodeType> : InternalImperfectSelection<P
     public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
     public typealias NodeValueIndexToNode = (NodeType?,Void,Int) -> NodeType
 
-    // Properties
-
-    // Constructor for specific nodes, equivalent to selectAll
-    // TODO: add constructors for search patterns, too.
-
     public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinPreSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
                      nodes: self.nodes,
@@ -197,27 +149,17 @@ public class MultiSelection<ParentType, NodeType> : InternalImperfectSelection<P
                      data: data)
     }
 
-    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        // TODO create more childrens
-        for (i, selected) in nodes.enumerated() {
-            eachFn(selected, (), i)
-        }
-        return self;
-    }
+
 }
 
 // MARK: -
 
-/// (internal) JoinedSelection includes the operations that are possible on a bound or pre-joined selection
-// note that JoinedSelection inherited from a pre-entered Join may contain partially bound data
-// where there is a value but no node.
-// update should be used to split out notes with no value.  It is not possible to address nodes that
-// don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
+/// (internal) JoinedSelection includes the operations that are possible on a bound or pre-joined selection.
+// access should be internal but there's a bug in swift : public typealias of a internal class is not visible by public children
 public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalParentedSelection<ParentType, NodeType> {
 
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
-    // TODO: should probably call this NodeToValue function and make it return Any
     public typealias NodeValueIndexToAny = (NodeType?,ValueType,Int) -> Any?
     public typealias NodeValueIndexToNode = (NodeType?,ValueType,Int) -> NodeType
 
@@ -240,20 +182,9 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
+// mainly used as a hook for extensions - has no specific behaviour.
+// could be internal but append2 currently visits it
 public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType> {
-
-    // Convenience types
-
-    // Properties
-
-    /// Vector of Node / Data pairs for existing nodes
-
-    public func call(function: (PerfectSelection) -> ()) -> Self {
-        function(self)
-
-        return self
-    }
-
 }
 
 // MARK: -
@@ -489,13 +420,9 @@ where ParentType : TreeNavigable {
 
 }
 
-// MARK: -
-
-// Enter Selection deals with entered nodes only.
-// it returns to type MultiSelection after append is performed.
-// TODO: EnterSelection has an 'each' but it's action is unexpected - it operates on 0 entries.  Is that intentional?  is enterselection really a joined selection?
+// Enter Pre Selection becomes a selection when append is run.
 final public class EnterPreSelection<ParentType, ValueType>
-where ParentType : TreeNavigable { // should just be treenavigable here
+where ParentType : TreeNavigable {
 
     public typealias NodeType = ParentType.ChildType
     public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
@@ -552,8 +479,7 @@ where ParentType : TreeNavigable, ParentType.ChildType == NodeType {
 
     /// Remove nodes from the document
     // unusually, this function doesn't chain - since the represented nodes are now dead
-    public func remove() {
-
+    public func remove() -> Void {
         for nodeValue in nodesValues {
             parent.remove(child: nodeValue.node!)
 //            nodeValue.node = nil // hmm.
@@ -564,9 +490,7 @@ where ParentType : TreeNavigable, ParentType.ChildType == NodeType {
 }
 
 final public class AppendedSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable {
-
-}
+where ParentType : TreeNavigable { }
 
 // MARK: -
 

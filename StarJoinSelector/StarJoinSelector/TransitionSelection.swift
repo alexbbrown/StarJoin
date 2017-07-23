@@ -10,7 +10,7 @@ import Foundation
 
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
-extension PerfectSelection where NodeType:KVCAnimated {
+extension PerfectSelection where NodeType: KVC & KVCAnimated & NodeMetadata {
 
     @discardableResult public
     func transition(duration: TimeInterval = 3) -> TransitionSelection<ParentType, NodeType, ValueType> {

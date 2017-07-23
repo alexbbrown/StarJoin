@@ -222,8 +222,7 @@ extension MultiSelection where NodeType : KVC & NodeMetadata {
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType>
-     where NodeType : KVC & NodeMetadata {
+public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType> {
 
 
     // Convenience Types
@@ -260,8 +259,7 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
-public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
-where NodeType : KVC & NodeMetadata {
+public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType> {
 
     // Convenience types
     fileprivate typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -278,6 +276,9 @@ where NodeType : KVC & NodeMetadata {
         super.init(parent: parent, nodes: nodes)
     }
 
+}
+
+extension PerfectSelection where NodeType : KVC & NodeMetadata {
 
     @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         for (i, node) in nodes.enumerated() {
@@ -692,14 +693,6 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
         }
 
     }
-
-    // TODO: add dataNodes, each etc.
-
-    public override func call(function: (ExitSelection) -> ()) -> Self {
-        function(self)
-
-        return self
-    }
 }
 
 final public class AppendedSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
@@ -712,7 +705,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 // extensions
 
 #if true
-extension PerfectSelection {
+    extension PerfectSelection where NodeType : NodeMetadata {
 
     // this isn't exactly the same as the main append - so let's call it append2
     // it's tested in the axis logic

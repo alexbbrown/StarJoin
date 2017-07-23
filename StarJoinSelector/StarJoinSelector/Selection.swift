@@ -707,7 +707,7 @@ extension ExitSelection {
 
 // extensions
 
-#if false
+#if true
 extension PerfectSelection {
 
     // this isn't exactly the same as the main append - so let's call it append2
@@ -729,10 +729,10 @@ extension PerfectSelection {
         var newNodes:[NewNodeType] = []
         var newNodeData:[NewNodeDataType] = []
 
-        for (i, node) in nodes.enumerated() {
+        for (i, oldNode) in nodes.enumerated() {
             // MARK: WORKING FACE
             
-            var newNode = constructorFn(nodes[i], node.metadata as! ValueType, i)
+            var newNode = constructorFn(oldNode, oldNode.metadata as! ValueType, i)
 
             newNodeData.append(NewNodeDataType(node: newNode,
                                                value: nodeData[i].value))
@@ -740,11 +740,13 @@ extension PerfectSelection {
             newNode.metadata = nodeData[i].value
 
             newNodes.append(newNode)
-            nodes[i].add(child: newNode)
+            oldNode.add(child: newNode)
         }
 
         // remove this hack (as! NewNodeType)
-        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: nodes[0], nodeData:newNodeData, nodes:newNodes);
+        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: nodes[0], nodeData: newNodeData, nodes: newNodes)
+
+        //
     }
 }
 #endif

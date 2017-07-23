@@ -50,17 +50,17 @@ public struct NodeValuePair<NodeType, ValueType> {
 // MARK: -
 // Selection is just a boring abstract base class.  Sets the Node and Value types
 // although ValueType might become subclass specific later.
-public class Selection<ParentType, NodeType> {
+final public class Selection<ParentType, NodeType> {
 
     // public accessible so axis can use it
-    public var nodes:[NodeType]
+//    public var nodes:[NodeType]
 
     // Convenience data types
 
-    /// Abstract
-    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
-        fatalError("This method must be overridden")
-    }
+//    /// Abstract
+//    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
+//        fatalError("This method must be overridden")
+//    }
 
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
@@ -69,13 +69,13 @@ public class Selection<ParentType, NodeType> {
         return SingleSelection(node: node)
     }
 
-    fileprivate init(nodes:[NodeType]) {
-        self.nodes = nodes
-    }
-
-    convenience public init(node:NodeType) {
-        self.init(nodes:[node])
-    }
+//    fileprivate init(nodes:[NodeType]) {
+//        self.nodes = nodes
+//    }
+//
+//    convenience public init(node:NodeType) {
+//        self.init(nodes:[node])
+//    }
 }
 
 // MARK: -
@@ -90,20 +90,23 @@ public class Selection<ParentType, NodeType> {
 // Selections support simple operations such as append - which generate
 // new selections.
 // this might be a selection of a parent only - we should distinguish between this and grabbing a single node to manipulate it
-public class SingleSelection<ParentType> : Selection<Void, ParentType>
-where ParentType : TreeNavigable {
+public class SingleSelection<NodeType>
+where NodeType : TreeNavigable {
 
-    typealias NodeType = ParentType
+    private var nodes:[NodeType]
+
+    // for skaxis
+    public var node:NodeType { return nodes[0] }
 
     // These nodes should be descendants of the parent node
     /// Step 2. select the children -
     /// * example: select(all: root.children)
-    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
+    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<NodeType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes)
     }
 
     // These nodes should be descendants of the parent node
-    public func select<NewNodeType>(all nodes: (ParentType) -> [NewNodeType]) -> MultiSelection<ParentType, NewNodeType> {
+    public func select<NewNodeType>(all nodes: (NodeType) -> [NewNodeType]) -> MultiSelection<NodeType, NewNodeType> {
         return .init(parent: self.nodes[0], nodes: nodes(self.nodes[0]))
     }
 
@@ -120,17 +123,17 @@ where ParentType : TreeNavigable {
         return self
     }
 
-    convenience fileprivate init(node:NodeType) {
-        self.init(nodes:[node])
+    public init(node:NodeType) {
+        self.nodes = [node]
     }
 }
 
 // MARK: -
 
-// (internal) InternalMultiSelection represents the common properties and actions
+// (internal) InternalParentedSelection represents the common properties and actions
 // of a multiple selection
 
-internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentType, NodeType> {
+internal class InternalParentedSelection<ParentType, NodeType> {
 
     // Convenience Types
 
@@ -143,10 +146,24 @@ internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentTy
     // computed accessor to get managed nodes & data
     /// selection is the set of nodes initially supplied
 
-    internal init(parent:ParentType, nodes:[NodeType]) {
+    internal init(parent:ParentType) {
         self.parent = parent
 
-        super.init(nodes: nodes)
+//        super.init(nodes: nodes)
+    }
+}
+
+internal class InternalImperfectSelection<ParentType, NodeType> : InternalParentedSelection<ParentType, NodeType> {
+
+    // Convenience Types
+
+    // Properties
+    public var nodes: [NodeType]
+
+    internal init(parent: ParentType, nodes: [NodeType]) {
+        self.nodes = nodes
+
+        super.init(parent: parent)
     }
 }
 
@@ -155,7 +172,7 @@ internal class InternalMultiSelection<ParentType, NodeType> : Selection<ParentTy
 // MultiSelection deals with pre-joined state - SelectAlls.
 // MultiSelection can be operated upon as basic selections, or converted
 // into a JoinSelection
-public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType> {
+public class MultiSelection<ParentType, NodeType> : InternalImperfectSelection<ParentType, NodeType> {
 
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,Void,Int) -> ()
@@ -166,10 +183,6 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
 
     // Constructor for specific nodes, equivalent to selectAll
     // TODO: add constructors for search patterns, too.
-    internal override init(parent:ParentType, nodes:[NodeType]) {
-
-        super.init(parent: parent, nodes: nodes)
-    }
 
     public func join<ValueType,KeyType:Hashable>(_ data:[ValueType], keyFunction:(ValueType,Int) -> KeyType) -> JoinPreSelection<ParentType, NodeType, ValueType> {
         return .init(parent: self.parent,
@@ -200,7 +213,7 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
 // where there is a value but no node.
 // update should be used to split out notes with no value.  It is not possible to address nodes that
 // don't exists - this has changed - a JoinedSelection cannot (apart from subclasses) contain missing nodes
-public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalMultiSelection<ParentType, NodeType> {
+public class InternalJoinedSelection<ParentType, NodeType, ValueType> : InternalParentedSelection<ParentType, NodeType> {
 
     // Convenience Types
     public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()
@@ -208,11 +221,18 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
     public typealias NodeValueIndexToAny = (NodeType?,ValueType,Int) -> Any?
     public typealias NodeValueIndexToNode = (NodeType?,ValueType,Int) -> NodeType
 
+    internal typealias NodeValuePairType = NodeValuePair<NodeType, ValueType>
+
     // Properties
+    internal var nodesValues:[NodeValuePairType]
 
     // TODO: return data - strip out missing results, perhaps? or return ValueType?
     fileprivate var data:[ValueType] { return [] } // this TYPE only makes sense for multiply selected things
 
+    internal init(parent: ParentType, nodesValues:[NodeValuePairType]) {
+        self.nodesValues = nodesValues
+        super.init(parent: parent)
+    }
 }
 
 // MARK: -
@@ -223,19 +243,10 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType> {
 
     // Convenience types
-    fileprivate typealias NodeValuePairType = NodeValuePair<NodeType, ValueType>
 
     // Properties
 
     /// Vector of Node / Data pairs for existing nodes
-    fileprivate var nodesValues:[NodeValuePairType]
-
-    fileprivate init(parent:ParentType, nodeData:[NodeValuePairType], nodes:[NodeType]) {
-
-        self.nodesValues = nodeData
-
-        super.init(parent: parent, nodes: nodes)
-    }
 
     public func call(function: (PerfectSelection) -> ()) -> Self {
         function(self)
@@ -434,7 +445,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // Update creates a new selection containing only valid node:value pairs
     // this needs clarifying (and unit testing - can update include enter or not?)
     public func update() -> UpdateSelection<ParentType, NodeType, ValueType> {
-        return .init(parent: parent, nodeData: updateSelection.pairs, nodes: updateSelection.nodes)
+        return .init(parent: parent, nodesValues: updateSelection.pairs)
     }
 
     // Return the Exit selection
@@ -450,7 +461,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
             NodeValuePairType(node: node, value: node.metadata as! ValueType)
         }
 
-        return .init(parent: parent, nodeData: exitNodeData, nodes: exitNodes)
+        return .init(parent: parent, nodesValues: exitNodeData)
     }
 
 }
@@ -473,11 +484,7 @@ where ParentType : TreeNavigable {
 
         let combinedNodeData = self.nodesValues + enterSelection.nodesValues
 
-        let combinedNodes = combinedNodeData.map { (nodeDataEl) -> NodeType in
-            nodeDataEl.node!
-        }
-
-        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodeData: combinedNodeData, nodes:combinedNodes)
+        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodesValues: combinedNodeData)
     }
 
 }
@@ -516,23 +523,21 @@ where ParentType : TreeNavigable { // should just be treenavigable here
     where ParentType.ChildType == NewNodeType, NewNodeType : TreeNavigable & NodeMetadata {
 
         // Convenience types
-        typealias NewNodeDataType = NodeValuePair<NewNodeType, ValueType>
+        typealias NewNodeValuePairType = NodeValuePair<NewNodeType, ValueType>
 
-        var newNodes:[NewNodeType] = []
-        var nodeData:[NewNodeDataType] = []
+        var newNodesValues:[NewNodeValuePairType] = []
 
         for (i, value) in data.enumerated() {
 
             var newNode = constructorFn(value, i)
-            newNodes.append(newNode)
-            nodeData.append(NewNodeDataType(node: newNode, value: value))
+            newNodesValues.append(NewNodeValuePairType(node: newNode, value: value))
 
             newNode.metadata = value
 
             parent.add(child:newNode)
         }
 
-        return .init(parent: parent, nodeData: nodeData, nodes: newNodes)
+        return .init(parent: parent, nodesValues: newNodesValues)
     }
 }
 
@@ -549,9 +554,12 @@ where ParentType : TreeNavigable, ParentType.ChildType == NodeType {
     // unusually, this function doesn't chain - since the represented nodes are now dead
     public func remove() {
 
-        for node in nodes {
-            parent.remove(child: node)
+        for nodeValue in nodesValues {
+            parent.remove(child: nodeValue.node!)
+//            nodeValue.node = nil // hmm.
         }
+
+        // should kill the selection when this is done.
     }
 }
 
@@ -588,13 +596,14 @@ where ParentType : TreeNavigable {
         var newNodes:[NewNodeType] = []
         var newNodesValues:[NewNodeValuePairType] = []
 
-        for (i, oldNode) in nodes.enumerated() {
+        for (i, oldNodesValues) in nodesValues.enumerated() {
             // MARK: WORKING FACE
-            
-            var newNode = constructorFn(oldNode, oldNode.metadata as! ValueType, i)
 
-            newNodesValues.append(NewNodeValuePairType(node: newNode,
-                                               value: nodesValues[i].value))
+            let oldNode = oldNodesValues.node!
+            var newNode = constructorFn(oldNode, oldNodesValues.value, i)
+
+            newNodesValues.append(.init(node: newNode,
+                                        value: oldNodesValues.value))
 
             newNode.metadata = nodesValues[i].value
 
@@ -603,7 +612,7 @@ where ParentType : TreeNavigable {
         }
 
         // It's too hard to fit parents into this model, so I'm just throwing up my hands.  There's no parent.
-        return .init(parent: (), nodeData: newNodesValues, nodes: newNodes)
+        return .init(parent: (), nodesValues: newNodesValues)
 
         //
     }

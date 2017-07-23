@@ -86,7 +86,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
 
     public func make(axisSelection:SingleSelection<SKNode>) -> () {
 
-        let axisNode:SKNode = axisSelection.nodes[0]
+        let axisNode:SKNode = axisSelection.node
 
         // Draw the axis line
 

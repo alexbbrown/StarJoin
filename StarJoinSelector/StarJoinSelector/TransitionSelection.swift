@@ -13,8 +13,8 @@ import Foundation
 extension PerfectSelection where NodeType: KVC & KVCAnimated & NodeMetadata {
 
     @discardableResult public
-    func transition(duration: TimeInterval = 3) -> TransitionSelection<ParentType, NodeType, ValueType> {
-        return .init(parent: self.parent, nodes:self.nodes, duration:duration)
+    func transition(duration: TimeInterval = 3) -> TransitionPerfectSelection<ParentType, NodeType, ValueType> {
+        return .init(parent: self.parent, nodesValues:self.nodesValues, duration:duration)
     }
 }
 
@@ -29,22 +29,21 @@ extension MultiSelection where NodeType:KVCAnimated {
 /// PerfectTransitionSelection is a PerfectSelection with delayed property operations
 // it has a duration property which defines how long the transitions take.
 // TODO: allow duration to be a function for each node.
-public class TransitionSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
+public class TransitionPerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
 where NodeType : KVC & KVCAnimated & NodeMetadata  {
 
     let duration : TimeInterval
 
-    internal init (parent:ParentType, nodes: [NodeType], duration:TimeInterval)
-    {
+    internal init(parent: ParentType, nodesValues:[NodeValuePairType], duration: TimeInterval) {
         self.duration = duration
-        super.init(parent: parent, nodes: nodes)
+        super.init(parent: parent, nodesValues: nodesValues)
     }
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
 
-        for node in nodes {
-            node.setNodeValueAnimated(toValue, forKeyPath: keyPath, withDuration:self.duration)
+        for nodeValue in nodesValues {
+            nodeValue.node?.setNodeValueAnimated(toValue, forKeyPath: keyPath, withDuration:self.duration)
         }
 
         return self;
@@ -53,8 +52,8 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
 
-        for (i, node) in nodes.enumerated() {
-            node.setNodeValueAnimated(toValueFn(node, self.metadata(from: node)!, i), forKeyPath: keyPath, withDuration:self.duration)
+        for (i, nodeValue) in nodesValues.enumerated() {
+            nodeValue.node?.setNodeValueAnimated(toValueFn(nodeValue.node, nodeValue.value, i), forKeyPath: keyPath, withDuration:self.duration)
         }
         return self;
     }
@@ -62,9 +61,11 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     public func remove() {
 
         // fixme: is this safe:
-        for node in nodes {
-            node.removeNodeFromParent(withDelay:duration)
+        for nodeValue in nodesValues {
+            nodeValue.node?.removeNodeFromParent(withDelay:duration)
         }
+
+        // TODO: this selection is dead!  we should prevent further edits.
     }
 
     // dodgy function
@@ -74,8 +75,56 @@ where NodeType : KVC & KVCAnimated & NodeMetadata  {
     }
 }
 
+///// PerfectTransitionSelection is a PerfectSelection with delayed property operations
+//// it has a duration property which defines how long the transitions take.
+//// TODO: allow duration to be a function for each node.
+//public class TransitionSelection<ParentType, NodeType, ValueType> : InternalJoinedSelection<ParentType, NodeType, ValueType>
+//where NodeType : KVC & KVCAnimated & NodeMetadata  {
+//
+//    let duration : TimeInterval
+//
+//    internal init (parent:ParentType, nodes: [NodeType], duration:TimeInterval)
+//    {
+//        self.duration = duration
+//        super.init(parent: parent, nodes: nodes)
+//    }
+//
+//    // set a property using key value coding
+//    @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
+//
+//        for node in nodes {
+//            node.setNodeValueAnimated(toValue, forKeyPath: keyPath, withDuration:self.duration)
+//        }
+//
+//        return self;
+//    }
+//
+//    // set a property using key value coding
+//    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
+//
+//        for (i, node) in nodes.enumerated() {
+//            node.setNodeValueAnimated(toValueFn(node, self.metadata(from: node)!, i), forKeyPath: keyPath, withDuration:self.duration)
+//        }
+//        return self;
+//    }
+//
+//    public func remove() {
+//
+//        // fixme: is this safe:
+//        for node in nodes {
+//            node.removeNodeFromParent(withDelay:duration)
+//        }
+//    }
+//
+//    // dodgy function
+//    private func metadata(from node:NodeType?) -> ValueType? {
+//
+//        return node?.metadata as? ValueType
+//    }
+//}
+
 // imperfect Transition
-public class TransitionMultiSelection<ParentType, NodeType> : InternalMultiSelection<ParentType, NodeType> {
+public class TransitionMultiSelection<ParentType, NodeType> : InternalImperfectSelection<ParentType, NodeType> {
 
     public typealias NodeValueIndexToAny = (NodeType?,Void,Int) -> Any?
 
@@ -84,7 +133,7 @@ public class TransitionMultiSelection<ParentType, NodeType> : InternalMultiSelec
     internal init (parent:ParentType, nodes: [NodeType], duration:TimeInterval)
     {
         self.duration = duration
-        super.init(parent: parent, nodes: nodes)
+        super.init(parent: parent, nodes:nodes)
     }
 
 }

@@ -27,30 +27,34 @@ extension MultiSelection where NodeType : KVC & NodeMetadata {
 
 
 
-extension PerfectSelection where NodeType : KVC & NodeMetadata {
-
-
+extension PerfectSelection where NodeType : KVC
+//& NodeMetadata
+{
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
-        for selected in nodes {
-            selected.setNodeValue(toValue, forKeyPath: keyPath)
+        for nodeValue in nodesValues {
+            nodeValue.node?.setNodeValue(toValue, forKeyPath: keyPath)
         }
         return self;
     }
 
     // set a property using key value coding
     @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath) // todo: explain the ! here
+        for (i, nodeValue) in nodesValues.enumerated() {
+//            let dataValue = self.metadata(from: nodeValue.node!)
+            nodeValue.node?.setNodeValue(toValueFn(nodeValue.node, nodeValue.value, i), forKeyPath: keyPath) // todo: explain the ! here
         }
         return self;
     }
 
-
-
-
+    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
+        for (i, nodeValue) in nodesValues.enumerated() {
+            //            let dataValue = self.metadata(from: node)
+            eachFn(nodeValue.node!, nodeValue.value, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
+        }
+        return self;
+    }
 }
 
 /// Each
@@ -61,13 +65,7 @@ extension PerfectSelection where NodeType : NodeMetadata {
         return node?.metadata as? ValueType
     }
 
-    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
-        }
-        return self;
-    }
+
 }
 
 /// Call

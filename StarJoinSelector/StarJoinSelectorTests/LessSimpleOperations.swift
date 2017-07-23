@@ -51,16 +51,16 @@ class LessSimpleOperations: XCTestCase {
 
         XCTAssertEqual(0, mySelection.debugNodes.count)
         XCTAssertEqual(1, enterSelection.debugNewData.count)
-        XCTAssertEqual(0, updateSelection.nodes.count)
+        XCTAssertEqual(0, updateSelection.nodesValues.count)
 
 
         let appendSelection = enterSelection.append { (d, i) -> TestNode in
             return .init()
         }
 
-        XCTAssertEqual(1, appendSelection.nodes.count)
+        XCTAssertEqual(1, appendSelection.nodesValues.count)
         XCTAssertEqual(1, enterSelection.debugNewData.count)
-        XCTAssertEqual(0, updateSelection.nodes.count)
+        XCTAssertEqual(0, updateSelection.nodesValues.count)
 
         let updateSelection2 = mySelection.update()
 
@@ -68,7 +68,7 @@ class LessSimpleOperations: XCTestCase {
         XCTAssertEqual(1, mySelection.debugNewData.count)
 //        XCTAssertEqual(updateSelection.nodes.count, updateSelection2.nodes.count) // same
 
-        XCTAssertEqual(0, updateSelection2.nodes.count)
+        XCTAssertEqual(0, updateSelection2.nodesValues.count)
 //        XCTAssertEqual(0, updateSelection2.nodes.count) // this should be ZERO in mergeWorld
 
 
@@ -102,7 +102,7 @@ class LessSimpleOperations: XCTestCase {
             return .init()
         }
 
-        XCTAssertEqual(0, appendSelection.nodes.count)
+        XCTAssertEqual(0, appendSelection.nodesValues.count)
 
 
         XCTAssertEqual(1, root.children.count)
@@ -137,17 +137,17 @@ class LessSimpleOperations: XCTestCase {
             return .init()
         }
 
-        XCTAssertEqual(1, appendSelection.nodes.count)
+        XCTAssertEqual(1, appendSelection.nodesValues.count)
 
         selection2.exit().remove()
 
         let updateSelection = selection2.update()
 
-        XCTAssertEqual(1, updateSelection.nodes.count)
+        XCTAssertEqual(1, updateSelection.nodesValues.count)
 
         let mergeSelection = updateSelection.merge(with: appendSelection)
 
-        XCTAssertEqual(2, mergeSelection.nodes.count)
+        XCTAssertEqual(2, mergeSelection.nodesValues.count)
         XCTAssertEqual(2, root.children.count)
 
     }

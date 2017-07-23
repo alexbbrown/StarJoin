@@ -27,9 +27,6 @@
 
 // TODO:[old]
 // refactor into DataDominant, NodeDominant, and Perfect joins
-// rationalise the the setKeyAttr logic
-// deprecate setKeyAttr in favour of attr
-// allow simple types and tuples to pass setKeyAttr
 // Allow data function to be a dictionary, which is auto-keyed. Perhaps a common ancestor of Array, Dictionary
 
 import Foundation
@@ -92,7 +89,7 @@ public class Selection<ParentType, NodeType> {
 // new selections.
 // this might be a selection of a parent only - we should distinguish between this and grabbing a single node to manipulate it
 public class SingleSelection<ParentType> : Selection<Void, ParentType>
-where ParentType : TreeNavigable & KVC & NodeMetadata {
+where ParentType : TreeNavigable & NodeMetadata {
 
     typealias NodeType = ParentType
 
@@ -100,7 +97,7 @@ where ParentType : TreeNavigable & KVC & NodeMetadata {
     /// Step 2. select the children -
     /// * example: select(all: root.children)
     public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
-    where NewNodeType : KVC & NodeMetadata {
+    where NewNodeType : NodeMetadata {
         return .init(parent: self.nodes[0], nodes: nodes)
     }
 
@@ -202,18 +199,7 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
 
 }
 
-extension MultiSelection where NodeType : KVC & NodeMetadata {
 
-    // set a property using key value coding
-    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, node) in nodes.enumerated() {
-            node.setNodeValue(toValueFn(node, (), i), forKeyPath: keyPath)
-        }
-        return self;
-    }
-
-
-}
 
 // MARK: -
 
@@ -238,24 +224,6 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 
 }
 
-// as yet unused - need things to inherit from this
-//public class DataDominantSelection<NodeType: KVC & TreeNavigable & NodeMetadata, ValueType> : JoinedSelection<NodeType, ValueType> {
-//
-//    // Convenience types
-//    internal typealias NodeDataType = NodeData<NodeType, ValueType>
-//
-//    // Properties
-//
-//    /// Vector of Node / Data pairs for existing nodes
-//    internal var nodeData:[NodeDataType]
-//
-//    internal init (parent:ParentType, nodeData:[NodeDataType]) {
-//
-//    }
-//
-//}
-// MARK: -
-
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
@@ -278,43 +246,7 @@ public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedS
 
 }
 
-extension PerfectSelection where NodeType : KVC & NodeMetadata {
 
-    @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            eachFn(node, dataValue!, i) // TODO: explain the ! here - any if it's true.  what about re-binds?
-        }
-        return self;
-    }
-
-    // set a property using key value coding
-    @discardableResult public func attr(_ keyPath: String, toValue: Any!) -> Self {
-        for selected in nodes {
-            selected.setNodeValue(toValue, forKeyPath: keyPath)
-        }
-        return self;
-    }
-
-    // set a property using key value coding
-    @discardableResult public func attr(_ keyPath: String, toValueFn: NodeValueIndexToAny) -> Self {
-        for (i, node) in nodes.enumerated() {
-            let dataValue = self.metadata(from: node)
-            node.setNodeValue(toValueFn(node, dataValue!, i), forKeyPath: keyPath) // todo: explain the ! here
-        }
-        return self;
-    }
-
-    private func metadata(from node:NodeType?) -> ValueType? {
-        return node?.metadata as? ValueType
-    }
-
-    public func call(function: (PerfectSelection) -> ()) -> Self {
-        function(self)
-
-        return self
-    }
-}
 
 // MARK: -
 
@@ -322,7 +254,7 @@ extension PerfectSelection where NodeType : KVC & NodeMetadata {
 // This is a precursor to Enter, Exit and Update selections
 // ultimately it's not really a selection at all, and should not be!
 final public class JoinPreSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.ChildType == NodeType  {
+where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType  {
 
     // Convenience types
     private typealias NodeDataType = NodeData<NodeType, ValueType>
@@ -583,7 +515,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
 
 // for perfect selection (update selection) can we do away with the parent?  If we aren't allowed to BIND again, we could.
 final public class UpdateSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
+where ParentType : TreeNavigable, NodeType : NodeMetadata {
 
     // Properties
 
@@ -597,8 +529,6 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
     override fileprivate var data:[ValueType] { get {
         return nodeData.map { $0.value }
         } } // this TYPE only makes sense for multiply selected things
-
-    // TODO: I consider this one to be probably the one that should get the active attr methods
 
     public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
@@ -644,7 +574,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
     func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> AppendedSelection<ParentType, NewNodeType, ValueType>
-    where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
+    where NewNodeType==ParentType.ChildType, NewNodeType : TreeNavigable & NodeMetadata {
 
         // Convenience types
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>
@@ -677,7 +607,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
 final public class ExitSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.ChildType == NodeType {
+where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType {
 
 //    override fileprivate init(parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
 //        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
@@ -696,7 +626,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
 }
 
 final public class AppendedSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
-where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
+where ParentType : TreeNavigable {
 
 }
 
@@ -720,7 +650,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
     // TODO: There should be a datafn version of this which calculates the bound data item
     // e.g. if it's a subfield of the parent.
     public func append2<NewNodeType>(constructorFn:(NodeType?,ValueType,Int) -> NewNodeType) -> PerfectSelection<Void, NewNodeType, ValueType>
-    where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : KVC & NodeMetadata {
+    where NewNodeType==NodeType.ChildType, NodeType : TreeNavigable, NewNodeType : NodeMetadata {
 
         // Convenience types
         typealias NewNodeDataType = NodeData<NewNodeType, ValueType>

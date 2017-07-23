@@ -599,7 +599,7 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 
     // TODO: I consider this one to be probably the one that should get the active attr methods
 
-    public func merge(with enterSelection:PerfectSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
+    public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 
         let combinedNodeData = self.nodeData + enterSelection.nodeData
 
@@ -642,7 +642,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
 
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
-    func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> PerfectSelection<ParentType, NewNodeType, ValueType>
+    func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> AppendedSelection<ParentType, NewNodeType, ValueType>
     where NewNodeType==ParentType.ChildType, NewNodeType : KVC & TreeNavigable & NodeMetadata {
 
         // Convenience types
@@ -664,7 +664,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
         }
         // actually self should return the appended selection!
         // FIXME: let's get rid of as NewNodeType
-        return PerfectSelection<ParentType, NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
+        return AppendedSelection<ParentType, NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
     }
 }
 
@@ -702,7 +702,8 @@ where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata, ParentType.Chil
     }
 }
 
-extension ExitSelection {
+final public class AppendedSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
+where ParentType : TreeNavigable, NodeType : KVC & NodeMetadata {
 
 }
 

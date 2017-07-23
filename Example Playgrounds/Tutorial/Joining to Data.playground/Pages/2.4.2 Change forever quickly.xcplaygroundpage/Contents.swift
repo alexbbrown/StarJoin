@@ -34,7 +34,7 @@ let entered = mySelection.enter()
 
 //:
 
-entered.append { (s, d, i) -> SKNode in
+entered.append { (d, i) -> SKNode in
     return SKSpriteNode()
     }.each(updateNode)
 
@@ -62,9 +62,7 @@ extension SJDelegate:SKSceneDelegate {
         let entered2 = mySelection2.enter()
 
         //: We still need new nodes for extra data rows, but we can choose not to configure them immediately
-        entered2.append { (_, _, _) in
-            return SKSpriteNode()
-        }
+        entered2.append { (_, _) in SKSpriteNode() }
 
         // TODO: check d3.js still use the enter/append/update selection sematics or if that's fixed.
         //: Instead grab all the nodes corresponding to updated data using the `update` selection–and configure your heart away!

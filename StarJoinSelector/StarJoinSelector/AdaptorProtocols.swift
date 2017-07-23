@@ -16,7 +16,7 @@ import Foundation
 // TODO: it looks like a mutable collection of some kind
 // TODO: can it be actually an array?  can we generalise to non linear structures such as matrixes or trees?
 public protocol TreeNavigable {
-    associatedtype ChildType = Self
+    associatedtype ChildType
     func add(child: ChildType)
 
     func remove(child: ChildType)

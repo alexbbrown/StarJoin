@@ -87,7 +87,7 @@ func updatePlot() {
 
     // new nodes
     mySelection.enter()
-        .append { (s, d, i) in SKSpriteNode()}
+        .append { (d, i) in SKSpriteNode()}
         // start white
         .attr("color",toValue: SKColor.white)
         // jump to start position and grow in

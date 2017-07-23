@@ -63,9 +63,7 @@ let mySelection = rootNode.select(all: allChildrenSelector).join(nodeArray)
 let entered = mySelection.enter()
 
 entered
-    .append { (s, d, i) -> SKNode in
-        return SKSpriteNode()
-    }
+    .append { (d, i) in SKSpriteNode() }
 //: * Callout(Ninja Tip): For more complex node configuration, `attr` can be replaced by `each` - which has no return value but expects `s` - the node - to be modified.  We need to cast `s` down to the type we expect.
     .each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {
@@ -87,7 +85,7 @@ mySelection2.exit().remove()
 
 let entered2 = mySelection2.enter()
 
-entered2.append { (_, _, _) in
+entered2.append { (_, _) in
     return SKSpriteNode()
     }.each { (s, d, i) -> () in
         if let sprite = s as? SKSpriteNode {

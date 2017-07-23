@@ -186,11 +186,6 @@ public class MultiSelection<ParentType, NodeType> : InternalMultiSelection<Paren
     @discardableResult public func each(_ eachFn:NodeValueIndexToVoid) -> Self {
         // TODO create more childrens
         for (i, selected) in nodes.enumerated() {
-
-            // unfortunate boxing required to handle tuples stored in
-            // NSMutableDictionary.  Can't push it down to the helper
-            // right now
-
             eachFn(selected, (), i)
         }
         return self;
@@ -219,6 +214,8 @@ public class InternalJoinedSelection<ParentType, NodeType, ValueType> : Internal
 
 }
 
+// MARK: -
+
 // PerfectSelection is a Node-Data join that has values for both sides
 // (assuming someone hasn't futzed with the node graph or metadata)
 // Child types: ExitSelection (WHAT?) and UpdateSelection
@@ -240,8 +237,6 @@ public class PerfectSelection<ParentType, NodeType, ValueType> : InternalJoinedS
     }
 
 }
-
-
 
 // MARK: -
 
@@ -510,7 +505,7 @@ where ParentType : TreeNavigable { // should just be treenavigable here
     /// Append for EnterSelection appends to the parent, not the current node.
     @discardableResult public
     func append<NewNodeType>(constructorFn:(ValueType,Int) -> NewNodeType ) -> AppendedSelection<ParentType, NewNodeType, ValueType>
-    where NewNodeType==ParentType.ChildType, NewNodeType : TreeNavigable & NodeMetadata {
+    where ParentType.ChildType == NewNodeType, NewNodeType : TreeNavigable & NodeMetadata {
 
         // Convenience types
         typealias NewNodeDataType = NodeValuePair<NewNodeType, ValueType>

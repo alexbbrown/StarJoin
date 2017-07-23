@@ -47,7 +47,7 @@ let mySelection = select(node:scene.rootNode)
 //: + Casting is often necessary for dictionaries; '`!`' is used here for brevity - `if let` patterns are also a good option
 mySelection
     .enter()
-    .append { (_, _, _) in
+    .append { (_, _) in
         var sphere = SCNSphere()
         var torus = SCNTorus(ringRadius: 1, pipeRadius: 0.35)
         return SCNNode(geometry: torus)

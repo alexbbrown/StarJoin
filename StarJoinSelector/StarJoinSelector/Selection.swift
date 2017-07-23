@@ -66,6 +66,7 @@ where NodeType : KVC & NodeMetadata {
 
     // This needs generalising - a select on a multiselection returns a multiselection
     // this one just returns a selection for one node.
+    /// Starting point : make the initial selection
     public class func select<NewNodeType>(only node: NewNodeType) -> SingleSelection<NewNodeType> {
         return SingleSelection(node: node)
     }
@@ -102,6 +103,8 @@ where ParentType : TreeNavigable & KVC & NodeMetadata {
     typealias NodeType = ParentType
 
     // These nodes should be descendants of the parent node
+    /// Step 2. select the children -
+    /// * example: select(all: root.children)
     public override func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
     where NewNodeType : KVC & NodeMetadata {
         return .init(parent: self.nodes[0], nodes: nodes)
@@ -750,6 +753,7 @@ extension PerfectSelection {
         //
         // nodes[0] would crash if there are... wait for it... 0 nodes.
 
+        // It's too hard to fit parents into this model, so I'm just throwing up my hands.  There's no parent.
         return .init(parent: (), nodeData: newNodeData, nodes: newNodes)
 
         //

@@ -593,35 +593,27 @@ where ParentType : TreeNavigable { // should just be treenavigable here
             parent.add(child:newNode) // oops this is NOT generic - can I fix with protocol?  also - use insert?
 
         }
-        // actually self should return the appended selection!
-        // FIXME: let's get rid of as NewNodeType
-        return AppendedSelection<ParentType, NewNodeType, ValueType>(parent: parent, nodeData: nodeData, nodes: newNodes)
+
+        return .self(parent: parent, nodeData: nodeData, nodes: newNodes)
     }
 }
 
 // MARK: -
 
 // Exit Selection deals with exiting nodes only
-// TODO: deprecate Exit Selection - all it's functionality exists elsewhere (probably)
 // is it joined?... it's prejoined.  we can rejoin it?
 // ExitSelection is not definitely a PerfectJoin - if the initial join is applied
 // to an imperfect join.  We may be able to transmit this information, maybe not.
 final public class ExitSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
 where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType {
 
-//    override fileprivate init(parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType]) {
-//        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
-//    }
-
-    // Remove nodes from the document
+    /// Remove nodes from the document
     // unusually, this function doesn't chain - since the represented nodes are now dead
     public func remove() {
 
-        //let anyArray = self.selection as [AnyObject]
         for node in nodes {
             parent.remove(child: node)
         }
-
     }
 }
 

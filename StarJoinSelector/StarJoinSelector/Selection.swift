@@ -257,7 +257,7 @@ final public class JoinPreSelection<ParentType, NodeType, ValueType>
 where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType == NodeType  {
 
     // Convenience types
-    private typealias NodeDataType = NodeValuePair<NodeType, ValueType>
+    private typealias NodeValuePairType = NodeValuePair<NodeType, ValueType>
 
     // Debug Properties
 
@@ -265,21 +265,17 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     internal var debugNewData:[ValueType] { return boundData } // this TYPE only makes sense for multiply selected things
 
     // computed accessor to get managed nodes & data
-    internal var debugNodes:[NodeType] { get {
-        // the enter (before append) is empty by definition
-        return updateAndEnterNodeData.flatMap { $0.node }
-        }
-        set { }
+    internal var debugNodes:[NodeType] {
+        // the enter (before append) is empty by definition - just get update
+        return updateSelection.nodes
     }
 
     // Properties
 
     internal let parent:ParentType
 
-    /// Vector of Node / Data pairs including the unrealised enter nodes
-    private let updateAndEnterNodeData: [NodeDataType]
-
-    private let updateSelection:(nodes: [NodeType], values: [ValueType])
+    /// Vector of Node / Data pairs including for update
+    private let updateSelection:(pairs: [NodeValuePairType], nodes: [NodeType], values: [ValueType])
 
     /// Vector of (missing) Node / Data pairs for existing nodes
     private let enterValues: [ValueType]
@@ -304,7 +300,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // ISSUE: there may be a race condition if a later selection picks them up
     // while they are in a timed animation and exit.  Should take care to check that
     // such nodes have their timed exit terminated (or that they are not eligible)
-    private let exitSelection:[NodeType]
+    private let exitNodes:[NodeType]
 
 
     // unkeyed version of join init
@@ -312,19 +308,17 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
         self.boundData = boundData;
 
-        var retainedSelection = [NodeType]()
-        var exitSelection = [NodeType]()
-        var updateAndEnterNodeData = [NodeDataType]()
-        var enterValues = [ValueType]()
+        var updateNodes: [NodeType] = []
+        var updatePairs: [NodeValuePairType] = []
+        var enterValues: [ValueType] = []
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
         let boundCount = boundData.count
         let retainedCount = min(boundCount, initialSelection.count)
 
-        retainedSelection.reserveCapacity(retainedCount)
-        exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
-        updateAndEnterNodeData.reserveCapacity(boundData.count)
+        updateNodes.reserveCapacity(retainedCount)
+        updatePairs.reserveCapacity(boundData.count)
         enterValues.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the Simple index case - where unique keys have not been supplied
@@ -334,10 +328,10 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         for (var nodeToUpdate, valueToUpdateWith) in zip(initialSelection, boundData) {
 
             // may want to re-order these 3 statements, depending, when nodeToUpdate is immutable
-            retainedSelection.append(nodeToUpdate)
+            updateNodes.append(nodeToUpdate)
 
-            updateAndEnterNodeData.append(NodeDataType(node: nodeToUpdate,
-                                         value: valueToUpdateWith))
+            updatePairs.append(.init(node: nodeToUpdate,
+                                     value: valueToUpdateWith))
 
             // write the new metadata for the updated node only.
             // TODO: consider handling the old value somehow, too.
@@ -348,17 +342,14 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         enterValues = Array(boundData.dropFirst(initialSelection.count))
 
         // grab the exit selection
-        for excessNode in initialSelection.dropFirst(boundData.count) {
-            exitSelection.append(excessNode)
-        }
+        let exitNodes = initialSelection.dropFirst(boundData.count)
 
-        updateSelection = (nodes:retainedSelection,
-                           values:boundData // dubious - could be retainedData?
-            )
+        updateSelection = (pairs: updatePairs,
+                           nodes: updateNodes,
+                           values: boundData)
 
-        self.exitSelection = exitSelection
+        self.exitNodes = Array(exitNodes)
 
-        self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterValues = enterValues
 
         self.parent = parent
@@ -370,18 +361,18 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 
         self.boundData = boundData;
 
-        var retainedSelection = [NodeType]()
-        var exitSelection = [NodeType]()
-        var updateAndEnterNodeData = [NodeDataType]()
-        var enterValues = [ValueType]()
+        var updateNodes: [NodeType] = []
+        var updatePairs: [NodeValuePairType] = []
+        var exitNodes: [NodeType] = []
+        var enterValues: [ValueType] = []
 
         // count up how many nodes to preserve, how many to create and how many to destroy.
         // note that for simple indexed joins, we either create OR destroy, not both
         let retainedCount = min(boundData.count,initialSelection.count)
 
-        retainedSelection.reserveCapacity(retainedCount)
-        exitSelection.reserveCapacity(max(0,initialSelection.count - boundData.count))
-        updateAndEnterNodeData.reserveCapacity(boundData.count)
+        updateNodes.reserveCapacity(retainedCount)
+        updatePairs.reserveCapacity(boundData.count)
+        exitNodes.reserveCapacity(max(0,initialSelection.count - boundData.count))
         enterValues.reserveCapacity(max(0,boundData.count - initialSelection.count))
 
         // handle the keyed case
@@ -420,14 +411,14 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         // data keys in the nodes.  bind as appropriate
         for (key, var node) in boundNodeDictionary {
             if let updatedValue = boundDataDictionary[key] {
-                retainedSelection.append(node)
+                updateNodes.append(node)
 
-                updateAndEnterNodeData.append(NodeDataType(node: node,
-                                             value: updatedValue))
+                updatePairs.append(NodeValuePairType(node: node,
+                                                     value: updatedValue))
 
                 node.metadata = updatedValue
             } else {
-                exitSelection.append(node)
+                exitNodes.append(node)
 
             }
         }
@@ -435,26 +426,20 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         // update the enter selection by searching for
         // unbound data keys in the nodes.  bind as appropriate
         for (key, updatedValue) in boundDataDictionary {
-            if let _ /* updatedNode */ = boundNodeDictionary[key] {
+            if let _ = boundNodeDictionary[key] {
 
             } else {
-                let newNodeData = NodeDataType(node: nil,
-                                               value: updatedValue)
-
-                // TODO: the nodeData (update set) should not include the new ones
-                // TODO: expect a new merge selection operation!
-                updateAndEnterNodeData.append(newNodeData)
                 enterValues.append(updatedValue)
             }
         }
 
-        updateSelection = (nodes:retainedSelection,
+        updateSelection = (pairs:updatePairs,
+                           nodes:updateNodes,
                            values:boundData // dubious - could be retainedData?
         )
 
-        self.exitSelection = exitSelection
+        self.exitNodes = exitNodes
 
-        self.updateAndEnterNodeData = updateAndEnterNodeData
         self.enterValues = enterValues
 
 //        super.init(parent: parent, nodes: retainedSelection)
@@ -472,17 +457,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // this needs clarifying (and unit testing - can update include enter or not?)
     public func update() -> UpdateSelection<ParentType, NodeType, ValueType> {
 
-        // There's a new plan: this behaviour is naughty now
-        // it should only return the goodNodeData.
-        let goodNodeData = updateAndEnterNodeData.filter { (nodeDataEl:NodeDataType) -> Bool in
-            return nil != nodeDataEl.node
-        }
-
-        let goodNodes = goodNodeData.map { (nodeDataEl) -> NodeType in
-            nodeDataEl.node!
-        }
-
-        return UpdateSelection<ParentType, NodeType, ValueType>(parent: self.parent, nodeData: goodNodeData, nodes:goodNodes)
+        return .init(parent: self.parent, nodeData: updateSelection.pairs, nodes: updateSelection.nodes)
     }
 
     // Return the Exit selection
@@ -494,11 +469,11 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
         // d is now !, not ?; so we don't check.  Perhaps we ONLY exit managed nodes (with metadata?)
         // that doesn't work if we expect to execute on arrays.  But it would work if we always work on
         // selections - even for reselection.
-        let exitNodeData:[NodeDataType] = exitSelection.map { (node:NodeType) in
-            NodeDataType(node: node, value: node.metadata as! ValueType)
+        let exitNodeData:[NodeValuePairType] = self.exitNodes.map { (node:NodeType) in
+            NodeValuePairType(node: node, value: node.metadata as! ValueType)
         }
 
-        return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitSelection)
+        return .init(parent: self.parent, nodeData: exitNodeData, nodes: exitNodes)
     }
 
 }
@@ -516,19 +491,6 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
 // for perfect selection (update selection) can we do away with the parent?  If we aren't allowed to BIND again, we could.
 final public class UpdateSelection<ParentType, NodeType, ValueType> : PerfectSelection<ParentType, NodeType, ValueType>
 where ParentType : TreeNavigable, NodeType : NodeMetadata {
-
-    // Properties
-
-    // Initializers
-
-//    internal override init (parent:ParentType, nodeData: [NodeDataType], nodes: [NodeType])
-//    {
-//        super.init(parent: parent, nodeData: nodeData, nodes: nodes)
-//    }
-
-    override fileprivate var data:[ValueType] { get {
-        return nodesValues.map { $0.value }
-        } } // this TYPE only makes sense for multiply selected things
 
     public func merge(with enterSelection:AppendedSelection<ParentType, NodeType, ValueType>) -> UpdateSelection<ParentType, NodeType, ValueType> {
 

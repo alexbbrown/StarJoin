@@ -97,7 +97,7 @@ where NodeType : KVC & NodeMetadata {
 // Selections support simple operations such as append - which generate
 // new selections.
 // this might be a selection of a parent only - we should distinguish between this and grabbing a single node to manipulate it
-public class SingleSelection<ParentType> : Selection<ParentType, ParentType>
+public class SingleSelection<ParentType> : Selection<Void, ParentType>
 where ParentType : TreeNavigable & KVC & NodeMetadata {
 
     typealias NodeType = ParentType
@@ -105,7 +105,7 @@ where ParentType : TreeNavigable & KVC & NodeMetadata {
     // These nodes should be descendants of the parent node
     /// Step 2. select the children -
     /// * example: select(all: root.children)
-    public override func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
+    public func select<NewNodeType>(all nodes: [NewNodeType]) -> MultiSelection<ParentType, NewNodeType>
     where NewNodeType : KVC & NodeMetadata {
         return .init(parent: self.nodes[0], nodes: nodes)
     }

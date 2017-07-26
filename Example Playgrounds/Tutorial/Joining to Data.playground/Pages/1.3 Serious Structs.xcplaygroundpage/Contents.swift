@@ -43,7 +43,7 @@ let mySelection = select(node:scene as SKNode)
 mySelection
     .enter()
     .append { (_, _) in SKSpriteNode() }
-    .attr("position") { (s, d, i) in NSValue(point:d.position) }
-    .attr("size") { (s, d, i) in NSValue(size:d.size) }
+    .attr("position") { (s, d, i) in d.position }
+    .attr("size") { (s, d, i) in d.size }
     .attr("color") { (s, d, i) in d.color }
 //: [Next–Section 2–evolving data](@next)

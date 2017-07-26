@@ -39,6 +39,7 @@ var myDataItems = [
     (x:200, y:200, color:#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), size:50),
     (x:300, y:300, color:#colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), size:50),
 ]
+
 /*:
  **`Select`ion** is a key concept in StarJoin.  It means picking a UI element or set of elements that we are going to create and modify.  We are going to add children to the scene, so we modify it:
 */

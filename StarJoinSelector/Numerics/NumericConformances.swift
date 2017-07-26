@@ -36,6 +36,7 @@ extension Double: SJFloatingPointType {
 }
 
 extension Float: SJFloatingPointType {
+
     public func pow(_ lhs: Float, _ rhs: Float) -> Float {
         return Darwin.pow(lhs, rhs)
     }

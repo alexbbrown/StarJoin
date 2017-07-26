@@ -131,7 +131,7 @@ open class DateExtent<D:SJFloatingPointType> : LinearExtent<D> where D.Stride ==
         // get the first hour
         let firstDate = domain[0]
         let roundBy = D(4*3600)
-        let roundedHour:D = firstDate + (roundBy - firstDate % roundBy)
+        let roundedHour:D = firstDate + (roundBy - firstDate.truncatingRemainder(dividingBy:roundBy))
 
         let ticks = stride(from: roundedHour, through: domain[1], by: 14400)
 

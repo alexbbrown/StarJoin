@@ -31,12 +31,13 @@ public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
     static func *(_:Self,_:Self) -> Self
     static func /(_:Self,_:Self) -> Self
     static func -(_:Self,_:Self) -> Self
-    static func %(_:Self,_:Self) -> Self
+//    static func %(_:Self,_:Self) -> Self
 
     func pow(_:Self,_:Self) -> Self
     func ceil(_:Self) -> Self
     func floor(_:Self) -> Self
     func log(_:Self) -> Self
+    func truncatingRemainder(dividingBy other: Self) -> Self
 
     init(integerLiteral value: IntegerLiteralType)
     init(floatLiteral value: FloatLiteralType)
@@ -44,6 +45,7 @@ public protocol SJFloatingPointType : ExpressibleByFloatLiteral, FloatingPoint {
 
     init(_ value: Float)
     init(_ value: Double)
+
 }
 
 

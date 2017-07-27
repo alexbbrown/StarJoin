@@ -10,6 +10,7 @@
 		18C166071F294CD300B95357 /* StarJoinUIViewAdaptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C165FD1F294CD300B95357 /* StarJoinUIViewAdaptor.framework */; };
 		18C1660C1F294CD300B95357 /* StarJoinUIViewAdaptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1660B1F294CD300B95357 /* StarJoinUIViewAdaptorTests.swift */; };
 		18C1660E1F294CD300B95357 /* StarJoinUIViewAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 18C166001F294CD300B95357 /* StarJoinUIViewAdaptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		18C1662F1F294CF800B95357 /* UIViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1662E1F294CF800B95357 /* UIViewAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		18C166061F294CD300B95357 /* StarJoinUIViewAdaptorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinUIViewAdaptorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C1660B1F294CD300B95357 /* StarJoinUIViewAdaptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinUIViewAdaptorTests.swift; sourceTree = "<group>"; };
 		18C1660D1F294CD300B95357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18C1662E1F294CF800B95357 /* UIViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				18C166001F294CD300B95357 /* StarJoinUIViewAdaptor.h */,
 				18C166011F294CD300B95357 /* Info.plist */,
+				18C1662E1F294CF800B95357 /* UIViewAdaptor.swift */,
 			);
 			path = StarJoinUIViewAdaptor;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				TargetAttributes = {
 					18C165FC1F294CD300B95357 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					18C166051F294CD300B95357 = {
 						CreatedOnToolsVersion = 9.0;
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C1662F1F294CF800B95357 /* UIViewAdaptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +337,7 @@
 		18C166121F294CD300B95357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
@@ -344,6 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinUIViewAdaptor;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -352,6 +359,7 @@
 		18C166131F294CD300B95357 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
@@ -372,6 +380,7 @@
 		18C166151F294CD300B95357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinUIViewAdaptorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -385,6 +394,7 @@
 		18C166161F294CD300B95357 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinUIViewAdaptorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

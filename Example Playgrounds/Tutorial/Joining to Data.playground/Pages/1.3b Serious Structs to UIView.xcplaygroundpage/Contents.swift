@@ -2,8 +2,16 @@
 //:# Structs to UIView
 //: * note: Set the Platform to iOS to run this playground
 import StarJoinSelector
-import StarJoinUIViewAdaptor
+#if os(iOS)
 import UIKit
+import StarJoinUIViewAdaptor
+#else
+import AppKit
+import StarJoinNSViewAdaptor
+typealias UIView=NSView
+typealias UIColor=NSColor
+typealias UIButton=NSButton
+#endif
 /*:
  Enable SpriteKit for Playground
  */
@@ -28,23 +36,19 @@ var nodeArray = [
     RowStruct(position: CGPoint(x: 300, y: 300), color: .yellow, size: CGSize(width: 50, height: 50)),
 ]
 //: **Selection** picks a root node and 'joins' it to the data
-
 let mySelection = select(node:scene as UIView)
     .select(all: scene.childNodes)
     .join(nodeArray)
-
 //: **enter** focuses on the new nodes we need,
 //: **append** summons a new sprite, and
 //: **attr** sets sprite properties using the **struct** data value `d`.  `s` is the sprite, which can be useful.
 mySelection
     .enter()
-    .append { (_, _) in UIButton(type:.system) }
+    .append { (_, _) in UIButton() }
     .attr("frame") { (s, d, i) in CGRect(origin:d.position, size:d.size) }
     .attr("backgroundColor") { (s, d, i) in d.color }
     .each { (s, d, i) in
         (s as? UIButton)?.setTitle("🐞", for: .normal) }
     .attr("showsTouchWhenHighlighted") { (s, d, i) in true }
     .attr("layer.cornerRadius") { (s, d, i) in d.size.width / 4 }
-
 //: [Next–Section 2–evolving data](@next)
-

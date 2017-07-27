@@ -49,6 +49,41 @@ extension SKNode: KVCAnimated {
             [.wait(forDuration:withDelay),
              .removeFromParent()]))
     }
+
+    public func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
+    {
+        if let toValue = toValue {
+
+            switch keyPath {
+            case "position":
+                run(.move(to: (toValue as! NSValue).cgPointValue,
+                          duration: withDuration))
+
+            case "xPosition":
+                run(.moveTo(x: toValue as! CGFloat, duration: withDuration))
+
+            case "yPosition":
+                run(.moveTo(y: toValue as! CGFloat, duration: withDuration))
+
+            case "scale":
+                run(.scale(to: toValue as! CGFloat, duration: withDuration))
+
+            case "size":
+                if let sizeO = toValue as? NSValue {
+                    let size = sizeO.cgPointValue
+                    run(.resize(toWidth: size.x, height: size.y, duration: withDuration))
+                }
+            case "color":
+                run(.colorize(with: toValue as! SKColor, colorBlendFactor:1.0, duration: withDuration))
+
+            case "alpha":
+                run(.fadeAlpha(to: toValue as! CGFloat, duration: withDuration))
+
+            default:
+                setValue(toValue, forKeyPath: keyPath)
+            }
+        }
+    }
 }
 
 extension SKNode: NodeMetadata {
@@ -76,41 +111,6 @@ extension SKNode: KVC {
     {
         if let toValue = toValue {
             self.setValue(toValue, forKeyPath: keyPath)
-        }
-    }
-
-    public func setNodeValueAnimated(_ toValue:Any?, forKeyPath keyPath:String, withDuration: TimeInterval)
-    {
-        if let toValue = toValue {
-
-            switch keyPath {
-            case "position":
-                run(.move(to: (toValue as! NSValue).cgPointValue,
-                                    duration: withDuration))
-
-            case "xPosition":
-                run(.moveTo(x: toValue as! CGFloat, duration: withDuration))
-
-            case "yPosition":
-                run(.moveTo(y: toValue as! CGFloat, duration: withDuration))
-
-            case "scale":
-                run(.scale(to: toValue as! CGFloat, duration: withDuration))
-
-            case "size":
-                if let sizeO = toValue as? NSValue {
-                    let size = sizeO.cgPointValue
-                    run(.resize(toWidth: size.x, height: size.y, duration: withDuration))
-                }
-            case "color":
-                run(.colorize(with: toValue as! SKColor, colorBlendFactor:1.0, duration: withDuration))
-
-            case "alpha":
-                run(.fadeAlpha(to: toValue as! CGFloat, duration: withDuration))
-
-            default:
-                setValue(toValue, forKeyPath: keyPath)
-            }
         }
     }
 

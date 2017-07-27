@@ -130,6 +130,16 @@ extension SKNode: KVC {
     //    }
 }
 
+//extension SKNode: SJKeyPath {
+//        
+//    subscript<Value>(attr path: WritableKeyPath<T, Value>) -> Value { get {}
+//        set (newValue) {
+//            self[keyPath:path] = newValue
+//        }
+//        
+//    }
+//}
+
 // Convenience function for selection
 
 public func allChildrenSelector(node:SKNode) -> [SKNode] {

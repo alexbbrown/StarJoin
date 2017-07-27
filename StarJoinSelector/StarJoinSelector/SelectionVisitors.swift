@@ -73,13 +73,19 @@ extension PerfectSelection where NodeType : KVC
 
 
 
+
 extension PerfectSelection {
-    public subscript<Value>(attrR path: ReferenceWritableKeyPath<NodeType, Value>) -> Value {
-        set { /* nothing */ }
-        get { fatalError() }
-    }
+    
+//    public subscript<Value>(attrR path: ReferenceWritableKeyPath<NodeType, Value>) -> Value {
+//        set { /* nothing */ }
+//        get { fatalError() }
+//    }
     public subscript<Value>(attr path: WritableKeyPath<NodeType, Value>) -> Value {
-        set { /* nothing */ }
+        set (newValue) {
+            for var nodeValue in nodesValues {
+                nodeValue.node?[keyPath:path] = newValue
+            }
+        }
         get { fatalError() }
     }
 }

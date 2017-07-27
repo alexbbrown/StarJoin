@@ -53,3 +53,14 @@ public protocol KVCAnimated {
     // this feels closer to TreeNavigable
     func removeNodeFromParent(withDelay: TimeInterval)
 }
+
+public protocol SuperKeyPath {
+    
+}
+
+//public protocol SJKeyPath : SuperKeyPath {
+//    associatedtype T : SuperKeyPath
+//    subscript<Value>(attr path: WritableKeyPath<T, Value>) -> Value { get  set }
+//
+//}
+

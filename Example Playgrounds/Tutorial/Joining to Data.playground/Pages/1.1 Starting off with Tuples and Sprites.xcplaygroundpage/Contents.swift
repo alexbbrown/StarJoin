@@ -63,8 +63,9 @@ let appendSelection = mySelection
 
 let KP = \SKNode.alpha
 
-appendSelection[attr:KP] = 0.0
-//    #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+appendSelection[attr:\SKNode.alpha] = 0.0
+//appendSelection[attr:\SKSpriteNode.alpha] = 0.0
+//    #colorLiteral(red: 0.3411764801, green: 0 .6235294342, blue: 0.1686274558, alpha: 1)
 
 
 /*:

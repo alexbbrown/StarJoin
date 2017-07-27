@@ -69,6 +69,19 @@ extension PerfectSelection where NodeType : KVC
 
 }
 
+// https://github.com/apple/swift-evolution/blob/master/proposals/0161-key-paths.md
+
+extension PerfectSelection {
+    public subscript<Value>(attrR path: ReferenceWritableKeyPath<NodeType, Value>) -> Value {
+        set { /* nothing */ }
+        get { fatalError() }
+    }
+    public subscript<Value>(attr path: WritableKeyPath<NodeType, Value>) -> Value {
+        set { /* nothing */ }
+        get { fatalError() }
+    }
+}
+
 extension PerfectSelection {
 
     public typealias NodeValueIndexToVoid = (NodeType?,ValueType,Int) -> ()

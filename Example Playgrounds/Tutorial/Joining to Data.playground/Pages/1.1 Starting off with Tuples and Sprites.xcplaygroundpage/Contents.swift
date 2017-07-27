@@ -51,7 +51,7 @@ let mySelection = select(node:scene)
 //: In spritejoin you `join` data to your graphics elements, matching each data item to a sprite.  Even if they don't exist yet.
     .join(myDataItems)
 //: the `enter` selection operator focuses on the new (missing) nodes we need to match the data we just joined:
-mySelection
+let appendSelection = mySelection
     .enter()
 //: then **`append`** (selection mutation operator) summons a new sprite to stand in for each data item, and
     .append { (d, i) in SKSpriteNode() }
@@ -60,6 +60,13 @@ mySelection
     .attr("position") { (s, d, i) in CGPoint(x: d.x, y: d.y) }
     .attr("size") { (s, d, i) in CGSize(width: d.size, height: d.size) }
     .attr("color") { (s, d, i) in d.color }
+
+let KP = \SKNode.alpha
+
+appendSelection[attr:KP] = 0.0
+//    #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+
+
 /*:
  ## *That's all folks!*
 

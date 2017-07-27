@@ -3,6 +3,8 @@
 
  **We'll show how easy it is to take a pinch of data, add a couple of rules, and draw something on the screen straight away.**
 
+![Example](demo.sprites3.png)
+
  Here are the ingredients we need:
  */
 import StarJoinSelector // a magic brush

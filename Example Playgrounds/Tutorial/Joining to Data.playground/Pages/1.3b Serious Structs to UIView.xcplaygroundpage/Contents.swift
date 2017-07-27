@@ -1,5 +1,6 @@
 //: [Previous-Joining Dictionaries](@previous)
 //:# Structs to UIView
+//: * note: Set the Platform to iOS to run this playground
 import StarJoinSelector
 import StarJoinUIViewAdaptor
 import UIKit
@@ -41,8 +42,7 @@ mySelection
     .attr("frame") { (s, d, i) in CGRect(origin:d.position, size:d.size) }
     .attr("backgroundColor") { (s, d, i) in d.color }
     .each { (s, d, i) in
-        (s as? UIButton)?.setTitle("🐞", for: .normal)
-
+        (s as? UIButton)?.setTitle("🐞", for: .normal) }
     .attr("showsTouchWhenHighlighted") { (s, d, i) in true }
     .attr("layer.cornerRadius") { (s, d, i) in d.size.width / 4 }
 

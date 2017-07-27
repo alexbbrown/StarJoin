@@ -1,15 +1,15 @@
 //: [Previous-Joining Dictionaries](@previous)
 //:# Structs to UIView
 import StarJoinSelector
-import StarJoinUIViewAdaptor
-import UIKit
+import StarJoinNSViewAdaptor
+import AppKit
 /*:
  Enable SpriteKit for Playground
  */
-var sceneView = UIView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
+var sceneView = NSView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 let scene = sceneView
 
-// Add a UIKit View to the Live View
+// Add a AppKit View to the Live View
 import PlaygroundSupport
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 //: **More Serious Data**
@@ -17,7 +17,7 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 //: This example uses an array of typed structs - we could easily use classes too.  You could even use any class in Cocoa or other APIs.
 struct RowStruct {
     let position : CGPoint
-    let color : UIColor
+    let color : NSColor
     let size : CGSize
 }
 
@@ -28,7 +28,7 @@ var nodeArray = [
 ]
 //: **Selection** picks a root node and 'joins' it to the data
 
-let mySelection = select(node:scene as UIView)
+let mySelection = select(node:scene as NSView)
     .select(all: scene.childNodes)
     .join(nodeArray)
 
@@ -37,13 +37,9 @@ let mySelection = select(node:scene as UIView)
 //: **attr** sets sprite properties using the **struct** data value `d`.  `s` is the sprite, which can be useful.
 mySelection
     .enter()
-    .append { (_, _) in UIButton(type:.system) }
-    .attr("frame") { (s, d, i) in CGRect(origin:d.position, size:d.size) }
-    .attr("backgroundColor") { (s, d, i) in d.color }
-    .each { (s, d, i) in
-        (s as? UIButton)?.setTitle("🐞", for: .normal)
-
-    .attr("showsTouchWhenHighlighted") { (s, d, i) in true }
+    .append { (_, _) in NSButton() }
+    .attr(#keyPath(NSButton.frame)) { (s, d, i) in CGRect(origin:d.position, size:d.size) }
+    .attr(#keyPath(NSButton.title), toValue:"🐞")
     .attr("layer.cornerRadius") { (s, d, i) in d.size.width / 4 }
 
 //: [Next–Section 2–evolving data](@next)

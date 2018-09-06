@@ -1,5 +1,5 @@
 //: [Previous-Joining Dictionaries](@previous)
-//:# Structs to UIView
+//:# Structs to NSView
 import StarJoinSelector
 import StarJoinNSViewAdaptor
 import AppKit

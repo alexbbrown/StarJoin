@@ -168,7 +168,7 @@ where ParentType : TreeNavigable, NodeType : NodeMetadata, ParentType.ChildType 
     // computed accessor to get managed nodes & data
     internal var debugNodes:[NodeType] {
         // the enter (before append) is empty by definition - just get update
-        return updateNodesValues.flatMap { $0.node }
+        return updateNodesValues.compactMap { $0.node }
     }
 
     // Properties

@@ -48,7 +48,10 @@ mySelection
     .attr("frame") { (s, d, i) in CGRect(origin:d.position, size:d.size) }
     .attr("backgroundColor") { (s, d, i) in d.color }
     .each { (s, d, i) in
-        (s as? UIButton)?.setTitle("🐞", for: .normal) }
+        (s as? UIButton)
+        (s as? UIButton)?.title = "🐞" }
+#if os(iOS)
     .attr("showsTouchWhenHighlighted") { (s, d, i) in true }
+#endif
     .attr("layer.cornerRadius") { (s, d, i) in d.size.width / 4 }
 //: [Next–Section 2–evolving data](@next)

@@ -256,12 +256,12 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         if animationDuration > 0 && self.enterScale != nil {
 
             enterTicks
-                .attr("alpha",toValue: 0)
+                .attr("alpha",toValue: CGFloat(0.0))
                 .transition(duration: animationDuration)
 
             enterTicks
                 .transition(duration: animationDuration)
-                .attr("alpha",toValue: 1)
+                .attr("alpha",toValue: CGFloat(1.0))
         }
 
         let mergedTicks = tickJoin
@@ -313,7 +313,7 @@ public class SKAxis<DomainType:Hashable,RangeType:SJFloatingPointType> {
         // scale lookups of exiting values on updated scales can be problematic for ordinals where the
         // value is no longer present.  Should fail gracefully in this case.
         animatedExit
-            .attr("alpha",toValue: 0.0)
+            .attr("alpha",toValue: CGFloat(0.0))
 
 
         switch self.side {

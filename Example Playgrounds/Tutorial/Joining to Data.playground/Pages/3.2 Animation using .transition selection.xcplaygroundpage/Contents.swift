@@ -70,7 +70,7 @@ func updatePlot() {
     mySelection
         .exit()
         .transition(duration: 0.5)
-        .attr("alpha", toValue:0)
+        .attr("alpha", toValue:0) // CGFloat?
         .remove()
 
     // existing nodes go red - or blue on purge cycles

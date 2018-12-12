@@ -260,9 +260,9 @@ class GameScene: SKScene {
             })
 
         enterAppendedSelection
-            .attr("alpha", toValue:0)
-            .transition(duration:0.5)
-            .attr("alpha", toValue:1)
+            .attr("alpha", toValue:CGFloat(0.0))
+            .transition(duration: 0.5)
+            .attr("alpha", toValue:CGFloat(1.0))
 
     }
 

@@ -159,9 +159,9 @@ open class QuoteNode: SKNode {
                 return CGPoint(x:self.newScales.x!.range!.1 + 10,
                     y:self.newScales.y?.scale(closeLastD) ?? 0)
             }
-            .attr("alpha", toValue: 0)
+            .attr("alpha", toValue: CGFloat(0.0))
             .transition(duration: duration)
-            .attr("alpha", toValue: 1)
+            .attr("alpha", toValue: CGFloat(1.0))
             
         mySelection.update().merge(with: appendedSelection)
             .each { (s, d, i) in
@@ -192,7 +192,7 @@ open class QuoteNode: SKNode {
         mySelection
             .exit()
             .transition(duration: duration)
-            .attr("alpha", toValue: 0)
+            .attr("alpha", toValue: CGFloat(0))
             .remove()
         
 //        // existing nodes go red - or blue on purge cycles

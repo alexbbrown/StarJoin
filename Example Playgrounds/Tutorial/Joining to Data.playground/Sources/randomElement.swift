@@ -1,5 +1,7 @@
 import Foundation
 
+// TODO: these are no longer needed since Random is available in swift!
+
 public extension CountableRange {
     /// return a random element of the range using arc4random
     func randomElement() -> Bound {

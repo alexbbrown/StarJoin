@@ -25,6 +25,6 @@ let package = Package(
             dependencies: ["StarJoinSelector"]),
         .testTarget(
             name: "StarJoinSpriteKitAdaptorTests",
-            dependencies: ["StarJoinSpriteKitAdaptor"]),
+            dependencies: ["StarJoinSelector", "StarJoinSpriteKitAdaptor"]),
     ]
 )

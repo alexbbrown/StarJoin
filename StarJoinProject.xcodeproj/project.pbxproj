@@ -90,20 +90,6 @@
 			remoteGlobalIDString = 184EEAED19AA8B70009B81C8;
 			remoteInfo = SpriteJoinSampleDataTests;
 		};
-		18EBE8141F1E8EDE00C57088 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18EBE7F51F1E8EDC00C57088;
-			remoteInfo = StarJoinSpriteKitAdaptor;
-		};
-		18EBE8161F1E8EDE00C57088 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18EBE7FE1F1E8EDD00C57088;
-			remoteInfo = StarJoinSpriteKitAdaptorTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -150,7 +136,6 @@
 		18B61A1D1F218B940006BD26 /* SpriteJoinSampleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteJoinSampleData.h; sourceTree = "<group>"; };
 		18B61A1E1F218B940006BD26 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		18B61A1F1F218B940006BD26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSpriteKitAdaptor.xcodeproj; path = StarJoinSpriteKitAdaptor/StarJoinSpriteKitAdaptor.xcodeproj; sourceTree = "<group>"; };
 		18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Joining to Data.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -351,18 +336,8 @@
 				1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */,
 				1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */,
 				182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */,
-				18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */,
 			);
 			path = AdaptorsOld;
-			sourceTree = "<group>";
-		};
-		18EBE8101F1E8EDD00C57088 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				18EBE8151F1E8EDE00C57088 /* StarJoinSpriteKitAdaptor.framework */,
-				18EBE8171F1E8EDE00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		18EBE81D1F1EA5FE00C57088 /* Tutorial */ = {
@@ -416,10 +391,6 @@
 				{
 					ProductGroup = 182CE3C91F21B21700D4BBB6 /* Products */;
 					ProjectRef = 182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */;
-				},
-				{
-					ProductGroup = 18EBE8101F1E8EDD00C57088 /* Products */;
-					ProjectRef = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
 				},
 				{
 					ProductGroup = 18610B3E1F217FA3006BF37E /* Products */;
@@ -502,20 +473,6 @@
 			fileType = wrapper.cfbundle;
 			path = SpriteJoinSampleDataTests.xctest;
 			remoteRef = 18B61A241F218B940006BD26 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18EBE8151F1E8EDE00C57088 /* StarJoinSpriteKitAdaptor.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = StarJoinSpriteKitAdaptor.framework;
-			remoteRef = 18EBE8141F1E8EDE00C57088 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18EBE8171F1E8EDE00C57088 /* StarJoinSpriteKitAdaptorTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StarJoinSpriteKitAdaptorTests.xctest;
-			remoteRef = 18EBE8161F1E8EDE00C57088 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

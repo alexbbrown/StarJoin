@@ -90,20 +90,6 @@
 			remoteGlobalIDString = 18610B2E1F217FA3006BF37E;
 			remoteInfo = StarJoinStocksTests;
 		};
-		187E743F1F1DFDE200AE571F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 187E74201F1DFDE000AE571F;
-			remoteInfo = StarJoinSelector;
-		};
-		187E74411F1DFDE200AE571F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 187E74291F1DFDE000AE571F;
-			remoteInfo = StarJoinSelectorTests;
-		};
 		18B61A221F218B940006BD26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
@@ -176,7 +162,7 @@
 		187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleEmptyScene.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSelector.xcodeproj; path = StarJoinSelector/StarJoinSelector.xcodeproj; sourceTree = "<group>"; };
+		18822F0A278FFD1E001392B9 /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = "../../../Radar Junk/StarJoinSelector"; sourceTree = "<group>"; };
 		18A753821F234E0500F9BA54 /* Scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratch.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18B61A121F218B940006BD26 /* apple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apple.json; sourceTree = "<group>"; };
@@ -302,22 +288,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		187E743B1F1DFDE000AE571F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				187E74401F1DFDE200AE571F /* StarJoinSelector.framework */,
-				187E74421F1DFDE200AE571F /* StarJoinSelectorTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
+				18822F0A278FFD1E001392B9 /* StarJoinSelector */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
 				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
-				187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
 				18EBE8201F1EA76D00C57088 /* Example Playgrounds */,
 			);
@@ -479,10 +456,6 @@
 					ProjectRef = 182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */;
 				},
 				{
-					ProductGroup = 187E743B1F1DFDE000AE571F /* Products */;
-					ProjectRef = 187E743A1F1DFDE000AE571F /* StarJoinSelector.xcodeproj */;
-				},
-				{
 					ProductGroup = 18EBE8101F1E8EDD00C57088 /* Products */;
 					ProjectRef = 18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */;
 				},
@@ -571,20 +544,6 @@
 			fileType = wrapper.cfbundle;
 			path = StarJoinStocksTests.xctest;
 			remoteRef = 18610B4E1F217FA5006BF37E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		187E74401F1DFDE200AE571F /* StarJoinSelector.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = StarJoinSelector.framework;
-			remoteRef = 187E743F1F1DFDE200AE571F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		187E74421F1DFDE200AE571F /* StarJoinSelectorTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StarJoinSelectorTests.xctest;
-			remoteRef = 187E74411F1DFDE200AE571F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		18B61A231F218B940006BD26 /* SpriteJoinSampleData.framework */ = {

@@ -62,20 +62,6 @@
 			remoteGlobalIDString = 182CE3B71F21B21700D4BBB6;
 			remoteInfo = StarJoinSceneKitAdaptorTests;
 		};
-		184309FE1F29B20100817578 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 184309F31F29B1FF00817578 /* StarJoinNSViewAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 184309D91F29B1FF00817578;
-			remoteInfo = StarJoinNSViewAdaptor;
-		};
-		18430A001F29B20100817578 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 184309F31F29B1FF00817578 /* StarJoinNSViewAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 184309E21F29B1FF00817578;
-			remoteInfo = StarJoinNSViewAdaptorTests;
-		};
 		18610B4C1F217FA5006BF37E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */;
@@ -103,20 +89,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 184EEAED19AA8B70009B81C8;
 			remoteInfo = SpriteJoinSampleDataTests;
-		};
-		18C1662A1F294CD500B95357 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18C166171F294CD300B95357 /* StarJoinUIViewAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18C165FD1F294CD300B95357;
-			remoteInfo = StarJoinUIViewAdaptor;
-		};
-		18C1662C1F294CD500B95357 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18C166171F294CD300B95357 /* StarJoinUIViewAdaptor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18C166061F294CD300B95357;
-			remoteInfo = StarJoinUIViewAdaptorTests;
 		};
 		18EBE8141F1E8EDE00C57088 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -155,14 +127,17 @@
 		180370671F21697100131E7E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		180370681F21697100131E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180370691F21697100131E7E /* SpriteJoinDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SpriteJoinDemo.xcodeproj; sourceTree = "<group>"; };
+		1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinNSViewAdaptor; path = ../StarJoinNSViewAdaptor; sourceTree = "<group>"; };
+		1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinUIViewAdaptor; path = ../StarJoinUIViewAdaptor; sourceTree = "<group>"; };
+		1827BBE1279002FB00D15E01 /* StarJoinSceneKitAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSceneKitAdaptor; path = ../StarJoinSceneKitAdaptor; sourceTree = "<group>"; };
+		1827BBE22790031100D15E01 /* StarJoinSpriteKitAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSpriteKitAdaptor; path = ../StarJoinSpriteKitAdaptor; sourceTree = "<group>"; };
 		182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSceneKitAdaptor.xcodeproj; path = StarJoinSceneKitAdaptor/StarJoinSceneKitAdaptor.xcodeproj; sourceTree = "<group>"; };
 		1841F0D61F1DEA810049A474 /* GameTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GameTemplate.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		184309F31F29B1FF00817578 /* StarJoinNSViewAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinNSViewAdaptor.xcodeproj; path = StarJoinNSViewAdaptor/StarJoinNSViewAdaptor.xcodeproj; sourceTree = "<group>"; };
 		18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinStocks.xcodeproj; path = StarJoinStocks/StarJoinStocks.xcodeproj; sourceTree = "<group>"; };
 		187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleEmptyScene.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18822F0A278FFD1E001392B9 /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = "../../../Radar Junk/StarJoinSelector"; sourceTree = "<group>"; };
+		18822F0A278FFD1E001392B9 /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoinSelector; sourceTree = "<group>"; };
 		18A753821F234E0500F9BA54 /* Scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratch.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18B61A121F218B940006BD26 /* apple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apple.json; sourceTree = "<group>"; };
@@ -175,7 +150,6 @@
 		18B61A1D1F218B940006BD26 /* SpriteJoinSampleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteJoinSampleData.h; sourceTree = "<group>"; };
 		18B61A1E1F218B940006BD26 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		18B61A1F1F218B940006BD26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18C166171F294CD300B95357 /* StarJoinUIViewAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinUIViewAdaptor.xcodeproj; path = StarJoinUIViewAdaptor/StarJoinUIViewAdaptor.xcodeproj; sourceTree = "<group>"; };
 		18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinSpriteKitAdaptor.xcodeproj; path = StarJoinSpriteKitAdaptor/StarJoinSpriteKitAdaptor.xcodeproj; sourceTree = "<group>"; };
 		18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Joining to Data.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -261,20 +235,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1827BBE32790035B00D15E01 /* Adaptors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Adaptors;
+			sourceTree = "<group>";
+		};
 		182CE3C91F21B21700D4BBB6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				182CE3D41F21B21800D4BBB6 /* StarJoinSceneKitAdaptor.framework */,
 				182CE3D61F21B21800D4BBB6 /* StarJoinSceneKitAdaptorTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		184309F41F29B1FF00817578 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				184309FF1F29B20100817578 /* StarJoinNSViewAdaptor.framework */,
-				18430A011F29B20100817578 /* StarJoinNSViewAdaptorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,7 +266,8 @@
 				18822F0A278FFD1E001392B9 /* StarJoinSelector */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
-				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
+				1827BBE32790035B00D15E01 /* Adaptors */,
+				18EBE7E81F1E8EAF00C57088 /* AdaptorsOld */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
 				18EBE8201F1EA76D00C57088 /* Example Playgrounds */,
 			);
@@ -370,24 +343,17 @@
 			path = SpriteJoinSampleData;
 			sourceTree = "<group>";
 		};
-		18C166181F294CD300B95357 /* Products */ = {
+		18EBE7E81F1E8EAF00C57088 /* AdaptorsOld */ = {
 			isa = PBXGroup;
 			children = (
-				18C1662B1F294CD500B95357 /* StarJoinUIViewAdaptor.framework */,
-				18C1662D1F294CD500B95357 /* StarJoinUIViewAdaptorTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {
-			isa = PBXGroup;
-			children = (
-				184309F31F29B1FF00817578 /* StarJoinNSViewAdaptor.xcodeproj */,
-				18C166171F294CD300B95357 /* StarJoinUIViewAdaptor.xcodeproj */,
+				1827BBE22790031100D15E01 /* StarJoinSpriteKitAdaptor */,
+				1827BBE1279002FB00D15E01 /* StarJoinSceneKitAdaptor */,
+				1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */,
+				1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */,
 				182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */,
 				18EBE80F1F1E8EDD00C57088 /* StarJoinSpriteKitAdaptor.xcodeproj */,
 			);
-			path = Adaptors;
+			path = AdaptorsOld;
 			sourceTree = "<group>";
 		};
 		18EBE8101F1E8EDD00C57088 /* Products */ = {
@@ -448,10 +414,6 @@
 					ProjectRef = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
 				},
 				{
-					ProductGroup = 184309F41F29B1FF00817578 /* Products */;
-					ProjectRef = 184309F31F29B1FF00817578 /* StarJoinNSViewAdaptor.xcodeproj */;
-				},
-				{
 					ProductGroup = 182CE3C91F21B21700D4BBB6 /* Products */;
 					ProjectRef = 182CE3C81F21B21700D4BBB6 /* StarJoinSceneKitAdaptor.xcodeproj */;
 				},
@@ -462,10 +424,6 @@
 				{
 					ProductGroup = 18610B3E1F217FA3006BF37E /* Products */;
 					ProjectRef = 18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */;
-				},
-				{
-					ProductGroup = 18C166181F294CD300B95357 /* Products */;
-					ProjectRef = 18C166171F294CD300B95357 /* StarJoinUIViewAdaptor.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -518,20 +476,6 @@
 			remoteRef = 182CE3D51F21B21800D4BBB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184309FF1F29B20100817578 /* StarJoinNSViewAdaptor.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = StarJoinNSViewAdaptor.framework;
-			remoteRef = 184309FE1F29B20100817578 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18430A011F29B20100817578 /* StarJoinNSViewAdaptorTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StarJoinNSViewAdaptorTests.xctest;
-			remoteRef = 18430A001F29B20100817578 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		18610B4D1F217FA5006BF37E /* StarJoinStocks.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -558,20 +502,6 @@
 			fileType = wrapper.cfbundle;
 			path = SpriteJoinSampleDataTests.xctest;
 			remoteRef = 18B61A241F218B940006BD26 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18C1662B1F294CD500B95357 /* StarJoinUIViewAdaptor.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = StarJoinUIViewAdaptor.framework;
-			remoteRef = 18C1662A1F294CD500B95357 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18C1662D1F294CD500B95357 /* StarJoinUIViewAdaptorTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StarJoinUIViewAdaptorTests.xctest;
-			remoteRef = 18C1662C1F294CD500B95357 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		18EBE8151F1E8EDE00C57088 /* StarJoinSpriteKitAdaptor.framework */ = {

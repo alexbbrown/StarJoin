@@ -49,7 +49,11 @@ mySelection
     .attr("frame") { (s, d, i) in CGRect(origin:d.position, size:d.size) }
     .attr("backgroundColor") { (s, d, i) in d.color }
     .each { (s, d, i) in
-        (s as? UIButton)?.setTitle("🐞", for: .normal)
+        #if os(iOS)
+            (s as? UIButton)?.setTitle("🐞", for: .normal)
+        #else
+            (s as? UIButton)?.title = "🐞"
+        #endif
     }
 #if os(iOS)
     .attr("showsTouchWhenHighlighted") { (s, d, i) in true }

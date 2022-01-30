@@ -1,7 +1,7 @@
 //: [Previous-Joining Dictionaries](@previous)
 //:# Structs to NSView
 import StarJoinSelector
-import StarJoinNSViewAdaptor
+import StarJoinNSViewAdaptor // Set your scheme to this
 import AppKit
 /*:
  Enable SpriteKit for Playground

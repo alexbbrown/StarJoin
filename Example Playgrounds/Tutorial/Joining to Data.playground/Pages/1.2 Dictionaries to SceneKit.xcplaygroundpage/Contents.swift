@@ -1,9 +1,10 @@
-//:[Previous–Joining Tuples](@previous)
-//:# Dictionaries to SceneKit Shapes
 /*:
-This one mixes it up - a dictionary instead of a tuple, and some funky donuts from `SceneKit`
+ [Previous–Joining Tuples](@previous)
+ # Dictionaries to SceneKit Shapes
+
+ This one mixes it up - a dictionary instead of a tuple, and some funky donuts from `SceneKit`
  
-![Three Donuts](donuts.png)
+![Screen shot of playground showing live view with 3 donuts](screenshot.png)
 
  * Callout(Recommended settings): Change the Xcode Scheme to `StarJoinSceneKitAdaptor`
 

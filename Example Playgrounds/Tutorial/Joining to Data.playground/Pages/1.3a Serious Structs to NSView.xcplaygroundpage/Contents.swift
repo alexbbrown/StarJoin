@@ -1,7 +1,13 @@
-//: [Previous-Joining Dictionaries](@previous)
-//:# Structs to NSView (macOS)
-//: * Note: To run this playground, Set the Playground Settings Platform to macOS & Set the Scheme to `StarJoinNSViewAdaptor`
+/*:
+ [Previous-Joining Dictionaries](@previous)
+ # Structs to NSView (macOS)
 
+ We can also join data to active controls - to generate UI for macOS Apps
+
+ ![Screen shot of playground showing live view with 3 NSButtons with ladybirds](Screenshot.png)
+
+ * Callout(Recommended settings): Set the Playground Settings Platform to macOS & Set the Scheme to `StarJoinNSViewAdaptor`
+*/
 import StarJoinSelector
 import StarJoinNSViewAdaptor // Set your scheme to this
 import AppKit

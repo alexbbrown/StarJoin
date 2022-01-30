@@ -1,15 +1,20 @@
-//: [Previous-Section 1](@previous)
-/*: [Previous-Joining Structs](@previous)
+//:
+/*: [Previous-Section 1](@previous) | [Previous-Joining Structs](@previous)
 # Evolving data by adding and removing
- This example demonstrates that programmatically generated data (it's random) works just as well as static data.
 
- Since can generate new and different data we use that to get two rounds of data - and demonstrate the process of **refreshing the data and nodes** - where *new nodes* get *new values*, but *existing nodes* ignore their new parameters (*that's a deliberate bug that's fixed in the next example*)
+ This example demonstrates that data doesn't need to be static.  We can generate and update it dynamically, and use that to update the nodes on screen multiple times.
 
- While this is not a perfect
- use case of d3, it is a precursor to animation - where EXISTING nodes get
- their new values animated in over time.
+ ![Screen shot of playground showing squares in different sizes and textures](screenshot.png)
 
- * note: To run this playground, Set the Playground Settings Platform to macOS or iOS & Set the Scheme to `StarJoinSpriteKitAdaptor`
+ But it also contains a bug: some nodes already on screen don't properly get updated: You can see Large and Small boxes, even though the final version of the data is large.
+
+ This issue is fixed in the next example which uses the `update` operator, and in the example after that we use this technique to create animate as the data changes.
+
+ You will see two sizes of boxes: the small ones from the first batch
+
+ There's no animation visible in this example.  See "Change over time".
+
+ * Callout(Recommended settings): Set the Scheme to `StarJoinSpriteKitAdaptor`
 */
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
@@ -43,12 +48,14 @@ func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
 
 var nodeArray = [TableRow]()
 
+//: The first data set has size 60, and few nodes
 for _ in 1...(5..<15).randomElement()! {
     nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 60))
 }
 
 var nodeArray2 = [TableRow]()
 
+//: The second data set has a larger size, but more nodes.
 for _ in 1...(50..<150).randomElement()! {
     // Note: using _ here avoids very expensively updating the "Result" panel.
     _ = nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))

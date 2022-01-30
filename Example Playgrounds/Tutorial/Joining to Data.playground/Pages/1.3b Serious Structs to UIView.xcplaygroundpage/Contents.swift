@@ -1,6 +1,14 @@
-//: [Previous-Joining Dictionaries](@previous)
-//:# Structs to UIView (iOS)
-//: * Note: To run this playground, Set the Playground Settings Platform to iOS & Set the Scheme to `StarJoinUIViewAdaptor`
+/*:
+ [Previous-Joining Dictionaries](@previous)
+
+# Structs to UIView (iOS)
+ We can also join data to active controls - to generate UI for iOS apps
+
+ ![Screen shot of playground showing live view with 3 UIButtons](Screenshot.png)
+
+ * Callout(Recommended settings):  To run this playground, Set the Playground Settings Platform to iOS & Set the Scheme to `StarJoinUIViewAdaptor`
+
+*/
 import StarJoinSelector
 #if os(iOS)
 import UIKit

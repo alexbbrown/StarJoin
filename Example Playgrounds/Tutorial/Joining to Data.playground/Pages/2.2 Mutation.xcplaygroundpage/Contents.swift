@@ -1,7 +1,12 @@
 /*: [Previous-Joining Structs](@previous)
 # Evolving data by updating
- In the mutation example, when new data replaces old data, the `update` method is used to update all nodes - not just the ones that are added.
+ In this example, *mutation*, we improve upon the previous example: when new data replaces old data, the `update` method is used to update all nodes - not just the ones that are added.
 
+ You should see just one size of elements on-screen.
+
+ No animation is visible in this example
+
+ * Callout(Recommended settings): Set the Scheme to `StarJoinSpriteKitAdaptor`
 */
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor

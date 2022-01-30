@@ -3,7 +3,7 @@
 
  **We'll show how easy it is to take a pinch of data, add a couple of rules, and draw something on the screen straight away:**
 
-![Screen shot of playground showing live view with 3 boxes](demo.sprites3.png)
+![Screen shot of playground showing live view with 3 boxes](screenshot.png)
 
  Here are the ingredients we need:
  */

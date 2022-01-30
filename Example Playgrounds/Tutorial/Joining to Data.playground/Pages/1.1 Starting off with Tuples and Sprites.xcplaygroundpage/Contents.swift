@@ -1,9 +1,9 @@
-//:# Getting Started
 /*:
+ # Getting Started
 
- **We'll show how easy it is to take a pinch of data, add a couple of rules, and draw something on the screen straight away.**
+ **We'll show how easy it is to take a pinch of data, add a couple of rules, and draw something on the screen straight away:**
 
-![Example](demo.sprites3.png)
+![Screen shot of playground showing live view with 3 boxes](demo.sprites3.png)
 
  Here are the ingredients we need:
  */
@@ -11,6 +11,8 @@ import StarJoinSelector // a magic brush
 import StarJoinSpriteKitAdaptor // and
 import SpriteKit        // a paintbox
 /*:
+ * Callout(Recommended settings): Set the Xcode Scheme to `StarJoinSpriteKitAdaptor`
+
  This page will be super simple, and each new one adds a little complexity - eventually you will have things flying around on the page.  *Take a peek if you like*.
 
  This series is intended for a beginner to play around and an intermediate user to find inspiration as well as learning more advanced techniques.

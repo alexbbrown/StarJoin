@@ -1,6 +1,6 @@
 //: [Previous-Joining Dictionaries](@previous)
 //:# Structs to NSView (macOS)
-//:   To run this playground, Set the Playground Settings Platform to macOS & Set the Scheme to `StarJoinNSViewAdaptor`
+//: * Note: To run this playground, Set the Playground Settings Platform to macOS & Set the Scheme to `StarJoinNSViewAdaptor`
 
 import StarJoinSelector
 import StarJoinNSViewAdaptor // Set your scheme to this

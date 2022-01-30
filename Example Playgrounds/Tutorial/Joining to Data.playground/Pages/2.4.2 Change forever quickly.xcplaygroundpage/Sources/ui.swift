@@ -1,6 +1,7 @@
 import Foundation
 import SpriteKit
 
+#if os(macOS)
 // The update function is in this file because the code in the sources directory of playgrounds is run at a much faster speed than that in the main view.  It would be even faster in an application
 public func updateNode(s:SKNode?, d:TableRow?, i:Int) -> () {
     if let sprite = s as? SKSpriteNode {
@@ -9,3 +10,4 @@ public func updateNode(s:SKNode?, d:TableRow?, i:Int) -> () {
         sprite.size = CGSize(width: CGFloat(d!.size), height: CGFloat(d!.size))
     }
 }
+#endif

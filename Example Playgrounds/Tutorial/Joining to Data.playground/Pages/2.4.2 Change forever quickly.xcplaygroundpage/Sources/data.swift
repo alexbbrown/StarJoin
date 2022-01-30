@@ -1,8 +1,10 @@
 import SpriteKit
 
+#if os(macOS)
 public typealias TableRow = (x: Float, y: Float, color: NSColor.Name, size: Float)
 
 public let colors = NSColorList(named:.init("Apple"))!
+
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float((0..<xmax).randomElement()),
             y:Float((0..<ymax).randomElement()),
@@ -17,3 +19,6 @@ public func nodeArrayGenerator(count:(min:Int, max:Int), xmax: Int, ymax:Int, si
     }
     return nodeArray
 }
+#endif
+
+

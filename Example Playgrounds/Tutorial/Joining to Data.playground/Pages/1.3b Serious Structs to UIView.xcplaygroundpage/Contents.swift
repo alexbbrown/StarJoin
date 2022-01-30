@@ -56,3 +56,4 @@ mySelection
 #endif
     .attr("layer.cornerRadius") { (s, d, i) in d.size.width / 4 }
 //: [Next–Section 2–evolving data](@next)
+PlaygroundPage.current.needsIndefiniteExecution = true

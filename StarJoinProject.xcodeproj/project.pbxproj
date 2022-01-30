@@ -54,13 +54,12 @@
 		1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinNSViewAdaptor; path = ../StarJoinNSViewAdaptor; sourceTree = "<group>"; };
 		1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinUIViewAdaptor; path = ../StarJoinUIViewAdaptor; sourceTree = "<group>"; };
 		1827BBE1279002FB00D15E01 /* StarJoinSceneKitAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSceneKitAdaptor; path = ../StarJoinSceneKitAdaptor; sourceTree = "<group>"; };
-		1827BBE22790031100D15E01 /* StarJoinSpriteKitAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSpriteKitAdaptor; path = ../StarJoinSpriteKitAdaptor; sourceTree = "<group>"; };
 		1841F0D61F1DEA810049A474 /* GameTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GameTemplate.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinStocks.xcodeproj; path = StarJoinStocks/StarJoinStocks.xcodeproj; sourceTree = "<group>"; };
+		187CFE4A27A66D89009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoinSelector; sourceTree = "<group>"; };
 		187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleEmptyScene.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F01F1DEDE100AE571F /* SelectOld.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectOld.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187E73F11F1DEE9E00AE571F /* SelectEditing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SelectEditing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18822F0A278FFD1E001392B9 /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoinSelector; sourceTree = "<group>"; };
 		18A753821F234E0500F9BA54 /* Scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratch.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpriteJoinSampleData.xcodeproj; path = SpriteJoinSampleData/SpriteJoinSampleData.xcodeproj; sourceTree = "<group>"; };
@@ -95,10 +94,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		187CFE4927A66D89009F216E /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				187CFE4A27A66D89009F216E /* StarJoinSelector */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
-				18822F0A278FFD1E001392B9 /* StarJoinSelector */,
+				187CFE4927A66D89009F216E /* Packages */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
 				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
@@ -130,7 +137,6 @@
 		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {
 			isa = PBXGroup;
 			children = (
-				1827BBE22790031100D15E01 /* StarJoinSpriteKitAdaptor */,
 				1827BBE1279002FB00D15E01 /* StarJoinSceneKitAdaptor */,
 				1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */,
 				1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */,

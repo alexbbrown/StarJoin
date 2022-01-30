@@ -17,10 +17,9 @@
 		18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B261F217FA3006BF37E /* LaunchScreen.storyboard */; };
 		18610B331F217FA3006BF37E /* StarJoinStocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */; };
 		18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* QuoteNode.swift */; };
-		187CFE2127A6500E009F216E /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2027A6500E009F216E /* StarJoinSelector */; };
-		187CFE2327A65043009F216E /* StarJoinSpriteKitAdaptor in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */; };
 		187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; };
 		187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		187CFE4F27A66EE8009F216E /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE4E27A66EE8009F216E /* StarJoinSelector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +65,11 @@
 		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
 		18610B541F2181BE006BF37E /* QuoteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteNode.swift; sourceTree = "<group>"; };
 		187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpriteJoinSampleData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		187CFE4527A66C17009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
+		187CFE4627A66C47009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
+		187CFE4727A66C5D009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
+		187CFE4827A66C76009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
+		187CFE4D27A66ED9009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187CFE2327A65043009F216E /* StarJoinSpriteKitAdaptor in Frameworks */,
 				187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */,
-				187CFE2127A6500E009F216E /* StarJoinSelector in Frameworks */,
+				187CFE4F27A66EE8009F216E /* StarJoinSelector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +95,7 @@
 		18610B0B1F217FA3006BF37E = {
 			isa = PBXGroup;
 			children = (
+				187CFE4427A66C17009F216E /* Packages */,
 				18610B161F217FA3006BF37E /* StarJoinStocks */,
 				18610B311F217FA3006BF37E /* StarJoinStocksTests */,
 				18610B151F217FA3006BF37E /* Products */,
@@ -145,6 +149,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		187CFE4427A66C17009F216E /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				187CFE4527A66C17009F216E /* StarJoinSelector */,
+				187CFE4627A66C47009F216E /* StarJoinSelector */,
+				187CFE4727A66C5D009F216E /* StarJoinSelector */,
+				187CFE4827A66C76009F216E /* StarJoinSelector */,
+				187CFE4D27A66ED9009F216E /* StarJoinSelector */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,8 +179,7 @@
 			);
 			name = StarJoinStocks;
 			packageProductDependencies = (
-				187CFE2027A6500E009F216E /* StarJoinSelector */,
-				187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */,
+				187CFE4E27A66EE8009F216E /* StarJoinSelector */,
 			);
 			productName = StarJoinStocks;
 			productReference = 18610B141F217FA3006BF37E /* StarJoinStocks.app */;
@@ -513,13 +528,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		187CFE2027A6500E009F216E /* StarJoinSelector */ = {
+		187CFE4E27A66EE8009F216E /* StarJoinSelector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StarJoinSelector;
-		};
-		187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = StarJoinSpriteKitAdaptor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

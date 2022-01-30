@@ -66,18 +66,21 @@ func updatePlot() {
     // remove nodes which don't have data
     mySelection.exit().remove()
 
+    let updated = mySelection.update()
+
     // existing nodes go red
-    mySelection.update().attr("color", toValue: SKColor.red)
+    updated
+        .attr("color", toValue: SKColor.red)
         .each { (s, d, i)  in
             (s as! SKSpriteNode).size = CGSize(width:CGFloat(d.size),
                                                height:CGFloat(d.size))
     }
 
-    // new nodes
-    mySelection.enter()
+    // new nodes go white
+    let appended = mySelection.enter()
         .append { (d, i) in SKSpriteNode()}
         // start white
-        .attr("color",toValue: SKColor.white)
+        .attr("color", toValue: SKColor.white)
         // jump to start position and grow in
         .each { (s, d, i) in
             s!.position = CGPoint(x:CGFloat(d.x), y:CGFloat(d.y))
@@ -85,14 +88,16 @@ func updatePlot() {
             s!.run(.scale(to:CGFloat(d.size), duration: period))
     }
 
+    let merged = updated
+        .merge(with: appended)
+
+    // all nodes move
     mySelection.update().each { (s, d, i) in
         s!.run(.move(to:CGPoint(x:CGFloat(d.x), y:CGFloat(d.y)), duration: period))
 
     }
 }
-
 //: Run this update repeatedly using SKActions
-
 func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction) {
     let action = SKAction.repeat(.group(
         [.wait(forDuration: interval),
@@ -101,8 +106,6 @@ func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction)
 }
 
 periodically(atInterval:period, count: 200, action:.run(updatePlot))
-
-
 /*:
  ## Display boilerplate
  let's move the boring stuff down here now.
@@ -117,6 +120,3 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 // Create the scene and add it to the view
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
-
-
-

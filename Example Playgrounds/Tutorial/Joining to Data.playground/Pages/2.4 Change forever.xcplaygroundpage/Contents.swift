@@ -88,7 +88,7 @@ extension SJDelegate:SKSceneDelegate {
 
         // should append BE the enter operation?
         // how does enter affect the selection it owns?
-        updated2.each { (s, d, i) -> () in
+        merged2.each { (s, d, i) -> () in
             if let sprite = s as? SKSpriteNode {
                 _ = sprite.position = CGPoint(x: CGFloat(d.x), y: CGFloat(d.y))
                 _ = sprite.color = colors.color(withKey:d.color) ?? .red

@@ -57,15 +57,16 @@ extension SJDelegate:SKSceneDelegate {
         let entered2 = mySelection2.enter()
 
         //: We still need new nodes for extra data rows, but we can choose not to configure them immediately
-        entered2.append { (_, _) in SKSpriteNode() }
-
+        let appended2 = entered2.append { (_, _) in SKSpriteNode() }
         // TODO: check d3.js still use the enter/append/update selection sematics or if that's fixed.
         //: Instead grab all the nodes corresponding to updated data using the `update` selection–and configure your heart away!
         let updated2 = mySelection2.update()
 
+        let merged2 = updated2.merge(with: appended2)
+
         // should append BE the enter operation?
         // how does enter affect the selection it owns?
-        updated2.each(updateNode)
+        merged2.each(updateNode)
     }
 }
 /*:

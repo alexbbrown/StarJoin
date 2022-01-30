@@ -38,18 +38,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             let gs = try GameScene.unarchiveFromFile(file: "GameScene")
         
-        if let scene = try gs as? GameScene {
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .aspectFill
-            
-            self.skView!.presentScene(scene)
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            self.skView!.ignoresSiblingOrder = true
-            
-            self.skView!.showsFPS = true
-            self.skView!.showsNodeCount = true
-        }
+            if let scene = try gs as? GameScene {
+                /* Set the scale mode to scale to fit the window */
+                scene.scaleMode = .aspectFill
+
+                self.skView!.presentScene(scene)
+
+                /* Sprite Kit applies additional optimizations to improve rendering performance */
+                self.skView!.ignoresSiblingOrder = true
+
+                self.skView!.showsFPS = true
+                self.skView!.showsNodeCount = true
+            }
         } catch {
             NSLog("Crash loading scene")
         }

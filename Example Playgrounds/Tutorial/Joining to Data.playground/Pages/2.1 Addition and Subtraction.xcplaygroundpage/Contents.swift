@@ -13,9 +13,18 @@
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 import SpriteKit
-
+//: ### Set-up SpriteKit and the Playgrounds Live View
 let scene = SKScene()
+let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
 
+// Add it to the Live View
+import PlaygroundSupport
+PlaygroundPage.current.liveView = sceneView
+
+// Create the scene and add it to the view
+scene.size = CGSize(width:640, height:480)
+scene.scaleMode = .resizeFill
+sceneView.presentScene(scene)
 //: **Generated data**
 //:
 //: The best kind of data is different each time!  Let's make some like that.  A tuple keeps it simple:
@@ -42,7 +51,8 @@ for _ in 1...(5..<15).randomElement() {
 var nodeArray2 = [TableRow]()
 
 for _ in 1...(50..<150).randomElement() {
-    nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
+    // Note: using _ here avoids very expensively updating the "Result" panel.
+    _ = nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
 }
 /*:
  ## Complex Selections
@@ -95,21 +105,6 @@ entered2.append { (_, _) in
         }
     }
 
-//: [Next–Mutating existing nodes](@next)
-/*:
- ## Display boilerplate
- let's move the boring stuff down here now.
- */
-let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
-
-// Add it to the Live View
-import PlaygroundSupport
-PlaygroundPage.current.liveView = sceneView
-
-// Create the scene and add it to the view
-scene.size = CGSize(width:640, height:480)
-scene.scaleMode = .resizeFill
-sceneView.presentScene(scene)
 
 //: [Next–Mutating existing nodes](@next)
 

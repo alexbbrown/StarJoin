@@ -26,8 +26,6 @@ let range = 0..<10
 
 range.last
 
-
-//: * note:  `range.randomElement()` is found in this playground's Sources
 let colors = NSColorList(named:.init("Apple"))!
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float((0..<xmax).randomElement()),

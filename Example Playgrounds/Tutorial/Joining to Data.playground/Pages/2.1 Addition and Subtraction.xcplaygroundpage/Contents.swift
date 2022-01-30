@@ -33,7 +33,6 @@ typealias TableRow = (x: Float, y: Float, texture: SKTexture, size: Float)
 let colors = NSColorList(named:.init("Apple"))!
 
 let textures = [#imageLiteral(resourceName: "wood1.jpg"), #imageLiteral(resourceName: "water1.jpg")].map(SKTexture.init(image:))
-//: * note:  `range.randomElement()` is found in this playground's Sources
 
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
     return (x:Float((0..<xmax).randomElement()!),

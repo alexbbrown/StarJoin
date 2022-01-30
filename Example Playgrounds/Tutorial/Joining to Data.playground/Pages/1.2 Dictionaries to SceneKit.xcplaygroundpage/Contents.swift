@@ -5,12 +5,14 @@ This one mixes it up - a dictionary instead of a tuple, and some funky donuts fr
  
 ![Three Donuts](donuts.png)
 
-*/
+ * Callout(Recommended settings): Change the Xcode Scheme to `StarJoinSceneKitAdaptor`
 
-import StarJoinSelector
-import StarJoinSceneKitAdaptor
-import SceneKit
-import SpriteKit // for SKColor?
+*/
+import StarJoinSelector // A Magic Brush
+import StarJoinSceneKitAdaptor // And
+import SceneKit // a *different* paintbox
+import SpriteKit // for SKColor
+
 /*:
  Enable Scenekit for Playground
  */
@@ -54,8 +56,7 @@ let mySelection = select(node:scene.rootNode)
 mySelection
     .enter()
     .append { (_, _) in
-        var sphere = SCNSphere()
-        var torus = SCNTorus(ringRadius: 1, pipeRadius: 0.35)
+        let torus = SCNTorus(ringRadius: 1, pipeRadius: 0.35)
         return SCNNode(geometry: torus)
     }
     .attr("position") { (s, d, i) in
@@ -70,8 +71,8 @@ mySelection
     .attr("geometry.firstMaterial.diffuse.contents") { (s, d, i) in color(d["color"] as! String)
     }
 //:   What's `(s, d, i)`?
+//:   - `s` is the sprite, which you can update or read from
 //:   - `d` is whatever the current record is - a row from the data array
-//:   - `s` is the sprite, which can be useful.
 //:   - `i` is the index in the array this element is from.  Can be used to order elements if you don't want absolute positioning (more on this later)
 //:
 //: [Next–Joining Structs](@next)

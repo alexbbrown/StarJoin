@@ -27,7 +27,7 @@ import SpriteKit        // a paintbox
  The live view shows you what you are drawing like so:
  */
 import PlaygroundSupport
-let sceneView = SKView(frame: CGRect(x: 0 , y: 0, width: 640, height: 480))
+let sceneView = SKView(frame: CGRect(x: 0 , y: 0, width: 400, height: 400))
 PlaygroundPage.current.liveView = sceneView
 //:  The `scene` object is the only bit of this we use later - keep an eye out.  Here we add it to the view so it gets drawn:
 let scene:SKScene = SKScene(size: CGSize(width:640, height:480))

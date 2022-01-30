@@ -30,7 +30,8 @@ let package = Package(
             name: "StarJoinSelectorTests",
             dependencies: ["StarJoinSelector"]),
         .target(
-            name: "StarJoinSpriteKitAdaptor"
+            name: "StarJoinSpriteKitAdaptor",
+            dependencies: ["StarJoinSelector"]
         ),
         .testTarget(name: "StarJoinSpriteKitAdaptorTests",
                     dependencies: [

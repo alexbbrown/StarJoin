@@ -29,7 +29,7 @@ var scene = SCNScene()
 sceneView.scene = scene
 //: **Data from the internet**
 //:
-//: Let's use a table-an array of dictionaries–as our data model this time, and bind that.  This sort of data might be loaded off disk or as Json from the internet, and is pretty common.
+//: Let's use a table-an array of dictionaries–as our data model this time, and bind that.  This sort of data might be loaded off disk or as `JSON` from the internet, and is pretty common.
 //: * note: you might have noticed that Starjoin likes data stored in arrays
 var nodeArray = [
     ["x":-100, "y":100, "color":"Red", "size":50],

@@ -1,6 +1,7 @@
 //: [Previous-Joining Dictionaries](@previous)
-//:# Structs to UIView
-//: * note: Set the Platform to iOS to run this playground
+//:# Structs to UIView (iOS)
+//: * note:
+//:   To run this playground, Set the Playground Settings Platform to iOS & Set the Scheme to `StarJoinUIViewAdaptor`
 import StarJoinSelector
 #if os(iOS)
 import UIKit

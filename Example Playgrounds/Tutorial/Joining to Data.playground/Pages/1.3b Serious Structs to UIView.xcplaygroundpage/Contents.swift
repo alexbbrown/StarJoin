@@ -49,7 +49,7 @@ mySelection
     .attr("backgroundColor") { (s, d, i) in d.color }
     .each { (s, d, i) in
         (s as? UIButton)
-        (s as? UIButton)?.title = "🐞" }
+        (s as? UIButton)?.titleLabel = "🐞" }
 #if os(iOS)
     .attr("showsTouchWhenHighlighted") { (s, d, i) in true }
 #endif

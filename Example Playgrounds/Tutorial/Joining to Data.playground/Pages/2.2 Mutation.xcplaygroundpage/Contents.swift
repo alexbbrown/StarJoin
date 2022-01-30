@@ -8,7 +8,6 @@ import StarJoinSpriteKitAdaptor
 import SpriteKit
 
 let scene = SKScene()
-
 //: **Generated data**
 //:
 //: The best kind of data is different each time!  Let's make some like that.  A tuple keeps it simple:
@@ -25,13 +24,13 @@ func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
 var nodeArray = [TableRow]()
 
 for _ in 1...(5..<15).randomElement() {
-    nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 50))
+    _ = nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 50))
 }
 
 var nodeArray2 = [TableRow]()
 
 for _ in 1...(50..<150).randomElement() {
-    nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
+    _ = nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
 }
 /*:
  ## Complex Selections
@@ -99,6 +98,4 @@ PlaygroundPage.current.liveView = sceneView
 scene.size = CGSize(width:640, height:480)
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
-
 //: [Next](@next)
-

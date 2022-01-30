@@ -5,27 +5,22 @@
  - Callout(performance): This version moves some of the code into a the sources folder - where it gets precompiled.  Now it runs at about 3 fps
  */
 //:  ![example](ss2.png)
-
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 import SpriteKit
 
 let scene = SKScene()
-
 //: **Generated data**
 //:
 //: The data generator has moved into the file `data.swift` for speed.
 let nodeArray = nodeArrayGenerator(count:(min:5, max:15), xmax:1000, ymax:600, size:50)
-
 /*:
  ## Complex Selections
  In this example we perform multiple selections.
  */
-
 let rootNode = SingleSelection<SKNode>(node: scene)
 
 let mySelection = rootNode.select(all: scene.childNodes).join(nodeArray)
-
 /*:
  ## First selection
  The original data we draw uses the usual approach - `enter` and `append` all the data.

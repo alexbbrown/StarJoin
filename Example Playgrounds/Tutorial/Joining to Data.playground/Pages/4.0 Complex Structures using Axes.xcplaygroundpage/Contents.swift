@@ -200,9 +200,7 @@ func updatePlot() {
     #endif
 
 }
-
 //: Run this update repeatedly using SKActions
-
 func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction) {
     let action = SKAction.repeat(.group(
         [.wait(forDuration: interval),
@@ -211,8 +209,6 @@ func periodically(atInterval interval:TimeInterval, count:Int, action: SKAction)
 }
 
 periodically(atInterval:period, count:count, action:.run(updatePlot))
-
-
 /*:
  ## Display boilerplate
  let's move the boring stuff down here now.
@@ -227,8 +223,3 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 // Create the scene and add it to the view
 scene.scaleMode = .resizeFill
 sceneView.presentScene(scene)
-
-
-
-
-

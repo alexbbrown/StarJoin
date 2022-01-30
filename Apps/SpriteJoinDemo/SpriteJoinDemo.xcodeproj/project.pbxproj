@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		187CFE2D27A65167009F216E /* StarJoinSpriteKitAdaptor in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2C27A65167009F216E /* StarJoinSpriteKitAdaptor */; };
+		187CFE2F27A65232009F216E /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2E27A65232009F216E /* StarJoinSelector */; };
 		18A01A5619ACFD1D00E013A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01A5519ACFD1D00E013A0 /* AppDelegate.swift */; };
 		18A01A5819ACFD1D00E013A0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18A01A5719ACFD1D00E013A0 /* GameScene.sks */; };
 		18A01A5C19ACFD1D00E013A0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01A5B19ACFD1D00E013A0 /* GameViewController.swift */; };
@@ -17,7 +19,6 @@
 		18A01A7519ACFD8000E013A0 /* PlotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA071C19AB8DFA00034392 /* PlotNode.swift */; };
 		18B8107519B0CFE3003A4F0F /* SpriteJoinSampleData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA7E9C6419AD5C9400D1E207 /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18BA071D19AB8DFA00034392 /* PlotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA071C19AB8DFA00034392 /* PlotNode.swift */; };
-		18C99B221F217EDA002819FA /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180370791F21699C00131E7E /* StarJoinSelector.framework */; };
 		18C99B271F217F1D002819FA /* StarJoinSelector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180370791F21699C00131E7E /* StarJoinSelector.framework */; };
 		18D2535F19AB752100AAB8B2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2535E19AB752100AAB8B2 /* main.swift */; };
 		18D2536119AB752100AAB8B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2536019AB752100AAB8B2 /* AppDelegate.swift */; };
@@ -125,8 +126,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18C99B221F217EDA002819FA /* StarJoinSelector.framework in Frameworks */,
+				187CFE2D27A65167009F216E /* StarJoinSpriteKitAdaptor in Frameworks */,
 				FA7E9C6719AD5C9400D1E207 /* SpriteJoinSampleData.framework in Frameworks */,
+				187CFE2F27A65232009F216E /* StarJoinSelector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +313,10 @@
 			dependencies = (
 			);
 			name = SpriteJoinDemo;
+			packageProductDependencies = (
+				187CFE2C27A65167009F216E /* StarJoinSpriteKitAdaptor */,
+				187CFE2E27A65232009F216E /* StarJoinSelector */,
+			);
 			productName = SpriteJoinDemo;
 			productReference = 18D2535919AB752100AAB8B2 /* SpriteJoinDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -374,6 +380,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -515,7 +522,10 @@
 				INFOPLIST_FILE = iOSSpriteJoinDemo/Info.plist;
 				INSTALL_PATH = /AppleInternal/Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos.internal;
 				SWIFT_VERSION = 3.0;
@@ -535,7 +545,10 @@
 				INFOPLIST_FILE = iOSSpriteJoinDemo/Info.plist;
 				INSTALL_PATH = /AppleInternal/Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos.internal;
 				SWIFT_VERSION = 3.0;
@@ -557,7 +570,11 @@
 				);
 				INFOPLIST_FILE = iOSSpriteJoinDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
@@ -572,7 +589,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSSpriteJoinDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
@@ -667,7 +688,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SpriteJoinDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -679,7 +703,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SpriteJoinDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -698,7 +725,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SpriteJoinDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteJoinDemo.app/Contents/MacOS/SpriteJoinDemo";
 			};
@@ -714,7 +745,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SpriteJoinDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteJoinDemo.app/Contents/MacOS/SpriteJoinDemo";
 			};
@@ -769,6 +804,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		187CFE2C27A65167009F216E /* StarJoinSpriteKitAdaptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarJoinSpriteKitAdaptor;
+		};
+		187CFE2E27A65232009F216E /* StarJoinSelector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarJoinSelector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18D2535119AB752100AAB8B2 /* Project object */;
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,10 @@
 		18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B261F217FA3006BF37E /* LaunchScreen.storyboard */; };
 		18610B331F217FA3006BF37E /* StarJoinStocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */; };
 		18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* QuoteNode.swift */; };
+		187CFE2127A6500E009F216E /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2027A6500E009F216E /* StarJoinSelector */; };
+		187CFE2327A65043009F216E /* StarJoinSpriteKitAdaptor in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */; };
+		187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; };
+		187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +32,20 @@
 			remoteInfo = StarJoinStocks;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		187CFE2727A65060009F216E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		18610B141F217FA3006BF37E /* StarJoinStocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarJoinStocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +65,7 @@
 		18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/StarJoinSpriteKitAdaptor.framework"; sourceTree = "<group>"; };
 		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
 		18610B541F2181BE006BF37E /* QuoteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteNode.swift; sourceTree = "<group>"; };
+		187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpriteJoinSampleData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187CFE2327A65043009F216E /* StarJoinSpriteKitAdaptor in Frameworks */,
+				187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */,
+				187CFE2127A6500E009F216E /* StarJoinSelector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +137,7 @@
 		18610B501F217FED006BF37E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */,
 				18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */,
 				18610B511F217FED006BF37E /* StarJoinSelector.framework */,
 				18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */,
@@ -132,12 +155,17 @@
 				18610B101F217FA3006BF37E /* Sources */,
 				18610B111F217FA3006BF37E /* Frameworks */,
 				18610B121F217FA3006BF37E /* Resources */,
+				187CFE2727A65060009F216E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = StarJoinStocks;
+			packageProductDependencies = (
+				187CFE2027A6500E009F216E /* StarJoinSelector */,
+				187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */,
+			);
 			productName = StarJoinStocks;
 			productReference = 18610B141F217FA3006BF37E /* StarJoinStocks.app */;
 			productType = "com.apple.product-type.application";
@@ -372,7 +400,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -383,7 +412,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinStocks/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -397,7 +429,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinStocks/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -412,7 +447,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinStocksTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocksTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -428,7 +467,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = XPSUQMMH5W;
 				INFOPLIST_FILE = StarJoinStocksTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocksTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -468,6 +511,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		187CFE2027A6500E009F216E /* StarJoinSelector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarJoinSelector;
+		};
+		187CFE2227A65043009F216E /* StarJoinSpriteKitAdaptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarJoinSpriteKitAdaptor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18610B0C1F217FA3006BF37E /* Project object */;
 }

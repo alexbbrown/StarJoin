@@ -173,7 +173,7 @@ class GameScene: SKScene {
         
         let enterSelection = join
             .enter()
-            .append { (s, d:(String,[[String:String]]), i) -> SKNode in
+            .append { (d: (String,[[String:String]]), i) -> SKNode in
                 
                 let newNode = QuoteNode(quote: d, color:SKColor.red, duration:self.duration)
            
@@ -201,7 +201,7 @@ class GameScene: SKScene {
             .each({ (s, d, i) in ()
                 if let s = s as? QuoteNode {
                     
-                    if let companyIndex = self.orderedCompanies!.index(of: d!.0) {
+                    if let companyIndex = self.orderedCompanies!.index(of: d.0) {
                         #if os(OSX)
                         let colorName = self.colors.allKeys[1+companyIndex]
                             if let color = self.colors.color(withKey: colorName) { // can overflow!
@@ -212,11 +212,11 @@ class GameScene: SKScene {
                         #endif
                     }
                     
-                    s.quote = d!
+                    s.quote = d
                     
-                    print("looking for \(d!.0) in \(ordinalScale!.domain)")
+                    print("looking for \(d.0) in \(ordinalScale!.domain)")
 
-                    let aKey = (ordinalScale!.domain!.count == 1) ? ordinalScale!.domain![0] : d!.0
+                    let aKey = (ordinalScale!.domain!.count == 1) ? ordinalScale!.domain![0] : d.0
                     
                     if let band = ordinalScale!.band(aKey) {
 

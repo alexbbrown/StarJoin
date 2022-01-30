@@ -11,9 +11,7 @@
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 import SpriteKit
-/*:
- ### Set up the canvas of SpriteKit
- */
+//: ### Set-up SpriteKit and the Playgrounds Live View
 let scene = SKScene()
 
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))

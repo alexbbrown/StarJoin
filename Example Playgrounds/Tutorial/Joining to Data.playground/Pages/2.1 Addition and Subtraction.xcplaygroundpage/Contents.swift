@@ -9,6 +9,7 @@
  use case of d3, it is a precursor to animation - where EXISTING nodes get
  their new values animated in over time.
 
+ * note: To run this playground, Set the Playground Settings Platform to macOS or iOS & Set the Scheme to `StarJoinSpriteKitAdaptor`
 */
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
@@ -32,25 +33,24 @@ typealias TableRow = (x: Float, y: Float, texture: SKTexture, size: Float)
 let colors = NSColorList(named:.init("Apple"))!
 
 let textures = [#imageLiteral(resourceName: "wood1.jpg"), #imageLiteral(resourceName: "water1.jpg")].map(SKTexture.init(image:))
-
 //: * note:  `range.randomElement()` is found in this playground's Sources
 
 func nodeGenerator(xmax: Int, ymax:Int, size:Float) -> TableRow {
-    return (x:Float((0..<xmax).randomElement()),
-            y:Float((0..<ymax).randomElement()),
-            texture: textures.randomElement(),
+    return (x:Float((0..<xmax).randomElement()!),
+            y:Float((0..<ymax).randomElement()!),
+            texture: textures.randomElement()!,
             size:size)
 }
 
 var nodeArray = [TableRow]()
 
-for _ in 1...(5..<15).randomElement() {
+for _ in 1...(5..<15).randomElement()! {
     nodeArray.append(nodeGenerator(xmax: 1000, ymax: 600, size: 60))
 }
 
 var nodeArray2 = [TableRow]()
 
-for _ in 1...(50..<150).randomElement() {
+for _ in 1...(50..<150).randomElement()! {
     // Note: using _ here avoids very expensively updating the "Result" panel.
     _ = nodeArray2.append(nodeGenerator(xmax: 1000, ymax: 600, size: 20))
 }

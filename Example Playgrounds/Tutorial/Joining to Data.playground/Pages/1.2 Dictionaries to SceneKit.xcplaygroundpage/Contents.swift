@@ -1,6 +1,12 @@
-//: [Previous–Joining Tuples](@previous)
+//:[Previous–Joining Tuples](@previous)
 //:# Dictionaries to SceneKit Shapes
-//: This one mixes it up - a dictionary instead of a tuple, and some funky donuts from `SceneKit`
+/*:
+This one mixes it up - a dictionary instead of a tuple, and some funky donuts from `SceneKit`
+ 
+![Three Donuts](donuts.png)
+
+*/
+
 import StarJoinSelector
 import StarJoinSceneKitAdaptor
 import SceneKit

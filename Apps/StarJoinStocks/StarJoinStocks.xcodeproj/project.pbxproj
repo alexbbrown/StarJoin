@@ -19,7 +19,7 @@
 		18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* QuoteNode.swift */; };
 		187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; };
 		187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		187CFE4F27A66EE8009F216E /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 187CFE4E27A66EE8009F216E /* StarJoinSelector */; };
+		18AE2A9F27A671E200A60DB0 /* StarJoinSelector in Frameworks */ = {isa = PBXBuildFile; productRef = 18AE2A9E27A671E200A60DB0 /* StarJoinSelector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */,
-				187CFE4F27A66EE8009F216E /* StarJoinSelector in Frameworks */,
+				18AE2A9F27A671E200A60DB0 /* StarJoinSelector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +179,7 @@
 			);
 			name = StarJoinStocks;
 			packageProductDependencies = (
-				187CFE4E27A66EE8009F216E /* StarJoinSelector */,
+				18AE2A9E27A671E200A60DB0 /* StarJoinSelector */,
 			);
 			productName = StarJoinStocks;
 			productReference = 18610B141F217FA3006BF37E /* StarJoinStocks.app */;
@@ -528,7 +528,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		187CFE4E27A66EE8009F216E /* StarJoinSelector */ = {
+		18AE2A9E27A671E200A60DB0 /* StarJoinSelector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StarJoinSelector;
 		};

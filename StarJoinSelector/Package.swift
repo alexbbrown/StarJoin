@@ -9,7 +9,11 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "StarJoinSelector",
-            targets: ["StarJoinSelector", "StarJoinSpriteKitAdaptor"]
+            targets: [
+                "StarJoinSelector",
+                "StarJoinSpriteKitAdaptor",
+                "StarJoinSceneKitAdaptor"
+            ]
         )
     ],
     dependencies: [
@@ -31,6 +35,15 @@ let package = Package(
         .testTarget(name: "StarJoinSpriteKitAdaptorTests",
                     dependencies: [
                         "StarJoinSpriteKitAdaptor", "StarJoinSelector"
-                    ])
+                    ]
+                   ),
+        .target(
+            name: "StarJoinSceneKitAdaptor",
+            dependencies: ["StarJoinSelector"]
+        ),
+        .testTarget(
+            name: "StarJoinSceneKitAdaptorTests",
+            dependencies: ["StarJoinSelector", "StarJoinSceneKitAdaptor"]
+        )
     ]
 )

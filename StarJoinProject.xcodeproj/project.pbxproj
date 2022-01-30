@@ -51,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		180370691F21697100131E7E /* SpriteJoinDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpriteJoinDemo.xcodeproj; path = SpriteJoinDemo/SpriteJoinDemo.xcodeproj; sourceTree = "<group>"; };
 		1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinNSViewAdaptor; path = ../StarJoinNSViewAdaptor; sourceTree = "<group>"; };
 		1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinUIViewAdaptor; path = ../StarJoinUIViewAdaptor; sourceTree = "<group>"; };
 		1827BBE1279002FB00D15E01 /* StarJoinSceneKitAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSceneKitAdaptor; path = ../StarJoinSceneKitAdaptor; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 			children = (
 				18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */,
 				18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */,
-				180370691F21697100131E7E /* SpriteJoinDemo.xcodeproj */,
 			);
 			path = Apps;
 			sourceTree = "<group>";

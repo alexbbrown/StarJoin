@@ -77,13 +77,6 @@
 			path = Apps;
 			sourceTree = "<group>";
 		};
-		1827BBE32790035B00D15E01 /* Adaptors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Adaptors;
-			sourceTree = "<group>";
-		};
 		18610B3E1F217FA3006BF37E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,8 +101,7 @@
 				18822F0A278FFD1E001392B9 /* StarJoinSelector */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
-				1827BBE32790035B00D15E01 /* Adaptors */,
-				18EBE7E81F1E8EAF00C57088 /* AdaptorsOld */,
+				18EBE7E81F1E8EAF00C57088 /* Adaptors */,
 				188B5B7D1F1DE70E007BB08A /* Development Playgrounds */,
 				18EBE8201F1EA76D00C57088 /* Example Playgrounds */,
 			);
@@ -135,7 +127,7 @@
 			path = Docs;
 			sourceTree = "<group>";
 		};
-		18EBE7E81F1E8EAF00C57088 /* AdaptorsOld */ = {
+		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {
 			isa = PBXGroup;
 			children = (
 				1827BBE22790031100D15E01 /* StarJoinSpriteKitAdaptor */,
@@ -143,7 +135,7 @@
 				1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */,
 				1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */,
 			);
-			path = AdaptorsOld;
+			path = Adaptors;
 			sourceTree = "<group>";
 		};
 		18EBE81D1F1EA5FE00C57088 /* Tutorial */ = {

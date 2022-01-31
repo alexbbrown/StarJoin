@@ -2,7 +2,7 @@
 //  JoinOperations.swift
 //  StarJoinSelectorTests
 //
-//  Created by apple on 7/22/17.
+//  Created by alex on 7/22/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

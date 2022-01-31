@@ -2,7 +2,7 @@
 //  LessSimpleOperations.swift
 //  StarJoinSelectorTests
 //
-//  Created by apple on 7/19/17.
+//  Created by alex on 7/19/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 // These tests are designed for cases where it's less obvious what the correct behaviour should be

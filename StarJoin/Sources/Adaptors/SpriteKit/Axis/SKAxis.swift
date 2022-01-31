@@ -2,7 +2,7 @@
 //  SKAxis.swift
 //  StarJoinSpriteKitAdaptor
 //
-//  Created by apple on 7/20/17.
+//  Created by alex on 7/20/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 
@@ -10,8 +10,8 @@
 //  SKAxis.swift
 //  SpriteJoin
 //
-//  Created by apple on 23/08/2014.
-//  Copyright (c) 2014 apple. All rights reserved.
+//  Created by alex on 23/08/2014.
+//  Copyright (c) 2014 Alex B Brown. All rights reserved.
 //
 // SKAxis is a SpriteNode operator - it is 'called' on
 // an SKNode and it generates an axis for the supplied

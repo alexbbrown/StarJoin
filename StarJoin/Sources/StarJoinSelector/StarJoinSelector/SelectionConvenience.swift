@@ -2,7 +2,7 @@
 //  SelectionConvenience.swift
 //  StarJoinSelector
 //
-//  Created by apple on 7/21/17.
+//  Created by alex on 7/21/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ScaleTests.swift
 //  StarJoinSelectorTests
 //
-//  Created by apple on 7/19/17.
+//  Created by alex on 7/19/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import XCTest
 //  ScaleTests.swift
 //  ScaleTests
 //
-//  Created by apple on 21/08/2014.
+//  Created by alex on 21/08/2014.
 //
 //
 

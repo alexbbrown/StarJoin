@@ -2,7 +2,7 @@
 //  StarJoinAdaptor.swift
 //  StarJoinSpriteKitAdaptor
 //
-//  Created by apple on 7/18/17.
+//  Created by alex on 7/18/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  NumericConformances.swift
 //  StarJoinSelector
 //
-//  Created by apple on 7/20/17.
+//  Created by alex on 7/20/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 
@@ -12,8 +12,8 @@ import Foundation
 //  NumericExtensions.swift
 //  SpriteJoin
 //
-//  Created by apple on 24/08/2014.
-//  Copyright (c) 2014 apple. All rights reserved.
+//  Created by alex on 24/08/2014.
+//  Copyright (c) 2014 Alex B Brown. All rights reserved.
 //
 
 import Foundation

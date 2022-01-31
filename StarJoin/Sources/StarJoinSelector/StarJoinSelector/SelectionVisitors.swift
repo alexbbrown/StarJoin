@@ -2,7 +2,7 @@
 //  SelectionAttr.swift
 //  StarJoinSelector
 //
-//  Created by apple on 7/23/17.
+//  Created by alex on 7/23/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

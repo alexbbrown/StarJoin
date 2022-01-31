@@ -2,7 +2,7 @@
 //  AdaptorProtocols.swift
 //  StarJoinSelector
 //
-//  Created by apple on 21/08/2014.
+//  Created by alex on 21/08/2014.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

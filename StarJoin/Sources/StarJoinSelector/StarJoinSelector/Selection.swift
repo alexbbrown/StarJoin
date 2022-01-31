@@ -2,8 +2,8 @@
 //  Selection.swift
 //  StarJoinSelector
 //
-//  Created by apple on 19/08/2014.
-//  Copyright (c) 2014 apple. All rights reserved.
+//  Created by alex on 19/08/2014.
+//  Copyright (c) 2014 Alex B Brown. All rights reserved.
 //
 
 // Issues

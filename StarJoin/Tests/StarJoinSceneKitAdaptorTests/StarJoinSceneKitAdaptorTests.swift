@@ -2,7 +2,7 @@
 //  StarJoinSceneKitAdaptorTests.swift
 //  StarJoinSceneKitAdaptorTests
 //
-//  Created by apple on 7/20/17.
+//  Created by alex on 7/20/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 

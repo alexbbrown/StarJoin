@@ -2,7 +2,7 @@
 //  GameScene.swift
 //  StarJoinStocks
 //
-//  Created by apple on 7/20/17.
+//  Created by alex on 7/20/17.
 //  Copyright © 2017 apple. All rights reserved.
 //
 
@@ -10,8 +10,8 @@
 //  GameScene.swift
 //  SpriteJoinGame
 //
-//  Created by apple on 21/08/2014.
-//  Copyright (c) 2014 apple. All rights reserved.
+//  Created by alex on 21/08/2014.
+//  Copyright (c) 2014 Alex B Brown. All rights reserved.
 //
 
 import SpriteKit

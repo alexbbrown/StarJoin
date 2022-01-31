@@ -27,27 +27,12 @@
 			remoteGlobalIDString = 18610B141F217FA3006BF37E;
 			remoteInfo = StarJoinStocks;
 		};
-		187CFE3C27A66557009F216E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 184EEAE219AA8B70009B81C8;
-			remoteInfo = SpriteJoinSampleData;
-		};
-		187CFE3E27A66557009F216E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 184EEAED19AA8B70009B81C8;
-			remoteInfo = SpriteJoinSampleDataTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		181C6CF327A79F7300CD89B0 /* Stocks.swiftpm */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Stocks.swiftpm; sourceTree = "<group>"; };
 		18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinStocks.xcodeproj; path = StarJoinStocks/StarJoinStocks.xcodeproj; sourceTree = "<group>"; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
-		18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpriteJoinSampleData.xcodeproj; path = SpriteJoinSampleData/SpriteJoinSampleData.xcodeproj; sourceTree = "<group>"; };
 		18EBE81E1F1EA6F100C57088 /* Tutorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tutorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18F5137727A7933C008D42BF /* StarJoin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +41,6 @@
 		1803704A1F21695300131E7E /* Apps */ = {
 			isa = PBXGroup;
 			children = (
-				18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */,
 				18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */,
 			);
 			path = Apps;
@@ -66,15 +50,6 @@
 			isa = PBXGroup;
 			children = (
 				18610B4D1F217FA5006BF37E /* StarJoinStocks.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		187CFE3827A66557009F216E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				187CFE3D27A66557009F216E /* SpriteJoinSampleData.framework */,
-				187CFE3F27A66557009F216E /* SpriteJoinSampleDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,10 +99,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 187CFE3827A66557009F216E /* Products */;
-					ProjectRef = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
-				},
-				{
 					ProductGroup = 18610B3E1F217FA3006BF37E /* Products */;
 					ProjectRef = 18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */;
 				},
@@ -145,20 +116,6 @@
 			fileType = wrapper.application;
 			path = StarJoinStocks.app;
 			remoteRef = 18610B4C1F217FA5006BF37E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		187CFE3D27A66557009F216E /* SpriteJoinSampleData.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SpriteJoinSampleData.framework;
-			remoteRef = 187CFE3C27A66557009F216E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		187CFE3F27A66557009F216E /* SpriteJoinSampleDataTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SpriteJoinSampleDataTests.xctest;
-			remoteRef = 187CFE3E27A66557009F216E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

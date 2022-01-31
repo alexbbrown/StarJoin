@@ -21,8 +21,6 @@ public func sampleDataJSON(name:String) throws -> NSDictionary? {
         do {
             if let jsonData = NSData(contentsOf:url) {
 
-                //, encoding: NSUTF8StringEncoding, error:nil)
-
                 let jsonDict = try JSONSerialization.jsonObject(with: jsonData as Data, options: []) as? NSDictionary
 
                 return jsonDict

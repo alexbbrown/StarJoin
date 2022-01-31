@@ -17,7 +17,6 @@
 import SpriteKit
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
-import SpriteJoinSampleData
 
 class GameScene: SKScene {
 

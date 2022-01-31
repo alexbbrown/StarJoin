@@ -17,6 +17,8 @@
 
  Note that when xcode resets, the scheme is often re-set to the default, which might not be the one you want.
 
+ ### error: PCH was compiled with module cache path '/var/folders/12/ftrrwtt54977v969dwdmkbhh0000gv/C/clang/ModuleCache/1YYYMQZPEYYBV', but the path is currently '/var/folders/12/ftrrwtt54977v969dwdmkbhh0000gv/C/clang/ModuleCache/KPC83QJQXY7Z'
 
+ Unclear.  This happens to iOS playgrounds like 90% of the time for me.  I wish I knew why.
 
  */

@@ -15,6 +15,8 @@ import Foundation
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#if os(macOS)
+
 import Foundation
 import AppKit
 import StarJoinSelector
@@ -61,3 +63,4 @@ extension NSView: KVC {
     }
 }
 
+#endif

@@ -12,7 +12,9 @@ let package = Package(
             targets: [
                 "StarJoinSelector",
                 "StarJoinSpriteKitAdaptor",
-                "StarJoinSceneKitAdaptor"
+                "StarJoinSceneKitAdaptor",
+                "StarJoinNSViewAdaptor",
+                "StarJoinUIViewAdaptor"
             ]
         )
     ],
@@ -45,6 +47,22 @@ let package = Package(
         .testTarget(
             name: "StarJoinSceneKitAdaptorTests",
             dependencies: ["StarJoinSelector", "StarJoinSceneKitAdaptor"]
+        ),
+        .target( // Mac Only
+            name: "StarJoinNSViewAdaptor",
+            dependencies: ["StarJoinSelector"]
+        ),
+        .testTarget(
+            name: "StarJoinNSViewAdaptorTests",
+            dependencies: ["StarJoinNSViewAdaptor", "StarJoinSelector"]
+        ),
+        .target(
+            name: "StarJoinUIViewAdaptor",
+            dependencies: ["StarJoinSelector"]
+        ),
+        .testTarget(
+            name: "StarJoinUIViewAdaptorTests",
+            dependencies: ["StarJoinSelector", "StarJoinUIViewAdaptor"]
         )
     ]
 )

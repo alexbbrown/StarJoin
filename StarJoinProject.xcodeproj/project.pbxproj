@@ -51,8 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinNSViewAdaptor; path = ../StarJoinNSViewAdaptor; sourceTree = "<group>"; };
-		1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinUIViewAdaptor; path = ../StarJoinUIViewAdaptor; sourceTree = "<group>"; };
 		1841F0D61F1DEA810049A474 /* GameTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GameTemplate.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinStocks.xcodeproj; path = StarJoinStocks/StarJoinStocks.xcodeproj; sourceTree = "<group>"; };
 		187E73EE1F1DEC3E00AE571F /* SimpleEmptyScene.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleEmptyScene.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -136,8 +134,6 @@
 		18EBE7E81F1E8EAF00C57088 /* Adaptors */ = {
 			isa = PBXGroup;
 			children = (
-				1827BBE0279002DD00D15E01 /* StarJoinUIViewAdaptor */,
-				1827BBDF2790029900D15E01 /* StarJoinNSViewAdaptor */,
 			);
 			path = Adaptors;
 			sourceTree = "<group>";

@@ -3,7 +3,7 @@
 //  StarJoinSceneKitAdaptorTests
 //
 //  Created by alex on 7/20/17.
-//  Copyright © 2017 apple. All rights reserved.
+//  Copyright © 2017 Alex B Brown. All rights reserved.
 //
 
 import XCTest

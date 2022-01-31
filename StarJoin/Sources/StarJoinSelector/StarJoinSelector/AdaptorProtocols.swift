@@ -3,7 +3,7 @@
 //  StarJoinSelector
 //
 //  Created by alex on 21/08/2014.
-//  Copyright © 2017 apple. All rights reserved.
+//  Copyright © 2017 Alex B Brown. All rights reserved.
 //
 
 import Foundation

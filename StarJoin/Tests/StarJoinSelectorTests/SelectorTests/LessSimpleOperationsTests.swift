@@ -3,7 +3,7 @@
 //  StarJoinSelectorTests
 //
 //  Created by alex on 7/19/17.
-//  Copyright © 2017 apple. All rights reserved.
+//  Copyright © 2017 Alex B Brown. All rights reserved.
 //
 // These tests are designed for cases where it's less obvious what the correct behaviour should be
 

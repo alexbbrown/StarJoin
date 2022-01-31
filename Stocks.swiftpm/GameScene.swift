@@ -21,13 +21,12 @@ import StarJoinSpriteKitAdaptor
 class GameScene: SKScene {
 
     #if os(OSX)
-
         let colors = NSColorList(named:NSColorList.Name("Apple"))!
     #else
         let colors:[SKColor] = [SKColor.red,SKColor.green,SKColor.blue,SKColor.yellow]
     #endif
 
-    let companies = ["apple","ibm", "intel", "microsoft"]
+    let companies = ["Apple","IBM", "Intel", "Microsoft"]
 
     var orderedCompanies:[String]?
 

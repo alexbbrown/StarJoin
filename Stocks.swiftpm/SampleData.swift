@@ -17,7 +17,7 @@ private class BundleFinder {}
 public func sampleDataJSON(name:String) throws -> NSDictionary? {
     let bundle = Bundle(for: BundleFinder.self)
 
-    if let url = bundle.url(forResource: name, withExtension:"json", subdirectory: "SampleData") {
+    if let url = bundle.url(forResource: name, withExtension:"json") {
         do {
             if let jsonData = NSData(contentsOf:url) {
 

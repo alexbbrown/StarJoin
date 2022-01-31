@@ -23,7 +23,6 @@
 		181C6CF327A79F7300CD89B0 /* Stocks.swiftpm */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Stocks.swiftpm; sourceTree = "<group>"; };
 		18B2D4921F1F496000199DD3 /* Architecture Sketches.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Architecture Sketches.pdf"; sourceTree = "<group>"; };
 		18E593B827A7D07300F851FF /* Scales.swiftpm */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Scales.swiftpm; sourceTree = "<group>"; };
-		18EBE81E1F1EA6F100C57088 /* Tutorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tutorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18F5137727A7933C008D42BF /* StarJoin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -32,7 +31,6 @@
 			isa = PBXGroup;
 			children = (
 				18F5137727A7933C008D42BF /* StarJoin */,
-				18EBE81E1F1EA6F100C57088 /* Tutorial.playground */,
 				181C6CF327A79F7300CD89B0 /* Stocks.swiftpm */,
 				18E593B827A7D07300F851FF /* Scales.swiftpm */,
 				18B2D4921F1F496000199DD3 /* Architecture Sketches.pdf */,

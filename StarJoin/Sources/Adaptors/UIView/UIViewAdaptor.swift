@@ -6,6 +6,8 @@
 //  Copyright © 2017 Alex B Brown. All rights reserved.
 //
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 import StarJoinSelector
@@ -51,4 +53,4 @@ extension UIView: KVC {
         }
     }
 }
-
+#endif

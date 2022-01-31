@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alex B Brown. All rights reserved.
 //
 
+#if os(iOS)
 import XCTest
 import UIKit
 @testable import StarJoinSelector
@@ -89,6 +90,5 @@ class StarJoinUIViewAdaptorTests: XCTestCase {
 
         XCTAssert(true, "Pass")
     }
-
-    
 }
+#endif

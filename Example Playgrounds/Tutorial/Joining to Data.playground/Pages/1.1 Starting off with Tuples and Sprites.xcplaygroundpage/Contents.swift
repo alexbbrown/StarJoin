@@ -65,7 +65,9 @@ mySelection
 /*:
  ## *That's all folks!*
 
- If you haven't done so already, open the *assistant editor* to view the result.  You should see three colored squares.
+ If you haven't done so already, open the *Live View* to view the result.  You should see three colored squares.
+
+ ![Screen shot of live view with 3 boxes](ThreeDots.png)
 
  * experiment: don't be shy - have a play with the code and data above and see what you can make it do.
 */

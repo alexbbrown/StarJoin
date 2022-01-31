@@ -89,19 +89,11 @@
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
-				18AE2A9C27A671C700A60DB0 /* Packages */,
+				18F5137727A7933C008D42BF /* StarJoin */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
 				18EBE81E1F1EA6F100C57088 /* Tutorial.playground */,
 			);
-			sourceTree = "<group>";
-		};
-		18AE2A9C27A671C700A60DB0 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				18F5137727A7933C008D42BF /* StarJoin */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		18B2D4971F1F496700199DD3 /* Docs */ = {

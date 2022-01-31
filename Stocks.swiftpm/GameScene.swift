@@ -78,7 +78,7 @@ class GameScene: SKScene {
 
         // Cyclic runner
 
-        func repeatedlyExecute(_ block: @escaping (()->()), atInterval interval:TimeInterval, count:Int) {
+        func repeatedlyExecute(_ block: @escaping () -> Void, atInterval interval:TimeInterval, count:Int) {
             let action = SKAction.repeat(SKAction.group(
                 [SKAction.wait(forDuration: interval),
                     SKAction.run(block)]),count:count)
@@ -89,11 +89,6 @@ class GameScene: SKScene {
         self.addChild(plotNode)
 
         plot = SingleSelection<SKNode>(node: plotNode)
-
-//        // variables to control the 'animation'
-//        var duration:TimeInterval = 0.5
-//        var count = 200
-//        var runCounter = 0
 
         updatePlot()
     }

@@ -8,20 +8,21 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Stocks",
+    name: "Scales",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Stocks",
-            targets: ["AppModuleStocks"],
+            name: "Scales",
+            targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .coins),
-            accentColor: .presetColor(.pink),
+            accentColor: .presetColor(.indigo),
             supportedDeviceFamilies: [
-                .pad
+                .pad,
+                .phone
             ],
             supportedInterfaceOrientations: [
                 .portrait,
@@ -36,7 +37,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "AppModuleStocks",
+            name: "AppModule",
             dependencies: [
                 "StarJoin"
             ],

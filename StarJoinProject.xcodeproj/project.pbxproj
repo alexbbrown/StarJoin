@@ -54,7 +54,7 @@
 		18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StarJoinStocks.xcodeproj; path = StarJoinStocks/StarJoinStocks.xcodeproj; sourceTree = "<group>"; };
 		18B2D4921F1F496000199DD3 /* Old Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Old Notes.pdf"; sourceTree = "<group>"; };
 		18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpriteJoinSampleData.xcodeproj; path = SpriteJoinSampleData/SpriteJoinSampleData.xcodeproj; sourceTree = "<group>"; };
-		18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Joining to Data.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18EBE81E1F1EA6F100C57088 /* Tutorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tutorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18F5137727A7933C008D42BF /* StarJoin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +92,7 @@
 				18AE2A9C27A671C700A60DB0 /* Packages */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
-				18EBE8201F1EA76D00C57088 /* Example Playgrounds */,
+				18EBE81E1F1EA6F100C57088 /* Tutorial.playground */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,22 +110,6 @@
 				18B2D4921F1F496000199DD3 /* Old Notes.pdf */,
 			);
 			path = Docs;
-			sourceTree = "<group>";
-		};
-		18EBE81D1F1EA5FE00C57088 /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				18EBE81E1F1EA6F100C57088 /* Joining to Data.playground */,
-			);
-			path = Tutorial;
-			sourceTree = "<group>";
-		};
-		18EBE8201F1EA76D00C57088 /* Example Playgrounds */ = {
-			isa = PBXGroup;
-			children = (
-				18EBE81D1F1EA5FE00C57088 /* Tutorial */,
-			);
-			path = "Example Playgrounds";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

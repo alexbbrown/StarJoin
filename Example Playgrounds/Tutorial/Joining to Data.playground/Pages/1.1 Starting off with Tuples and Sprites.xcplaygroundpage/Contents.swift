@@ -19,7 +19,7 @@ import SpriteKit        // a paintbox
 
  */
 /*:
- ### Getting ready for race day
+ ### Configuring the Playground
   We have a couple playground specific steps to let it know we are interested in displaying some graphics output.
 
  * Callout(try this): It's time to show the *Live View* Assistant Editor - the two circles button at the top right.

@@ -2,47 +2,34 @@
 //  GameScene.swift
 //  SpriteJoinGame
 //
-//  Created by apple on 21/08/2014.
-//  Copyright (c) 2014 apple. All rights reserved.
+//  Created by alex on 21/08/2014.
+//  Copyright (c) 2014 Alex B Brown. All rights reserved.
 //
 
 import SpriteKit
 import StarJoinSelector
 import StarJoinSpriteKitAdaptor
 
-let arc4RandomMax = Double(0x100000000)
-func Random01() -> Double
-{
-    Double.random(in: 0 ... 1.0)
-}
-
-
-func rangeRandom(minV:UInt32, maxV:UInt32) -> UInt32 {
-    UInt32.random(in: minV ... maxV)
-}
-
-func rangeRandomOrdinals<T>(ordinals: [T]) -> T {
-    ordinals.randomElement()!
-}
-
 class GameScene: SKScene {
     
     var valueMax:Float = 100.0
     
     // MARK: Enable SpriteKit for Playground
-//    let colors = NSColorList(named:"Apple")
-
+    #if os(macOS)
+    let colors = NSColorList(named:"Apple").allKeys
+    #else
     let colors = ["red", "green", "blue", "yellow"]
+    #endif
 
     // This form uses tuples rather than dictionaries
     typealias TableRow = (x:Float, y:Float, color:String, size:Float)
     
     // nodeGenerator assumes minimum is 0
     func nodeGenerator(xmax: Int, ymax: Int, size: Float) -> TableRow {
-        return (x: Float(Int.random(in: 0 ..< xmax)),
-                y: Float(Int.random(in: 0 ..< ymax)),
-                color: colors.randomElement()!,
-                size:size)
+        (x: Float(Int.random(in: 0 ..< xmax)),
+         y: Float(Int.random(in: 0 ..< ymax)),
+         color: colors.randomElement()!,
+         size:size)
     }
     
     func tableGenerator(_ xmax:Int, _ ymax:Int, size: Float, count: Int) -> [TableRow] {
@@ -64,16 +51,6 @@ class GameScene: SKScene {
         let height = self.size.height
         
         let margin:CGFloat = 100
-//
-//        let xScale = LinearScale(domain: [0,CGFloat(valueMax)],
-//                                          range: (margin,width-margin))
-//
-//
-//        let yScale = LinearScale<CGFloat>(domain:[0,CGFloat(valueMax)],
-//                                          range:(margin,height-margin))
-        
-        // Create the SpriteKit View
-//        let spriteView:SKView = view
         
         // MARK: Data Configuration
         
@@ -85,7 +62,8 @@ class GameScene: SKScene {
                  SKAction.run(block)]),count:count)
             self.run(action)
         }
-        
+
+        // The 'plot' is the root object
         let plotNode = SKNode()
         self.addChild(plotNode)
         

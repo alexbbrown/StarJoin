@@ -27,13 +27,6 @@
 			remoteGlobalIDString = 18610B141F217FA3006BF37E;
 			remoteInfo = StarJoinStocks;
 		};
-		18610B4E1F217FA5006BF37E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18610B3D1F217FA3006BF37E /* StarJoinStocks.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18610B2E1F217FA3006BF37E;
-			remoteInfo = StarJoinStocksTests;
-		};
 		187CFE3C27A66557009F216E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */;
@@ -56,6 +49,7 @@
 		18B61A191F218B940006BD26 /* SpriteJoinSampleData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpriteJoinSampleData.xcodeproj; path = SpriteJoinSampleData/SpriteJoinSampleData.xcodeproj; sourceTree = "<group>"; };
 		18EBE81E1F1EA6F100C57088 /* Tutorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tutorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18F5137727A7933C008D42BF /* StarJoin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarJoin; sourceTree = "<group>"; };
+		18F5137B27A79D18008D42BF /* My App.swiftpm */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "My App.swiftpm"; path = "../../../../Library/Mobile Documents/iCloud~com~apple~Playgrounds/Documents/100 Days of SwiftUI/My App.swiftpm"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -72,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				18610B4D1F217FA5006BF37E /* StarJoinStocks.app */,
-				18610B4F1F217FA5006BF37E /* StarJoinStocksTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +82,7 @@
 		188B5B6A1F1DE677007BB08A = {
 			isa = PBXGroup;
 			children = (
+				18F5137B27A79D18008D42BF /* My App.swiftpm */,
 				18F5137727A7933C008D42BF /* StarJoin */,
 				1803704A1F21695300131E7E /* Apps */,
 				18B2D4971F1F496700199DD3 /* Docs */,
@@ -151,13 +145,6 @@
 			fileType = wrapper.application;
 			path = StarJoinStocks.app;
 			remoteRef = 18610B4C1F217FA5006BF37E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18610B4F1F217FA5006BF37E /* StarJoinStocksTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StarJoinStocksTests.xctest;
-			remoteRef = 18610B4E1F217FA5006BF37E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		187CFE3D27A66557009F216E /* SpriteJoinSampleData.framework */ = {

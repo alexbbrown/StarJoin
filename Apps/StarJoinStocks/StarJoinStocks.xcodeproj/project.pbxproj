@@ -15,22 +15,11 @@
 		18610B231F217FA3006BF37E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B211F217FA3006BF37E /* Main.storyboard */; };
 		18610B251F217FA3006BF37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18610B241F217FA3006BF37E /* Assets.xcassets */; };
 		18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B261F217FA3006BF37E /* LaunchScreen.storyboard */; };
-		18610B331F217FA3006BF37E /* StarJoinStocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */; };
 		18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* QuoteNode.swift */; };
 		187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; };
 		187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18F5137927A79374008D42BF /* StarJoin in Frameworks */ = {isa = PBXBuildFile; productRef = 18F5137827A79374008D42BF /* StarJoin */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		18610B2F1F217FA3006BF37E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18610B0C1F217FA3006BF37E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 18610B131F217FA3006BF37E;
-			remoteInfo = StarJoinStocks;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		187CFE2727A65060009F216E /* Embed Frameworks */ = {
@@ -57,9 +46,6 @@
 		18610B241F217FA3006BF37E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18610B271F217FA3006BF37E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18610B291F217FA3006BF37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18610B2E1F217FA3006BF37E /* StarJoinStocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarJoinStocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJoinStocksTests.swift; sourceTree = "<group>"; };
-		18610B341F217FA3006BF37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18610B511F217FED006BF37E /* StarJoinSelector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSelector.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug/StarJoinSelector.framework"; sourceTree = "<group>"; };
 		18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/StarJoinSpriteKitAdaptor.framework"; sourceTree = "<group>"; };
 		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
@@ -77,13 +63,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18610B2B1F217FA3006BF37E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,7 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				18610B161F217FA3006BF37E /* StarJoinStocks */,
-				18610B311F217FA3006BF37E /* StarJoinStocksTests */,
 				18610B151F217FA3006BF37E /* Products */,
 				18610B501F217FED006BF37E /* Frameworks */,
 			);
@@ -101,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				18610B141F217FA3006BF37E /* StarJoinStocks.app */,
-				18610B2E1F217FA3006BF37E /* StarJoinStocksTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,15 +98,6 @@
 				18610B291F217FA3006BF37E /* Info.plist */,
 			);
 			path = StarJoinStocks;
-			sourceTree = "<group>";
-		};
-		18610B311F217FA3006BF37E /* StarJoinStocksTests */ = {
-			isa = PBXGroup;
-			children = (
-				18610B321F217FA3006BF37E /* StarJoinStocksTests.swift */,
-				18610B341F217FA3006BF37E /* Info.plist */,
-			);
-			path = StarJoinStocksTests;
 			sourceTree = "<group>";
 		};
 		18610B501F217FED006BF37E /* Frameworks */ = {
@@ -167,24 +135,6 @@
 			productReference = 18610B141F217FA3006BF37E /* StarJoinStocks.app */;
 			productType = "com.apple.product-type.application";
 		};
-		18610B2D1F217FA3006BF37E /* StarJoinStocksTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 18610B3A1F217FA3006BF37E /* Build configuration list for PBXNativeTarget "StarJoinStocksTests" */;
-			buildPhases = (
-				18610B2A1F217FA3006BF37E /* Sources */,
-				18610B2B1F217FA3006BF37E /* Frameworks */,
-				18610B2C1F217FA3006BF37E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				18610B301F217FA3006BF37E /* PBXTargetDependency */,
-			);
-			name = StarJoinStocksTests;
-			productName = StarJoinStocksTests;
-			productReference = 18610B2E1F217FA3006BF37E /* StarJoinStocksTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +147,6 @@
 				TargetAttributes = {
 					18610B131F217FA3006BF37E = {
 						CreatedOnToolsVersion = 9.0;
-					};
-					18610B2D1F217FA3006BF37E = {
-						CreatedOnToolsVersion = 9.0;
-						TestTargetID = 18610B131F217FA3006BF37E;
 					};
 				};
 			};
@@ -218,7 +164,6 @@
 			projectRoot = "";
 			targets = (
 				18610B131F217FA3006BF37E /* StarJoinStocks */,
-				18610B2D1F217FA3006BF37E /* StarJoinStocksTests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,13 +181,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18610B2C1F217FA3006BF37E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -257,23 +195,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18610B2A1F217FA3006BF37E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				18610B331F217FA3006BF37E /* StarJoinStocksTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		18610B301F217FA3006BF37E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 18610B131F217FA3006BF37E /* StarJoinStocks */;
-			targetProxy = 18610B2F1F217FA3006BF37E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		18610B211F217FA3006BF37E /* Main.storyboard */ = {
@@ -437,46 +359,6 @@
 			};
 			name = Release;
 		};
-		18610B3B1F217FA3006BF37E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = XPSUQMMH5W;
-				INFOPLIST_FILE = StarJoinStocksTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocksTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarJoinStocks.app/StarJoinStocks";
-			};
-			name = Debug;
-		};
-		18610B3C1F217FA3006BF37E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = XPSUQMMH5W;
-				INFOPLIST_FILE = StarJoinStocksTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.StarJoinStocksTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarJoinStocks.app/StarJoinStocks";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -494,15 +376,6 @@
 			buildConfigurations = (
 				18610B381F217FA3006BF37E /* Debug */,
 				18610B391F217FA3006BF37E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		18610B3A1F217FA3006BF37E /* Build configuration list for PBXNativeTarget "StarJoinStocksTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				18610B3B1F217FA3006BF37E /* Debug */,
-				18610B3C1F217FA3006BF37E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

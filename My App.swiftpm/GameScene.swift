@@ -64,16 +64,16 @@ class GameScene: SKScene {
         let height = self.size.height
         
         let margin:CGFloat = 100
-        
-        let xScale = LinearScale<CGFloat>(domain: [0,CGFloat(valueMax)],
-                                          range: (margin,width-margin))
-
-        
-        let yScale = LinearScale<CGFloat>(domain:[0,CGFloat(valueMax)],
-                                          range:(margin,height-margin))
+//
+//        let xScale = LinearScale(domain: [0,CGFloat(valueMax)],
+//                                          range: (margin,width-margin))
+//
+//
+//        let yScale = LinearScale<CGFloat>(domain:[0,CGFloat(valueMax)],
+//                                          range:(margin,height-margin))
         
         // Create the SpriteKit View
-        let spriteView:SKView = view
+//        let spriteView:SKView = view
         
         // MARK: Data Configuration
         
@@ -92,8 +92,8 @@ class GameScene: SKScene {
         let plot = SingleSelection<SKNode>(node: plotNode)
         
         // variables to control the 'animation'
-        var period: TimeInterval = 1
-        var count = 200
+        let period: TimeInterval = 1
+        let count = 200
         var runCounter = 0
         
         // create a layer for the axes
@@ -104,8 +104,8 @@ class GameScene: SKScene {
         axesNode.add(child: xAxisNode)
         axesNode.add(child: yAxisNode)
         
-        var oldXScale:LinearScale<CGFloat>? = nil
-        var oldYScale:LinearScale<CGFloat>? = nil
+        var oldXScale: LinearScale<CGFloat>? = nil
+        var oldYScale: LinearScale<CGFloat>? = nil
         
         func updatePlot() {
             
@@ -146,7 +146,7 @@ class GameScene: SKScene {
             mySelection
                 .exit()
                 .transition(duration: period)
-                .attr("alpha", toValue: 0)
+                .attr("alpha", toValue: CGFloat(0))
                 .remove()
             
             // existing nodes go red - or blue on purge cycles
@@ -204,16 +204,16 @@ class GameScene: SKScene {
             
             let yAxisSelection = SingleSelection<SKNode>(node: yAxisNode)
             
-            let xAxis = SKLinearAxis(scale: xScale, side: .bottom)
+            let xAxis = SKAxis<CGFloat, CGFloat>(scale: xScale, side: .bottom)
             
             xAxis.enterScale = oldXScale
             
             xAxis.lineColor = SKColor.white
             xAxis.lineWidth = 1
             
-            xAxisSelection.call(xAxis.make)
+            xAxisSelection.call(function: xAxis.make)
             
-            let yAxis = SKAxis<CGFloat, (scale: yScale, side: .left)
+            let yAxis = SKAxis<CGFloat, CGFloat>(scale: yScale, side: .left)
             
             yAxis.enterScale = oldYScale
             
@@ -228,7 +228,9 @@ class GameScene: SKScene {
         
         repeatedlyExecute(updatePlot, atInterval:period, count:count)
     }
-    
+
+    #if os(macOS)
+
     override func mouseDown(theEvent: NSEvent) {
         /* Called when a mouse click occurs */
         
@@ -245,8 +247,6 @@ class GameScene: SKScene {
 //        
 //        self.addChild(sprite)
     }
+    #endif
     
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-    }
 }

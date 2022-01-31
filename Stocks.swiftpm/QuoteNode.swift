@@ -9,7 +9,6 @@
 import SpriteKit
 import StarJoinSpriteKitAdaptor
 import StarJoinSelector
-//import SpriteJoinSampleData
 
 func field<T>(_ name:String, _ el:[String:T]) -> T? {
     return el[name]
@@ -63,9 +62,7 @@ open class QuoteNode: SKNode {
         plot = SingleSelection<SKNode>(node:plotNode)
         
         // create a layer for the axes
-
-        
-        addAxes()
+        _ = addAxes()
     }
     
     func addAxes() -> SKNode {

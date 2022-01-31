@@ -54,12 +54,6 @@ class GameScene: SKScene {
 
         backgroundColor = SKColor.black
 
-        let width = self.size.width
-        let height = self.size.height
-
-        // get the SpriteKit View
-        let spriteView:SKView = view
-
         // MARK: Data Configuration
         for company in companies {
             if let q = yahooHistorical(name:company) {
@@ -75,13 +69,13 @@ class GameScene: SKScene {
             CGFloat(QuoteNode.stockRange(el.1).max)
         }
 
-        var sortableCompanies = Array(zip(companies, maxValues))
+        let sortableCompanies = zip(companies, maxValues)
 
-        orderedCompanies = sortableCompanies.sorted{ $0.1 < $1.1 }.map{ $0.0 }
+        orderedCompanies = sortableCompanies.sorted { $0.1 < $1.1 }.map { $0.0 }
 
         // basic selection
 
-        plotMode = PlotMode.each(which: 0, max:companies.count)
+        plotMode = PlotMode.each(which: 0, max: companies.count)
 
         // Cyclic runner
 
@@ -125,7 +119,7 @@ class GameScene: SKScene {
                         max:max(acc.max, QuoteNode.stockRange(el.1).max))
             }
 
-        case .each(let index, let maxIndex):
+        case .each(let index, _):
 
             let currentCompany = orderedCompanies![index % orderedCompanies!.count]
 
@@ -209,7 +203,7 @@ class GameScene: SKScene {
             .each({ (s, d, i) in ()
                 if let s = s as? QuoteNode {
 
-                    if let companyIndex = self.orderedCompanies!.index(of: d.0) {
+                    if let companyIndex = self.orderedCompanies!.firstIndex(of: d.0) {
                         #if os(OSX)
                         let colorName = self.colors.allKeys[1+companyIndex]
                             if let color = self.colors.color(withKey: colorName) { // can overflow!
@@ -222,7 +216,7 @@ class GameScene: SKScene {
 
                     s.quote = d
 
-                    print("looking for \(d.0) in \(ordinalScale!.domain)")
+                    print("looking for \(d.0) in \(String(describing: ordinalScale!.domain))")
 
                     let aKey = (ordinalScale!.domain!.count == 1) ? ordinalScale!.domain![0] : d.0
 
@@ -270,7 +264,7 @@ class GameScene: SKScene {
         case .all:
             plotMode = .smallMultiple
         case .smallMultiple:
-            plotMode = .each(which: 0, max:companies.count)
+            plotMode = .each(which: 0, max: companies.count)
         case .each(let index, let maxIndex):
             let newIndex = index + 1
             if newIndex == maxIndex {

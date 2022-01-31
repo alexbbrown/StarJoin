@@ -65,11 +65,6 @@
 		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
 		18610B541F2181BE006BF37E /* QuoteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteNode.swift; sourceTree = "<group>"; };
 		187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpriteJoinSampleData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		187CFE4527A66C17009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
-		187CFE4627A66C47009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
-		187CFE4727A66C5D009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
-		187CFE4827A66C76009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
-		187CFE4D27A66ED9009F216E /* StarJoinSelector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StarJoinSelector; path = ../../StarJoinSelector; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +90,6 @@
 		18610B0B1F217FA3006BF37E = {
 			isa = PBXGroup;
 			children = (
-				187CFE4427A66C17009F216E /* Packages */,
 				18610B161F217FA3006BF37E /* StarJoinStocks */,
 				18610B311F217FA3006BF37E /* StarJoinStocksTests */,
 				18610B151F217FA3006BF37E /* Products */,
@@ -147,18 +141,6 @@
 				18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		187CFE4427A66C17009F216E /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				187CFE4527A66C17009F216E /* StarJoinSelector */,
-				187CFE4627A66C47009F216E /* StarJoinSelector */,
-				187CFE4727A66C5D009F216E /* StarJoinSelector */,
-				187CFE4827A66C76009F216E /* StarJoinSelector */,
-				187CFE4D27A66ED9009F216E /* StarJoinSelector */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

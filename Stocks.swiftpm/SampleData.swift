@@ -12,10 +12,12 @@
 
 import Foundation
 
-public func sampleDataJSON(name:String) throws -> NSDictionary? {
-    let bundle = Bundle(identifier:"com.apple.SpriteJoinSampleData")
+private class BundleFinder {}
 
-    if let url = bundle?.url(forResource: name, withExtension:"json") {
+public func sampleDataJSON(name:String) throws -> NSDictionary? {
+    let bundle = Bundle(for: BundleFinder.self)
+
+    if let url = bundle.url(forResource: name, withExtension:"json", subdirectory: "SampleData") {
         do {
             if let jsonData = NSData(contentsOf:url) {
 

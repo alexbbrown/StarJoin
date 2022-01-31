@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18610B181F217FA3006BF37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B171F217FA3006BF37E /* AppDelegate.swift */; };
-		18610B1A1F217FA3006BF37E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18610B191F217FA3006BF37E /* GameScene.sks */; };
 		18610B1C1F217FA3006BF37E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18610B1B1F217FA3006BF37E /* Actions.sks */; };
-		18610B1E1F217FA3006BF37E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B1D1F217FA3006BF37E /* GameScene.swift */; };
 		18610B201F217FA3006BF37E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B1F1F217FA3006BF37E /* GameViewController.swift */; };
 		18610B231F217FA3006BF37E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B211F217FA3006BF37E /* Main.storyboard */; };
 		18610B251F217FA3006BF37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18610B241F217FA3006BF37E /* Assets.xcassets */; };
 		18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18610B261F217FA3006BF37E /* LaunchScreen.storyboard */; };
-		18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610B541F2181BE006BF37E /* QuoteNode.swift */; };
 		187CFE2527A65060009F216E /* SpriteJoinSampleData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; };
 		187CFE2627A65060009F216E /* SpriteJoinSampleData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18F5137927A79374008D42BF /* StarJoin in Frameworks */ = {isa = PBXBuildFile; productRef = 18F5137827A79374008D42BF /* StarJoin */; };
@@ -37,10 +33,7 @@
 
 /* Begin PBXFileReference section */
 		18610B141F217FA3006BF37E /* StarJoinStocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarJoinStocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18610B171F217FA3006BF37E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18610B191F217FA3006BF37E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		18610B1B1F217FA3006BF37E /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		18610B1D1F217FA3006BF37E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		18610B1F1F217FA3006BF37E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		18610B221F217FA3006BF37E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18610B241F217FA3006BF37E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +42,6 @@
 		18610B511F217FED006BF37E /* StarJoinSelector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSelector.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug/StarJoinSelector.framework"; sourceTree = "<group>"; };
 		18610B521F217FED006BF37E /* StarJoinSpriteKitAdaptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StarJoinSpriteKitAdaptor.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/StarJoinSpriteKitAdaptor.framework"; sourceTree = "<group>"; };
 		18610B531F217FED006BF37E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteJoinSampleData.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/StarJoinProject-ejpcugcrhxltfpgilqtznglfeyoq/Build/Products/Debug-iphonesimulator/SpriteJoinSampleData.framework"; sourceTree = "<group>"; };
-		18610B541F2181BE006BF37E /* QuoteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteNode.swift; sourceTree = "<group>"; };
 		187CFE2427A65060009F216E /* SpriteJoinSampleData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpriteJoinSampleData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,11 +78,7 @@
 		18610B161F217FA3006BF37E /* StarJoinStocks */ = {
 			isa = PBXGroup;
 			children = (
-				18610B541F2181BE006BF37E /* QuoteNode.swift */,
-				18610B171F217FA3006BF37E /* AppDelegate.swift */,
-				18610B191F217FA3006BF37E /* GameScene.sks */,
 				18610B1B1F217FA3006BF37E /* Actions.sks */,
-				18610B1D1F217FA3006BF37E /* GameScene.swift */,
 				18610B1F1F217FA3006BF37E /* GameViewController.swift */,
 				18610B211F217FA3006BF37E /* Main.storyboard */,
 				18610B241F217FA3006BF37E /* Assets.xcassets */,
@@ -174,7 +162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18610B231F217FA3006BF37E /* Main.storyboard in Resources */,
-				18610B1A1F217FA3006BF37E /* GameScene.sks in Resources */,
 				18610B251F217FA3006BF37E /* Assets.xcassets in Resources */,
 				18610B281F217FA3006BF37E /* LaunchScreen.storyboard in Resources */,
 				18610B1C1F217FA3006BF37E /* Actions.sks in Resources */,
@@ -188,10 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18610B1E1F217FA3006BF37E /* GameScene.swift in Sources */,
 				18610B201F217FA3006BF37E /* GameViewController.swift in Sources */,
-				18610B551F2181BE006BF37E /* QuoteNode.swift in Sources */,
-				18610B181F217FA3006BF37E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

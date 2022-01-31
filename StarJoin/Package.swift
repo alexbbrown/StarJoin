@@ -33,24 +33,30 @@ let package = Package(
             dependencies: ["StarJoinSelector"]),
         .target(
             name: "StarJoinSpriteKitAdaptor",
-            dependencies: ["StarJoinSelector"]
+            dependencies: ["StarJoinSelector"],
+            path: "Sources/Adaptors/SpriteKit"
         ),
-        .testTarget(name: "StarJoinSpriteKitAdaptorTests",
-                    dependencies: [
-                        "StarJoinSpriteKitAdaptor", "StarJoinSelector"
-                    ]
-                   ),
+        .testTarget(
+            name: "StarJoinSpriteKitAdaptorTests",
+            dependencies: [
+                "StarJoinSpriteKitAdaptor", "StarJoinSelector"
+            ]
+        ),
         .target(
             name: "StarJoinSceneKitAdaptor",
-            dependencies: ["StarJoinSelector"]
+            dependencies: ["StarJoinSelector"],
+            path: "Sources/Adaptors/SceneKit"
         ),
         .testTarget(
             name: "StarJoinSceneKitAdaptorTests",
-            dependencies: ["StarJoinSelector", "StarJoinSceneKitAdaptor"]
+            dependencies: [
+                "StarJoinSelector", "StarJoinSceneKitAdaptor"
+            ]
         ),
         .target( // Mac Only
             name: "StarJoinNSViewAdaptor",
-            dependencies: ["StarJoinSelector"]
+            dependencies: ["StarJoinSelector"],
+            path: "Sources/Adaptors/NSView"
         ),
         .testTarget(
             name: "StarJoinNSViewAdaptorTests",
@@ -58,7 +64,8 @@ let package = Package(
         ),
         .target(
             name: "StarJoinUIViewAdaptor",
-            dependencies: ["StarJoinSelector"]
+            dependencies: ["StarJoinSelector"],
+            path: "Sources/Adaptors/UIView"
         ),
         .testTarget(
             name: "StarJoinUIViewAdaptorTests",

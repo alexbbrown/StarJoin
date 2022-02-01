@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='rendered' buildActiveScheme='true' executeOnSourceChanges='true'>
+    <pages>
+        <page name='1.1 Starting off with Tuples and Sprites'/>
+        <page name='1.2 Dictionaries to SceneKit'/>
+        <page name='1.3a Serious Structs to NSView'/>
+        <page name='1.3b Serious Structs to UIView'/>
+        <page name='2.1 Addition and Subtraction'/>
+        <page name='2.2 Mutation'/>
+        <page name='2.3 Change over time'/>
+        <page name='2.4 Change forever'/>
+        <page name='2.4.2 Change forever quickly'/>
+        <page name='3.0 Animated Motion using SpriteKit'/>
+        <page name='3.1 Scale independent drawing using LinearScale'/>
+        <page name='3.2 Animation using .transition selection'/>
+        <page name='4.0 Complex Structures using Axes'/>
+        <page name='1.1 Backup #kp Starting off with Tuples and Sprites'/>
+        <page name='9.0 Mutation'/>
+        <page name='TroubleShooting'/>
+    </pages>
+</playground>
